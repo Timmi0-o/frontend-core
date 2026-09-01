@@ -22,6 +22,9 @@
 			"import": "./dist/kits/ui-kit/index.js",
 			"default": "./dist/kits/ui-kit/index.js"
 		},
+		"./ui-kit/styles.css": {
+			"default": "./dist/kits/ui-kit/styles.css"
+		},
 		"./social-ui-kit": {
 			"types": "./dist/kits/social/index.d.ts",
 			"import": "./dist/kits/social/index.js",

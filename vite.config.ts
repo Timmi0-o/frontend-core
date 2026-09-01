@@ -61,6 +61,10 @@ const emitKitStyles = (): Plugin => {
 				}
 			}
 
+			const socialCss = flattenCss(
+				resolve(root, 'src/kits/social/styles.css'),
+			)
+
 			for (const kit of kits) {
 				const entryName = `kits/${kit}/index.js`
 				const entry = bundle[entryName]
@@ -76,9 +80,18 @@ const emitKitStyles = (): Plugin => {
 				this.emitFile({
 					type: 'asset',
 					fileName: `kits/${kit}/styles.css`,
-					source: flattenCss(resolve(root, `src/kits/${kit}/styles.css`)),
+					source:
+						kit === 'social'
+							? socialCss
+							: flattenCss(resolve(root, `src/kits/${kit}/styles.css`)),
 				})
 			}
+
+			this.emitFile({
+				type: 'asset',
+				fileName: 'kits/ui-kit/styles.css',
+				source: socialCss,
+			})
 		},
 	}
 }
