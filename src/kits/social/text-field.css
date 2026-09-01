@@ -1,0 +1,30 @@
+[data-ui-kit='social'] [data-slot='text-field']:not([data-variant='unstyled']){
+	display: flex;
+	width: 100%;
+	min-width: 0;
+	flex-direction: column;
+	gap: 0.375rem;
+}
+
+[data-ui-kit='social'] [data-slot='text-field-label']:not([data-variant='unstyled']){
+	display: flex;
+	align-items: center;
+	gap: 0.25rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--header);
+}
+
+[data-ui-kit='social'] [data-slot='text-field-required']:not([data-variant='unstyled']){
+	color: var(--danger);
+}
+
+[data-ui-kit='social'] [data-slot='text-field-error']:not([data-variant='unstyled']){
+	margin: 0;
+	font-size: 0.75rem;
+	color: #dc2626;
+}
+
+html.dark [data-ui-kit='social'] [data-slot='text-field-error']:not([data-variant='unstyled']),.dark [data-ui-kit='social'] [data-slot='text-field-error']:not([data-variant='unstyled']),[data-theme='dark'] [data-ui-kit='social'] [data-slot='text-field-error']:not([data-variant='unstyled']){
+	color: #f87171;
+}

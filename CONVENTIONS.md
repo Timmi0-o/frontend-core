@@ -1,0 +1,1 @@
+Follow AGENTS.md and `.cursor/rules/public-api.mdc`.

@@ -1,0 +1,61 @@
+[data-ui-kit='social'] [data-slot='avatar']:not([data-variant='unstyled']){
+	position: relative;
+	display: inline-flex;
+	height: 2rem;
+	width: 2rem;
+	flex-shrink: 0;
+	border-radius: 9999px;
+	overflow: hidden;
+	border: 1px solid var(--border-primary-color);
+	background: var(--background-secondary);
+}
+
+[data-ui-kit='social'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='sm']{
+	height: 1.5rem;
+	width: 1.5rem;
+}
+
+[data-ui-kit='social'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='lg']{
+	height: 2.5rem;
+	width: 2.5rem;
+}
+
+[data-ui-kit='social'] [data-slot='avatar-image']:not([data-variant='unstyled']){
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+}
+
+[data-ui-kit='social'] [data-slot='avatar-fallback']:not([data-variant='unstyled']){
+	display: flex;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.75rem;
+	color: var(--text);
+}
+
+[data-ui-kit='social'] [data-slot='avatar-group']:not([data-variant='unstyled']){
+	display: flex;
+}
+
+[data-ui-kit='social'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']){
+	margin-left: -0.5rem;
+}
+
+[data-ui-kit='social'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']):first-child{
+	margin-left: 0;
+}
+
+[data-ui-kit='social'] [data-slot='avatar-group-count']:not([data-variant='unstyled']){
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 2rem;
+	min-width: 2rem;
+	border-radius: 9999px;
+	background: var(--background-secondary);
+	color: var(--text);
+	font-size: 0.75rem;
+}

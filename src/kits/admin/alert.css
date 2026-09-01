@@ -1,0 +1,64 @@
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.125rem;
+	border: 0;
+	border-radius: min(32px, var(--radius-3xl));
+	background: var(--default);
+	padding: 0.75rem 1rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+	color: var(--default-foreground);
+	box-shadow: var(--surface-shadow);
+}
+
+[data-ui-kit='admin'] [data-slot='alert-description']:not([data-variant='unstyled']){
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 400;
+	color: var(--muted);
+}
+
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='warning']{
+	background: color-mix(in oklab, var(--warning) 22%, var(--surface));
+	color: var(--warning-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='warning'] [data-slot='alert-description']:not([data-variant='unstyled']){
+	color: var(--warning-soft-foreground);
+	opacity: 0.82;
+}
+
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='danger'],[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='error']{
+	background: var(--danger);
+	color: var(--danger-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='danger'] [data-slot='alert-description']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='alert'][data-variant='error'] [data-slot='alert-description']:not([data-variant='unstyled']){
+	color: var(--danger-foreground);
+	opacity: 0.88;
+}
+
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success']{
+	background: color-mix(in oklab, var(--success) 22%, var(--surface));
+	color: var(--success-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='success'] [data-slot='alert-description']:not([data-variant='unstyled']){
+	color: var(--success-soft-foreground);
+	opacity: 0.82;
+}
+
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='soft-danger']{
+	background: color-mix(in oklab, var(--danger) 16%, var(--surface));
+	color: var(--danger-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='soft-danger'] [data-slot='alert-description']:not([data-variant='unstyled']){
+	color: var(--danger-soft-foreground);
+	opacity: 0.82;
+}

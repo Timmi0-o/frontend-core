@@ -1,0 +1,84 @@
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled']){
+	display: inline-flex;
+	width: fit-content;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 0.125rem;
+	min-height: 0;
+	border: 0;
+	border-radius: var(--radius-2xl);
+	padding: 0.125rem 0.5rem;
+	background: var(--default);
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	color: var(--default-foreground);
+	cursor: default;
+	user-select: none;
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]{
+	cursor: pointer;
+	transition: background-color 0.15s var(--ease-smooth), color 0.15s var(--ease-smooth);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]:hover{
+	background: var(--default-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='secondary']{
+	background: var(--default-soft);
+	color: var(--default-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='secondary'][data-clickable]:hover{
+	background: var(--default-soft-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='accent']{
+	background: var(--accent-soft);
+	color: var(--accent-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='outline']{
+	background: transparent;
+	color: var(--foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='success']{
+	background: var(--success-soft);
+	color: var(--success-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='warning']{
+	background: var(--warning-soft);
+	color: var(--warning-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='warning'][data-clickable]:hover{
+	background: var(--warning-soft-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='danger']{
+	background: var(--danger);
+	color: var(--danger-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='danger'][data-clickable]:hover{
+	background: var(--danger-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='soft-danger']{
+	background: var(--danger-soft);
+	color: var(--danger-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='soft-danger'][data-clickable]:hover{
+	background: var(--danger-soft-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='info']{
+	background: var(--accent-soft);
+	color: var(--accent-soft-foreground);
+}

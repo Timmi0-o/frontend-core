@@ -1,0 +1,95 @@
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled']){
+	position: relative;
+	display: inline-flex;
+	height: 2.5rem;
+	width: 2.5rem;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	overflow: visible;
+	border: 0;
+	border-radius: var(--button-radius);
+	background: var(--default);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='sm']{
+	height: 2rem;
+	width: 2rem;
+	border-radius: var(--radius-2xl);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='lg']{
+	height: 3rem;
+	width: 3rem;
+	border-radius: var(--button-radius);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-image']:not([data-variant='unstyled']){
+	position: absolute;
+	inset: 0;
+	height: 100%;
+	width: 100%;
+	aspect-ratio: 1;
+	object-fit: cover;
+	overflow: hidden;
+	border-radius: inherit;
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-fallback']:not([data-variant='unstyled']){
+	display: flex;
+	height: 100%;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	overflow: hidden;
+	border-radius: inherit;
+	background: var(--default);
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--default-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-badge']:not([data-variant='unstyled']){
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	bottom: 0;
+	width: 0.625rem;
+	height: 0.625rem;
+	border-radius: 9999px;
+	background: var(--success);
+	box-shadow: 0 0 0 2px var(--surface);
+	transform: translate(15%, 15%);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar'][data-size='lg'] [data-slot='avatar-fallback']:not([data-variant='unstyled']){
+	font-size: 1rem;
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-group']:not([data-variant='unstyled']){
+	display: flex;
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']){
+	margin-left: -0.5rem;
+	box-shadow: 0 0 0 2px var(--background);
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']):first-child{
+	margin-left: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='avatar-group-count']:not([data-variant='unstyled']){
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 2.5rem;
+	min-width: 2.5rem;
+	margin-left: -0.5rem;
+	border-radius: var(--button-radius);
+	background: var(--default);
+	color: var(--default-foreground);
+	font-size: 0.75rem;
+	font-weight: 500;
+	box-shadow: 0 0 0 2px var(--background);
+}

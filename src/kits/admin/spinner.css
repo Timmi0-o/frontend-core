@@ -1,0 +1,66 @@
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled']){
+	display: inline-block;
+	box-sizing: border-box;
+	flex-shrink: 0;
+	border-radius: 9999px;
+	color: var(--blue);
+	width: 1.125rem;
+	height: 1.125rem;
+	background: conic-gradient(
+		from 140deg,
+		transparent 0%,
+		color-mix(in srgb, currentColor 12%, transparent) 28%,
+		currentColor 88%,
+		transparent 100%
+	);
+	mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+	-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2px));
+	animation: tg-admin-spin 0.75s linear infinite;
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-size='sm']{
+	width: 0.875rem;
+	height: 0.875rem;
+	mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+	-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-size='md']{
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-size='lg']{
+	width: 1.5rem;
+	height: 1.5rem;
+	mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+	-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-variant='secondary']{
+	color: var(--gray);
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-variant='danger']{
+	color: var(--danger);
+}
+
+[data-ui-kit='admin'] [data-slot='spinner']:not([data-variant='unstyled'])[data-variant='soft-danger']{
+	color: var(--danger-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='button'] [data-slot='spinner']:not([data-variant='unstyled']){
+	color: inherit;
+}
+
+[data-ui-kit='admin'] [data-slot='button-spinner']:not([data-variant='unstyled']){
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@keyframes tg-admin-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

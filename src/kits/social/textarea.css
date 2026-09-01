@@ -1,0 +1,38 @@
+[data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled']) {
+	box-sizing: border-box;
+	display: block;
+	min-height: 4rem;
+	width: 100%;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--radius-2xl);
+	background: var(--glass-bg);
+	box-shadow: var(--glass-shadow);
+	padding: 0.625rem 0.875rem;
+	color: var(--foreground);
+	font-size: 0.875rem;
+	line-height: 1.4;
+	outline: none;
+	resize: vertical;
+	transition:
+		background-color 200ms,
+		box-shadow 200ms,
+		border-color 200ms;
+}
+
+[data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled'])::placeholder {
+	color: var(--muted-foreground);
+}
+
+[data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled']):hover:not(:disabled) {
+	border-color: color-mix(in srgb, var(--ring) 40%, transparent);
+}
+
+[data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled']):focus {
+	border-color: var(--ring);
+	box-shadow: var(--focus-ring);
+}
+
+[data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled']):disabled {
+	cursor: not-allowed;
+	opacity: 0.45;
+}

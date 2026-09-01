@@ -1,0 +1,66 @@
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled']) {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 1.25rem;
+	border: 1px solid transparent;
+	border-radius: var(--button-radius);
+	padding: 0.125rem 0.5rem;
+	background: var(--secondary);
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1;
+	color: var(--secondary-foreground);
+	cursor: default;
+	user-select: none;
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable] {
+	cursor: pointer;
+	transition: background-color 200ms, color 200ms;
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]:hover {
+	background: color-mix(in srgb, var(--secondary) 80%, transparent);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='secondary'] {
+	background: var(--secondary);
+	color: var(--secondary-foreground);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='accent'] {
+	background: var(--accent);
+	color: var(--accent-foreground);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='outline'] {
+	border-color: var(--glass-border);
+	background: transparent;
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='success'] {
+	background: color-mix(in srgb, var(--success) 12%, var(--background));
+	color: color-mix(in srgb, var(--success) 66%, black);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='warning'] {
+	background: color-mix(in srgb, #f59e0b 16%, var(--background));
+	color: color-mix(in srgb, #f59e0b 72%, black);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='danger'] {
+	background: color-mix(in srgb, var(--danger) 12%, var(--background));
+	color: var(--destructive);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
+	background: var(--danger-soft);
+	color: var(--danger-soft-foreground);
+}
+
+[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='info'] {
+	background: var(--secondary);
+	color: var(--secondary-foreground);
+}

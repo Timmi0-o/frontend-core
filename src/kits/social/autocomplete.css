@@ -1,0 +1,134 @@
+[data-ui-kit='social'] [data-slot='autocomplete']:not([data-variant='unstyled']){
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-label']:not([data-variant='unstyled']){
+	margin-bottom: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	color: var(--text-primary);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	width: 100%;
+	cursor: text;
+	outline: none;
+	border: 1px solid var(--glass-border);
+	border-radius: var(--button-radius);
+	background: var(--glass-bg);
+	box-shadow: var(--glass-shadow);
+	color: var(--foreground);
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.25rem;
+	transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])::placeholder{
+	color: var(--light-gray);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):hover:not(:disabled){
+	background: var(--input-background-hover);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):focus,[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-open]{
+	border-color: var(--ring);
+	box-shadow: var(--focus-ring);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']{
+	border-color: var(--input-border-strong);
+	background: var(--background);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']:hover,[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']:focus{
+	border-color: var(--main-blue);
+	background: var(--background);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='sm']{
+	height: 2.25rem;
+	padding: 0 0.75rem;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='md']{
+	height: 2.25rem;
+	padding: 0 0.875rem;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='lg']{
+	height: 2.75rem;
+	padding: 0 1rem;
+	font-size: 1rem;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):disabled,[data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-disabled]{
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-dropdown']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	max-height: min(18.5rem, 60vh);
+	overflow-y: auto;
+	border-radius: var(--radius);
+	padding: 0.25rem;
+	overflow-x: hidden;
+	outline: none;
+	width: min(var(--anchor-width, 100%), calc(100vw - 24px));
+	min-width: 0;
+	max-width: calc(100vw - 24px);
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg-strong);
+	box-shadow: var(--glass-shadow);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-option']:not([data-variant='unstyled']){
+	margin: 0;
+	display: flex;
+	height: 2.25rem;
+	width: 100%;
+	cursor: pointer;
+	align-items: center;
+	gap: 0.625rem;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	padding: 0 1rem;
+	text-align: left;
+	font-size: 0.875rem;
+	color: var(--text-primary);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-option']:not([data-variant='unstyled']):hover,[data-ui-kit='social'] [data-slot='autocomplete-option']:not([data-variant='unstyled'])[data-selected]{
+	background: var(--hover-light-main-blue);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-option']:not([data-variant='unstyled'])[data-disabled]{
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-empty']:not([data-variant='unstyled']),[data-ui-kit='social'] [data-slot='autocomplete-loading']:not([data-variant='unstyled']){
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 0.625rem;
+	font-size: 0.875rem;
+	color: var(--gray);
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-error']:not([data-variant='unstyled']){
+	margin: 0.25rem 0 0;
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: #dc2626;
+}

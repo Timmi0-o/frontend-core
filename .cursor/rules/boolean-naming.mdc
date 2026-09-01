@@ -1,0 +1,25 @@
+---
+description: Boolean имена только с префиксом is/has/should/can (eslint local-rules/no-is-prefix-for-non-boolean)
+alwaysApply: true
+---
+
+# Boolean-имена: is / has / should / can
+
+ESLint: `local-rules/no-is-prefix-for-non-boolean`.
+
+- Переменная, поле, параметр или функция с типом `boolean` (или `() => boolean`) — имя начинается с `is`, `has`, `should` или `can`, дальше PascalCase: `isLoading`, `hasMeal`, `shouldRedirect`, `canCancel`.
+- Эти префиксы **запрещены** для не-boolean (`isUser` как объект — нельзя).
+- `useState`: стейт `isMealFilterEnabled`, сеттер `setIsMealFilterEnabled`. Не `onlyMeal`, `open`, `loading`, `enabled` без префикса.
+- Хуки `useX` правило не трогает; идентификаторы **внутри** хука — трогает.
+
+```ts
+// ❌
+const [onlyMeal, setOnlyMeal] = useState(false)
+const loading = true
+const isUser = { id: '1' }
+
+// ✅
+const [isMealFilterEnabled, setIsMealFilterEnabled] = useState(false)
+const isLoading = true
+const user = { id: '1' }
+```

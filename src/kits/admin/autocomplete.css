@@ -1,0 +1,164 @@
+[data-ui-kit='admin'] [data-slot='autocomplete']:not([data-variant='unstyled']){
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-label']:not([data-variant='unstyled']){
+	margin-bottom: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	color: var(--text-primary);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	width: 100%;
+	cursor: text;
+	outline: none;
+	border: 1px solid transparent;
+	border-radius: var(--field-radius);
+	background: var(--input-background);
+	color: var(--text-primary);
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.25rem;
+	box-shadow: var(--field-shadow);
+	transition:
+		background-color 150ms var(--ease-smooth),
+		box-shadow 150ms var(--ease-out);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])::placeholder{
+	color: var(--light-gray);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):hover:not(:disabled){
+	background: var(--input-background-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):focus{
+	background: var(--input-background);
+	box-shadow: var(--field-shadow), var(--focus-field-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']{
+	border-color: var(--input-border-strong);
+	background: var(--background);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']:hover:not(:disabled):not(:focus){
+	border-color: var(--border);
+	background: var(--field-hover);
+	background: var(--background);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-variant='light']:focus{
+	border-color: var(--input-border-strong);
+	background: var(--background);
+	box-shadow: 0 0 0 4px var(--input-focus-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='sm']{
+	height: 2.25rem;
+	padding: 0 0.75rem;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='md']{
+	height: 2.5rem;
+	padding: 0 0.875rem 0 1rem;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='lg']{
+	height: 3rem;
+	padding: 0 1rem;
+	font-size: 1rem;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled']):disabled,[data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-disabled]{
+	cursor: not-allowed;
+	opacity: 0.6;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-dropdown']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	max-height: min(18.5rem, 60vh);
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	border-radius: min(32px, var(--radius-3xl));
+	padding: calc(var(--spacing) * 1.5);
+	overflow-x: hidden;
+	outline: none;
+	width: min(var(--anchor-width, 100%), calc(100vw - 24px));
+	min-width: 0;
+	max-width: calc(100vw - 24px);
+	border: 0;
+	background: var(--overlay-bg);
+	box-shadow: var(--overlay-shadow);
+	font-size: 0.875rem;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled']){
+	position: relative;
+	margin: 0;
+	display: flex;
+	min-height: calc(var(--spacing) * 9);
+	width: 100%;
+	cursor: pointer;
+	align-items: center;
+	justify-content: flex-start;
+	gap: calc(var(--spacing) * 3);
+	border: 0;
+	border-radius: calc(var(--radius) * 2);
+	background: transparent;
+	padding: calc(var(--spacing) * 1.5) calc(var(--spacing) * 2.5);
+	text-align: left;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: var(--foreground);
+	white-space: nowrap;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	transition:
+		transform 250ms var(--ease-out-quart),
+		box-shadow 150ms var(--ease-out);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled']):hover{
+	background: var(--default);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled']):active{
+	transform: scale(0.98);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled'])[data-selected]{
+	background: transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled'])[data-selected]:hover{
+	background: var(--default);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled'])[data-disabled]{
+	cursor: not-allowed;
+	opacity: var(--disabled-opacity);
+	pointer-events: none;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-empty']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='autocomplete-loading']:not([data-variant='unstyled']){
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 0.625rem;
+	font-size: 0.875rem;
+	color: var(--gray);
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-error']:not([data-variant='unstyled']){
+	margin: 0.25rem 0 0;
+	font-size: 0.75rem;
+	font-weight: 500;
+	color: #dc2626;
+}

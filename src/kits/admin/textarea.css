@@ -1,0 +1,51 @@
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	border: var(--field-border-width) solid var(--field-border);
+	background: var(--input-background);
+	color: var(--header);
+	outline: none;
+	resize: vertical;
+	box-shadow: var(--field-shadow);
+	transition:
+		background-color 150ms var(--ease-smooth),
+		box-shadow 150ms var(--ease-out);
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled'])::placeholder{
+	color: var(--placeholder);
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled']):hover:not(:disabled){
+	background: var(--input-background-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled']):focus{
+	background: var(--input-background);
+	box-shadow: var(--field-shadow), var(--focus-field-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled'])[data-size='sm']{
+	min-height: 5.5rem;
+	border-radius: var(--field-radius);
+	padding: 0.5rem 0.75rem;
+	font-size: 0.875rem;
+	line-height: 1.4;
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled'])[data-size='md']{
+	min-height: 7.5rem;
+	border-radius: var(--field-radius);
+	padding: 0.75rem 0.875rem;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}
+
+[data-ui-kit='admin'] [data-slot='textarea']:not([data-variant='unstyled'])[data-size='lg']{
+	min-height: 7.5rem;
+	border-radius: var(--field-radius);
+	padding: 0.75rem 0.875rem;
+	font-size: 0.875rem;
+	line-height: 1.5;
+}

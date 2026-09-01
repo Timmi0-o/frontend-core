@@ -1,0 +1,27 @@
+[data-ui-kit='admin'],
+[data-ui-kit='admin'] *:not([data-slot='modal-overlay']):not([data-slot='bottom-sheet-overlay']) {
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+[data-ui-kit='admin']::-webkit-scrollbar,
+[data-ui-kit='admin'] *:not([data-slot='modal-overlay']):not([data-slot='bottom-sheet-overlay'])::-webkit-scrollbar {
+	width: 4px;
+	height: 4px;
+}
+
+[data-ui-kit='admin']::-webkit-scrollbar-track,
+[data-ui-kit='admin'] *:not([data-slot='modal-overlay']):not([data-slot='bottom-sheet-overlay'])::-webkit-scrollbar-track {
+	background: var(--scrollbar-track);
+}
+
+[data-ui-kit='admin']::-webkit-scrollbar-thumb,
+[data-ui-kit='admin'] *:not([data-slot='modal-overlay']):not([data-slot='bottom-sheet-overlay'])::-webkit-scrollbar-thumb {
+	background-color: var(--scrollbar-thumb);
+	border-radius: 999px;
+}
+
+[data-ui-kit='admin']::-webkit-scrollbar-thumb:hover,
+[data-ui-kit='admin'] *:not([data-slot='modal-overlay']):not([data-slot='bottom-sheet-overlay'])::-webkit-scrollbar-thumb:hover {
+	background-color: var(--scrollbar-thumb-hover);
+}

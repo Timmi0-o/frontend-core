@@ -1,0 +1,46 @@
+[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled']){
+	position: relative;
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	gap: 0.75rem;
+	overflow: visible;
+	border: 0;
+	border-radius: min(32px, var(--radius-3xl));
+	padding: 1rem;
+	background: var(--surface);
+	box-shadow: var(--surface-shadow);
+}
+
+[data-ui-kit='admin'] [data-slot='card-header']:not([data-variant='unstyled']){
+	display: flex;
+	flex-direction: column;
+}
+
+[data-ui-kit='admin'] [data-slot='card-title']:not([data-variant='unstyled']){
+	margin: 0;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.5rem;
+	color: var(--foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='card-description']:not([data-variant='unstyled']){
+	margin: 0;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: var(--muted);
+}
+
+[data-ui-kit='admin'] [data-slot='card-content']:not([data-variant='unstyled']){
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: 0.25rem;
+}
+
+[data-ui-kit='admin'] [data-slot='card-footer']:not([data-variant='unstyled']){
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

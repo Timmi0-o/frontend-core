@@ -1,0 +1,96 @@
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled']){
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 1.25rem;
+	border: 1px solid transparent;
+	border-radius: 9999px;
+	padding: 0 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1;
+	background: var(--background-secondary);
+	color: var(--text-primary);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='success']{
+	background: color-mix(in srgb, var(--success) 12%, var(--background));
+	color: color-mix(in srgb, var(--success) 66%, black);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='error']{
+	background: color-mix(in srgb, var(--danger) 12%, var(--background));
+	color: color-mix(in srgb, var(--danger) 66%, black);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='outline']{
+	border-color: var(--border-primary-color);
+	background: transparent;
+}
+
+[data-ui-kit='social'] [data-slot='badge-anchor']:not([data-variant='unstyled']){
+	position: relative;
+	display: inline-flex;
+	width: max-content;
+	flex-shrink: 0;
+	vertical-align: middle;
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement]{
+	position: absolute;
+	z-index: 1;
+	min-width: 1.125rem;
+	min-height: 1.125rem;
+	padding: 0 0.35rem;
+	font-size: 0.625rem;
+	pointer-events: none;
+	border-color: var(--background);
+	background: var(--main-blue);
+	color: var(--text-contrast);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='success']{
+	background: var(--success);
+	color: var(--text-contrast);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='error']{
+	background: var(--danger);
+	color: var(--text-contrast);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='outline']{
+	background: var(--background);
+	border-color: var(--border-primary-color);
+	color: var(--text-primary);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-empty]{
+	min-width: 0.5rem;
+	min-height: 0.5rem;
+	padding: 0;
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-right']{
+	top: 0;
+	right: 0;
+	transform: translate(40%, -40%);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-left']{
+	top: 0;
+	left: 0;
+	transform: translate(-40%, -40%);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-right']{
+	bottom: 0;
+	right: 0;
+	transform: translate(40%, 40%);
+}
+
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-left']{
+	bottom: 0;
+	left: 0;
+	transform: translate(-40%, 40%);
+}

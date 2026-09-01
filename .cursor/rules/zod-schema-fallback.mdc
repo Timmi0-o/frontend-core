@@ -1,0 +1,26 @@
+---
+description: Вход query/UI валидировать Zod-схемой с .catch(fallback), без parseX helpers
+alwaysApply: true
+---
+
+# Zod: fallback в схеме, не в хелпере
+
+Грязный вход (query, path, searchParams) парсит **та же Zod-схема**, что описывает поле. Если значение пустое, не того типа или вне лимита — схема отдаёт fallback через `.catch()`, а не `safeParse` в `parseFooParam`.
+
+```ts
+// ❌ BAD — микропарсер + ручной fallback
+const ChildCountSchema = z.number().int().min(0).max(8)
+export const parseAviaChildCountParam = (value: string | null | undefined) => {
+  if (value == null || value.trim() === '') return 0
+  const parsed = ChildCountSchema.safeParse(Number(value))
+  return parsed.success ? parsed.data : 0
+}
+
+// ✅ GOOD — лимит и fallback в схеме, на границе только .parse
+export const AviaChildCountSchema = z.coerce.number().int().min(0).max(8).catch(0)
+const childCount = AviaChildCountSchema.parse(searchParams.children)
+```
+
+- `children=9` при max 8 → `0`, не throw и не clamp до 8.
+- Не писать TS-гарды / `Number.isNaN` рядом со схемой «на всякий случай».
+- Вызов: `Schema.parse(raw)` (или `.parse` объекта query) в page/action. UI получает уже число/флаг.

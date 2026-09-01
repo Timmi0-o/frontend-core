@@ -1,0 +1,214 @@
+[data-ui-kit='social'] [data-slot='modal-overlay']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']) {
+	position: fixed;
+	inset: 0;
+	background: var(--overlay);
+	z-index: var(--tg-overlay-z, 1100);
+	touch-action: none;
+}
+
+[data-ui-kit='social'] [data-slot='modal-overlay']:not([data-variant='unstyled'])[data-open] {
+	animation: tg-social-modal-overlay-in 100ms ease-out;
+}
+
+[data-ui-kit='social'] [data-slot='modal-overlay']:not([data-variant='unstyled'])[data-ending-style] {
+	animation: tg-social-modal-overlay-out 100ms ease-in;
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled']) {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: calc(var(--tg-overlay-z, 1100) + 1);
+	box-sizing: border-box;
+	width: 100%;
+	height: auto;
+	max-width: min(24rem, calc(100% - 2rem));
+	--modal-padding-inline: 1rem;
+	padding: 1rem;
+	border-radius: var(--radius);
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg-strong);
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur-float));
+	-webkit-backdrop-filter: blur(var(--glass-blur-float));
+	color: var(--foreground);
+	font-size: 0.875rem;
+	transform: translate(-50%, -50%);
+	outline: none;
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-open] {
+	animation: tg-social-modal-in 100ms ease-out;
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-ending-style] {
+	animation: tg-social-modal-out 100ms ease-in;
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-animation='bottom-sheet'][data-open] {
+	animation: tg-social-modal-sheet-in 280ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-animation='bottom-sheet'][data-ending-style] {
+	animation: tg-social-modal-sheet-out 220ms cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+[data-ui-kit='social'] [data-slot='modal-title-hidden']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='bottom-sheet-title']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-title']:not([data-variant='unstyled']) {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+	clip: rect(0, 0, 0, 0);
+	clip-path: inset(50%);
+}
+
+[data-ui-kit='social'] [data-slot='modal-title']:not([data-variant='unstyled']) {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.375rem;
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='modal-close']:not([data-variant='unstyled']) {
+	appearance: none;
+	border: 0;
+	background: transparent;
+	cursor: pointer;
+	color: inherit;
+}
+
+[data-ui-kit='social'] [data-slot='modal-header']:not([data-variant='unstyled']) {
+	font-size: 1rem;
+	font-weight: 600;
+	line-height: 1.375rem;
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='modal-body']:not([data-variant='unstyled']) {
+	max-height: 60vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	margin: 1rem 0;
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='modal-footer']:not([data-variant='unstyled']) {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-content']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']:not([data-variant='unstyled']) {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: calc(var(--tg-overlay-z, 1100) + 1);
+	display: flex;
+	width: 100%;
+	max-height: min(92dvh, 100%);
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg-strong);
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur-float));
+	-webkit-backdrop-filter: blur(var(--glass-blur-float));
+	outline: none;
+	overscroll-behavior: contain;
+	touch-action: none;
+	will-change: transform;
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-body']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-body']:not([data-variant='unstyled']) {
+	min-height: 0;
+	width: 100%;
+	flex: 1;
+	overflow: auto;
+	padding: 1rem 1.25rem 1.5rem;
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-handle']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-handle']:not([data-variant='unstyled']) {
+	margin: 0.375rem auto 0;
+	height: 0.25rem;
+	width: 2.5rem;
+	flex-shrink: 0;
+	border-radius: 9999px;
+	background: color-mix(in srgb, var(--muted-foreground) 50%, transparent);
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-header']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-header']:not([data-variant='unstyled']) {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	padding: 0.25rem 0 0.75rem;
+	flex-shrink: 0;
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-footer']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-footer']:not([data-variant='unstyled']) {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	padding: 0.75rem 0 0;
+	flex-shrink: 0;
+}
+
+@keyframes tg-social-modal-overlay-in {
+	from { opacity: 0; }
+	to { opacity: 1; }
+}
+
+@keyframes tg-social-modal-overlay-out {
+	from { opacity: 1; }
+	to { opacity: 0; }
+}
+
+@keyframes tg-social-modal-in {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.95);
+	}
+
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+@keyframes tg-social-modal-out {
+	from {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.95);
+	}
+}
+
+@keyframes tg-social-modal-sheet-in {
+	from { transform: translate(-50%, 100%); }
+	to { transform: translate(-50%, -50%); }
+}
+
+@keyframes tg-social-modal-sheet-out {
+	from { transform: translate(-50%, -50%); }
+	to { transform: translate(-50%, 100%); }
+}

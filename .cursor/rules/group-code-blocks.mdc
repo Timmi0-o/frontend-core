@@ -1,0 +1,56 @@
+---
+description: Обязательная группировка импортов, хуков, констант и derived с пустыми строками между группами
+alwaysApply: true
+---
+
+# Группы в файле: отступы обязательны
+
+Каша из хуков, стейта и вычислений в одном сплошном блоке — запрещена. Между **группами** всегда пустая строка. Внутри группы — без пустых строк, кроме длинного вызова (перенос аргументов).
+
+## Импорты
+
+Порядок, пустая строка между группами:
+
+1. `'use client'` / side-effect
+2. внешние пакеты (`react`, `next`, ui-kit, библиотеки)
+3. алиасы проекта (`@/`) — при необходимости подгруппы: `actions` / `components` / `hooks` / `utils`
+4. относительные (`./`, `../`)
+5. стили (`*.module.css`) — последними
+
+Не смешивать `react` и `@/hooks` в одной куче без разделителя.
+
+## Тело компонента / хука
+
+Порядок, пустая строка между группами:
+
+1. i18n (`useTranslations`)
+2. context / store / refs
+3. data-хуки: query и mutate **одним блоком** (Rules of Hooks: не вставлять между ними derived)
+4. `useState`
+5. derived: обычные `const` из props/data (`orderInfo`, флаги, id)
+6. `useMemo` / `useCallback` — только после нужных derived
+7. обработчики
+8. `useEffect`
+9. `return`
+
+`useQuery` / `useMutation` **после** derived-каши — нельзя. Аргумент хука, который считается из props, передавай сразу в вызов хука (или считай id из props, не из ответа предыдущего запроса посреди блока).
+
+```tsx
+// ❌ хуки, стейт, derived и ещё хук вперемешку
+const t = useTranslations('…')
+const { data } = useGetOrder(orderId)
+const [selected, setSelected] = useState('')
+const item = data?.data?.items[0]
+const { data: extra } = useExtra(item?.id)
+
+// ✅
+const t = useTranslations('…')
+
+const { data: orderResult } = useGetOrder(orderId)
+const { data: extraResult } = useExtra(orderItemId)
+
+const [selected, setSelected] = useState('')
+
+const order = orderResult?.data
+const item = order?.items[0]
+```

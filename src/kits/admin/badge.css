@@ -1,0 +1,124 @@
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled']){
+	display: inline-flex;
+	width: fit-content;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	gap: 0.125rem;
+	min-height: 1.25rem;
+	border: 0;
+	border-radius: var(--radius-2xl);
+	padding: 0.125rem 0.5rem;
+	background: color-mix(in oklab, var(--foreground) 8%, var(--surface));
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+	color: var(--default-foreground);
+	white-space: nowrap;
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='success']{
+	background: color-mix(in oklab, var(--success) 28%, var(--surface));
+	color: var(--success-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='error']{
+	background: var(--danger);
+	color: var(--danger-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='warning']{
+	background: color-mix(in oklab, var(--warning) 28%, var(--surface));
+	color: var(--warning-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='info']{
+	background: color-mix(in oklab, var(--accent) 22%, var(--surface));
+	color: var(--accent-soft-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='outline']{
+	background: var(--surface);
+	box-shadow: inset 0 0 0 1px var(--border);
+	color: var(--foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge-anchor']:not([data-variant='unstyled']){
+	position: relative;
+	display: inline-flex;
+	width: max-content;
+	flex-shrink: 0;
+	vertical-align: middle;
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement]{
+	position: absolute;
+	z-index: 1;
+	min-width: 1.125rem;
+	min-height: 1.125rem;
+	padding: 0 0.35rem;
+	font-size: 0.625rem;
+	line-height: 1;
+	font-weight: 600;
+	pointer-events: none;
+	border-radius: 9999px;
+	box-shadow: 0 0 0 2px var(--surface);
+	background: var(--accent);
+	color: var(--accent-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='success']{
+	background: var(--success);
+	color: var(--success-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='error']{
+	background: var(--danger);
+	color: var(--danger-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='warning']{
+	background: var(--warning);
+	color: var(--warning-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='info']{
+	background: var(--accent);
+	color: var(--accent-foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='outline']{
+	background: var(--surface);
+	box-shadow: 0 0 0 2px var(--surface), inset 0 0 0 1px var(--border);
+	color: var(--foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-empty]{
+	min-width: 0.625rem;
+	min-height: 0.625rem;
+	padding: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-right']{
+	top: 0;
+	right: 0;
+	transform: translate(35%, -35%);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-left']{
+	top: 0;
+	left: 0;
+	transform: translate(-35%, -35%);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-right']{
+	bottom: 0;
+	right: 0;
+	transform: translate(35%, 35%);
+}
+
+[data-ui-kit='admin'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-left']{
+	bottom: 0;
+	left: 0;
+	transform: translate(-35%, 35%);
+}

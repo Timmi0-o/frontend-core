@@ -1,0 +1,53 @@
+[data-ui-kit='admin'] [data-slot='calendar']:not([data-variant='unstyled']){
+	display: flex;
+	width: 15.75rem;
+	max-width: 100%;
+	flex-direction: column;
+	overflow: hidden;
+	overscroll-behavior: contain;
+	border: 0;
+	border-radius: min(32px, calc(var(--radius) * 3));
+	background: var(--overlay-bg);
+	box-shadow: var(--overlay-shadow);
+	padding: 0.75rem;
+}
+
+[data-ui-kit='admin'] [data-slot='calendar-headline']:not([data-variant='unstyled']){
+	display: none;
+}
+
+[data-ui-kit='admin'] [data-slot='calendar-headline-weekday']:not([data-variant='unstyled']){
+	margin: 0;
+	font-size: 0.75rem;
+	font-weight: 650;
+	letter-spacing: 0.04em;
+	text-transform: capitalize;
+	color: var(--muted);
+}
+
+[data-ui-kit='admin'] [data-slot='calendar-headline-day']:not([data-variant='unstyled']){
+	margin: 0.1rem 0 0;
+	font-size: 2.5rem;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -0.05em;
+	font-variant-numeric: tabular-nums;
+	color: var(--text-primary);
+}
+
+[data-ui-kit='admin'] [data-slot='calendar-headline-month']:not([data-variant='unstyled']){
+	margin: 0.3rem 0 0;
+	font-size: 0.875rem;
+	text-transform: capitalize;
+	color: var(--text);
+}
+
+[data-ui-kit='admin'] [data-slot='calendar'] [data-slot='date-picker-popover']:not([data-variant='unstyled']){
+	width: 100%;
+	max-width: none;
+	border: 0;
+	border-radius: 0;
+	background: transparent;
+	box-shadow: none;
+	padding: 0.7rem 0.85rem 0.55rem;
+}

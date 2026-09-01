@@ -1,0 +1,145 @@
+[data-ui-kit='social'][data-slot='dropdown-menu-positioner']:not([data-variant='unstyled']){
+	z-index: 1205;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	min-width: 8rem;
+	max-width: min(22rem, calc(100vw - 24px));
+	max-height: min(24rem, calc(100dvh - 24px));
+	overflow-x: hidden;
+	overflow-y: auto;
+	border-radius: var(--radius);
+	border: 1px solid var(--glass-border);
+	background: var(--glass-bg-strong);
+	padding: 0.375rem;
+	box-shadow: var(--glass-shadow);
+	backdrop-filter: blur(var(--glass-blur-float));
+	-webkit-backdrop-filter: blur(var(--glass-blur-float));
+	outline: none;
+	transform-origin: var(--transform-origin);
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open]{
+	animation: tg-dropdown-menu-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style]{
+	animation: tg-dropdown-menu-out 120ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']){
+	box-sizing: border-box;
+	display: flex;
+	width: 100%;
+	min-height: 2rem;
+	align-items: center;
+	justify-content: space-between;
+	gap: 0.5rem;
+	border: 0;
+	border-radius: calc(var(--radius) - 2px);
+	background: transparent;
+	padding: 0.375rem 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 400;
+	line-height: 1.25;
+	letter-spacing: 0;
+	color: var(--foreground);
+	text-align: left;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']) svg,[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) svg{
+	width: 18px;
+	height: 18px;
+	flex-shrink: 0;
+	opacity: 0.88;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):hover,[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted]{
+	background: var(--surface-hover);
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive']{
+	color: var(--danger);
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled]{
+	pointer-events: none;
+	opacity: 0.45;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not(:last-child):not(
+		:has(+ [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']))
+	),[data-ui-kit='social']
+	[data-slot='dropdown-menu-checkbox-item']:not(:last-child):not(
+		:has(+ [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']))
+	){
+	box-shadow: none;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']){
+	margin: 0.25rem 0;
+	height: 1px;
+	background: var(--glass-border);
+}
+
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-section']
+	+ [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
+	margin-top: 0.25rem;
+	box-shadow: none;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-label']:not([data-variant='unstyled']){
+	padding: 0.375rem 0.5rem;
+	font-size: 0.75rem;
+	font-weight: 500;
+	line-height: 1.2;
+	color: var(--muted-foreground);
+	box-shadow: none;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item-indicator']:not([data-variant='unstyled']){
+	display: inline-flex;
+	height: 18px;
+	width: 18px;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']){
+	display: block;
+	width: 6px;
+	height: 11px;
+	border-right: 2px solid currentColor;
+	border-bottom: 2px solid currentColor;
+	transform: rotate(45deg) translateY(-1px);
+}
+
+@keyframes tg-dropdown-menu-in {
+	from {
+		opacity: 0;
+		transform: scale(0.92);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes tg-dropdown-menu-out {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(0.96);
+	}
+}
