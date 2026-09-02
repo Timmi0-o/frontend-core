@@ -1,6 +1,6 @@
 {
 	"name": "@timmi0-o/frontend-core",
-	"version": "0.0.12",
+	"version": "0.0.17",
 	"description": "Shared frontend primitives: UI kits, hooks, abstract actions, utils",
 	"type": "module",
 	"files": [
@@ -60,7 +60,8 @@
 	"scripts": {
 		"build": "vite build",
 		"playground": "vite --config playground/vite.config.ts",
-		"prepublishOnly": "npm run build"
+		"prepublishOnly": "npm run build",
+		"publish:patch": "npm version patch --no-git-tag-version && npm publish"
 	},
 	"peerDependencies": {
 		"@base-ui/react": "^1.7.0",

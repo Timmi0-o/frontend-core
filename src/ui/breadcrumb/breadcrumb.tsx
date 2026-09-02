@@ -2,7 +2,6 @@
 
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import { Breadcrumbs } from '../breadcrumbs/breadcrumbs'
 import type { ComponentProps, ReactElement } from 'react'
 
 /**
@@ -28,7 +27,15 @@ export const Breadcrumb = ({
 	variant = 'default',
 	...props
 }: ComponentProps<'nav'> & { variant?: TSlotVariant }): ReactElement => {
-	return <Breadcrumbs className={cn(className)} variant={variant} {...props} />
+	return (
+		<nav
+			aria-label='Хлебные крошки'
+			{...props}
+			data-slot='breadcrumbs'
+			data-variant={variant}
+			className={cn(className)}
+		/>
+	)
 }
 
 /**
@@ -47,10 +54,9 @@ export const BreadcrumbList = ({
 	className,
 	variant = 'default',
 	...props
-}: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement => {
+}: ComponentProps<'ol'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
-		<div
-			data-slot='breadcrumb-list'
+		<ol
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -72,10 +78,10 @@ export const BreadcrumbItem = ({
 	className,
 	variant = 'default',
 	...props
-}: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
+}: ComponentProps<'li'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
-		<span
-			data-slot='breadcrumb-item'
+		<li
+			data-slot='breadcrumbs-item'
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -98,7 +104,7 @@ export const BreadcrumbLink = ({
 }: ComponentProps<'a'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<a
-			data-slot='breadcrumb-link'
+			data-slot='breadcrumbs-link'
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -121,7 +127,7 @@ export const BreadcrumbPage = ({
 }: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<span
-			data-slot='breadcrumb-page'
+			data-slot='breadcrumbs-current'
 			data-variant={variant}
 			aria-current='page'
 			className={cn(className)}
@@ -146,7 +152,7 @@ export const BreadcrumbSeparator = ({
 }: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<span
-			data-slot='breadcrumb-separator'
+			data-slot='breadcrumbs-separator'
 			data-variant={variant}
 			className={cn(className)}
 			{...props}

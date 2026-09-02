@@ -94,6 +94,15 @@
 	background: var(--background);
 }
 
+/* tokens.css вне @layer — иначе background с кита красит порталы. */
+[data-ui-kit='social'][data-slot$='-positioner'] {
+	background: transparent;
+}
+
+[data-ui-kit='social'][data-slot$='-overlay'] {
+	background: var(--overlay);
+}
+
 html.dark [data-ui-kit='social'],
 .dark [data-ui-kit='social'],
 [data-theme='dark'] [data-ui-kit='social'] {

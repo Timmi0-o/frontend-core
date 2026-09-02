@@ -5,11 +5,6 @@
 	box-sizing: border-box;
 }
 
-/* Positioner только позиционирует: фон с [data-ui-kit] не должен рисовать прямоугольник. */
-[data-ui-kit][data-slot$='-positioner'] {
-	background: transparent;
-}
-
 /* Жест скролла не уходит на страницу из оверлеев, списков и календаря. */
 [data-ui-kit] :where(
 	[data-slot='calendar'],

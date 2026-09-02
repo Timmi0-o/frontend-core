@@ -159,8 +159,7 @@ const AdaptiveDialogContent = ({
 				onOpenChange={onOpenChange}
 				title={title}
 				height={height}
-				className={className}
-				contentClassName={contentClassName}
+				contentClassName={cn(className, contentClassName)}
 				variant={variant}
 			>
 				{children}

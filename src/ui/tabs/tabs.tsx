@@ -201,7 +201,9 @@ const TabsTab = ({
 					{icon}
 				</span>
 			) : null}
-			<span data-slot='tab-label'>{children}</span>
+			{children != null && children !== '' ? (
+				<span data-slot='tab-label'>{children}</span>
+			) : null}
 		</TabsPrimitive.Tab>
 	)
 }
