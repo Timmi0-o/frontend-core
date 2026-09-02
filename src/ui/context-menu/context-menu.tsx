@@ -1,12 +1,13 @@
 'use client'
 
 import { ContextMenu as ContextMenuPrimitive } from '@base-ui/react/context-menu'
+import type { ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import type { ReactNode } from 'react'
 
 interface IContextMenuContextValue {
 	uiKit: string | undefined
@@ -25,18 +26,18 @@ export interface IContextMenuRootProps extends ContextMenuPrimitive.Root.Props {
  * @example
  * ```tsx
  * <ContextMenu>
- *   <ContextMenuTrigger>
+ *   <ContextMenu.Trigger>
  *     <div>ПКМ здесь</div>
- *   </ContextMenuTrigger>
- *   <ContextMenuContent>
- *     <ContextMenuItem onClick={handleCopy}>Копировать</ContextMenuItem>
- *     <ContextMenuSeparator />
- *     <ContextMenuItem onClick={handleDelete}>Удалить</ContextMenuItem>
- *   </ContextMenuContent>
+ *   </ContextMenu.Trigger>
+ *   <ContextMenu.Content>
+ *     <ContextMenu.Item onClick={handleCopy}>Копировать</ContextMenu.Item>
+ *     <ContextMenu.Separator />
+ *     <ContextMenu.Item onClick={handleDelete}>Удалить</ContextMenu.Item>
+ *   </ContextMenu.Content>
  * </ContextMenu>
  * ```
  */
-const ContextMenu = ({
+const ContextMenuRoot = ({
 	children,
 	variant = 'default',
 	...props
@@ -173,8 +174,14 @@ const ContextMenuSeparator = ({
 	)
 }
 
+export const ContextMenu = Object.assign(ContextMenuRoot, {
+	Trigger: ContextMenuTrigger,
+	Content: ContextMenuContent,
+	Item: ContextMenuItem,
+	Separator: ContextMenuSeparator,
+})
+
 export {
-	ContextMenu,
 	ContextMenuTrigger,
 	ContextMenuContent,
 	ContextMenuItem,

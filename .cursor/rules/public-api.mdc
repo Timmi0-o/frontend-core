@@ -9,7 +9,7 @@ alwaysApply: true
 
 | Import | Для чего |
 |--------|----------|
-| `@timmi0-o/frontend-core/ui-kit` | Компоненты |
+| `@timmi0-o/frontend-core/ui-kit` | Компоненты + `uiKit` (`data-ui-kit` на корне приложения) |
 | `@timmi0-o/frontend-core/ui-kit/styles.css` | CSS кита social (дефолт для приложений) |
 | `@timmi0-o/frontend-core/social-ui-kit` + `.../styles.css` | Кит `social` (`uiKit` + CSS), playground |
 | `@timmi0-o/frontend-core/admin-ui-kit` + `.../styles.css` | Кит `admin` (`uiKit` + CSS) |

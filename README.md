@@ -48,18 +48,16 @@ zod ^4
 ## Быстрый старт
 
 ```tsx
-import { uiKit } from '@timmi0-o/frontend-core/social-ui-kit'
+import { uiKit, Button, Card } from '@timmi0-o/frontend-core/ui-kit'
 
 <body data-ui-kit={uiKit}>{children}</body>
 ```
 
 ```css
-@import '@timmi0-o/frontend-core/social-ui-kit/styles.css';
+@import '@timmi0-o/frontend-core/ui-kit/styles.css';
 ```
 
 ```tsx
-import { Button, Card } from '@timmi0-o/frontend-core/ui-kit'
-
 export const Example = () => {
 	return (
 		<Card>
@@ -75,12 +73,13 @@ export const Example = () => {
 }
 ```
 
+`ui-kit` — дефолтный путь приложений (кит social, без префикса имени). `social-ui-kit` / `admin-ui-kit` — только если нужно явно переключить кит (playground).
+
 | CSS | `data-ui-kit` |
 | --- | ------------- |
+| `ui-kit/styles.css` | `social` (дефолт) |
 | `social-ui-kit/styles.css` | `social` |
 | `admin-ui-kit/styles.css` | `admin` |
-
-Рекомендуемый импорт компонентов: `@timmi0-o/frontend-core/ui-kit` (без скрытого CSS). Стили — отдельным `@import`.
 
 ---
 
@@ -88,9 +87,10 @@ export const Example = () => {
 
 | Импорт | Что внутри |
 | ------ | ---------- |
-| `@timmi0-o/frontend-core/ui-kit` | Компоненты и типы, **без** CSS |
-| `@timmi0-o/frontend-core/social-ui-kit` | Компоненты + CSS social + `uiKit` |
-| `@timmi0-o/frontend-core/admin-ui-kit` | Компоненты + CSS admin + `uiKit` |
+| `@timmi0-o/frontend-core/ui-kit` | Компоненты, типы, `uiKit` |
+| `@timmi0-o/frontend-core/ui-kit/styles.css` | CSS social (дефолт приложений) |
+| `@timmi0-o/frontend-core/social-ui-kit` | То же + CSS social (playground) |
+| `@timmi0-o/frontend-core/admin-ui-kit` | То же + CSS admin (playground) |
 | `@timmi0-o/frontend-core/hooks` | `useDebounceValue`, `useLocalStorage`, `useMediaQuery`, `useManageSearchParams`, `useLockBodyScroll`, … |
 | `@timmi0-o/frontend-core/actions` | `abstractGetAction`, `abstractMutateAction`, типы workers/fetcher/mapper |
 | `@timmi0-o/frontend-core/utils` | `base64Manager`, `multiTypeFieldParser` |

@@ -1,9 +1,10 @@
 'use client'
 
 import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
+import type { ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
-import type { ReactNode } from 'react'
 import { POPOVER_DISPLAY_NAMES } from '../../constants/popover.constants'
 import { usePopoverContext } from '../../context/popover-context'
 import type { IPopoverContentProps } from '../../types/i-popover-props'
@@ -51,11 +52,14 @@ export const PopoverContent = ({
 					data-variant={variant}
 					initialFocus={initialFocus}
 					finalFocus={finalFocus}
-					className={cn(className)}
+					className={hasPanel ? undefined : cn(className)}
 					style={style}
 				>
 					{hasPanel ? (
-						<div data-slot='popover-panel' className={panelClassName}>
+						<div
+							data-slot='popover-panel'
+							className={cn(className, panelClassName)}
+						>
 							{children}
 						</div>
 					) : (

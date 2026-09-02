@@ -44,7 +44,7 @@
 	padding: 0 0.35rem;
 	font-size: 0.625rem;
 	pointer-events: none;
-	border-color: var(--background);
+	border: 0;
 	background: var(--main-blue);
 	color: var(--text-contrast);
 }

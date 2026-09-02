@@ -1,7 +1,10 @@
 /**
  * Компоненты без CSS кита.
- * Внешний вид задаёт приложение: стили выбранного кита и `data-ui-kit` на корне.
+ * Внешний вид задаёт приложение: `@timmi0-o/frontend-core/ui-kit/styles.css`
+ * и `data-ui-kit={uiKit}` на корне.
  */
+export const uiKit = 'social' as const
+
 export {
 	Accordion,
 	AdaptiveDialog,

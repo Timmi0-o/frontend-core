@@ -29,6 +29,7 @@
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 	color: var(--foreground);
 	font-size: 0.875rem;
+	overflow: hidden;
 }
 
 @keyframes tg-popover-in {
