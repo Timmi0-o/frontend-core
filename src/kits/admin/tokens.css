@@ -161,6 +161,15 @@
 	--scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
 
+/* tokens.css вне @layer — иначе background с кита красит порталы. */
+[data-ui-kit='admin'][data-slot$='-positioner'] {
+	background: transparent;
+}
+
+[data-ui-kit='admin'][data-slot$='-overlay'] {
+	background: var(--overlay);
+}
+
 html.dark [data-ui-kit='admin'],
 .dark [data-ui-kit='admin'],
 [data-theme='dark'] [data-ui-kit='admin'] {

@@ -48,21 +48,36 @@
 	margin-inline-end: var(--input-padding-inline);
 }
 
+[data-ui-kit='admin'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']){
+	position: relative;
+	z-index: 1;
+}
+
 [data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled']){
 	box-sizing: border-box;
-	flex: 1 1 auto;
-	align-self: stretch;
-	height: 100%;
+	position: absolute;
+	inset: 0;
 	width: 100%;
-	min-width: 0;
+	height: 100%;
 	margin: 0;
+	padding-block: 0;
 	padding-inline: var(--input-padding-inline);
 	border: 0;
 	outline: none;
+	appearance: none;
 	background: transparent;
 	border-radius: inherit;
 	color: var(--header);
 	font-size: 0.875rem;
+}
+
+[data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled']):-webkit-autofill,
+[data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled']):-webkit-autofill:hover,
+[data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled']):-webkit-autofill:focus{
+	border-radius: inherit;
+	-webkit-text-fill-color: var(--header);
+	caret-color: var(--header);
+	box-shadow: inset 0 0 0 1000px color-mix(in srgb, #1a73e8 14%, var(--input-background));
 }
 
 [data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled'])::placeholder{
@@ -137,11 +152,11 @@
 	inset-inline-end: 0;
 }
 
-[data-ui-kit='admin'] [data-slot='input']:has([data-slot='input-group-prefix']) > [data-slot='input-field']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='input']:has(> :first-child:not([data-slot='input-field'])) > [data-slot='input-field']:not([data-variant='unstyled']){
 	padding-inline-start: calc(var(--input-padding-inline) + var(--input-addon-inline, 1.625rem));
 }
 
-[data-ui-kit='admin'] [data-slot='input']:has([data-slot='input-group-suffix']) > [data-slot='input-field']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='input']:has(> :last-child:not([data-slot='input-field'])) > [data-slot='input-field']:not([data-variant='unstyled']){
 	padding-inline-end: calc(var(--input-padding-inline) + var(--input-addon-inline, 1.625rem));
 }
 

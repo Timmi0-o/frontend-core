@@ -1,6 +1,6 @@
 {
 	"name": "@timmi0-o/frontend-core",
-	"version": "0.0.17",
+	"version": "0.0.19",
 	"description": "Shared frontend primitives: UI kits, hooks, abstract actions, utils",
 	"type": "module",
 	"files": [
