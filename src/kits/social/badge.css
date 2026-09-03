@@ -19,8 +19,8 @@
 }
 
 [data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='error']{
-	background: color-mix(in srgb, var(--danger) 12%, var(--background));
-	color: color-mix(in srgb, var(--danger) 66%, black);
+	background: var(--danger);
+	color: #fff;
 }
 
 [data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='outline']{
@@ -56,7 +56,7 @@
 
 [data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='error']{
 	background: var(--danger);
-	color: var(--text-contrast);
+	color: #fff;
 }
 
 [data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='outline']{
