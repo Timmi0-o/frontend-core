@@ -5,6 +5,7 @@ import { cn } from '@/core/cn'
 import { Spinner } from '@/ui/spinner/spinner'
 import {
 	forwardRef,
+	isValidElement,
 	type MouseEvent,
 	type ReactElement,
 	useCallback,
@@ -39,6 +40,14 @@ const ButtonSpinner = ({
 
 ButtonSpinner.displayName = 'Button.Spinner'
 
+const isNativeButtonRender = (render: IButtonProps['render']): boolean => {
+	if (render == null) {
+		return true
+	}
+
+	return isValidElement(render) && render.type === 'button'
+}
+
 const ButtonRoot = forwardRef<HTMLElement, IButtonProps>(
 	(
 		{
@@ -58,6 +67,7 @@ const ButtonRoot = forwardRef<HTMLElement, IButtonProps>(
 		ref,
 	): ReactElement => {
 		const isButtonDisabled = Boolean(isDisabled || isPending)
+		const isNativeButton = isNativeButtonRender(render)
 
 		const handleClick = useCallback(
 			(event: MouseEvent<HTMLButtonElement>) => {
@@ -77,7 +87,7 @@ const ButtonRoot = forwardRef<HTMLElement, IButtonProps>(
 				ref={ref}
 				type={type}
 				disabled={isButtonDisabled}
-				nativeButton
+				nativeButton={isNativeButton}
 				data-slot='button'
 				data-variant={variant}
 				data-size={size}
