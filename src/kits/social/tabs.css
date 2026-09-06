@@ -165,6 +165,8 @@
 	padding: 0;
 	height: auto;
 	gap: 1.25rem;
+	overflow: visible;
+	border-radius: 0;
 }
 
 [data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tabs-indicator']:not([data-variant='unstyled']),
@@ -175,6 +177,11 @@
 	border-radius: 0;
 	background: var(--foreground);
 	box-shadow: none;
+}
+
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tab']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] [data-slot='tab']:not([data-variant='unstyled']) {
+	border-radius: 0;
 }
 
 [data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tab']:not([data-variant='unstyled'])[data-active],
