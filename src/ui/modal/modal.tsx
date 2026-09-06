@@ -105,6 +105,33 @@ const ModalTitle = ({
 
 ModalTitle.displayName = MODAL_DISPLAY_NAMES.TITLE
 
+export interface IModalDescriptionProps {
+	children: ReactNode
+	className?: string
+	variant?: TSlotVariant
+}
+
+/**
+ * Подзаголовок модалки. Ставит `modal-description`, чтобы текст был меньше title.
+ */
+const ModalDescription = ({
+	children,
+	className,
+	variant = 'default',
+}: IModalDescriptionProps): ReactElement => {
+	return (
+		<p
+			data-slot='modal-description'
+			data-variant={variant}
+			className={className}
+		>
+			{children}
+		</p>
+	)
+}
+
+ModalDescription.displayName = MODAL_DISPLAY_NAMES.DESCRIPTION
+
 export interface IModalCloseProps {
 	children?: ReactNode
 	className?: string
@@ -134,6 +161,7 @@ type TModalComponent = typeof ModalRoot & {
 	Body: typeof ModalBody
 	Footer: typeof ModalFooter
 	Title: typeof ModalTitle
+	Description: typeof ModalDescription
 	Close: typeof ModalClose
 	Root: typeof ModalRoot
 }
@@ -146,6 +174,7 @@ type TModalComponent = typeof ModalRoot & {
  * <Modal open={isOpen} onOpenChange={setIsOpen} title="Подтверждение">
  *   <Modal.Header>
  *     <Modal.Title>Отменить заказ?</Modal.Title>
+ *     <Modal.Description>Бронь снимется.</Modal.Description>
  *     <Modal.Close />
  *   </Modal.Header>
  *   <Modal.Body>Бронь снимется.</Modal.Body>
@@ -162,5 +191,6 @@ export const Modal: TModalComponent = Object.assign(ModalRoot, {
 	Body: ModalBody,
 	Footer: ModalFooter,
 	Title: ModalTitle,
+	Description: ModalDescription,
 	Close: ModalClose,
 })

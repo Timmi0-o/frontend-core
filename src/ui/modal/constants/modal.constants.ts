@@ -4,5 +4,6 @@ export const MODAL_DISPLAY_NAMES = {
 	BODY: 'Modal.Body',
 	FOOTER: 'Modal.Footer',
 	TITLE: 'Modal.Title',
+	DESCRIPTION: 'Modal.Description',
 	CLOSE: 'Modal.Close',
 } as const

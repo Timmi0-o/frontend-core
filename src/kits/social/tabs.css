@@ -18,6 +18,7 @@
 	flex-wrap: nowrap;
 	align-items: stretch;
 	justify-content: center;
+	gap: 0.25rem;
 	overflow: hidden;
 	width: max-content;
 	max-width: 100%;
@@ -163,6 +164,7 @@
 	box-shadow: none;
 	padding: 0;
 	height: auto;
+	gap: 1.25rem;
 }
 
 [data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tabs-indicator']:not([data-variant='unstyled']),

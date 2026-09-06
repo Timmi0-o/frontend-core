@@ -19,11 +19,10 @@ import {
 	useMobileCondition,
 	type TMobileCondition,
 } from '@/hooks/use-mobile-condition'
-
+import { BottomSheet } from '../modal/bottom-sheet/bottom-sheet'
 import { ModalBody } from '../modal/components/modal-body/modal-body'
 import { ModalFooter } from '../modal/components/modal-footer/modal-footer'
 import { ModalHeader } from '../modal/components/modal-header/modal-header'
-import { BottomSheet } from '../modal/bottom-sheet/bottom-sheet'
 import { Modal } from '../modal/modal'
 
 const DEFAULT_DIALOG_TITLE = 'Диалог'
@@ -276,9 +275,14 @@ const AdaptiveDialogTitle = ({
 
 AdaptiveDialogTitle.displayName = 'AdaptiveDialog.Title'
 
+/**
+ * Подзаголовок диалога. На десктопе — `modal-description`, на мобилке — слот шторки.
+ * Нужен, чтобы description не наследовал размер и вес title из шапки.
+ */
 const AdaptiveDialogDescription = ({
 	className,
 	children,
+	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
 	const { isMobile } = useAdaptiveDialog()
 
@@ -290,7 +294,11 @@ const AdaptiveDialogDescription = ({
 		)
 	}
 
-	return <p className={className}>{children}</p>
+	return (
+		<Modal.Description className={className} variant={variant}>
+			{children}
+		</Modal.Description>
+	)
 }
 
 AdaptiveDialogDescription.displayName = 'AdaptiveDialog.Description'

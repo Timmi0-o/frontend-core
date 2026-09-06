@@ -51,6 +51,18 @@
 [data-ui-kit='admin'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']){
 	position: relative;
 	z-index: 1;
+	display: inline-flex;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	color: var(--muted);
+}
+
+[data-ui-kit='admin'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']) svg{
+	display: block;
+	width: 1rem;
+	height: 1rem;
+	flex-shrink: 0;
 }
 
 [data-ui-kit='admin'] [data-slot='input-field']:not([data-variant='unstyled']){
