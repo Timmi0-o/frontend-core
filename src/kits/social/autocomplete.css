@@ -25,7 +25,10 @@
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.25rem;
-	transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])::placeholder{

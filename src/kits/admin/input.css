@@ -10,9 +10,9 @@
 	background: var(--input-background);
 	box-shadow: var(--field-shadow);
 	transition:
-		background-color 150ms var(--ease-smooth),
-		border-color 150ms var(--ease-smooth),
-		box-shadow 150ms var(--ease-out);
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled']):hover:not([data-disabled]){

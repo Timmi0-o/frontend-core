@@ -13,6 +13,7 @@ const kitEntries = {
 	'hooks/index': resolve(root, 'src/hooks/index.ts'),
 	'actions/index': resolve(root, 'src/actions/index.ts'),
 	'utils/index': resolve(root, 'src/utils/index.ts'),
+	'motion/index': resolve(root, 'src/motion/index.ts'),
 } as const
 
 const kits = ['social', 'admin'] as const

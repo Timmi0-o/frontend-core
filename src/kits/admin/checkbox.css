@@ -21,9 +21,9 @@
 	box-shadow: var(--field-shadow);
 	border-radius: calc(var(--radius) * 0.75);
 	transition:
-		border-color 200ms ease-out,
-		background-color 200ms ease-out,
-		box-shadow 200ms ease-out;
+		border-color var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='checkbox'][data-size='md'] [data-slot='checkbox-control']:not([data-variant='unstyled']){

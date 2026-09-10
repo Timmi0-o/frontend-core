@@ -1,0 +1,43 @@
+:root,
+[data-ui-kit] {
+	--motion-duration-instant: 0ms;
+	--motion-duration-micro: 100ms;
+	--motion-duration-fast: 150ms;
+	--motion-duration-control: 180ms;
+	--motion-duration-short: 220ms;
+	--motion-duration-base: 220ms;
+	--motion-duration-standard: 280ms;
+	--motion-duration-slow: 320ms;
+	--motion-duration-medium: 340ms;
+	--motion-duration-long: 440ms;
+	--motion-duration-emphasized: 550ms;
+
+	--motion-easing-enter: cubic-bezier(0.28, 0.08, 0.16, 1);
+	--motion-easing-exit: cubic-bezier(0.28, 0.08, 0.16, 1);
+	--motion-easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+	--motion-easing-control: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	:root,
+	[data-ui-kit] {
+		--motion-duration-instant: 0ms;
+		--motion-duration-micro: 0.01ms;
+		--motion-duration-fast: 0.01ms;
+		--motion-duration-control: 0.01ms;
+		--motion-duration-short: 0.01ms;
+		--motion-duration-base: 0.01ms;
+		--motion-duration-slow: 0.01ms;
+		--motion-duration-standard: 0.01ms;
+		--motion-duration-medium: 0.01ms;
+		--motion-duration-long: 0.01ms;
+		--motion-duration-emphasized: 0.01ms;
+	}
+
+	[data-ui-kit],
+	[data-ui-kit] *,
+	[data-ui-kit] *::before,
+	[data-ui-kit] *::after {
+		scroll-behavior: auto;
+	}
+}

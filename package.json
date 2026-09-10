@@ -55,6 +55,11 @@
 			"types": "./dist/utils/index.d.ts",
 			"import": "./dist/utils/index.js",
 			"default": "./dist/utils/index.js"
+		},
+		"./motion": {
+			"types": "./dist/motion/index.d.ts",
+			"import": "./dist/motion/index.js",
+			"default": "./dist/motion/index.js"
 		}
 	},
 	"scripts": {

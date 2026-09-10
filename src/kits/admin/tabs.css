@@ -41,9 +41,9 @@
 	pointer-events: none;
 	transform: translate3d(var(--active-tab-left), var(--active-tab-top), 0);
 	transition:
-		transform 250ms var(--ease-out-fluid),
-		width 250ms var(--ease-out-fluid),
-		height 250ms var(--ease-out-fluid);
+		transform var(--motion-duration-base) var(--motion-easing-control),
+		width var(--motion-duration-base) var(--motion-easing-control),
+		height var(--motion-duration-base) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='tabs-indicator'][hidden]{
@@ -76,10 +76,10 @@
 	font-weight: 500;
 	line-height: 1.25rem;
 	transition:
-		color 150ms var(--ease-smooth),
-		background-color 150ms var(--ease-smooth),
-		box-shadow 150ms var(--ease-out),
-		opacity 150ms var(--ease-smooth);
+		color var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='tab']:not([data-variant='unstyled']):hover:not(:disabled):not([data-disabled]):not([data-type='action']):not([data-active]){

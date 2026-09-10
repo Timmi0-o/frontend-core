@@ -20,7 +20,9 @@
 
 [data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]{
 	cursor: pointer;
-	transition: background-color 0.15s var(--ease-smooth), color 0.15s var(--ease-smooth);
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]:hover{

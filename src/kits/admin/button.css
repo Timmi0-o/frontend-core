@@ -25,12 +25,12 @@
 	outline: none;
 	transform-origin: center;
 	transition:
-		transform 250ms var(--ease-smooth),
-		background-color 100ms var(--ease-out),
-		box-shadow 100ms var(--ease-out),
-		border-color 100ms var(--ease-out),
-		color 100ms var(--ease-out),
-		opacity 150ms var(--ease-out);
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-micro) var(--motion-easing-control),
+		box-shadow var(--motion-duration-micro) var(--motion-easing-control),
+		border-color var(--motion-duration-micro) var(--motion-easing-control),
+		color var(--motion-duration-micro) var(--motion-easing-control),
+		opacity var(--motion-duration-fast) var(--motion-easing-control);
 	-webkit-tap-highlight-color: transparent;
 }
 

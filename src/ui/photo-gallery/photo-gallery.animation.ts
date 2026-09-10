@@ -1,16 +1,22 @@
 import type { MotionProps, Transition, Variants } from 'framer-motion'
-
-const GALLERY_EASE = [0.16, 1, 0.3, 1] as [number, number, number, number]
+import {
+	MOTION_DURATION_FAST,
+	MOTION_DURATION_MICRO,
+	MOTION_DURATION_SLOW,
+	MOTION_EASING_ENTER,
+	MOTION_EASING_EXIT,
+	REDUCED_MOTION_TRANSITION,
+} from '@/motion'
 
 export const GALLERY_OVERLAY_TRANSITION: Transition = {
 	type: 'tween',
-	duration: 0.44,
-	ease: GALLERY_EASE,
+	duration: MOTION_DURATION_SLOW,
+	ease: MOTION_EASING_ENTER,
 }
 
 export const GALLERY_OVERLAY_TRANSITION_REDUCED: Transition = {
 	type: 'tween',
-	duration: 0,
+	...REDUCED_MOTION_TRANSITION,
 }
 
 export const GALLERY_OVERLAY_ROOT_VARIANTS: Variants = {
@@ -26,8 +32,8 @@ export const GALLERY_OVERLAY_ROOT_VARIANTS: Variants = {
 		pointerEvents: 'none',
 		transition: {
 			type: 'tween',
-			duration: 0.34,
-			ease: GALLERY_EASE,
+			duration: MOTION_DURATION_SLOW,
+			ease: MOTION_EASING_EXIT,
 			pointerEvents: { duration: 0 },
 		},
 	},
@@ -52,9 +58,9 @@ export const GALLERY_OVERLAY_CHROME_TOP_VARIANTS: Variants = {
 		y: 0,
 		transition: {
 			type: 'tween',
-			duration: 0.38,
-			ease: GALLERY_EASE,
-			delay: 0.1,
+			duration: MOTION_DURATION_SLOW,
+			ease: MOTION_EASING_ENTER,
+			delay: MOTION_DURATION_MICRO,
 		},
 	},
 }
@@ -67,9 +73,9 @@ export const GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS: Variants = {
 		y: 0,
 		transition: {
 			type: 'tween',
-			duration: 0.4,
-			ease: GALLERY_EASE,
-			delay: 0.14,
+			duration: MOTION_DURATION_SLOW,
+			ease: MOTION_EASING_ENTER,
+			delay: MOTION_DURATION_FAST,
 		},
 	},
 }

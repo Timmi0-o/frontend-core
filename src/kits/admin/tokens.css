@@ -20,11 +20,6 @@
 	--radius-2xl: calc(var(--radius) * 2);
 	--radius-3xl: calc(var(--radius) * 3);
 
-	--ease-smooth: ease;
-	--ease-out: cubic-bezier(0.165, 0.84, 0.44, 1);
-	--ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
-	--ease-out-fluid: cubic-bezier(0.32, 0.72, 0, 1);
-
 	--background: oklch(0.9702 0 0);
 	--foreground: var(--eclipse);
 	--surface: var(--white);

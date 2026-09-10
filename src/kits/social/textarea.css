@@ -14,9 +14,9 @@
 	outline: none;
 	resize: vertical;
 	transition:
-		background-color 200ms,
-		box-shadow 200ms,
-		border-color 200ms;
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='textarea']:not([data-variant='unstyled'])::placeholder {

@@ -20,11 +20,11 @@
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-open] {
-	animation: tg-tooltip-in 100ms ease-out;
+	animation: tg-tooltip-in var(--motion-duration-micro) var(--motion-easing-enter);
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style] {
-	animation: tg-tooltip-out 100ms ease-in;
+	animation: tg-tooltip-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-arrow']:not([data-variant='unstyled']) {

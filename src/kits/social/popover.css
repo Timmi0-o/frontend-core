@@ -11,11 +11,11 @@
 }
 
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open] {
-	animation: tg-popover-in 100ms ease-out;
+	animation: tg-popover-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
 
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-ending-style] {
-	animation: tg-popover-out 100ms ease-in;
+	animation: tg-popover-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
 [data-ui-kit='social'] [data-slot='popover-panel']:not([data-variant='unstyled']) {

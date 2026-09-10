@@ -26,12 +26,12 @@
 	outline: none;
 	background-clip: padding-box;
 	transition:
-		transform 200ms,
-		background-color 200ms,
-		border-color 200ms,
-		color 200ms,
-		box-shadow 200ms,
-		opacity 200ms;
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		opacity var(--motion-duration-fast) var(--motion-easing-control);
 	-webkit-tap-highlight-color: transparent;
 }
 

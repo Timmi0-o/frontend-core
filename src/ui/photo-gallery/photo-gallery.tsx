@@ -5,6 +5,7 @@ import { overlayLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll'
+import { REDUCED_MOTION_TRANSITION } from '@/motion'
 import { usePhotoGalleryDismissGesture } from '@/ui/photo-gallery/hooks/use-photo-gallery-dismiss-gesture'
 import {
 	GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS,
@@ -317,13 +318,13 @@ const PhotoGalleryOverlay = ({
 										? {
 												opacity: 1,
 												pointerEvents: 'none',
-												transition: { duration: 0 },
+												transition: REDUCED_MOTION_TRANSITION,
 											}
 										: 'exit'
 								}
 								transition={
 									prefersReducedMotion
-										? { duration: 0 }
+										? REDUCED_MOTION_TRANSITION
 										: overlayMotion.transition
 								}
 							>

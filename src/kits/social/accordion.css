@@ -35,7 +35,7 @@
 	font-weight: 500;
 	line-height: 1.375;
 	text-align: left;
-	transition: background-color 150ms ease;
+	transition: background-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='accordion-trigger']:not([data-variant='unstyled']):hover:not(:disabled):not([data-disabled]) {
@@ -59,7 +59,9 @@
 	align-items: center;
 	justify-content: center;
 	color: var(--muted-foreground);
-	transition: transform 180ms ease, color 180ms ease;
+	transition:
+		transform var(--motion-duration-base) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='accordion-trigger-icon']:not([data-variant='unstyled']) svg {
@@ -76,7 +78,7 @@
 	display: flow-root;
 	height: var(--accordion-panel-height);
 	overflow: hidden;
-	transition: height 180ms ease;
+	transition: height var(--motion-duration-base) var(--motion-easing-standard);
 }
 
 [data-ui-kit='social'] [data-slot='accordion-panel']:not([data-variant='unstyled'])[data-starting-style],

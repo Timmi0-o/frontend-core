@@ -18,10 +18,10 @@
 	cursor: pointer;
 	-webkit-tap-highlight-color: transparent;
 	transition:
-		background-color 200ms,
-		border-color 200ms,
-		box-shadow 200ms,
-		opacity 200ms;
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='switch']:not([data-variant='unstyled']):hover:not([data-disabled]):not([data-checked]) {
@@ -55,7 +55,7 @@
 	background: #fff;
 	box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
 	translate: 0;
-	transition: translate 200ms;
+	transition: translate var(--motion-duration-base) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='switch'][data-checked] [data-slot='switch-thumb']:not([data-variant='unstyled']),

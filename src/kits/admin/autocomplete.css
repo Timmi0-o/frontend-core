@@ -26,8 +26,8 @@
 	line-height: 1.25rem;
 	box-shadow: var(--field-shadow);
 	transition:
-		background-color 150ms var(--ease-smooth),
-		box-shadow 150ms var(--ease-out);
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])::placeholder{
@@ -121,8 +121,8 @@
 	outline: none;
 	-webkit-tap-highlight-color: transparent;
 	transition:
-		transform 250ms var(--ease-out-quart),
-		box-shadow 150ms var(--ease-out);
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled']):hover{

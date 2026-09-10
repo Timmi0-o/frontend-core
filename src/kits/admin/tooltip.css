@@ -18,11 +18,11 @@
 }
 
 [data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-open]{
-	animation: tg-admin-tooltip-in 150ms cubic-bezier(0.22, 1, 0.36, 1);
+	animation: tg-admin-tooltip-in var(--motion-duration-micro) var(--motion-easing-enter);
 }
 
 [data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-admin-tooltip-out 120ms cubic-bezier(0.4, 0, 0.2, 1);
+	animation: tg-admin-tooltip-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
 [data-ui-kit='admin'] [data-slot='tooltip-arrow']:not([data-variant='unstyled']){

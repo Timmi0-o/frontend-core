@@ -17,7 +17,9 @@
 
 [data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable] {
 	cursor: pointer;
-	transition: background-color 200ms, color 200ms;
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-clickable]:hover {

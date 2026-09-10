@@ -43,7 +43,7 @@
 
 [data-ui-kit='social'] [data-slot='table-root'] [data-slot='table-row']:not([data-variant='unstyled']){
 	border-bottom: var(--main-table-border);
-	transition: background-color 0.2s ease;
+	transition: background-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='table-root'] [data-slot='table-row']:not([data-variant='unstyled']):hover{

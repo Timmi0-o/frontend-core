@@ -108,7 +108,7 @@
 	line-height: 0;
 	cursor: pointer;
 	opacity: 0;
-	transition: opacity 150ms var(--ease-smooth);
+	transition: opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-sonner-toast]:hover [data-close-button] {

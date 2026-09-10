@@ -31,9 +31,9 @@
 	font-weight: 400;
 	line-height: 1.25rem;
 	transition:
-		background-color 200ms,
-		box-shadow 200ms,
-		border-color 200ms;
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
+		border-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled']):hover:not(:disabled):not([data-disabled]),
@@ -130,7 +130,7 @@
 	align-items: center;
 	justify-content: center;
 	color: var(--muted-foreground);
-	transition: transform 200ms;
+	transition: transform var(--motion-duration-base) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='select-indicator']:not([data-variant='unstyled'])[data-open] {

@@ -28,8 +28,8 @@
 	font-size: 0.875rem;
 	box-shadow: var(--field-shadow);
 	transition:
-		background-color 150ms var(--ease-smooth),
-		box-shadow 150ms var(--ease-out);
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-input']:not([data-variant='unstyled']):hover:not(:disabled){
@@ -239,8 +239,8 @@
 	background: transparent;
 	color: var(--accent-soft-foreground);
 	transition:
-		transform 250ms var(--ease-out),
-		background-color 100ms var(--ease-out);
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-micro) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-nav-previous']:not([data-variant='unstyled']):hover:not(:disabled),[data-ui-kit='admin'] [data-slot='date-picker-nav-next']:not([data-variant='unstyled']):hover:not(:disabled){
@@ -331,7 +331,9 @@
 	text-overflow: ellipsis;
 	text-transform: capitalize;
 	color: var(--text-primary);
-	transition: background-color 150ms ease, color 150ms ease;
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-year']:not([data-variant='unstyled']){
@@ -349,7 +351,10 @@
 	font-weight: 600;
 	font-variant-numeric: tabular-nums;
 	color: var(--text-primary);
-	transition: background-color 150ms ease, color 150ms ease, box-shadow 150ms ease;
+	transition:
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-month']:not([data-variant='unstyled']):hover:not(:disabled),[data-ui-kit='admin'] [data-slot='date-picker-year']:not([data-variant='unstyled']):hover:not(:disabled){
@@ -411,9 +416,9 @@
 	background: transparent;
 	color: var(--foreground);
 	transition:
-		transform 250ms var(--ease-out),
-		background-color 100ms var(--ease-out),
-		box-shadow 100ms var(--ease-out);
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-micro) var(--motion-easing-control),
+		box-shadow var(--motion-duration-micro) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-day']:not([data-variant='unstyled'])[data-empty]{

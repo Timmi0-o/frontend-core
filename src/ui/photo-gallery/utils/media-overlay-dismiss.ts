@@ -1,18 +1,9 @@
 import type { Transition } from 'framer-motion'
-
-const MEDIA_OVERLAY_EASE = [0.16, 1, 0.3, 1] as [
-	number,
-	number,
-	number,
-	number,
-]
-
-const MEDIA_OVERLAY_DISMISS_FLING_EASE = [0.22, 0.61, 0.36, 1] as [
-	number,
-	number,
-	number,
-	number,
-]
+import {
+	MOTION_DURATION_BASE,
+	MOTION_EASING_ENTER,
+	MOTION_EASING_EXIT,
+} from '@/motion'
 
 /** Смещение по вертикали, после которого жест считается dismiss, а не свайпом слайда. */
 export const MEDIA_OVERLAY_DISMISS_ACTIVATE_PX = 14
@@ -35,8 +26,8 @@ const MEDIA_OVERLAY_DISMISS_FLING_DURATION_MAX = 0.58
 
 export const MEDIA_OVERLAY_DISMISS_SNAP_TRANSITION: Transition = {
 	type: 'tween',
-	duration: 0.28,
-	ease: MEDIA_OVERLAY_EASE,
+	duration: MOTION_DURATION_BASE,
+	ease: MOTION_EASING_ENTER,
 }
 
 /**
@@ -54,7 +45,7 @@ export const getMediaOverlayDismissFlingTransition = (
 			remainingPx / MEDIA_OVERLAY_DISMISS_FLING_SPEED_PX_PER_S,
 		),
 	),
-	ease: MEDIA_OVERLAY_DISMISS_FLING_EASE,
+	ease: MOTION_EASING_EXIT,
 })
 
 /**

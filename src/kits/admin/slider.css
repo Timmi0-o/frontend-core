@@ -143,9 +143,9 @@
 	cursor: grab;
 	outline: none;
 	transition:
-		background-color 250ms var(--ease-smooth),
-		transform 250ms var(--ease-out),
-		box-shadow 150ms var(--ease-out);
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='slider-thumb']:not([data-variant='unstyled'])::after{
@@ -157,7 +157,7 @@
 	border-radius: calc(var(--radius) * 1.25);
 	background: var(--accent-foreground);
 	box-shadow: var(--field-shadow);
-	transition: transform 250ms var(--ease-out);
+	transition: transform var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='admin'] [data-slot='slider'][data-orientation='vertical'] [data-slot='slider-thumb']:not([data-variant='unstyled']){

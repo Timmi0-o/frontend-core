@@ -1,3 +1,4 @@
+@import '../motion.css';
 @import './tokens.css';
 @import '../reset.css' layer(base);
 @import './spinner.css' layer(components);

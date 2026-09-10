@@ -21,11 +21,11 @@
 }
 
 [data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open]{
-	animation: tg-dropdown-menu-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+	animation: tg-dropdown-menu-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
 
 [data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-dropdown-menu-out 120ms cubic-bezier(0.4, 0, 0.2, 1);
+	animation: tg-dropdown-menu-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
 [data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']){

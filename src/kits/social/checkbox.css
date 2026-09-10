@@ -20,9 +20,9 @@
 	box-shadow: var(--glass-shadow);
 	outline: none;
 	transition:
-		border-color 200ms,
-		background-color 200ms,
-		box-shadow 200ms;
+		border-color var(--motion-duration-fast) var(--motion-easing-control),
+		background-color var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='checkbox'][data-size='md'] [data-slot='checkbox-control']:not([data-variant='unstyled']) {
