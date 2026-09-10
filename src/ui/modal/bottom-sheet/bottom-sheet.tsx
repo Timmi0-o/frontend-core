@@ -8,11 +8,13 @@ import {
 	overlayLayerStyle,
 	useOverlayLayer,
 } from '@/core/overlay-layer'
+import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	createContext,
 	forwardRef,
+	useCallback,
 	useContext,
 	type ComponentProps,
 	type CSSProperties,
@@ -133,11 +135,47 @@ const BottomSheetContent = forwardRef<
 		variant = 'default',
 		className,
 		style,
+		onPointerDownOutside,
+		onInteractOutside,
+		onFocusOutside,
 		children,
 		...props
 	},
 	ref,
 ): ReactElement {
+	const preventFloatingOutsideDismiss = useCallback(
+		(event: CustomEvent<{ originalEvent: Event }>) => {
+			if (shouldPreventOverlayDismiss(event)) {
+				event.preventDefault()
+			}
+		},
+		[],
+	)
+
+	const handlePointerDownOutside = useCallback(
+		(event: CustomEvent<{ originalEvent: PointerEvent }>) => {
+			preventFloatingOutsideDismiss(event)
+			onPointerDownOutside?.(event)
+		},
+		[onPointerDownOutside, preventFloatingOutsideDismiss],
+	)
+
+	const handleInteractOutside = useCallback(
+		(event: CustomEvent<{ originalEvent: PointerEvent | FocusEvent }>) => {
+			preventFloatingOutsideDismiss(event)
+			onInteractOutside?.(event)
+		},
+		[onInteractOutside, preventFloatingOutsideDismiss],
+	)
+
+	const handleFocusOutside = useCallback(
+		(event: CustomEvent<{ originalEvent: FocusEvent }>) => {
+			preventFloatingOutsideDismiss(event)
+			onFocusOutside?.(event)
+		},
+		[onFocusOutside, preventFloatingOutsideDismiss],
+	)
+
 	return (
 		<DrawerPrimitive.Content
 			ref={ref}
@@ -146,6 +184,9 @@ const BottomSheetContent = forwardRef<
 			data-variant={variant}
 			className={cn(className)}
 			style={style}
+			onPointerDownOutside={handlePointerDownOutside}
+			onInteractOutside={handleInteractOutside}
+			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
 			{children}

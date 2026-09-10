@@ -2,6 +2,7 @@
 
 import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
 import { findHoverFloatingRoot } from '@/core/hover-floating-root'
+import { getOverlayPortalContainer } from '@/core/overlay-layer'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	useCallback,
@@ -41,8 +42,10 @@ const PopoverRoot = ({
 	}, [])
 
 	useLayoutEffect(() => {
-		setPortalContainer(findHoverFloatingRoot(hostRef.current))
-	}, [hostRef])
+		setPortalContainer(
+			findHoverFloatingRoot(hostRef.current) ?? getOverlayPortalContainer(),
+		)
+	}, [hostRef, open])
 
 	const value = useMemo<IPopoverContextValue>(
 		() => ({

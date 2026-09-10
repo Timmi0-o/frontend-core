@@ -65,6 +65,7 @@ export const overlayBackdropStyle = (): CSSProperties =>
  */
 export const floatingLayerStyle = (floatingZ: number): CSSProperties => ({
 	zIndex: floatingZ,
+	pointerEvents: 'auto',
 })
 
 /**

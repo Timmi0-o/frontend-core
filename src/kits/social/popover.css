@@ -1,5 +1,6 @@
 [data-ui-kit='social'][data-slot='popover-positioner']:not([data-variant='unstyled']) {
 	z-index: 1205;
+	pointer-events: auto;
 }
 
 [data-ui-kit='social'] [data-slot='popover-anchor']:not([data-variant='unstyled']) {

@@ -115,6 +115,7 @@
 	max-height: min(36rem, calc(100dvh - 24px));
 	overflow-x: hidden;
 	overflow-y: auto;
+	pointer-events: auto;
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-popover'][data-month-count]:not([data-variant='unstyled']){
