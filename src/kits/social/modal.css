@@ -42,6 +42,20 @@
 	outline: none;
 }
 
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-nested-dialog-open] {
+	overflow: hidden;
+}
+
+[data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-nested-dialog-open]::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 2;
+	border-radius: inherit;
+	background: var(--overlay);
+	pointer-events: none;
+}
+
 [data-ui-kit='social'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-social-modal-in var(--motion-duration-base) var(--motion-easing-enter) both;
 }
