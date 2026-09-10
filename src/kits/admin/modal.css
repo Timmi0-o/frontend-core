@@ -11,7 +11,7 @@
 }
 
 [data-ui-kit='admin'] [data-slot='modal-overlay']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-admin-modal-overlay-out var(--motion-duration-fast) var(--motion-easing-exit) both;
+	animation: tg-admin-modal-overlay-out var(--motion-duration-short) var(--motion-easing-exit) both;
 }
 
 [data-ui-kit='admin'] [data-slot='modal-content']:not([data-variant='unstyled']){
@@ -39,7 +39,7 @@
 }
 
 [data-ui-kit='admin'] [data-slot='modal-content']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-admin-modal-out var(--motion-duration-fast) var(--motion-easing-exit) both;
+	animation: tg-admin-modal-out var(--motion-duration-short) var(--motion-easing-exit) both;
 }
 
 [data-ui-kit='admin'] [data-slot='modal-title-hidden']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='bottom-sheet-title']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='bottom-sheet-title']:not([data-variant='unstyled']){
@@ -198,5 +198,5 @@
 
 @keyframes tg-admin-modal-out {
 	from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-	to { opacity: 0; transform: translate(-50%, -50%) scale(0.95); }
+	to { opacity: 0; transform: translate(-50%, -50%) scale(0.98); }
 }
