@@ -61,6 +61,8 @@
 	--background-secondary: var(--muted);
 	--background-header-table: var(--muted);
 	--overlay: rgb(0 0 0 / 0.4);
+	--overlay-backdrop-blur: 6px;
+	--overlay-backdrop-filter: blur(6px);
 
 	--danger: var(--destructive);
 	--danger-soft: color-mix(in srgb, var(--destructive) 10%, transparent);
@@ -99,8 +101,10 @@
 	background: transparent;
 }
 
-[data-ui-kit='social'][data-slot$='-overlay'] {
+[data-ui-kit='social'] [data-slot$='-overlay']:not([data-variant='unstyled']) {
 	background: var(--overlay);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 }
 
 html.dark [data-ui-kit='social'],

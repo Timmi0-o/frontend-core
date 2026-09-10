@@ -4,6 +4,9 @@
 	position: fixed;
 	inset: 0;
 	background: var(--overlay);
+	/* literal blur: Lightning CSS вырезает backdrop-filter с var() */
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 	z-index: var(--tg-overlay-z, 1100);
 	touch-action: none;
 }

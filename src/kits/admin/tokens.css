@@ -127,6 +127,8 @@
 	--surface-muted: var(--background);
 	--surface-information: var(--surface-secondary);
 	--overlay: var(--backdrop);
+	--overlay-backdrop-blur: 6px;
+	--overlay-backdrop-filter: blur(6px);
 	--status-danger-fg: var(--danger);
 	--skeleton-base: var(--default);
 	--skeleton-highlight: var(--surface);
@@ -161,8 +163,10 @@
 	background: transparent;
 }
 
-[data-ui-kit='admin'][data-slot$='-overlay'] {
+[data-ui-kit='admin'] [data-slot$='-overlay']:not([data-variant='unstyled']) {
 	background: var(--overlay);
+	backdrop-filter: blur(6px);
+	-webkit-backdrop-filter: blur(6px);
 }
 
 html.dark [data-ui-kit='admin'],

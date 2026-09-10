@@ -3,7 +3,9 @@
 import { Dialog } from '@base-ui/react/dialog'
 import { cn } from '@/core/cn'
 import {
+	getOverlayPortalContainer,
 	OverlayLayerProvider,
+	overlayBackdropStyle,
 	overlayLayerStyle,
 	useOverlayLayer,
 } from '@/core/overlay-layer'
@@ -47,9 +49,15 @@ const ModalRoot = ({
 			<ModalContext.Provider
 				value={{ isOpen: open, onOpenChange, setHasVisibleTitle }}
 			>
-				<Dialog.Portal>
+				<Dialog.Portal container={getOverlayPortalContainer()}>
 					<div data-ui-kit={uiKit} style={overlayLayerStyle(overlayZ)}>
-						<Dialog.Backdrop data-slot='modal-overlay' />
+						<Dialog.Backdrop
+							data-slot='modal-overlay'
+							style={{
+								...overlayBackdropStyle(),
+								zIndex: overlayZ,
+							}}
+						/>
 						<Dialog.Popup
 							data-slot='modal-content'
 							data-variant={variant}

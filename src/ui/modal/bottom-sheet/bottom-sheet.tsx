@@ -2,7 +2,9 @@
 
 import { cn } from '@/core/cn'
 import {
+	getOverlayPortalContainer,
 	OverlayLayerProvider,
+	overlayBackdropStyle,
 	overlayLayerStyle,
 	useOverlayLayer,
 } from '@/core/overlay-layer'
@@ -76,10 +78,15 @@ function BottomSheetTrigger({
 }
 
 function BottomSheetPortal({
+	container,
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Portal>): ReactElement {
 	return (
-		<DrawerPrimitive.Portal data-slot='bottom-sheet-portal' {...props} />
+		<DrawerPrimitive.Portal
+			data-slot='bottom-sheet-portal'
+			{...props}
+			container={container ?? getOverlayPortalContainer()}
+		/>
 	)
 }
 
@@ -106,7 +113,7 @@ const BottomSheetOverlay = forwardRef<
 			data-slot='bottom-sheet-overlay'
 			data-variant={variant}
 			className={cn(className)}
-			style={style}
+			style={{ ...overlayBackdropStyle(), ...style }}
 			{...props}
 		/>
 	)
@@ -276,7 +283,11 @@ function BottomSheetConvenienceBody({
 	const { overlayZ } = useOverlayLayer()
 	const layerStyle = overlayLayerStyle(overlayZ)
 
-	const overlayStyle: CSSProperties = { ...layerStyle, zIndex: overlayZ }
+	const overlayStyle: CSSProperties = {
+		...layerStyle,
+		...overlayBackdropStyle(),
+		zIndex: overlayZ,
+	}
 	const contentStyle: CSSProperties = {
 		...layerStyle,
 		zIndex: overlayZ + 1,
