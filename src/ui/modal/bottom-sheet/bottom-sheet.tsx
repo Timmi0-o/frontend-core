@@ -2,11 +2,11 @@
 
 import { cn } from '@/core/cn'
 import {
-	getOverlayPortalContainer,
 	OverlayLayerProvider,
 	overlayBackdropStyle,
 	overlayLayerStyle,
 	useOverlayLayer,
+	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
 import type { TSlotVariant } from '@/core/slot-variant'
@@ -82,12 +82,19 @@ function BottomSheetTrigger({
 function BottomSheetPortal({
 	container,
 	...props
-}: ComponentProps<typeof DrawerPrimitive.Portal>): ReactElement {
+}: ComponentProps<typeof DrawerPrimitive.Portal>): ReactElement | null {
+	const defaultContainer = useOverlayPortalContainer()
+	const resolvedContainer = container ?? defaultContainer
+
+	if (!resolvedContainer) {
+		return null
+	}
+
 	return (
 		<DrawerPrimitive.Portal
 			data-slot='bottom-sheet-portal'
 			{...props}
-			container={container ?? getOverlayPortalContainer()}
+			container={resolvedContainer}
 		/>
 	)
 }

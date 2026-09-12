@@ -3,7 +3,9 @@
 import {
 	createContext,
 	useContext,
+	useLayoutEffect,
 	useMemo,
+	useState,
 	type CSSProperties,
 	type ReactElement,
 	type ReactNode,
@@ -32,12 +34,23 @@ export const useOverlayLayer = (): IOverlayLayer =>
  * Вешаем на `documentElement`, а не на `body`: при scroll-lock на body
  * `overflow: hidden` ломает `backdrop-filter` у оверлеев внутри body.
  */
-export const getOverlayPortalContainer = (): HTMLElement => {
+export const getOverlayPortalContainer = (): HTMLElement | null => {
 	if (typeof document === 'undefined') {
-		throw new Error('getOverlayPortalContainer is client-only')
+		return null
 	}
 
 	return document.documentElement
+}
+
+/** Контейнер портала после mount — без hydration mismatch и без SSR-crash. */
+export const useOverlayPortalContainer = (): HTMLElement | null => {
+	const [container, setContainer] = useState<HTMLElement | null>(null)
+
+	useLayoutEffect(() => {
+		setContainer(document.documentElement)
+	}, [])
+
+	return container
 }
 
 /**

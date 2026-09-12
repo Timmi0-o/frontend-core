@@ -3,11 +3,11 @@
 import { Dialog } from '@base-ui/react/dialog'
 import { cn } from '@/core/cn'
 import {
-	getOverlayPortalContainer,
 	OverlayLayerProvider,
 	overlayBackdropStyle,
 	overlayLayerStyle,
 	useOverlayLayer,
+	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
@@ -42,6 +42,7 @@ const ModalRoot = ({
 	const [hasVisibleTitle, setHasVisibleTitle] = useState(false)
 	const { hostRef, uiKit } = useInheritedUiKit()
 	const { overlayZ } = useOverlayLayer()
+	const portalContainer = useOverlayPortalContainer()
 
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
@@ -49,32 +50,34 @@ const ModalRoot = ({
 			<ModalContext.Provider
 				value={{ isOpen: open, onOpenChange, setHasVisibleTitle }}
 			>
-				<Dialog.Portal container={getOverlayPortalContainer()}>
-					<div data-ui-kit={uiKit} style={overlayLayerStyle(overlayZ)}>
-						<Dialog.Backdrop
-							data-slot='modal-overlay'
-							style={{
-								...overlayBackdropStyle(),
-								zIndex: overlayZ,
-							}}
-						/>
-						<Dialog.Popup
-							data-slot='modal-content'
-							data-variant={variant}
-							data-animation={animation}
-							className={cn(className)}
-						>
-							<OverlayLayerProvider overlayZ={overlayZ}>
-								{hasVisibleTitle ? null : (
-									<Dialog.Title data-slot='modal-title-hidden'>
-										{title ?? DEFAULT_DIALOG_TITLE}
-									</Dialog.Title>
-								)}
-								{children}
-							</OverlayLayerProvider>
-						</Dialog.Popup>
-					</div>
-				</Dialog.Portal>
+				{portalContainer ? (
+					<Dialog.Portal container={portalContainer}>
+						<div data-ui-kit={uiKit} style={overlayLayerStyle(overlayZ)}>
+							<Dialog.Backdrop
+								data-slot='modal-overlay'
+								style={{
+									...overlayBackdropStyle(),
+									zIndex: overlayZ,
+								}}
+							/>
+							<Dialog.Popup
+								data-slot='modal-content'
+								data-variant={variant}
+								data-animation={animation}
+								className={cn(className)}
+							>
+								<OverlayLayerProvider overlayZ={overlayZ}>
+									{hasVisibleTitle ? null : (
+										<Dialog.Title data-slot='modal-title-hidden'>
+											{title ?? DEFAULT_DIALOG_TITLE}
+										</Dialog.Title>
+									)}
+									{children}
+								</OverlayLayerProvider>
+							</Dialog.Popup>
+						</div>
+					</Dialog.Portal>
+				) : null}
 			</ModalContext.Provider>
 		</Dialog.Root>
 	)
