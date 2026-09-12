@@ -54,7 +54,11 @@ import { uiKit, Button, Card } from '@timmi0-o/frontend-core/ui-kit'
 ```
 
 ```css
-@import '@timmi0-o/frontend-core/ui-kit/styles.css';
+/* social-приложение */
+@import '@timmi0-o/frontend-core/ui-kit/social/styles.css';
+
+/* admin-приложение */
+@import '@timmi0-o/frontend-core/ui-kit/admin/styles.css';
 ```
 
 ```tsx
@@ -73,13 +77,12 @@ export const Example = () => {
 }
 ```
 
-`ui-kit` — дефолтный путь приложений (кит social, без префикса имени). `social-ui-kit` / `admin-ui-kit` — только если нужно явно переключить кит (playground).
+Компоненты всегда из `ui-kit`. CSS подключается отдельно — путь выбирает визуальный кит:
 
 | CSS | `data-ui-kit` |
 | --- | ------------- |
-| `ui-kit/styles.css` | `social` (дефолт) |
-| `social-ui-kit/styles.css` | `social` |
-| `admin-ui-kit/styles.css` | `admin` |
+| `ui-kit/social/styles.css` | `social` |
+| `ui-kit/admin/styles.css` | `admin` |
 
 ---
 
@@ -88,9 +91,8 @@ export const Example = () => {
 | Импорт | Что внутри |
 | ------ | ---------- |
 | `@timmi0-o/frontend-core/ui-kit` | Компоненты, типы, `uiKit` |
-| `@timmi0-o/frontend-core/ui-kit/styles.css` | CSS social (дефолт приложений) |
-| `@timmi0-o/frontend-core/social-ui-kit` | То же + CSS social (playground) |
-| `@timmi0-o/frontend-core/admin-ui-kit` | То же + CSS admin (playground) |
+| `@timmi0-o/frontend-core/ui-kit/social/styles.css` | CSS кита `social` |
+| `@timmi0-o/frontend-core/ui-kit/admin/styles.css` | CSS кита `admin` |
 | `@timmi0-o/frontend-core/hooks` | `useDebounceValue`, `useLocalStorage`, `useMediaQuery`, `useManageSearchParams`, `useLockBodyScroll`, … |
 | `@timmi0-o/frontend-core/actions` | `abstractGetAction`, `abstractMutateAction`, типы workers/fetcher/mapper |
 | `@timmi0-o/frontend-core/utils` | `base64Manager`, `multiTypeFieldParser` |

@@ -22,23 +22,12 @@
 			"import": "./dist/kits/ui-kit/index.js",
 			"default": "./dist/kits/ui-kit/index.js"
 		},
-		"./ui-kit/styles.css": {
-			"default": "./dist/kits/ui-kit/styles.css"
-		},
-		"./social-ui-kit": {
-			"types": "./dist/kits/social/index.d.ts",
-			"import": "./dist/kits/social/index.js",
-			"default": "./dist/kits/social/index.js"
-		},
-		"./admin-ui-kit": {
-			"types": "./dist/kits/admin/index.d.ts",
-			"import": "./dist/kits/admin/index.js",
-			"default": "./dist/kits/admin/index.js"
-		},
-		"./social-ui-kit/styles.css": {
+		"./ui-kit/social/styles.css": {
+			"style": "./dist/kits/social/styles.css",
 			"default": "./dist/kits/social/styles.css"
 		},
-		"./admin-ui-kit/styles.css": {
+		"./ui-kit/admin/styles.css": {
+			"style": "./dist/kits/admin/styles.css",
 			"default": "./dist/kits/admin/styles.css"
 		},
 		"./hooks": {

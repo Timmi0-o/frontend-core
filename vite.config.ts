@@ -8,8 +8,6 @@ const root = dirname(fileURLToPath(import.meta.url))
 
 const kitEntries = {
 	'kits/ui-kit/index': resolve(root, 'src/kits/ui-kit/index.ts'),
-	'kits/social/index': resolve(root, 'src/kits/social/index.ts'),
-	'kits/admin/index': resolve(root, 'src/kits/admin/index.ts'),
 	'hooks/index': resolve(root, 'src/hooks/index.ts'),
 	'actions/index': resolve(root, 'src/actions/index.ts'),
 	'utils/index': resolve(root, 'src/utils/index.ts'),
@@ -67,17 +65,6 @@ const emitKitStyles = (): Plugin => {
 			)
 
 			for (const kit of kits) {
-				const entryName = `kits/${kit}/index.js`
-				const entry = bundle[entryName]
-
-				if (entry?.type === 'chunk') {
-					const withoutDirective = entry.code.replace(
-						/^['"]use client['"];?\n/,
-						'',
-					)
-					entry.code = `'use client';\nimport './styles.css';\n${withoutDirective}`
-				}
-
 				this.emitFile({
 					type: 'asset',
 					fileName: `kits/${kit}/styles.css`,
@@ -87,12 +74,6 @@ const emitKitStyles = (): Plugin => {
 							: flattenCss(resolve(root, `src/kits/${kit}/styles.css`)),
 				})
 			}
-
-			this.emitFile({
-				type: 'asset',
-				fileName: 'kits/ui-kit/styles.css',
-				source: socialCss,
-			})
 		},
 	}
 }

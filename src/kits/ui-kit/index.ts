@@ -1,7 +1,7 @@
 /**
  * Компоненты без CSS кита.
- * Внешний вид задаёт приложение: `@timmi0-o/frontend-core/ui-kit/styles.css`
- * и `data-ui-kit={uiKit}` на корне.
+ * Внешний вид задаёт приложение: `@timmi0-o/frontend-core/ui-kit/social/styles.css`
+ * или `.../ui-kit/admin/styles.css` и `data-ui-kit={uiKit}` на корне.
  */
 export const uiKit = 'social' as const
 
