@@ -100,12 +100,12 @@
 	box-sizing: border-box;
 	width: 20.75rem;
 	max-width: min(20.75rem, calc(100vw - 24px));
-	border-radius: 1.25rem;
+	border-radius: var(--overlay-radius);
 	padding: 0.9rem 0.9rem 0.65rem;
 	outline: none;
 	border: 1px solid var(--border-primary-color);
 	background: var(--background);
-	box-shadow: var(--box-shadow-modal);
+	box-shadow: var(--overlay-shadow);
 	overscroll-behavior: contain;
 	max-height: min(36rem, calc(100dvh - 24px));
 	overflow-x: hidden;

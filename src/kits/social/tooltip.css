@@ -13,7 +13,7 @@
 	font-weight: 500;
 	line-height: 1.25;
 	color: var(--foreground);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 	outline: none;

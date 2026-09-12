@@ -142,7 +142,7 @@
 	max-height: min(18.5rem, 60vh);
 	overflow-x: hidden;
 	overflow-y: auto;
-	border-radius: var(--radius);
+	border-radius: var(--overlay-radius);
 	padding: 0.25rem;
 	outline: none;
 	width: min(var(--anchor-width, 100%), calc(100vw - 24px));
@@ -150,7 +150,7 @@
 	max-width: calc(100vw - 24px);
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 }

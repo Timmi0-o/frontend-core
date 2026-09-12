@@ -79,7 +79,7 @@
 	box-sizing: border-box;
 	max-height: min(18.5rem, 60vh);
 	overflow-y: auto;
-	border-radius: var(--radius);
+	border-radius: var(--overlay-radius);
 	padding: 0.25rem;
 	overflow-x: hidden;
 	outline: none;
@@ -88,7 +88,7 @@
 	max-width: calc(100vw - 24px);
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 }
 
 [data-ui-kit='social'] [data-slot='autocomplete-option']:not([data-variant='unstyled']){

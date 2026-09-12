@@ -20,12 +20,12 @@
 }
 
 [data-ui-kit='social'] [data-slot='popover-panel']:not([data-variant='unstyled']) {
-	border-radius: var(--radius);
+	border-radius: var(--overlay-radius);
 	padding: 0.625rem;
 	z-index: 50;
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 	color: var(--foreground);

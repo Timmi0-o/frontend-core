@@ -5,8 +5,8 @@
 	inset: 0;
 	background: var(--overlay);
 	/* literal blur: Lightning CSS вырезает backdrop-filter с var() */
-	backdrop-filter: blur(6px);
-	-webkit-backdrop-filter: blur(6px);
+	backdrop-filter: blur(3px);
+	-webkit-backdrop-filter: blur(3px);
 	z-index: var(--tg-overlay-z, 1100);
 	touch-action: none;
 }
@@ -30,10 +30,10 @@
 	max-width: min(24rem, calc(100% - 2rem));
 	--modal-padding-inline: 1rem;
 	padding: 1rem;
-	border-radius: var(--radius);
+	border-radius: var(--overlay-radius);
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 	color: var(--foreground);
@@ -142,10 +142,10 @@
 	max-height: min(92dvh, 100%);
 	flex-direction: column;
 	overflow: hidden;
-	border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+	border-radius: var(--overlay-radius) var(--overlay-radius) 0 0;
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	box-shadow: var(--glass-shadow);
+	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));
 	outline: none;
