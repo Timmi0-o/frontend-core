@@ -135,6 +135,7 @@ export type {
 	IInputProps,
 	IInputRootProps,
 	IInputSize,
+	TInputVariant,
 } from './input/input'
 export { Modal } from './modal/modal'
 export type {

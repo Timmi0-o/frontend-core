@@ -19,6 +19,22 @@
 	background: var(--input-background-hover);
 }
 
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='light']{
+	border: 1px solid var(--input-border-strong);
+	background: var(--background);
+	box-shadow: none;
+}
+
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='light']:hover:not([data-disabled]):not(:focus-within){
+	border-color: var(--border);
+	background: var(--field-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='light']:focus-within{
+	border-color: var(--input-border-strong);
+	background: var(--input-background);
+}
+
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled']):focus-within{
 	background: var(--field-focus);
 	box-shadow: var(--field-shadow), var(--focus-field-ring);

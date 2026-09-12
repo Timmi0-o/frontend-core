@@ -23,6 +23,8 @@ import {
 } from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
 
+const DEFAULT_DRAWER_TITLE = 'Панель'
+
 const DrawerKitContext = createContext<string | undefined>(undefined)
 
 const useDrawerUiKit = (): string | undefined => useContext(DrawerKitContext)
@@ -31,12 +33,11 @@ export interface IDrawerRootProps {
 	open: boolean
 	onOpenChange: (isOpen: boolean) => void
 	onCloseAnimationEnd?: () => void
-	title: string
+	title?: string
 	children: ReactNode
 	width?: CSSProperties['width']
 	direction?: 'left' | 'right'
 	className?: string
-	contentClassName?: string
 	variant?: TSlotVariant
 }
 
@@ -107,13 +108,15 @@ function DrawerClose({
 const DrawerOverlay = forwardRef<
 	HTMLDivElement,
 	ComponentProps<typeof DrawerPrimitive.Overlay> & {
-		uiKit?: string
 		variant?: TSlotVariant
 	}
 >(function DrawerOverlay(
-	{ uiKit, variant = 'default', className, style, ...props },
+	{ variant = 'default', className, style, ...props },
 	ref,
 ): ReactElement {
+	const uiKit = useDrawerUiKit()
+	const { overlayZ } = useOverlayLayer()
+
 	return (
 		<DrawerPrimitive.Overlay
 			ref={ref}
@@ -121,7 +124,12 @@ const DrawerOverlay = forwardRef<
 			data-slot='drawer-overlay'
 			data-variant={variant}
 			className={cn(className)}
-			style={{ ...overlayBackdropStyle(), ...style }}
+			style={{
+				...overlayLayerStyle(overlayZ),
+				...overlayBackdropStyle(),
+				zIndex: overlayZ,
+				...style,
+			}}
 			{...props}
 		/>
 	)
@@ -130,14 +138,10 @@ const DrawerOverlay = forwardRef<
 const DrawerContent = forwardRef<
 	HTMLDivElement,
 	ComponentProps<typeof DrawerPrimitive.Content> & {
-		uiKit?: string
-		bodyClassName?: string
 		variant?: TSlotVariant
 	}
 >(function DrawerContent(
 	{
-		uiKit,
-		bodyClassName,
 		variant = 'default',
 		className,
 		style,
@@ -149,6 +153,9 @@ const DrawerContent = forwardRef<
 	},
 	ref,
 ): ReactElement {
+	const uiKit = useDrawerUiKit()
+	const { overlayZ } = useOverlayLayer()
+
 	const preventFloatingOutsideDismiss = useCallback(
 		(event: CustomEvent<{ originalEvent: Event }>) => {
 			if (shouldPreventOverlayDismiss(event)) {
@@ -189,32 +196,82 @@ const DrawerContent = forwardRef<
 			data-slot='drawer-content'
 			data-variant={variant}
 			className={cn(className)}
-			style={style}
+			style={{
+				...overlayLayerStyle(overlayZ),
+				zIndex: overlayZ + 1,
+				...style,
+			}}
 			onPointerDownOutside={handlePointerDownOutside}
 			onInteractOutside={handleInteractOutside}
 			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
-			{children}
+			<OverlayLayerProvider overlayZ={overlayZ}>
+				{children}
+			</OverlayLayerProvider>
 		</DrawerPrimitive.Content>
 	)
 })
 
 function DrawerHeader({
 	className,
+	variant = 'default',
 	...props
-}: ComponentProps<'div'>): ReactElement {
+}: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
 	return (
-		<div data-slot='drawer-header' className={cn(className)} {...props} />
+		<div
+			data-slot='drawer-header'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		/>
+	)
+}
+
+function DrawerBody({
+	className,
+	variant = 'default',
+	...props
+}: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
+	return (
+		<div
+			data-slot='drawer-body'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		/>
 	)
 }
 
 function DrawerFooter({
 	className,
+	variant = 'default',
 	...props
-}: ComponentProps<'div'>): ReactElement {
+}: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
 	return (
-		<div data-slot='drawer-footer' className={cn(className)} {...props} />
+		<div
+			data-slot='drawer-footer'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		/>
+	)
+}
+
+function DrawerTitleHidden({
+	children,
+	variant = 'default',
+}: {
+	children: ReactNode
+	variant?: TSlotVariant
+}): ReactElement {
+	return (
+		<DrawerPrimitive.Title
+			data-slot='drawer-title-hidden'
+			data-variant={variant}
+		>
+			{children}
+		</DrawerPrimitive.Title>
 	)
 }
 
@@ -251,16 +308,15 @@ function DrawerDescription({
 	)
 }
 
-const DrawerConvenience = ({
+const DrawerRoot = ({
 	open,
 	onOpenChange,
 	onCloseAnimationEnd,
-	title,
+	title = DEFAULT_DRAWER_TITLE,
 	children,
-	width = 'min(480px, 100vw)',
+	width = 'min(420px, 100vw)',
 	direction = 'right',
 	className,
-	contentClassName,
 	variant = 'default',
 }: IDrawerRootProps): ReactElement => {
 	return (
@@ -274,68 +330,24 @@ const DrawerConvenience = ({
 				}
 			}}
 		>
-			<DrawerConvenienceBody
-				title={title}
-				width={width}
-				className={className}
-				contentClassName={contentClassName}
-				variant={variant}
-			>
-				{children}
-			</DrawerConvenienceBody>
+			<DrawerPortal>
+				<DrawerOverlay variant={variant} />
+				<DrawerContent
+					className={className}
+					style={{ width }}
+					variant={variant}
+				>
+					<DrawerTitleHidden variant={variant}>{title}</DrawerTitleHidden>
+					{children}
+				</DrawerContent>
+			</DrawerPortal>
 		</DrawerPrimitiveRoot>
 	)
 }
 
-function DrawerConvenienceBody({
-	title,
-	children,
-	width,
-	className,
-	contentClassName,
-	variant = 'default',
-}: Pick<
-	IDrawerRootProps,
-	'title' | 'children' | 'width' | 'className' | 'contentClassName' | 'variant'
->): ReactElement {
-	const uiKit = useDrawerUiKit()
-	const { overlayZ } = useOverlayLayer()
-	const layerStyle = overlayLayerStyle(overlayZ)
+DrawerRoot.displayName = 'Drawer'
 
-	const overlayStyle: CSSProperties = {
-		...layerStyle,
-		...overlayBackdropStyle(),
-		zIndex: overlayZ,
-	}
-	const contentStyle: CSSProperties = {
-		...layerStyle,
-		zIndex: overlayZ + 1,
-		width,
-	}
-
-	return (
-		<DrawerPortal>
-			<DrawerOverlay uiKit={uiKit} style={overlayStyle} variant={variant} />
-			<DrawerContent
-				uiKit={uiKit}
-				className={className}
-				style={contentStyle}
-				variant={variant}
-			>
-				<OverlayLayerProvider overlayZ={overlayZ}>
-					<DrawerTitle variant={variant}>{title}</DrawerTitle>
-					<div data-slot='drawer-body' className={cn(contentClassName)}>
-						{children}
-					</div>
-				</OverlayLayerProvider>
-			</DrawerContent>
-		</DrawerPortal>
-	)
-}
-
-DrawerConvenience.displayName = 'Drawer'
-
-type TDrawerComponent = typeof DrawerConvenience & {
+type TDrawerComponent = typeof DrawerRoot & {
 	Root: typeof DrawerPrimitiveRoot
 	Trigger: typeof DrawerTrigger
 	Portal: typeof DrawerPortal
@@ -343,22 +355,31 @@ type TDrawerComponent = typeof DrawerConvenience & {
 	Overlay: typeof DrawerOverlay
 	Content: typeof DrawerContent
 	Header: typeof DrawerHeader
+	Body: typeof DrawerBody
 	Footer: typeof DrawerFooter
 	Title: typeof DrawerTitle
 	Description: typeof DrawerDescription
 }
 
 /**
- * Боковая панель (drawer). Короткий путь: `open`, `title`, дети. Кастом — `Root` + `Content`.
+ * Боковая панель. Как Modal: слоты `Header` / `Body` / `Footer`.
  *
  * @example
  * ```tsx
  * <Drawer open={isOpen} onOpenChange={setIsOpen} title="Фильтры">
- *   <Checkbox label="Только активные" checked={isActive} onCheckedChange={setIsActive} />
+ *   <Drawer.Header>
+ *     <Drawer.Title>Фильтры</Drawer.Title>
+ *   </Drawer.Header>
+ *   <Drawer.Body>
+ *     <Checkbox label="Только активные" checked={isActive} onCheckedChange={setIsActive} />
+ *   </Drawer.Body>
+ *   <Drawer.Footer>
+ *     <Button onClick={() => setIsOpen(false)}>Закрыть</Button>
+ *   </Drawer.Footer>
  * </Drawer>
  * ```
  */
-export const Drawer: TDrawerComponent = Object.assign(DrawerConvenience, {
+export const Drawer: TDrawerComponent = Object.assign(DrawerRoot, {
 	Root: DrawerPrimitiveRoot,
 	Trigger: DrawerTrigger,
 	Portal: DrawerPortal,
@@ -366,6 +387,7 @@ export const Drawer: TDrawerComponent = Object.assign(DrawerConvenience, {
 	Overlay: DrawerOverlay,
 	Content: DrawerContent,
 	Header: DrawerHeader,
+	Body: DrawerBody,
 	Footer: DrawerFooter,
 	Title: DrawerTitle,
 	Description: DrawerDescription,

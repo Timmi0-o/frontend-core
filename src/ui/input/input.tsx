@@ -15,6 +15,7 @@ import {
 } from 'react'
 
 export type IInputSize = 'xs' | 'sm' | 'md' | 'lg'
+export type TInputVariant = TSlotVariant | 'light'
 
 interface IInputContextValue {
 	size: IInputSize
@@ -31,7 +32,7 @@ export interface IInputRootProps extends ICompoundChildProps {
 	isDisabled?: boolean
 	className?: string
 	style?: CSSProperties
-	variant?: TSlotVariant
+	variant?: TInputVariant
 }
 
 const InputRoot = ({
@@ -69,7 +70,7 @@ export interface IInputFieldProps extends Omit<
 	size?: IInputSize
 	invalid?: boolean
 	isDisabled?: boolean
-	variant?: TSlotVariant
+	variant?: TInputVariant
 }
 
 const InputField = forwardRef<HTMLInputElement, IInputFieldProps>(
@@ -113,7 +114,7 @@ export interface IInputProps extends Omit<
 	isDisabled?: boolean
 	containerClassName?: string
 	children?: ReactNode
-	variant?: TSlotVariant
+	variant?: TInputVariant
 }
 
 const InputCombined = forwardRef<HTMLInputElement, IInputProps>(
