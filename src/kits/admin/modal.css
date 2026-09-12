@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='modal-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='modal-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='bottom-sheet-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='drawer-overlay']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-overlay']:not([data-variant='unstyled']){
 	position: fixed;
 	inset: 0;
 	background: var(--overlay);
@@ -58,7 +58,7 @@
 	animation: tg-admin-modal-out var(--motion-duration-short) var(--motion-easing-exit) both;
 }
 
-[data-ui-kit='admin'] [data-slot='modal-title-hidden']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='bottom-sheet-title']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='bottom-sheet-title']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='modal-title-hidden']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='bottom-sheet-title']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='bottom-sheet-title']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='drawer-title']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-title']:not([data-variant='unstyled']){
 	position: absolute;
 	width: 1px;
 	height: 1px;
@@ -192,6 +192,69 @@
 }
 
 [data-ui-kit='admin'] [data-slot='bottom-sheet-footer']:not([data-variant='unstyled']) > [data-slot='button'],[data-ui-kit='admin'][data-slot='bottom-sheet-footer']:not([data-variant='unstyled']) > [data-slot='button']{
+	flex: 1 1 0;
+	width: auto;
+	min-width: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-content']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-content']:not([data-variant='unstyled']){
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	z-index: calc(var(--tg-overlay-z, 1100) + 1);
+	display: flex;
+	width: min(480px, 100vw);
+	max-width: 100%;
+	height: 100%;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 28px 0 0 28px;
+	background: var(--surface-primary);
+	box-shadow: var(--box-shadow-modal);
+	outline: none;
+	overscroll-behavior: contain;
+	touch-action: none;
+	will-change: transform;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-body']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-body']:not([data-variant='unstyled']){
+	min-height: 0;
+	width: 100%;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	padding: 16px 20px 24px;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-header']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-header']:not([data-variant='unstyled']){
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 0.375rem;
+	padding: 0.25rem 0 0.75rem;
+	flex-shrink: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-description']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-description']:not([data-variant='unstyled']){
+	margin: 0;
+	font-size: 0.8125rem;
+	font-weight: 400;
+	line-height: 1.25rem;
+	color: var(--muted);
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-footer']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-footer']:not([data-variant='unstyled']){
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.5rem;
+	padding: 0.75rem 0 0;
+	flex-shrink: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-footer']:not([data-variant='unstyled']) > [data-slot='button'],[data-ui-kit='admin'][data-slot='drawer-footer']:not([data-variant='unstyled']) > [data-slot='button']{
 	flex: 1 1 0;
 	width: auto;
 	min-width: 0;
