@@ -23,6 +23,7 @@ interface ICheckboxContextValue {
 	variant: TCheckboxAppearance
 	textColor?: CheckboxTextColor
 	checked?: boolean
+	indeterminate?: boolean
 	isDisabled: boolean
 	readOnly?: boolean
 	name?: string
@@ -36,6 +37,7 @@ const { Context, useCompoundContext } =
 export interface ICheckboxRootProps extends ICompoundChildProps {
 	checked?: boolean
 	defaultChecked?: boolean
+	indeterminate?: boolean
 	onCheckedChange?: (isChecked: boolean) => void
 	onBlur?: FocusEventHandler<HTMLElement>
 	isDisabled?: boolean
@@ -57,6 +59,7 @@ const CheckboxRoot = ({
 	children,
 	checked,
 	defaultChecked,
+	indeterminate,
 	onCheckedChange,
 	onBlur,
 	isDisabled,
@@ -78,6 +81,7 @@ const CheckboxRoot = ({
 				variant: appearance,
 				textColor,
 				checked,
+				indeterminate,
 				isDisabled: isDisabled === true,
 				readOnly,
 				name,
@@ -108,6 +112,7 @@ CheckboxRoot.displayName = 'Checkbox'
 export interface ICheckboxControlProps {
 	className?: string
 	defaultChecked?: boolean
+	indeterminate?: boolean
 	variant?: TSlotVariant
 }
 
@@ -128,6 +133,19 @@ const CheckboxCheckIcon = (): ReactElement => {
 	)
 }
 
+const CheckboxIndeterminateIcon = (): ReactElement => {
+	return (
+		<svg viewBox='0 0 16 16' fill='none' aria-hidden='true'>
+			<path
+				d='M4 8h8'
+				stroke='currentColor'
+				strokeWidth='2.2'
+				strokeLinecap='round'
+			/>
+		</svg>
+	)
+}
+
 /**
  * Точка радио: отдельный SVG, чтобы не путать с квадратным чекбоксом.
  */
@@ -142,10 +160,12 @@ const CheckboxRadioDot = (): ReactElement => {
 const CheckboxControl = ({
 	className,
 	defaultChecked,
+	indeterminate: indeterminateProp,
 	variant: variantProp,
 }: ICheckboxControlProps): ReactElement => {
 	const {
 		checked,
+		indeterminate: indeterminateContext,
 		isDisabled,
 		readOnly,
 		name,
@@ -154,11 +174,14 @@ const CheckboxControl = ({
 		onCheckedChange,
 	} = useCompoundContext()
 
+	const indeterminate = indeterminateProp ?? indeterminateContext
+
 	return (
 		<CheckboxPrimitive.Root
 			checked={checked}
 			defaultChecked={defaultChecked}
 			disabled={isDisabled}
+			indeterminate={indeterminate}
 			readOnly={readOnly}
 			name={name}
 			onBlur={onBlur}
@@ -170,6 +193,8 @@ const CheckboxControl = ({
 			<CheckboxPrimitive.Indicator data-slot='checkbox-indicator'>
 				{contextAppearance === 'radio' ? (
 					<CheckboxRadioDot />
+				) : indeterminate ? (
+					<CheckboxIndeterminateIcon />
 				) : (
 					<CheckboxCheckIcon />
 				)}
@@ -216,6 +241,7 @@ export interface ICheckboxProps {
 	labelClassName?: string
 	checked?: boolean
 	defaultChecked?: boolean
+	indeterminate?: boolean
 	isDisabled?: boolean
 	name?: string
 	readOnly?: boolean
@@ -234,6 +260,7 @@ const CheckboxCombined = ({
 	labelClassName,
 	checked,
 	defaultChecked,
+	indeterminate,
 	isDisabled,
 	name,
 	readOnly,
@@ -250,6 +277,7 @@ const CheckboxCombined = ({
 			className={containerClassName}
 			checked={checked}
 			defaultChecked={defaultChecked}
+			indeterminate={indeterminate}
 			isDisabled={isDisabled}
 			name={name}
 			readOnly={readOnly}

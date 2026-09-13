@@ -64,7 +64,8 @@
 	box-shadow: var(--focus-ring);
 }
 
-[data-ui-kit='admin'] [data-slot='checkbox-control']:not([data-variant='unstyled'])[data-checked]{
+[data-ui-kit='admin'] [data-slot='checkbox-control']:not([data-variant='unstyled'])[data-checked],
+[data-ui-kit='admin'] [data-slot='checkbox-control']:not([data-variant='unstyled'])[data-indeterminate]{
 	background: var(--accent);
 	border-color: transparent;
 	box-shadow: none;
