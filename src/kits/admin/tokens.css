@@ -183,8 +183,10 @@ html.dark [data-ui-kit='admin'],
 	--muted: oklch(70.5% 0.015 286.067);
 	--default: oklch(27.4% 0.006 286.033);
 	--default-foreground: var(--snow);
-	--field-background: oklch(0.2103 0.0059 285.89);
+	--field-background: var(--surface-secondary);
 	--field-foreground: var(--foreground);
+	--field-border: var(--border);
+	--field-border-width: 1px;
 	--warning: oklch(0.8203 0.1388 76.34);
 	--warning-foreground: var(--eclipse);
 	--danger: oklch(0.594 0.1967 24.63);
