@@ -17,6 +17,7 @@ const KIT_COMPONENT_NAMES = [
 	'BottomSheet',
 	'Breadcrumbs',
 	'Button',
+	'ButtonGroup',
 	'Calendar',
 	'Card',
 	'Checkbox',

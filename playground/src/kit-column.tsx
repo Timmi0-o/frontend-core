@@ -8,6 +8,7 @@ import {
 	Breadcrumbs,
 	Calendar,
 	Button,
+	ButtonGroup,
 	Checkbox,
 	Chip,
 	DatePicker,
@@ -372,6 +373,25 @@ export const KitColumn = ({
 							•
 						</Button>
 						<Button fullWidth>full width</Button>
+					</div>
+					<div className='kit-row'>
+						<ButtonGroup>
+							<Button variant='primary'>Фильтры</Button>
+							<Button isIconOnly variant='primary' aria-label='Сбросить'>
+								×
+							</Button>
+						</ButtonGroup>
+						<ButtonGroup>
+							<Button size='sm' variant='outline'>
+								Слева
+							</Button>
+							<Button size='sm' variant='outline'>
+								Центр
+							</Button>
+							<Button size='sm' variant='outline'>
+								Справа
+							</Button>
+						</ButtonGroup>
 					</div>
 				</DemoSection>
 

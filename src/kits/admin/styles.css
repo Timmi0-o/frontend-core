@@ -4,6 +4,7 @@
 @import './scrollbar.css' layer(components);
 @import './spinner.css' layer(components);
 @import './button.css' layer(components);
+@import '../button-group.css' layer(components);
 @import './checkbox.css' layer(components);
 @import './popover.css' layer(components);
 @import './switch.css' layer(components);

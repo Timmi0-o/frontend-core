@@ -17,7 +17,6 @@
 	[data-slot='drawer-body'],
 	[data-slot='select-dropdown'],
 	[data-slot='autocomplete-dropdown'],
-	[data-slot='table-scroll'],
 	[data-slot='textarea'],
 	[data-slot='dropdown-menu-content'],
 	[data-slot='context-menu-content'],

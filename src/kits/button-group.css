@@ -1,0 +1,40 @@
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) {
+	display: inline-flex;
+	max-width: 100%;
+	isolation: isolate;
+	vertical-align: middle;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']) {
+	z-index: 0;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']):hover,
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']):focus-visible {
+	z-index: 1;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']):not(:first-child) {
+	margin-inline-start: -1px;
+	border-start-start-radius: 0;
+	border-end-start-radius: 0;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']):not(:last-child) {
+	border-start-end-radius: 0;
+	border-end-end-radius: 0;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']):active:not(:disabled):not([data-pending]) {
+	transform: none;
+}
+
+[data-ui-kit] [data-slot='button-group']:not([data-variant='unstyled']) > [data-slot='button']:not([data-variant='unstyled']) + [data-slot='button']:not([data-variant='unstyled'])::before {
+	content: '';
+	pointer-events: none;
+	position: absolute;
+	inset-block: 22%;
+	inset-inline-start: 0;
+	width: 1px;
+	background: color-mix(in srgb, currentColor 28%, transparent);
+}
