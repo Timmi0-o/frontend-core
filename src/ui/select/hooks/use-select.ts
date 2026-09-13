@@ -106,15 +106,32 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 		[isMultiselect, props, valueMulti],
 	)
 
+	const handleClear = useCallback((): void => {
+		if (isDisabled) {
+			return
+		}
+
+		if (isMultiselect) {
+			;(props.onChange as ((value: T[]) => void) | undefined)?.([])
+		} else {
+			;(props.onChange as ((value: T | null) => void) | undefined)?.(null)
+		}
+
+		setIsOpen(false)
+		props.onClear?.()
+	}, [isDisabled, isMultiselect, props])
+
 	return {
 		isOpen,
 		setIsOpen,
 		isMultiselect,
 		isDisabled,
+		isClearable: props.isClearable === true,
 		minDropdownWidth,
 		selectedItems,
 		triggerLabel,
 		isOptionSelected,
 		handleSelect,
+		handleClear,
 	}
 }

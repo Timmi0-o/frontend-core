@@ -9,6 +9,7 @@ import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import { useSelectContext } from '../../context/select-context'
 import { hasSelectValueChild } from '../../helpers/has-select-value-child'
 import type { ISelectTriggerProps } from '../../types/i-select-props'
+import { SelectClear } from '../select-clear/select-clear'
 import { SelectIndicator } from '../select-indicator/select-indicator'
 import { SelectValue } from '../select-value/select-value'
 
@@ -41,6 +42,7 @@ const resolveTriggerContent = (
 		return (
 			<>
 				<SelectValue />
+				<SelectClear />
 				<SelectIndicator />
 			</>
 		)

@@ -43,7 +43,7 @@
 	margin-inline-end: var(--input-padding-inline);
 }
 
-[data-ui-kit='social'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']) {
+[data-ui-kit='social'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']):not([data-slot='input-clear']) {
 	position: relative;
 	z-index: 1;
 	display: inline-flex;
@@ -53,7 +53,7 @@
 	color: var(--muted-foreground);
 }
 
-[data-ui-kit='social'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']) svg {
+[data-ui-kit='social'] [data-slot='input'] > :not([data-slot='input-field']):not([data-slot='input-group-prefix']):not([data-slot='input-group-suffix']):not([data-slot='input-clear']) svg {
 	display: block;
 	width: 1rem;
 	height: 1rem;
@@ -124,7 +124,8 @@
 }
 
 [data-ui-kit='social'] [data-slot='input-group-prefix']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='input-group-suffix']:not([data-variant='unstyled']) {
+[data-ui-kit='social'] [data-slot='input-group-suffix']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='input-clear']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	position: absolute;
 	z-index: 1;
@@ -139,7 +140,8 @@
 	inset-inline-start: 0;
 }
 
-[data-ui-kit='social'] [data-slot='input-group-suffix']:not([data-variant='unstyled']) {
+[data-ui-kit='social'] [data-slot='input-group-suffix']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='input-clear']:not([data-variant='unstyled']) {
 	inset-inline-end: 0;
 }
 
@@ -172,6 +174,26 @@
 }
 
 [data-ui-kit='social'] [data-slot='input-group-password-toggle'] svg {
+	display: block;
+	width: 1rem;
+	height: 1rem;
+}
+
+[data-ui-kit='social'] [data-slot='input-clear']:not([data-variant='unstyled']) {
+	appearance: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+}
+
+[data-ui-kit='social'] [data-slot='input-clear']:not([data-variant='unstyled']):hover:not(:disabled) {
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='input-clear'] svg {
 	display: block;
 	width: 1rem;
 	height: 1rem;

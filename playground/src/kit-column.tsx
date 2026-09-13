@@ -116,6 +116,7 @@ export const KitColumn = ({
 	const [volume, setVolume] = useState(40)
 	const [priceRange, setPriceRange] = useState<readonly number[]>([20, 80])
 	const [city, setCity] = useState<string | null>('msk')
+	const [clearableQuery, setClearableQuery] = useState('Москва')
 	const [cityLight, setCityLight] = useState<string | null>('msk')
 	const [hotelId, setHotelId] = useState<string | null>('sea')
 	const [hotelRichId, setHotelRichId] = useState<string | null>('sea')
@@ -516,6 +517,13 @@ export const KitColumn = ({
 
 				<DemoSection title='Input'>
 					<Input placeholder='Обычный input' size='sm' />
+					<Input
+						isClearable
+						placeholder='isClearable'
+						size='sm'
+						value={clearableQuery}
+						onChange={(event) => setClearableQuery(event.target.value)}
+					/>
 				</DemoSection>
 
 				<DemoSection title='InputGroup'>
@@ -591,6 +599,7 @@ export const KitColumn = ({
 					<div className='kit-stack kit-stack--full'>
 						<p className='kit-caption'>default</p>
 						<Select
+							isClearable
 							label='Город'
 							options={CITY_OPTIONS}
 							value={city}

@@ -54,6 +54,8 @@ export interface ISelectBaseProps<T extends string | number = string> {
 	children?: ReactNode
 	placeholder?: string
 	isDisabled?: boolean
+	isClearable?: boolean
+	onClear?: () => void
 	size?: TSelectSize
 	variant?: TSelectVariant
 	tone?: TSelectTone
@@ -104,6 +106,11 @@ export interface ISelectIndicatorProps {
 	variant?: TSlotVariant
 }
 
+export interface ISelectClearProps {
+	className?: string
+	variant?: TSlotVariant
+}
+
 export interface ISelectDropdownProps {
 	className?: string
 	variant?: TSlotVariant
@@ -127,6 +134,7 @@ export type TSelectComponent = TSelectRootComponent & {
 	Trigger: (props: ISelectTriggerProps) => ReactElement
 	Value: (props: ISelectValueProps) => ReactElement
 	Indicator: (props: ISelectIndicatorProps) => ReactElement | null
+	Clear: (props: ISelectClearProps) => ReactElement | null
 	Dropdown: (props: ISelectDropdownProps) => ReactNode
 	Option: (props: ISelectOptionItemProps) => ReactElement
 }

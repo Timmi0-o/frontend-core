@@ -3,6 +3,7 @@
 import { cn } from '@/core/cn'
 import { useMemo, type ReactElement } from 'react'
 import { Popover } from '../popover/popover'
+import { SelectClear } from './components/select-clear/select-clear'
 import { SelectDropdown } from './components/select-dropdown/select-dropdown'
 import { SelectIndicator } from './components/select-indicator/select-indicator'
 import { SelectLabel } from './components/select-label/select-label'
@@ -26,6 +27,7 @@ import type {
 } from './types/i-select-props'
 
 export type {
+	ISelectClearProps,
 	ISelectDropdownProps,
 	ISelectIndicatorProps,
 	ISelectLabelProps,
@@ -71,11 +73,13 @@ const SelectRoot = <T extends string | number = string>(
 		setIsOpen,
 		isMultiselect,
 		isDisabled,
+		isClearable,
 		minDropdownWidth,
 		selectedItems,
 		triggerLabel,
 		isOptionSelected,
 		handleSelect,
+		handleClear,
 	} = useSelect(props)
 
 	const visualVariant = variant === 'unstyled' ? 'default' : variant
@@ -87,6 +91,7 @@ const SelectRoot = <T extends string | number = string>(
 			isOpen,
 			isMultiselect,
 			isDisabled,
+			isClearable,
 			isLoading,
 			triggerLabel,
 			placeholder,
@@ -98,6 +103,7 @@ const SelectRoot = <T extends string | number = string>(
 			minDropdownWidth,
 			isOptionSelected,
 			handleSelect,
+			handleClear,
 			fieldLabel: label,
 		}),
 		[
@@ -106,6 +112,7 @@ const SelectRoot = <T extends string | number = string>(
 			isOpen,
 			isMultiselect,
 			isDisabled,
+			isClearable,
 			isLoading,
 			triggerLabel,
 			placeholder,
@@ -117,6 +124,7 @@ const SelectRoot = <T extends string | number = string>(
 			minDropdownWidth,
 			isOptionSelected,
 			handleSelect,
+			handleClear,
 			label,
 		],
 	)
@@ -152,6 +160,7 @@ const SelectRoot = <T extends string | number = string>(
 						<>
 							<SelectTrigger>
 								<SelectValue />
+								<SelectClear />
 								<SelectIndicator />
 							</SelectTrigger>
 							<SelectDropdown />
@@ -183,8 +192,10 @@ SelectRoot.displayName = SELECT_DISPLAY_NAMES.ROOT
  *     { label: 'Паспорт', value: 'passport' },
  *     { label: 'Загранпаспорт', value: 'foreign' },
  *   ]}
+ *   isClearable
  *   value={documentType}
  *   onChange={setDocumentType}
+ *   onClear={() => setDocumentType(null)}
  *   error={error}
  * />
  *
@@ -201,6 +212,7 @@ export const Select: TSelectComponent = Object.assign(SelectRoot, {
 	Trigger: SelectTrigger,
 	Value: SelectValue,
 	Indicator: SelectIndicator,
+	Clear: SelectClear,
 	Dropdown: SelectDropdown,
 	Option: SelectOption,
 	Root: SelectRoot,

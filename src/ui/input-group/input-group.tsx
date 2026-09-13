@@ -91,6 +91,8 @@ const InputGroupRoot = ({
 	size = 'md',
 	invalid: invalidProp,
 	isDisabled = false,
+	isClearable = false,
+	onClear,
 	className,
 	style,
 	variant = 'default',
@@ -117,6 +119,8 @@ const InputGroupRoot = ({
 				size={size}
 				invalid={isInvalid}
 				isDisabled={isDisabled}
+				isClearable={isClearable}
+				onClear={onClear}
 				className={className}
 				style={style}
 				variant={variant}

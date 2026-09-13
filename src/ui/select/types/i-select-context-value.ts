@@ -14,6 +14,7 @@ export interface ISelectContextValue {
 	isOpen: boolean
 	isMultiselect: boolean
 	isDisabled: boolean
+	isClearable: boolean
 	isLoading: boolean
 	triggerLabel: string
 	fieldLabel?: string
@@ -26,4 +27,5 @@ export interface ISelectContextValue {
 	minDropdownWidth: number
 	isOptionSelected: (option: ISelectOption<TSelectValue>) => boolean
 	handleSelect: (option: ISelectOption<TSelectValue>) => void
+	handleClear: () => void
 }

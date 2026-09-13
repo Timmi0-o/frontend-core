@@ -148,6 +148,28 @@
 	transform: rotate(180deg);
 }
 
+[data-ui-kit='admin'] [data-slot='select-clear']:not([data-variant='unstyled']){
+	display: inline-flex;
+	height: 1rem;
+	width: 1rem;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	color: var(--placeholder);
+	cursor: pointer;
+	border-radius: 9999px;
+}
+
+[data-ui-kit='admin'] [data-slot='select-clear']:not([data-variant='unstyled']):hover{
+	color: var(--text-primary);
+}
+
+[data-ui-kit='admin'] [data-slot='select-clear']:not([data-variant='unstyled']) svg{
+	display: block;
+	height: 1rem;
+	width: 1rem;
+}
+
 [data-ui-kit='admin'] [data-slot='select-dropdown']:not([data-variant='unstyled']){
 	box-sizing: border-box;
 	max-height: min(18.5rem, 60vh);

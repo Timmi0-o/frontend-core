@@ -8,6 +8,7 @@ export const SELECT_DISPLAY_NAMES = {
 	TRIGGER: 'SelectTrigger',
 	VALUE: 'Select.Value',
 	INDICATOR: 'SelectIndicator',
+	CLEAR: 'SelectClear',
 	DROPDOWN: 'SelectDropdown',
 	OPTION: 'SelectOption',
 } as const
