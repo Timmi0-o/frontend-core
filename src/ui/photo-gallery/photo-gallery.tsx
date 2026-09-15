@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@/core/cn'
-import { overlayLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
+import { overlayLayerStyle, useOpenOverlayZ } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll'
@@ -181,7 +181,7 @@ const PhotoGalleryOverlay = ({
 	variant = 'default',
 }: IPhotoGalleryProps): ReactElement => {
 	const { hostRef, uiKit } = useInheritedUiKit()
-	const { overlayZ } = useOverlayLayer()
+	const overlayZ = useOpenOverlayZ(open)
 	const resolvedLabels = resolvePhotoGalleryLabels(labels)
 	const prefersReducedMotion = useReducedMotion()
 	const overlayMotion = galleryOverlayMotionProps(prefersReducedMotion)

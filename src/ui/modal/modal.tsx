@@ -6,7 +6,7 @@ import {
 	OverlayLayerProvider,
 	overlayBackdropStyle,
 	overlayLayerStyle,
-	useOverlayLayer,
+	useOpenOverlayZ,
 	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
@@ -41,7 +41,7 @@ const ModalRoot = ({
 }: IModalRootProps): ReactElement => {
 	const [hasVisibleTitle, setHasVisibleTitle] = useState(false)
 	const { hostRef, uiKit } = useInheritedUiKit()
-	const { overlayZ } = useOverlayLayer()
+	const overlayZ = useOpenOverlayZ(open)
 	const portalContainer = useOverlayPortalContainer()
 
 	return (

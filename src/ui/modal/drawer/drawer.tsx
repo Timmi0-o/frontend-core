@@ -2,10 +2,11 @@
 
 import { cn } from '@/core/cn'
 import {
+	OpenOverlayZProvider,
 	OverlayLayerProvider,
 	overlayBackdropStyle,
 	overlayLayerStyle,
-	useOverlayLayer,
+	useActiveOverlayZ,
 	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
@@ -52,24 +53,27 @@ function DrawerPrimitiveRoot({
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
 	const { hostRef, uiKit } = useInheritedUiKit()
+	const isOpen = props.open === true
 
 	return (
-		<DrawerKitContext.Provider value={uiKit}>
-			<DrawerPrimitive.Root
-				data-slot='drawer'
-				shouldScaleBackground={shouldScaleBackground}
-				repositionInputs={repositionInputs}
-				fixed={fixed}
-				setBackgroundColorOnScale={setBackgroundColorOnScale}
-				direction={direction}
-				dismissible={dismissible}
-				modal={modal}
-				{...props}
-			>
-				<span ref={hostRef} hidden />
-				{props.children}
-			</DrawerPrimitive.Root>
-		</DrawerKitContext.Provider>
+		<OpenOverlayZProvider isOpen={isOpen}>
+			<DrawerKitContext.Provider value={uiKit}>
+				<DrawerPrimitive.Root
+					data-slot='drawer'
+					shouldScaleBackground={shouldScaleBackground}
+					repositionInputs={repositionInputs}
+					fixed={fixed}
+					setBackgroundColorOnScale={setBackgroundColorOnScale}
+					direction={direction}
+					dismissible={dismissible}
+					modal={modal}
+					{...props}
+				>
+					<span ref={hostRef} hidden />
+					{props.children}
+				</DrawerPrimitive.Root>
+			</DrawerKitContext.Provider>
+		</OpenOverlayZProvider>
 	)
 }
 
@@ -115,7 +119,7 @@ const DrawerOverlay = forwardRef<
 	ref,
 ): ReactElement {
 	const uiKit = useDrawerUiKit()
-	const { overlayZ } = useOverlayLayer()
+	const overlayZ = useActiveOverlayZ()
 
 	return (
 		<DrawerPrimitive.Overlay
@@ -154,7 +158,7 @@ const DrawerContent = forwardRef<
 	ref,
 ): ReactElement {
 	const uiKit = useDrawerUiKit()
-	const { overlayZ } = useOverlayLayer()
+	const overlayZ = useActiveOverlayZ()
 
 	const preventFloatingOutsideDismiss = useCallback(
 		(event: CustomEvent<{ originalEvent: Event }>) => {

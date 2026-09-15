@@ -3,9 +3,11 @@
 import {
 	createContext,
 	useContext,
+	useId,
 	useLayoutEffect,
 	useMemo,
 	useState,
+	useSyncExternalStore,
 	type CSSProperties,
 	type ReactElement,
 	type ReactNode,
@@ -28,6 +30,122 @@ const OverlayLayerContext = createContext<IOverlayLayer>({
 
 export const useOverlayLayer = (): IOverlayLayer =>
 	useContext(OverlayLayerContext)
+
+const OpenOverlayZContext = createContext<number | null>(null)
+
+type TOverlayStackListener = () => void
+
+const overlayStackIds: string[] = []
+const overlayStackListeners = new Set<TOverlayStackListener>()
+
+const emitOverlayStack = (): void => {
+	for (const listener of overlayStackListeners) {
+		listener()
+	}
+}
+
+const subscribeOverlayStack = (listener: TOverlayStackListener): (() => void) => {
+	overlayStackListeners.add(listener)
+
+	return () => {
+		overlayStackListeners.delete(listener)
+	}
+}
+
+const getOverlayStackIndex = (id: string): number => {
+	const index = overlayStackIds.indexOf(id)
+
+	return index === -1 ? 0 : index
+}
+
+const ensureOverlayStackId = (id: string): void => {
+	if (overlayStackIds.includes(id)) {
+		return
+	}
+
+	overlayStackIds.push(id)
+}
+
+const releaseOverlayStackId = (id: string): void => {
+	const index = overlayStackIds.indexOf(id)
+
+	if (index === -1) {
+		return
+	}
+
+	overlayStackIds.splice(index, 1)
+}
+
+const overlayZFromStackIndex = (index: number): number =>
+	OVERLAY_Z_BASE + index * OVERLAY_Z_STEP
+
+/**
+ * z открытого оверлея. Стек глобальный: соседний confirm-портал
+ * тоже выше предыдущей модалки, не только Dialog, вложенный в React-дереве.
+ */
+export const useOpenOverlayZ = (isOpen: boolean): number => {
+	const { overlayZ: inheritedOverlayZ } = useOverlayLayer()
+	const id = useId()
+
+	if (isOpen && typeof window !== 'undefined') {
+		ensureOverlayStackId(id)
+	}
+
+	const stackIndex = useSyncExternalStore(
+		subscribeOverlayStack,
+		() => getOverlayStackIndex(id),
+		() => 0,
+	)
+
+	useLayoutEffect(() => {
+		if (isOpen) {
+			ensureOverlayStackId(id)
+			emitOverlayStack()
+		} else {
+			releaseOverlayStackId(id)
+			emitOverlayStack()
+		}
+
+		return () => {
+			releaseOverlayStackId(id)
+			emitOverlayStack()
+		}
+	}, [id, isOpen])
+
+	if (!isOpen) {
+		return inheritedOverlayZ
+	}
+
+	return Math.max(inheritedOverlayZ, overlayZFromStackIndex(stackIndex))
+}
+
+/**
+ * Общий z для частей одного оверлея (overlay + content у Drawer/Sheet).
+ * Регистрирует слой один раз, чтобы backdrop и панель не занимали два слота.
+ */
+export const OpenOverlayZProvider = ({
+	isOpen,
+	children,
+}: {
+	isOpen: boolean
+	children: ReactNode
+}): ReactElement => {
+	const overlayZ = useOpenOverlayZ(isOpen)
+
+	return (
+		<OpenOverlayZContext.Provider value={overlayZ}>
+			{children}
+		</OpenOverlayZContext.Provider>
+	)
+}
+
+/** z текущего оверлея: из OpenOverlayZProvider или из inherited-слоя. */
+export const useActiveOverlayZ = (): number => {
+	const scopedOverlayZ = useContext(OpenOverlayZContext)
+	const { overlayZ } = useOverlayLayer()
+
+	return scopedOverlayZ ?? overlayZ
+}
 
 /**
  * Контейнер для Modal/BottomSheet portal.
