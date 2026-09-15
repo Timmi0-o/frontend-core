@@ -16,7 +16,8 @@ const splitLocalDateTime = (
 		return { date: null, time: '09:00' }
 	}
 
-	const [datePart = '', timePart = '09:00'] = value.split('T')
+	const normalized = value.includes('T') ? value : value.replace(' ', 'T')
+	const [datePart = '', timePart = '09:00'] = normalized.split('T')
 
 	if (!datePart) {
 		return { date: null, time: timePart }
