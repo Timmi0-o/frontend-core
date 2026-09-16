@@ -5,6 +5,7 @@ import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	useLayoutEffect,
 	useRef,
+	type CSSProperties,
 	type ReactElement,
 } from 'react'
 import { Toaster as SonnerToaster } from 'sonner'
@@ -23,6 +24,10 @@ export interface IToasterProps {
 }
 
 const TOAST_SWIPE_DIRECTIONS = ['top', 'right', 'bottom', 'left'] as const
+
+const TOASTER_WIDTH_STYLE = {
+	'--width': 'min(32rem, calc(100vw - 2rem))',
+} as CSSProperties
 
 /**
  * Хост тостов. Один раз в корне приложения; показ — `toast` из `@timmi0-o/frontend-core/ui-kit`.
@@ -70,6 +75,7 @@ export const Toaster = ({
 				gap={10}
 				visibleToasts={3}
 				swipeDirections={[...TOAST_SWIPE_DIRECTIONS]}
+				style={TOASTER_WIDTH_STYLE}
 				toastOptions={{ unstyled: true }}
 			/>
 		</>
