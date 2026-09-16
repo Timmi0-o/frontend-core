@@ -28,12 +28,23 @@ export const SelectDropdown = ({
 				data-slot='select-dropdown'
 				data-variant={variant}
 				data-multiselect={isMultiselect ? '' : undefined}
-				role='listbox'
+				data-vaul-no-drag=''
 			>
-				{children ??
-					options.map((option) => (
-						<SelectOption key={String(option.value)} option={option} />
-					))}
+				<div
+					data-slot='select-dropdown-list'
+					role='listbox'
+					onTouchMove={(event) => {
+						event.stopPropagation()
+					}}
+					onWheel={(event) => {
+						event.stopPropagation()
+					}}
+				>
+					{children ??
+						options.map((option) => (
+							<SelectOption key={String(option.value)} option={option} />
+						))}
+				</div>
 			</div>
 		</Popover.Content>
 	)

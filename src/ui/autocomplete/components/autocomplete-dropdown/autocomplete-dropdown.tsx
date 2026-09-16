@@ -40,30 +40,41 @@ export const AutocompleteDropdown = ({
 			<div
 				data-slot='autocomplete-dropdown'
 				data-variant={variant}
-				id={listboxId}
-				role='listbox'
+				data-vaul-no-drag=''
 			>
-				{isLoading ? (
-					<div data-slot='autocomplete-loading'>
-						<Spinner size='sm' />
-						<span>{loadingLabel}</span>
-					</div>
-				) : null}
+				<div
+					data-slot='autocomplete-dropdown-list'
+					id={listboxId}
+					role='listbox'
+					onTouchMove={(event) => {
+						event.stopPropagation()
+					}}
+					onWheel={(event) => {
+						event.stopPropagation()
+					}}
+				>
+					{isLoading ? (
+						<div data-slot='autocomplete-loading'>
+							<Spinner size='sm' />
+							<span>{loadingLabel}</span>
+						</div>
+					) : null}
 
-				{!isLoading && filteredOptions.length === 0 ? (
-					<div data-slot='autocomplete-empty'>{noResultsLabel}</div>
-				) : null}
+					{!isLoading && filteredOptions.length === 0 ? (
+						<div data-slot='autocomplete-empty'>{noResultsLabel}</div>
+					) : null}
 
-				{!isLoading
-					? filteredOptions.map((option) => (
-							<AutocompleteOption
-								key={String(option.value)}
-								option={option}
-								isSelected={isOptionSelected(option)}
-								onSelect={handleSelect}
-							/>
-						))
-					: null}
+					{!isLoading
+						? filteredOptions.map((option) => (
+								<AutocompleteOption
+									key={String(option.value)}
+									option={option}
+									isSelected={isOptionSelected(option)}
+									onSelect={handleSelect}
+								/>
+							))
+						: null}
+				</div>
 			</div>
 		</Popover.Content>
 	)

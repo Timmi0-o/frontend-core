@@ -71,34 +71,18 @@ export const SelectOption = ({
 	)
 
 	const onSelect = (): void => {
+		if (option.disabled) {
+			return
+		}
+
 		handleSelect(option)
 	}
 
-	if (isMultiselect) {
-		return (
-			<div
-				role='option'
-				aria-selected={isSelected}
-				aria-disabled={option.disabled}
-				data-slot='select-option'
-				data-variant={variant}
-				data-selected={isSelected ? '' : undefined}
-				data-disabled={option.disabled ? '' : undefined}
-				data-rich={children != null ? '' : undefined}
-				className={cn(className)}
-				onClick={onSelect}
-			>
-				{content}
-			</div>
-		)
-	}
-
 	return (
-		<button
-			type='button'
+		<div
 			role='option'
 			aria-selected={isSelected}
-			disabled={option.disabled}
+			aria-disabled={option.disabled}
 			data-slot='select-option'
 			data-variant={variant}
 			data-selected={isSelected ? '' : undefined}
@@ -106,9 +90,15 @@ export const SelectOption = ({
 			data-rich={children != null ? '' : undefined}
 			className={cn(className)}
 			onClick={onSelect}
+			onKeyDown={(event) => {
+				if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault()
+					onSelect()
+				}
+			}}
 		>
 			{content}
-		</button>
+		</div>
 	)
 }
 

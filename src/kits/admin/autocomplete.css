@@ -83,12 +83,12 @@
 
 [data-ui-kit='admin'] [data-slot='autocomplete-dropdown']:not([data-variant='unstyled']){
 	box-sizing: border-box;
-	max-height: min(18.5rem, 60vh);
-	overflow-y: auto;
-	overscroll-behavior: contain;
+	display: flex;
+	max-height: min(18.5rem, 50dvh, var(--available-height, 100dvh));
+	flex-direction: column;
+	overflow: hidden;
 	border-radius: min(32px, var(--radius-3xl));
 	padding: calc(var(--spacing) * 1.5);
-	overflow-x: hidden;
 	outline: none;
 	width: min(var(--anchor-width, 100%), calc(100vw - 24px));
 	min-width: 0;
@@ -97,6 +97,15 @@
 	background: var(--overlay-bg);
 	box-shadow: var(--overlay-shadow);
 	font-size: 0.875rem;
+}
+
+[data-ui-kit='admin'] [data-slot='autocomplete-dropdown-list']:not([data-variant='unstyled']){
+	min-height: 0;
+	flex: 1 1 auto;
+	overflow: auto;
+	overscroll-behavior: contain;
+	-webkit-overflow-scrolling: touch;
+	touch-action: pan-y;
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-option']:not([data-variant='unstyled']){

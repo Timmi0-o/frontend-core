@@ -11,6 +11,12 @@
 	outline: none;
 }
 
+[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='select-dropdown']),
+[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='autocomplete-dropdown']) {
+	max-height: min(18.5rem, 50dvh, var(--available-height, 100dvh));
+	overflow: hidden;
+}
+
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-popover-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
