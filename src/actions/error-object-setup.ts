@@ -2,7 +2,7 @@ import type { IApiResponseMapper } from './contracts/api-response/types/i-api-re
 import type { IAppActionResponseError } from './contracts/api-response/types/i-app-action-response.type'
 import type {
 	TActionErrorLogger,
-	TFormatActionErrorMessage,
+	TResolveActionError,
 } from './types/i-action-request-workers'
 
 /**
@@ -13,7 +13,7 @@ export const ErrorObjectSetup = async (
 	res: Response,
 	responseMapper: IApiResponseMapper,
 	options?: {
-		formatErrorMessage?: TFormatActionErrorMessage
+		resolveActionError?: TResolveActionError
 		onError?: TActionErrorLogger
 	},
 ) => {
@@ -27,27 +27,28 @@ export const ErrorObjectSetup = async (
 		const errorResponse: unknown = await res.json()
 		const formattedErrorResponse = responseMapper(errorResponse).error
 
-		const shortDescription = formattedErrorResponse?.message
-			? `API: ${String(formattedErrorResponse.message)
+		const apiMessage = formattedErrorResponse?.message
+			? String(formattedErrorResponse.message)
 					.split(',')
 					.map((item: string) => item.trim())
-					.join(', ')}`
+					.join(', ')
 			: ''
 
-		const errorMessage = [shortDescription].filter(Boolean).join(`\n`).trim()
+		const apiCode = formattedErrorResponse?.code
+		const fallbackMessage = apiMessage || `Ошибка запроса (${res.status})`
 
-		options?.onError?.(errorMessage || 'Неизвестная ошибка запроса')
+		options?.onError?.(fallbackMessage)
 
-		const rawMessage = errorMessage
-			? errorMessage
-			: `Ошибка запроса (${res.status})`
+		const resolved = options?.resolveActionError
+			? await options.resolveActionError(apiMessage, apiCode)
+			: null
 
 		errorData = {
 			statusCode: formattedErrorResponse?.statusCode || res.status,
 			timestamp: formattedErrorResponse?.timestamp || new Date().toISOString(),
-			message: options?.formatErrorMessage
-				? options.formatErrorMessage(rawMessage)
-				: rawMessage,
+			message: resolved?.message ?? fallbackMessage,
+			...(apiCode ? { code: apiCode } : {}),
+			...(resolved?.cta ? { cta: resolved.cta } : {}),
 		}
 	} catch {
 		errorData = {

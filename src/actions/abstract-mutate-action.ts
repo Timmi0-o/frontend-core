@@ -32,7 +32,7 @@ export const abstractMutateAction = async <TBody, TData = unknown>(
 		res,
 		requestWorkers.responseMapper,
 		{
-			formatErrorMessage: requestWorkers.formatErrorMessage,
+			resolveActionError: requestWorkers.resolveActionError,
 			onError: requestWorkers.onError,
 		},
 	)

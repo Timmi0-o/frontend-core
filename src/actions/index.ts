@@ -17,7 +17,8 @@ export type {
 	IActionRequestWorkers,
 	IGetActionRequestWorkers,
 	TActionErrorLogger,
-	TFormatActionErrorMessage,
+	TResolveActionError,
+	TResolvedActionError,
 } from './types/i-action-request-workers'
 export type {
 	IActionFilters,

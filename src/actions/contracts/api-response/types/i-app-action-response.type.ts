@@ -17,6 +17,7 @@ export interface IAppActionResponseError {
 	statusCode: number
 	message: string
 	timestamp: string
+	code?: string
 	cta?: string
 }
 

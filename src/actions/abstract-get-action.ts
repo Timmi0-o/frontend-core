@@ -49,7 +49,7 @@ export const abstractGetAction = async <
 		res,
 		requestWorkers.responseMapper,
 		{
-			formatErrorMessage: requestWorkers.formatErrorMessage,
+			resolveActionError: requestWorkers.resolveActionError,
 			onError: requestWorkers.onError,
 		},
 	)
