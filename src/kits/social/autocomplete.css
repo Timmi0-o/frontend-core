@@ -77,6 +77,9 @@
 
 [data-ui-kit='social'] [data-slot='autocomplete-dropdown']:not([data-variant='unstyled']){
 	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	gap: var(--overlay-item-gap);
 	max-height: min(18.5rem, 60vh);
 	overflow-y: auto;
 	border-radius: var(--overlay-radius);
@@ -100,7 +103,7 @@
 	align-items: center;
 	gap: 0.625rem;
 	border: 0;
-	border-radius: 0;
+	border-radius: var(--overlay-item-radius);
 	background: transparent;
 	padding: 0 1rem;
 	text-align: left;
