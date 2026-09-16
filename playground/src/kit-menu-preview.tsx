@@ -6,6 +6,7 @@ import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
+	ContextMenuSection,
 	ContextMenuSeparator,
 	ContextMenuTrigger,
 	DropdownMenu,
@@ -40,7 +41,7 @@ export const KitMenuPreview = (): ReactElement => {
 						Настройки
 					</DropdownMenu.Trigger>
 					<DropdownMenu.Content>
-						<DropdownMenu.Section label='Бронь #10482'>
+						<DropdownMenu.Section title='Бронь #10482'>
 							<DropdownMenu.Item>
 								Открыть карточку
 								<MenuGlyph path='M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Zm10 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' />
@@ -60,7 +61,7 @@ export const KitMenuPreview = (): ReactElement => {
 								В избранном
 							</DropdownMenu.CheckboxItem>
 						</DropdownMenu.Section>
-						<DropdownMenu.Section label='Опасная зона'>
+						<DropdownMenu.Section title='Опасная зона'>
 							<DropdownMenu.Item variant='destructive'>
 								Отменить бронь
 								<MenuGlyph path='M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14' />
@@ -88,18 +89,20 @@ export const KitMenuPreview = (): ReactElement => {
 						</span>
 					</ContextMenuTrigger>
 					<ContextMenuContent>
-						<ContextMenuItem>
-							Копировать номер
-							<MenuGlyph path='M9 9h11v11H9zM5 15V5h10' />
-						</ContextMenuItem>
-						<ContextMenuItem>
-							Скопировать ссылку
-							<MenuGlyph path='M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0 7.5-.5l-2 2a5 5 0 0 0 7 7L12.5 18' />
-						</ContextMenuItem>
-						<ContextMenuItem>
-							Добавить в заметки
-							<MenuGlyph path='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4' />
-						</ContextMenuItem>
+						<ContextMenuSection title='Действия'>
+							<ContextMenuItem>
+								Копировать номер
+								<MenuGlyph path='M9 9h11v11H9zM5 15V5h10' />
+							</ContextMenuItem>
+							<ContextMenuItem>
+								Скопировать ссылку
+								<MenuGlyph path='M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.5 1.5M14 11a5 5 0 0 0 7.5-.5l-2 2a5 5 0 0 0 7 7L12.5 18' />
+							</ContextMenuItem>
+							<ContextMenuItem>
+								Добавить в заметки
+								<MenuGlyph path='M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5M9 13h6M9 17h4' />
+							</ContextMenuItem>
+						</ContextMenuSection>
 						<ContextMenuSeparator />
 						<ContextMenuItem variant='destructive'>
 							Удалить

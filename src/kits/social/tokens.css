@@ -41,6 +41,10 @@
 	--overlay-radius: 1.5rem;
 	--overlay-item-radius: calc(var(--overlay-radius) - 0.25rem);
 	--overlay-item-gap: 0.25rem;
+	--menu-radius: 0.875rem;
+	--menu-item-radius: 0.5rem;
+	--menu-padding: 0.25rem;
+	--menu-item-hover: color-mix(in srgb, var(--foreground) 12%, transparent);
 	--overlay-shadow:
 		0 1px 2px rgb(0 0 0 / 0.04),
 		0 8px 20px rgb(0 0 0 / 0.08),

@@ -1,131 +1,28 @@
-[data-ui-kit='social'][data-slot='dropdown-menu-positioner']:not([data-variant='unstyled']){
-	z-index: 1205;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']){
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	gap: var(--overlay-item-gap);
-	min-width: 8rem;
-	max-width: min(22rem, calc(100vw - 24px));
-	max-height: min(24rem, calc(100dvh - 24px));
-	overflow-x: hidden;
-	overflow-y: auto;
-	border-radius: var(--overlay-radius);
-	border: 0;
-	background: var(--glass-bg-strong);
-	padding: 0.375rem;
-	box-shadow: var(--overlay-shadow);
-	backdrop-filter: blur(var(--glass-blur-float));
-	-webkit-backdrop-filter: blur(var(--glass-blur-float));
-	outline: none;
-	transform-origin: var(--transform-origin);
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open]{
+[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-dropdown-menu-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style]{
+[data-ui-kit='social'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style] {
 	animation: tg-dropdown-menu-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']){
-	box-sizing: border-box;
-	display: flex;
-	width: 100%;
-	flex-shrink: 0;
-	min-height: 2rem;
-	align-items: center;
-	justify-content: flex-start;
-	gap: 0.5rem;
-	border: 0;
-	border-radius: var(--overlay-item-radius);
-	background: transparent;
-	padding: 0.375rem 0.5rem;
-	font-size: 0.875rem;
-	font-weight: 400;
-	line-height: 1.25;
-	letter-spacing: 0;
-	color: var(--foreground);
-	text-align: left;
-	cursor: pointer;
-	outline: none;
-	user-select: none;
+[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) {
+	justify-content: space-between;
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']) > svg,[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) > svg{
-	width: 18px;
-	height: 18px;
-	flex-shrink: 0;
-	opacity: 0.88;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):hover,[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted]{
-	background: var(--surface-hover);
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive']{
-	color: var(--danger);
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled]{
-	pointer-events: none;
-	opacity: 0.45;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not(:last-child):not(
-		:has(+ [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']))
-	),[data-ui-kit='social']
-	[data-slot='dropdown-menu-checkbox-item']:not(:last-child):not(
-		:has(+ [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']))
-	){
-	box-shadow: none;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']){
-	margin: 0.25rem 0;
-	height: 1px;
-	background: var(--glass-border);
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
-	display: flex;
-	width: 100%;
-	flex-direction: column;
-	gap: var(--overlay-item-gap);
-}
-
-[data-ui-kit='social']
-	[data-slot='dropdown-menu-section']
-	+ [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
-	margin-top: 0.25rem;
-	box-shadow: none;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-label']:not([data-variant='unstyled']){
-	padding: 0.375rem 0.5rem;
-	font-size: 0.75rem;
-	font-weight: 500;
-	line-height: 1.2;
-	color: var(--muted-foreground);
-	box-shadow: none;
-}
-
-[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item-indicator']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item-indicator']:not([data-variant='unstyled']) {
 	display: inline-flex;
-	height: 18px;
-	width: 18px;
+	height: 1.125rem;
+	width: 1.125rem;
 	flex-shrink: 0;
 	align-items: center;
 	justify-content: center;
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']) {
 	display: block;
-	width: 6px;
-	height: 11px;
+	width: 5px;
+	height: 10px;
 	border-right: 2px solid currentColor;
 	border-bottom: 2px solid currentColor;
 	transform: rotate(45deg) translateY(-1px);
@@ -134,7 +31,7 @@
 @keyframes tg-dropdown-menu-in {
 	from {
 		opacity: 0;
-		transform: scale(0.92);
+		transform: scale(0.96);
 	}
 
 	to {
@@ -151,6 +48,6 @@
 
 	to {
 		opacity: 0;
-		transform: scale(0.96);
+		transform: scale(0.98);
 	}
 }

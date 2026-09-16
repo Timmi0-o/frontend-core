@@ -34,6 +34,8 @@ export {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuSection,
 	ContextMenuSeparator,
 	ContextMenuTrigger,
 	DatePicker,

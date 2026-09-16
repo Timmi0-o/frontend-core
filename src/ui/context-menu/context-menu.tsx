@@ -1,13 +1,14 @@
 'use client'
 
 import { ContextMenu as ContextMenuPrimitive } from '@base-ui/react/context-menu'
-import type { ReactNode } from 'react'
+import type { ReactElement, ReactNode } from 'react'
 
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
+import { assertMenuSectionChildren } from '@/ui/menu/assert-menu-section-children'
 
 interface IContextMenuContextValue {
 	uiKit: string | undefined
@@ -30,9 +31,13 @@ export interface IContextMenuRootProps extends ContextMenuPrimitive.Root.Props {
  *     <div>ПКМ здесь</div>
  *   </ContextMenu.Trigger>
  *   <ContextMenu.Content>
- *     <ContextMenu.Item onClick={handleCopy}>Копировать</ContextMenu.Item>
+ *     <ContextMenu.Section title="Действия">
+ *       <ContextMenu.Item onClick={handleCopy}>Копировать</ContextMenu.Item>
+ *     </ContextMenu.Section>
  *     <ContextMenu.Separator />
- *     <ContextMenu.Item onClick={handleDelete}>Удалить</ContextMenu.Item>
+ *     <ContextMenu.Item variant="destructive" onClick={handleDelete}>
+ *       Удалить
+ *     </ContextMenu.Item>
  *   </ContextMenu.Content>
  * </ContextMenu>
  * ```
@@ -174,11 +179,89 @@ const ContextMenuSeparator = ({
 	)
 }
 
+export interface IContextMenuLabelProps
+	extends ContextMenuPrimitive.GroupLabel.Props {
+	className?: string
+	variant?: TSlotVariant
+}
+
+const ContextMenuLabel = ({
+	className,
+	variant = 'default',
+	...props
+}: IContextMenuLabelProps): ReactNode => {
+	return (
+		<ContextMenuPrimitive.GroupLabel
+			data-slot='context-menu-label'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		/>
+	)
+}
+
+export type TContextMenuSectionChild =
+	| ReactElement<IContextMenuItemProps>
+	| ReactElement<IContextMenuSeparatorProps>
+	| boolean
+	| null
+	| undefined
+
+export interface IContextMenuSectionProps
+	extends Omit<ContextMenuPrimitive.Group.Props, 'title' | 'children'> {
+	title?: ReactNode
+	className?: string
+	variant?: TSlotVariant
+	children?: TContextMenuSectionChild | TContextMenuSectionChild[]
+}
+
+/**
+ * Группа пунктов в стиле Apple. `title` — подпись секции.
+ * Дети: только `ContextMenu.Item` или `ContextMenu.Separator`.
+ */
+const ContextMenuSection = ({
+	title,
+	className,
+	children,
+	variant = 'default',
+	...props
+}: IContextMenuSectionProps): ReactNode => {
+	assertMenuSectionChildren(
+		children,
+		[ContextMenuItem, ContextMenuSeparator],
+		'ContextMenu.Section',
+	)
+
+	return (
+		<ContextMenuPrimitive.Group
+			data-slot='context-menu-section'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		>
+			{title != null && title !== '' ? (
+				<ContextMenuLabel>{title}</ContextMenuLabel>
+			) : null}
+			{children}
+		</ContextMenuPrimitive.Group>
+	)
+}
+
+ContextMenuRoot.displayName = 'ContextMenu'
+ContextMenuTrigger.displayName = 'ContextMenu.Trigger'
+ContextMenuContent.displayName = 'ContextMenu.Content'
+ContextMenuItem.displayName = 'ContextMenu.Item'
+ContextMenuSeparator.displayName = 'ContextMenu.Separator'
+ContextMenuSection.displayName = 'ContextMenu.Section'
+ContextMenuLabel.displayName = 'ContextMenu.Label'
+
 export const ContextMenu = Object.assign(ContextMenuRoot, {
 	Trigger: ContextMenuTrigger,
 	Content: ContextMenuContent,
 	Item: ContextMenuItem,
 	Separator: ContextMenuSeparator,
+	Section: ContextMenuSection,
+	Label: ContextMenuLabel,
 })
 
 export {
@@ -186,4 +269,6 @@ export {
 	ContextMenuContent,
 	ContextMenuItem,
 	ContextMenuSeparator,
+	ContextMenuSection,
+	ContextMenuLabel,
 }

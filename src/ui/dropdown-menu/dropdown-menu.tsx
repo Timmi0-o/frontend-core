@@ -1,12 +1,14 @@
 'use client'
 
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
+import type { ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import type { ReactNode } from 'react'
+import { assertMenuSectionChildren } from '@/ui/menu/assert-menu-section-children'
 
 interface IDropdownMenuContextValue {
 	uiKit: string | undefined
@@ -171,39 +173,6 @@ const DropdownMenuLabel = ({
 	)
 }
 
-export interface IDropdownMenuSectionProps
-	extends Omit<MenuPrimitive.Group.Props, 'title'> {
-	label?: ReactNode
-	className?: string
-	variant?: TSlotVariant
-}
-
-/**
- * Именованная группа пунктов. Нужна, когда в одном меню несколько блоков
- * (действия / опасная зона). Заголовок — через label или DropdownMenu.Label.
- */
-const DropdownMenuSection = ({
-	label,
-	className,
-	children,
-	variant = 'default',
-	...props
-}: IDropdownMenuSectionProps): ReactNode => {
-	return (
-		<MenuPrimitive.Group
-			data-slot='dropdown-menu-section'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		>
-			{label != null && label !== '' ? (
-				<DropdownMenuLabel>{label}</DropdownMenuLabel>
-			) : null}
-			{children}
-		</MenuPrimitive.Group>
-	)
-}
-
 export interface IDropdownMenuCheckboxItemProps
 	extends MenuPrimitive.CheckboxItem.Props {
 	className?: string
@@ -228,6 +197,65 @@ const DropdownMenuCheckboxItem = ({
 				<span data-slot='dropdown-menu-checkbox-check' />
 			</MenuPrimitive.CheckboxItemIndicator>
 		</MenuPrimitive.CheckboxItem>
+	)
+}
+
+export type TDropdownMenuSectionChild =
+	| ReactElement<IDropdownMenuItemProps>
+	| ReactElement<IDropdownMenuSeparatorProps>
+	| ReactElement<IDropdownMenuCheckboxItemProps>
+	| ReactElement<IDropdownMenuLabelProps>
+	| boolean
+	| null
+	| undefined
+
+export interface IDropdownMenuSectionProps
+	extends Omit<MenuPrimitive.Group.Props, 'title' | 'children'> {
+	title?: ReactNode
+	/** @deprecated Используй `title` */
+	label?: ReactNode
+	className?: string
+	variant?: TSlotVariant
+	children?: TDropdownMenuSectionChild | TDropdownMenuSectionChild[]
+}
+
+/**
+ * Именованная группа пунктов. Заголовок — `title` (или `DropdownMenu.Label` внутри).
+ * Дети: Item, Separator, CheckboxItem или Label.
+ */
+const DropdownMenuSection = ({
+	title,
+	label,
+	className,
+	children,
+	variant = 'default',
+	...props
+}: IDropdownMenuSectionProps): ReactNode => {
+	assertMenuSectionChildren(
+		children,
+		[
+			DropdownMenuItem,
+			DropdownMenuSeparator,
+			DropdownMenuCheckboxItem,
+			DropdownMenuLabel,
+		],
+		'DropdownMenu.Section',
+	)
+
+	const heading = title ?? label
+
+	return (
+		<MenuPrimitive.Group
+			data-slot='dropdown-menu-section'
+			data-variant={variant}
+			className={cn(className)}
+			{...props}
+		>
+			{heading != null && heading !== '' ? (
+				<DropdownMenuLabel>{heading}</DropdownMenuLabel>
+			) : null}
+			{children}
+		</MenuPrimitive.Group>
 	)
 }
 

@@ -90,8 +90,20 @@ export { ContextMenu } from './context-menu/context-menu'
 export {
 	ContextMenuContent,
 	ContextMenuItem,
+	ContextMenuLabel,
+	ContextMenuSection,
 	ContextMenuSeparator,
 	ContextMenuTrigger,
+} from './context-menu/context-menu'
+export type {
+	IContextMenuContentProps,
+	IContextMenuItemProps,
+	IContextMenuLabelProps,
+	IContextMenuRootProps,
+	IContextMenuSectionProps,
+	IContextMenuSeparatorProps,
+	IContextMenuTriggerProps,
+	TContextMenuSectionChild,
 } from './context-menu/context-menu'
 export type { IChipLabelProps, IChipRootProps, IChipVariant } from './chip/chip'
 export { DatePicker } from './date-picker/date-picker'
@@ -108,6 +120,7 @@ export type {
 	IDropdownMenuSectionProps,
 	IDropdownMenuSeparatorProps,
 	IDropdownMenuTriggerProps,
+	TDropdownMenuSectionChild,
 } from './dropdown-menu/dropdown-menu'
 export type {
 	IDatePickerInputProps,

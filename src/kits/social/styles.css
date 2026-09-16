@@ -28,6 +28,7 @@
 @import './badge.css' layer(components);
 @import './avatar.css' layer(components);
 @import './tooltip.css' layer(components);
+@import './menu.css' layer(components);
 @import './dropdown-menu.css' layer(components);
 @import './context-menu.css' layer(components);
 @import './toast.css' layer(components);

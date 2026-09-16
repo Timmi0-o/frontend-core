@@ -570,6 +570,7 @@ export const Example = () => {
   ContextMenu,
   ContextMenuContent,
   ContextMenuItem,
+  ContextMenuSection,
   ContextMenuSeparator,
   ContextMenuTrigger,
   DropdownMenu,
@@ -586,7 +587,7 @@ export const Example = () => {
           Настройки
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <DropdownMenu.Section label="Бронь #10482">
+          <DropdownMenu.Section title="Бронь #10482">
             <DropdownMenu.Item>Открыть карточку</DropdownMenu.Item>
             <DropdownMenu.Item>Поделиться</DropdownMenu.Item>
             <DropdownMenu.CheckboxItem
@@ -596,7 +597,7 @@ export const Example = () => {
               В избранном
             </DropdownMenu.CheckboxItem>
           </DropdownMenu.Section>
-          <DropdownMenu.Section label="Опасная зона">
+          <DropdownMenu.Section title="Опасная зона">
             <DropdownMenu.Item variant="destructive">
               Отменить бронь
             </DropdownMenu.Item>
@@ -610,8 +611,10 @@ export const Example = () => {
           River Palace · бронь #10482
         </ContextMenuTrigger>
         <ContextMenuContent>
-          <ContextMenuItem>Копировать номер</ContextMenuItem>
-          <ContextMenuItem>Скопировать ссылку</ContextMenuItem>
+          <ContextMenuSection title="Действия">
+            <ContextMenuItem>Копировать номер</ContextMenuItem>
+            <ContextMenuItem>Скопировать ссылку</ContextMenuItem>
+          </ContextMenuSection>
           <ContextMenuSeparator />
           <ContextMenuItem variant="destructive">Удалить</ContextMenuItem>
         </ContextMenuContent>
