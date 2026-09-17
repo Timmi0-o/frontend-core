@@ -135,6 +135,8 @@
 	white-space: nowrap;
 	cursor: pointer;
 	outline: none;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
 	transition:
 		background-color var(--motion-duration-micro) var(--motion-easing-control),
 		border-color var(--motion-duration-micro) var(--motion-easing-control),
@@ -171,10 +173,16 @@
 	background: var(--button-ghost-hover);
 }
 
+[data-ui-kit='admin'] [data-sonner-toast] [data-title],
+[data-ui-kit='admin'] [data-sonner-toast] [data-description] {
+	overflow-wrap: anywhere;
+}
+
 [data-ui-kit='admin'] [data-sonner-toast] [data-close-button] {
 	position: absolute;
 	top: -0.25rem;
 	right: -0.25rem;
+	z-index: 2;
 	display: inline-flex;
 	height: 1.25rem;
 	width: 1.25rem;
@@ -192,15 +200,58 @@
 	line-height: 0;
 	cursor: pointer;
 	opacity: 0;
+	pointer-events: none;
 	transition: opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-sonner-toast]:hover [data-close-button] {
-	opacity: 1;
+@media (hover: hover) {
+	[data-ui-kit='admin'] [data-sonner-toast]:hover [data-close-button] {
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	[data-ui-kit='admin'] [data-sonner-toast] [data-close-button]:hover {
+		background: var(--default);
+	}
 }
 
-[data-ui-kit='admin'] [data-sonner-toast] [data-close-button]:hover {
-	background: var(--default);
+@media (hover: none) {
+	[data-ui-kit='admin'] [data-sonner-toast] [data-close-button] {
+		opacity: 1;
+		pointer-events: auto;
+	}
+}
+
+@media (max-width: 40rem) {
+	[data-ui-kit='admin'] [data-sonner-toast]:has([data-button]:not([data-cancel])) {
+		display: grid;
+		grid-template-columns: auto minmax(0, 1fr);
+		align-items: start;
+		column-gap: 0.5rem;
+		row-gap: 0.375rem;
+		padding: 0.75rem 1.75rem 0.25rem 0.75rem;
+	}
+
+	[data-ui-kit='admin'] [data-sonner-toast]:has([data-button]:not([data-cancel])) [data-icon] {
+		margin: 0;
+	}
+
+	[data-ui-kit='admin'] [data-sonner-toast]:has([data-button]:not([data-cancel])) [data-content] {
+		flex: none;
+		width: 100%;
+		max-width: none;
+		padding: 0;
+		align-self: start;
+	}
+
+	[data-ui-kit='admin'] [data-sonner-toast] [data-button]:not([data-cancel]) {
+		grid-column: 1 / -1;
+		min-width: 0;
+		min-height: 2.75rem;
+		width: 100%;
+		position: relative;
+		z-index: 1;
+	}
 }
 
 html.dark [data-ui-kit='admin'] [data-sonner-toast],
