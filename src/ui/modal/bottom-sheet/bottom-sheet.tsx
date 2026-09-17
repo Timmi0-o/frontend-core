@@ -48,7 +48,7 @@ function BottomSheetPrimitiveRoot({
 	direction = 'bottom',
 	dismissible = true,
 	modal = true,
-	handleOnly = true,
+	handleOnly = false,
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
 	const { hostRef, uiKit } = useInheritedUiKit()

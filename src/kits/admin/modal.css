@@ -144,7 +144,7 @@
 	box-shadow: var(--box-shadow-modal);
 	outline: none;
 	overscroll-behavior: contain;
-	touch-action: pan-y;
+	touch-action: none;
 	will-change: transform;
 }
 
