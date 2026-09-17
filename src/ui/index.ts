@@ -32,7 +32,10 @@ export type {
 	TAutocompleteVariant,
 } from './autocomplete/autocomplete'
 export { BottomSheet } from './modal/bottom-sheet/bottom-sheet'
-export type { IBottomSheetRootProps } from './modal/bottom-sheet/bottom-sheet'
+export type {
+	IBottomSheetRootProps,
+	TBottomSheetVariant,
+} from './modal/bottom-sheet/bottom-sheet'
 export { Drawer } from './modal/drawer/drawer'
 export type { IDrawerRootProps } from './modal/drawer/drawer'
 export {

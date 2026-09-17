@@ -19,7 +19,7 @@ import {
 	useMobileCondition,
 	type TMobileCondition,
 } from '@/hooks/use-mobile-condition'
-import { BottomSheet } from '../modal/bottom-sheet/bottom-sheet'
+import { BottomSheet, type TBottomSheetVariant } from '../modal/bottom-sheet/bottom-sheet'
 import { ModalBody } from '../modal/components/modal-body/modal-body'
 import { ModalFooter } from '../modal/components/modal-footer/modal-footer'
 import { ModalHeader } from '../modal/components/modal-header/modal-header'
@@ -32,7 +32,7 @@ interface IAdaptiveDialogContextValue {
 	isOpen: boolean
 	onOpenChange: (isNextOpen: boolean) => void
 	title: string
-	variant: TSlotVariant
+	variant: TBottomSheetVariant
 	height: CSSProperties['height']
 	hasMounted: boolean
 }
@@ -63,7 +63,7 @@ export interface IAdaptiveDialogRootProps {
 	onOpenChange?: (isOpen: boolean) => void
 	children?: ReactNode
 	title?: string
-	variant?: TSlotVariant
+	variant?: TBottomSheetVariant
 	height?: CSSProperties['height']
 	isMobileCondition?: TMobileCondition
 }
@@ -127,7 +127,7 @@ export interface IAdaptiveDialogContentProps {
 	className?: string
 	contentClassName?: string
 	children?: ReactNode
-	variant?: TSlotVariant
+	variant?: TBottomSheetVariant
 }
 
 const AdaptiveDialogContent = ({
@@ -172,7 +172,7 @@ const AdaptiveDialogContent = ({
 			onOpenChange={onOpenChange}
 			title={title}
 			className={className}
-			variant={variant}
+			variant={variant === 'secondary' ? 'default' : variant}
 		>
 			{children}
 		</Modal>
@@ -363,6 +363,7 @@ type TAdaptiveDialogComponent = typeof AdaptiveDialogRoot & {
 /**
  * На десктопе — Modal, на мобилке — BottomSheet. Порог по умолчанию: max-width 1024px.
  * `isMobileCondition` — boolean или CSS media query.
+ * `variant="secondary"` на мобилке даёт парящую шторку с отступами от краёв.
  *
  * @example
  * ```tsx

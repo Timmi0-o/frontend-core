@@ -71,6 +71,7 @@ export type {
 	IAutocompleteOption,
 	IAutocompleteProps,
 	IBottomSheetRootProps,
+	TBottomSheetVariant,
 	IDrawerRootProps,
 	IBreadcrumbsRootProps,
 	IButtonGroupProps,

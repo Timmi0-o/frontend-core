@@ -104,6 +104,14 @@
 
 	font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 	color: var(--foreground);
+}
+
+/*
+ * Фон страницы только на корне кита (body).
+ * На порталах data-ui-kit копируется на слот — иначе шторка красится в --background
+ * и в тёмной теме сливается со страницей, а у secondary торчит квадратный фон под карточкой.
+ */
+[data-ui-kit='social']:not([data-slot]) {
 	background: var(--background);
 }
 

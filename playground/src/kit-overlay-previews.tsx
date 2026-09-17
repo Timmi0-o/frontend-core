@@ -171,6 +171,7 @@ const toggleFilterValue = (current: string[], value: string): string[] => {
 
 export const KitSheetPreview = (): ReactElement => {
 	const [isOpen, setIsOpen] = useState(false)
+	const [isSecondaryOpen, setIsSecondaryOpen] = useState(false)
 	const [price, setPrice] = useState('any')
 	const [stars, setStars] = useState<string[]>(['4★'])
 	const [amenities, setAmenities] = useState(['wifi', 'pool'])
@@ -209,9 +210,14 @@ export const KitSheetPreview = (): ReactElement => {
 
 	return (
 		<>
-			<Button variant='outline' onClick={() => setIsOpen(true)}>
-				Фильтры поиска
-			</Button>
+			<div className='kit-row'>
+				<Button variant='outline' onClick={() => setIsOpen(true)}>
+					Фильтры поиска
+				</Button>
+				<Button variant='outline' onClick={() => setIsSecondaryOpen(true)}>
+					Парящая шторка
+				</Button>
+			</div>
 			<BottomSheet
 				open={isOpen}
 				onOpenChange={setIsOpen}
@@ -363,6 +369,29 @@ export const KitSheetPreview = (): ReactElement => {
 						</Button>
 						<Button onClick={() => setIsOpen(false)}>
 							Показать {Math.max(resultCount, 3)} номеров
+						</Button>
+					</div>
+				</div>
+			</BottomSheet>
+			<BottomSheet
+				open={isSecondaryOpen}
+				onOpenChange={setIsSecondaryOpen}
+				title='Действия'
+				variant='secondary'
+			>
+				<div className='kit-sheet-preview'>
+					<p className='kit-sheet-preview__lead'>
+						Парящий блок с отступами от краёв экрана
+					</p>
+					<div className='kit-sheet-preview__actions'>
+						<Button
+							variant='ghost'
+							onClick={() => setIsSecondaryOpen(false)}
+						>
+							Закрыть
+						</Button>
+						<Button onClick={() => setIsSecondaryOpen(false)}>
+							Продолжить
 						</Button>
 					</div>
 				</div>

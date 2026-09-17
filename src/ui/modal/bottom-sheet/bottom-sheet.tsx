@@ -1,16 +1,16 @@
 'use client'
 
 import { cn } from '@/core/cn'
+import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
 import {
 	OpenOverlayZProvider,
-	OverlayLayerProvider,
 	overlayBackdropStyle,
+	OverlayLayerProvider,
 	overlayLayerStyle,
 	useActiveOverlayZ,
 	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
-import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
-import type { TSlotVariant } from '@/core/slot-variant'
+import type { WithUnstyledVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	createContext,
@@ -26,7 +26,12 @@ import { Drawer as DrawerPrimitive } from 'vaul'
 
 const BottomSheetKitContext = createContext<string | undefined>(undefined)
 
-const useBottomSheetUiKit = (): string | undefined => useContext(BottomSheetKitContext)
+const useBottomSheetUiKit = (): string | undefined =>
+	useContext(BottomSheetKitContext)
+
+export type TBottomSheetVariant = WithUnstyledVariant<'default' | 'secondary'>
+
+const DEFAULT_SHEET_HEIGHT = 'calc(100svh - 10px)'
 
 export interface IBottomSheetRootProps {
 	open: boolean
@@ -37,7 +42,8 @@ export interface IBottomSheetRootProps {
 	height?: CSSProperties['height']
 	className?: string
 	contentClassName?: string
-	variant?: TSlotVariant
+	/** `default` — на всю ширин. `secondary` — парящий блок с отступами. */
+	variant?: TBottomSheetVariant
 }
 
 function BottomSheetPrimitiveRoot({
@@ -80,9 +86,7 @@ function BottomSheetPrimitiveRoot({
 function BottomSheetTrigger({
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Trigger>): ReactElement {
-	return (
-		<DrawerPrimitive.Trigger data-slot='bottom-sheet-trigger' {...props} />
-	)
+	return <DrawerPrimitive.Trigger data-slot='bottom-sheet-trigger' {...props} />
 }
 
 function BottomSheetPortal({
@@ -115,7 +119,7 @@ const BottomSheetOverlay = forwardRef<
 	HTMLDivElement,
 	ComponentProps<typeof DrawerPrimitive.Overlay> & {
 		uiKit?: string
-		variant?: TSlotVariant
+		variant?: TBottomSheetVariant
 	}
 >(function BottomSheetOverlay(
 	{ uiKit, variant = 'default', className, style, ...props },
@@ -139,7 +143,7 @@ const BottomSheetContent = forwardRef<
 	ComponentProps<typeof DrawerPrimitive.Content> & {
 		uiKit?: string
 		bodyClassName?: string
-		variant?: TSlotVariant
+		variant?: TBottomSheetVariant
 	}
 >(function BottomSheetContent(
 	{
@@ -202,7 +206,9 @@ const BottomSheetContent = forwardRef<
 			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
-			{children}
+			<div data-slot='bottom-sheet-surface' data-variant={variant}>
+				{children}
+			</div>
 		</DrawerPrimitive.Content>
 	)
 })
@@ -212,11 +218,7 @@ function BottomSheetHeader({
 	...props
 }: ComponentProps<'div'>): ReactElement {
 	return (
-		<div
-			data-slot='bottom-sheet-header'
-			className={cn(className)}
-			{...props}
-		/>
+		<div data-slot='bottom-sheet-header' className={cn(className)} {...props} />
 	)
 }
 
@@ -225,11 +227,7 @@ function BottomSheetFooter({
 	...props
 }: ComponentProps<'div'>): ReactElement {
 	return (
-		<div
-			data-slot='bottom-sheet-footer'
-			className={cn(className)}
-			{...props}
-		/>
+		<div data-slot='bottom-sheet-footer' className={cn(className)} {...props} />
 	)
 }
 
@@ -239,7 +237,7 @@ function BottomSheetTitle({
 	variant = 'default',
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Title> & {
-	variant?: TSlotVariant
+	variant?: TBottomSheetVariant
 }): ReactElement {
 	return (
 		<DrawerPrimitive.Title
@@ -271,7 +269,7 @@ function BottomSheetHandle({
 	className,
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Handle> & {
-	variant?: TSlotVariant
+	variant?: TBottomSheetVariant
 }): ReactElement {
 	return (
 		<DrawerPrimitive.Handle
@@ -294,11 +292,14 @@ const BottomSheetConvenience = ({
 	onCloseAnimationEnd,
 	title,
 	children,
-	height = 'calc(100svh - 10px)',
+	height,
 	className,
 	contentClassName,
 	variant = 'default',
 }: IBottomSheetRootProps): ReactElement => {
+	const resolvedHeight =
+		height ?? (variant === 'secondary' ? 'auto' : DEFAULT_SHEET_HEIGHT)
+
 	return (
 		<BottomSheetPrimitiveRoot
 			open={open}
@@ -311,7 +312,7 @@ const BottomSheetConvenience = ({
 		>
 			<BottomSheetConvenienceBody
 				title={title}
-				height={height}
+				height={resolvedHeight}
 				className={className}
 				contentClassName={contentClassName}
 				variant={variant}
@@ -345,7 +346,7 @@ function BottomSheetConvenienceBody({
 	}
 	const contentStyle: CSSProperties = {
 		...layerStyle,
-		pointerEvents: 'auto',
+		pointerEvents: variant === 'secondary' ? 'none' : 'auto',
 		zIndex: overlayZ + 1,
 		height,
 	}
@@ -368,6 +369,7 @@ function BottomSheetConvenienceBody({
 					<BottomSheetHandle variant={variant} />
 					<div
 						data-slot='bottom-sheet-body'
+						data-variant={variant}
 						className={cn(contentClassName)}
 					>
 						{children}
