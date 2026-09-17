@@ -1,0 +1,12 @@
+---
+description: npm pack — сразу удалять предыдущие tgz, оставлять только текущую версию
+alwaysApply: true
+---
+
+# pack tgz
+
+После `npm run build && npm pack` в этом пакете:
+
+- Живёт один файл: `timmi0-o-frontend-core-<version>.tgz` (`version` из `package.json`).
+- Все прочие `timmi0-o-frontend-core-*.tgz` в этой папке и в приложениях-потребителях — удалить сразу.
+- Не копировать архив в `my-master-next-app/` / admin: там только `file:../frontend-core/...tgz`.
