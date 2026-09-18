@@ -155,6 +155,7 @@ export const KitScenario = (): ReactElement => {
 			</Breadcrumbs>
 
 			<AlertBanner variant='success'>
+				<AlertBanner.Title>Есть свободные номера</AlertBanner.Title>
 				<AlertBanner.Description>
 					На эти даты ещё есть свободные номера — бронь держится 15 минут.
 				</AlertBanner.Description>

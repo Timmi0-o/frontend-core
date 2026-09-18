@@ -1,10 +1,10 @@
-[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	display: flex;
+	position: relative;
 	width: 100%;
-	flex-direction: column;
 	align-items: flex-start;
-	gap: 0.125rem;
+	gap: 0.5rem;
 	border: 0;
 	border-radius: min(32px, var(--radius-3xl));
 	background: var(--default);
@@ -16,49 +16,86 @@
 	box-shadow: var(--surface-shadow);
 }
 
-[data-ui-kit='admin'] [data-slot='alert-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert-icon']:not([data-variant='unstyled']) {
+	display: flex;
+	width: 1.5rem;
+	height: 1.5rem;
+	flex-shrink: 0;
+	align-items: center;
+	justify-content: center;
+	color: currentColor;
+}
+
+[data-ui-kit='admin'] [data-slot='alert-icon'] svg {
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+[data-ui-kit='admin'] [data-slot='alert-body']:not([data-variant='unstyled']) {
+	display: flex;
+	min-width: 0;
+	flex: 1 1 auto;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.125rem;
+}
+
+[data-ui-kit='admin'] [data-slot='alert-title']:not([data-variant='unstyled']) {
+	margin: 0;
+	font-size: 0.875rem;
+	font-weight: 500;
+	line-height: 1.25rem;
+}
+
+[data-ui-kit='admin'] [data-slot='alert-description']:not([data-variant='unstyled']) {
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 	font-weight: 400;
 	color: var(--muted);
 }
 
-[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='warning']{
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='warning'] {
 	background: color-mix(in oklab, var(--warning) 22%, var(--surface));
 	color: var(--warning-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='alert'][data-variant='warning'] [data-slot='alert-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='warning'] [data-slot='alert-description']:not([data-variant='unstyled']) {
 	color: var(--warning-soft-foreground);
 	opacity: 0.82;
 }
 
-[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='danger'],[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='error']{
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='danger'],
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='error'] {
 	background: var(--danger);
 	color: var(--danger-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='alert'][data-variant='danger'] [data-slot='alert-description']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='alert'][data-variant='error'] [data-slot='alert-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='danger'] [data-slot='alert-description']:not([data-variant='unstyled']),
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='error'] [data-slot='alert-description']:not([data-variant='unstyled']) {
 	color: var(--danger-foreground);
 	opacity: 0.88;
 }
 
-[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success']{
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success'] {
 	background: color-mix(in oklab, var(--success) 22%, var(--surface));
 	color: var(--success-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='alert'][data-variant='success'] [data-slot='alert-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='success'] [data-slot='alert-description']:not([data-variant='unstyled']) {
 	color: var(--success-soft-foreground);
 	opacity: 0.82;
 }
 
-[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='soft-danger']{
+[data-ui-kit='admin'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
 	background: color-mix(in oklab, var(--danger) 16%, var(--surface));
 	color: var(--danger-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='alert'][data-variant='soft-danger'] [data-slot='alert-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='alert'][data-variant='soft-danger'] [data-slot='alert-description']:not([data-variant='unstyled']) {
 	color: var(--danger-soft-foreground);
 	opacity: 0.82;
+}
+
+[data-ui-kit='admin'] [data-slot='alert-body'] > [data-slot='button'] {
+	margin-block-start: 0.5rem;
 }

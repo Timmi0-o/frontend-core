@@ -757,28 +757,33 @@ export const Example = () => {
   return (
     <>
       <AlertBanner variant="default">
+        <AlertBanner.Title>Изменение тарифа</AlertBanner.Title>
         <AlertBanner.Description>
-          Информация: тариф можно изменить до заезда без доплаты.
+          Тариф можно изменить до заезда без доплаты.
         </AlertBanner.Description>
       </AlertBanner>
       <AlertBanner variant="warning">
+        <AlertBanner.Title>Мало свободных номеров</AlertBanner.Title>
         <AlertBanner.Description>
-          Свободных номеров мало: подтвердите бронь в течение 15 минут.
+          Подтвердите бронь в течение 15 минут.
         </AlertBanner.Description>
       </AlertBanner>
       <AlertBanner variant="danger">
+        <AlertBanner.Title>Платёж не прошёл</AlertBanner.Title>
         <AlertBanner.Description>
-          Не удалось подтвердить бронь: платёж не прошёл.
+          Проверьте карту или выберите другой способ оплаты.
         </AlertBanner.Description>
       </AlertBanner>
       <AlertBanner variant="success">
+        <AlertBanner.Title>Бронь подтверждена</AlertBanner.Title>
         <AlertBanner.Description>
-          Бронь подтверждена. Ваучер отправлен на почту гостя.
+          Ваучер отправлен на почту гостя.
         </AlertBanner.Description>
       </AlertBanner>
       <AlertBanner variant="soft-danger">
+        <AlertBanner.Title>Часть услуг недоступна</AlertBanner.Title>
         <AlertBanner.Description>
-          Часть услуг недоступна. Можно продолжить без трансфера.
+          Можно продолжить без трансфера.
         </AlertBanner.Description>
       </AlertBanner>
     </>

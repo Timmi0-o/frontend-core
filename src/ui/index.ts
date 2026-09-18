@@ -19,6 +19,7 @@ export type {
 	IAlertBannerDescriptionProps,
 	IAlertBannerProps,
 	IAlertBannerRootProps,
+	IAlertBannerTitleProps,
 	IAlertBannerVariant,
 } from './alert-banner/alert-banner'
 export { AutoComplete } from './autocomplete/autocomplete'
