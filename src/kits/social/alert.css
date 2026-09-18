@@ -66,7 +66,8 @@
 	color: var(--alert-accent);
 }
 
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-body'] {
+[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-body'],
+[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success'] [data-slot='alert-body'] {
 	color: var(--text-primary);
 }
 
@@ -78,7 +79,8 @@
 	color: var(--alert-accent);
 }
 
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-title'] {
+[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-title'],
+[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success'] [data-slot='alert-title'] {
 	color: var(--text-primary);
 }
 

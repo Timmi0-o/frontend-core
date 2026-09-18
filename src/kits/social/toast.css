@@ -30,7 +30,7 @@
 }
 
 [data-ui-kit='social'] [data-sonner-toast][data-type='success'] {
-	--toast-accent: var(--success);
+	--toast-accent: var(--success-foreground);
 }
 
 [data-ui-kit='social'] [data-sonner-toast][data-type='error'] {
