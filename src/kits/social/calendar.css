@@ -26,6 +26,10 @@
 	color: var(--muted-foreground);
 }
 
+[data-ui-kit='social'] [data-slot='calendar-headline-weekday']:not([data-variant='unstyled'])[data-weekend]{
+	color: var(--danger);
+}
+
 [data-ui-kit='social'] [data-slot='calendar-headline-day']:not([data-variant='unstyled']){
 	margin: 0.1rem 0 0;
 	font-size: 1.75rem;

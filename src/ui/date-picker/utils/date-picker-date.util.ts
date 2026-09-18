@@ -179,7 +179,7 @@ export const getCalendarWeekdayLabels = (locale: string): string[] => {
 }
 
 /**
- * Суббота или воскресенье. Нужен приглушённый цвет выходных в сетке.
+ * Суббота или воскресенье. В сетке и шапке дней недели красится как выходной.
  */
 export const isWeekendDay = (date: Date): boolean => {
 	const weekday = date.getDay()

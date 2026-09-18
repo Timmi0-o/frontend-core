@@ -5,7 +5,7 @@ import type { TSlotVariant } from '@/core/slot-variant'
 import { useMemo, type ReactElement } from 'react'
 import { CalendarView } from './components/calendar-view/calendar-view'
 import { useDatePicker } from '../date-picker/hooks/use-date-picker'
-import { startOfDay } from '../date-picker/utils/date-picker-date.util'
+import { isWeekendDay, startOfDay } from '../date-picker/utils/date-picker-date.util'
 
 export interface ICalendarProps {
 	value?: Date | null
@@ -84,7 +84,12 @@ export const Calendar = ({
 	return (
 		<div data-slot='calendar' data-variant={variant} className={cn(className)}>
 			<div data-slot='calendar-headline'>
-				<p data-slot='calendar-headline-weekday'>{headlineWeekday}</p>
+				<p
+					data-slot='calendar-headline-weekday'
+					data-weekend={isWeekendDay(headlineDate) ? '' : undefined}
+				>
+					{headlineWeekday}
+				</p>
 				<p data-slot='calendar-headline-day'>{headlineDate.getDate()}</p>
 				<p data-slot='calendar-headline-month'>{headlineMonth}</p>
 			</div>

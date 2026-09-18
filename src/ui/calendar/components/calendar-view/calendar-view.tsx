@@ -92,8 +92,14 @@ const CalendarDaysPanel = ({
 				<p data-slot='date-picker-month-caption'>{caption}</p>
 			) : null}
 			<div data-slot='date-picker-weekdays'>
-				{weekdays.map((weekday) => (
-					<div key={weekday} data-slot='date-picker-weekday'>
+				{weekdays.map((weekday, index) => (
+					<div
+						key={weekday}
+						data-slot='date-picker-weekday'
+						data-weekend={
+							isWeekendDay(new Date(2024, 0, 1 + index)) ? '' : undefined
+						}
+					>
 						{weekday}
 					</div>
 				))}

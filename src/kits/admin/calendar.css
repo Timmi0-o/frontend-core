@@ -25,6 +25,10 @@
 	color: var(--muted);
 }
 
+[data-ui-kit='admin'] [data-slot='calendar-headline-weekday']:not([data-variant='unstyled'])[data-weekend]{
+	color: var(--danger);
+}
+
 [data-ui-kit='admin'] [data-slot='calendar-headline-day']:not([data-variant='unstyled']){
 	margin: 0.1rem 0 0;
 	font-size: 2.5rem;

@@ -399,6 +399,10 @@
 	color: var(--placeholder);
 }
 
+[data-ui-kit='admin'] [data-slot='date-picker-weekday']:not([data-variant='unstyled'])[data-weekend]{
+	color: var(--danger);
+}
+
 [data-ui-kit='admin'] [data-slot='date-picker-day']:not([data-variant='unstyled']){
 	display: flex;
 	aspect-ratio: 1;
@@ -427,7 +431,7 @@
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-day']:not([data-variant='unstyled'])[data-weekend]:not([data-selected]):not([data-today]){
-	color: var(--foreground);
+	color: var(--danger);
 }
 
 [data-ui-kit='admin'] [data-slot='date-picker-day']:not([data-variant='unstyled'])[data-outside]:not([data-selected]):not([data-in-range]){
