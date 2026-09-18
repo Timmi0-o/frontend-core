@@ -97,6 +97,14 @@
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-popover']:not([data-variant='unstyled']){
+	--date-picker-day-size: 2.375rem;
+	--date-picker-weekday-height: 1.65rem;
+	--date-picker-weekday-gap: 0.25rem;
+	--date-picker-picker-gap: 0.375rem;
+	--date-picker-body-height: calc(
+		var(--date-picker-weekday-height) + var(--date-picker-weekday-gap) +
+			6 * var(--date-picker-day-size)
+	);
 	box-sizing: border-box;
 	width: 20.75rem;
 	max-width: min(20.75rem, calc(100vw - 24px));
@@ -153,6 +161,10 @@
 		max-width: 2.75rem;
 		height: 2.5rem;
 	}
+
+	[data-ui-kit='social'] [data-slot='date-picker-popover']:not([data-variant='unstyled']){
+		--date-picker-day-size: 2.5rem;
+	}
 }
 
 [data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-picker-popover']:not([data-variant='unstyled']),
@@ -194,6 +206,11 @@
 	width: 100%;
 	max-width: none;
 	height: 2.75rem;
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-picker-popover']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-picker-popover']:not([data-variant='unstyled']){
+	--date-picker-day-size: 2.75rem;
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-month-caption']:not([data-variant='unstyled']){
@@ -286,62 +303,49 @@
 
 [data-ui-kit='social'] [data-slot='date-picker-months']:not([data-variant='unstyled']){
 	display: grid;
-	min-height: 14.5rem;
+	box-sizing: border-box;
+	height: var(--date-picker-body-height);
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	align-content: start;
-	gap: 0.25rem;
+	grid-template-rows: repeat(4, minmax(0, 1fr));
+	gap: var(--date-picker-picker-gap);
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-years']:not([data-variant='unstyled']){
 	display: grid;
-	min-height: 14.5rem;
-	max-height: 14.5rem;
+	box-sizing: border-box;
+	height: var(--date-picker-body-height);
+	max-height: var(--date-picker-body-height);
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	align-content: start;
-	gap: 0.25rem;
+	grid-auto-rows: calc(
+		(var(--date-picker-body-height) - 3 * var(--date-picker-picker-gap)) / 4
+	);
+	gap: var(--date-picker-picker-gap);
 	overflow-x: hidden;
 	overflow-y: auto;
-	padding-right: 0.125rem;
+	scrollbar-gutter: stable;
 }
 
-[data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled']){
-	display: block;
+[data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled']){
+	display: flex;
 	width: 100%;
+	height: 100%;
 	min-width: 0;
-	min-height: 2.5rem;
+	min-height: 0;
+	align-items: center;
+	justify-content: center;
 	overflow: hidden;
 	cursor: pointer;
 	border: 1px solid transparent;
-	border-radius: 0.75rem;
+	border-radius: 0.875rem;
 	background: transparent;
-	padding: 0.55rem 0.25rem;
-	font-size: 0.75rem;
-	font-weight: 500;
+	padding: 0.5rem 0.35rem;
+	font-size: 0.9375rem;
+	font-weight: 600;
 	line-height: 1.2;
 	white-space: nowrap;
 	text-align: center;
-	text-overflow: ellipsis;
 	text-transform: capitalize;
-	color: var(--text-primary);
-	transition:
-		background-color var(--motion-duration-fast) var(--motion-easing-control),
-		color var(--motion-duration-fast) var(--motion-easing-control);
-}
-
-[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled']){
-	display: flex;
-	min-width: 0;
-	min-height: 2.5rem;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	border: 1px solid transparent;
-	border-radius: 0.75rem;
-	background: transparent;
-	padding: 0.4rem 0.25rem;
-	font-size: 0.875rem;
-	font-weight: 600;
-	font-variant-numeric: tabular-nums;
 	color: var(--text-primary);
 	transition:
 		background-color var(--motion-duration-fast) var(--motion-easing-control),
@@ -349,20 +353,26 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled']):hover:not(:disabled),[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled']):hover:not(:disabled){
-	background: color-mix(in srgb, var(--text-primary) 8%, var(--background));
-	color: var(--header);
+[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled']){
+	font-variant-numeric: tabular-nums;
+	text-transform: none;
+}
+
+[data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled']):hover:not(:disabled):not([data-selected]),[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled']):hover:not(:disabled):not([data-selected]){
+	background: color-mix(in srgb, var(--main-blue) 10%, transparent);
+	color: var(--main-blue);
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled'])[data-selected],[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled'])[data-selected]{
 	font-weight: 650;
-	background: var(--background-secondary);
-	color: var(--header);
+	background: var(--main-blue);
+	color: var(--text-contrast);
+	box-shadow: none;
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled'])[data-current]:not([data-selected]){
-	box-shadow: inset 0 0 0 1px var(--border-primary-color);
-	color: var(--text);
+	box-shadow: inset 0 0 0 1.5px var(--main-blue);
+	color: var(--main-blue);
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-month']:not([data-variant='unstyled'])[data-disabled],[data-ui-kit='social'] [data-slot='date-picker-year']:not([data-variant='unstyled'])[data-disabled]{
@@ -376,12 +386,22 @@
 	grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
+[data-ui-kit='social'] [data-slot='date-picker-days']:not([data-variant='unstyled']){
+	height: calc(6 * var(--date-picker-day-size));
+}
+
 [data-ui-kit='social'] [data-slot='date-picker-weekdays']:not([data-variant='unstyled']){
-	margin-bottom: 0.25rem;
+	height: var(--date-picker-weekday-height);
+	margin-bottom: var(--date-picker-weekday-gap);
+	align-items: center;
 }
 
 [data-ui-kit='social'] [data-slot='date-picker-weekday']:not([data-variant='unstyled']){
-	padding: 0.4rem 0;
+	display: flex;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
 	text-align: center;
 	font-size: 0.6875rem;
 	font-weight: 600;
@@ -396,8 +416,8 @@
 
 [data-ui-kit='social'] [data-slot='date-picker-day']:not([data-variant='unstyled']){
 	display: flex;
-	height: 2.375rem;
-	width: 2.375rem;
+	height: var(--date-picker-day-size);
+	width: var(--date-picker-day-size);
 	justify-self: center;
 	align-items: center;
 	justify-content: center;
