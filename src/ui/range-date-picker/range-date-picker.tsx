@@ -1,9 +1,11 @@
 'use client'
 
+import { useMemo, type ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
+import { useMobileCondition } from '@/hooks/use-mobile-condition'
 import { DATE_PICKER_POPOVER_OFFSET_PX } from '@/ui/date-picker/constants/date-picker.constants'
 import { Popover } from '@/ui/popover/popover'
-import { useMemo, type ReactElement } from 'react'
 import { RangeDatePickerInput } from './components/range-date-picker-input/range-date-picker-input'
 import { RangeDatePickerPopover } from './components/range-date-picker-popover/range-date-picker-popover'
 import { RANGE_DATE_PICKER_DISPLAY_NAMES } from './constants/range-date-picker.constants'
@@ -37,7 +39,10 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 		locale = 'ru',
 		previousMonth = 'Предыдущий месяц',
 		nextMonth = 'Следующий месяц',
+		isMobileCondition,
 	} = props
+
+	const isMobile = useMobileCondition(isMobileCondition)
 
 	const {
 		isOpen,
@@ -80,6 +85,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 			placeholder,
 			isOpen,
 			isDisabled,
+			isMobile,
 			visibleMonth,
 			visibleMonthCount,
 			viewMode,
@@ -101,6 +107,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 			handleShiftVisibleYear,
 			handleSelectDate,
 			handleSelectToday,
+			handleOpenChange,
 			handleDayPointerEnter,
 			handleDayPointerLeave,
 			isDateDisabled,
@@ -119,6 +126,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 			placeholder,
 			isOpen,
 			isDisabled,
+			isMobile,
 			visibleMonth,
 			visibleMonthCount,
 			viewMode,
@@ -140,6 +148,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 			handleShiftVisibleYear,
 			handleSelectDate,
 			handleSelectToday,
+			handleOpenChange,
 			handleDayPointerEnter,
 			handleDayPointerLeave,
 			isDateDisabled,
@@ -154,6 +163,13 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 		],
 	)
 
+	const pickerContent = children ?? (
+		<>
+			<RangeDatePickerInput />
+			<RangeDatePickerPopover />
+		</>
+	)
+
 	return (
 		<RangeDatePickerContext.Provider value={contextValue}>
 			<div
@@ -166,25 +182,24 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 			>
 				{label ? <label data-slot='date-picker-label'>{label}</label> : null}
 
-				<Popover
-					open={isOpen}
-					onOpenChange={(isNextOpen) => {
-						if (isDisabled) {
-							return
-						}
+				{isMobile ? (
+					pickerContent
+				) : (
+					<Popover
+						open={isOpen}
+						onOpenChange={(isNextOpen) => {
+							if (isDisabled) {
+								return
+							}
 
-						handleOpenChange(isNextOpen)
-					}}
-					placement='bottom-start'
-					offset={DATE_PICKER_POPOVER_OFFSET_PX}
-				>
-					{children ?? (
-						<>
-							<RangeDatePickerInput />
-							<RangeDatePickerPopover />
-						</>
-					)}
-				</Popover>
+							handleOpenChange(isNextOpen)
+						}}
+						placement='bottom-start'
+						offset={DATE_PICKER_POPOVER_OFFSET_PX}
+					>
+						{pickerContent}
+					</Popover>
+				)}
 
 				{error ? (
 					<p data-slot='date-picker-error' role='alert'>
@@ -199,7 +214,8 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 RangeDatePickerRoot.displayName = RANGE_DATE_PICKER_DISPLAY_NAMES.ROOT
 
 /**
- * Диапазон дат `{ start, end }`. Несколько месяцев — `extendMonthCount`.
+ * Диапазон дат `{ start, end }`. На мобилке (≤1024px) — тот же календарь в BottomSheet.
+ * Несколько месяцев — `extendMonthCount`.
  *
  * @example
  * ```tsx

@@ -1,4 +1,5 @@
 import type { TSlotVariant } from '@/core/slot-variant'
+import type { TMobileCondition } from '@/hooks/use-mobile-condition'
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
 import type {
 	TDatePickerSize,
@@ -27,6 +28,7 @@ export interface IRangeDatePickerProps {
 	previousMonth?: string
 	nextMonth?: string
 	extendMonthCount?: number
+	isMobileCondition?: TMobileCondition
 }
 
 export interface IRangeDatePickerInputProps extends Omit<

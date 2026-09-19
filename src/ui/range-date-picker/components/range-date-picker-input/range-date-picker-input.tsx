@@ -46,35 +46,50 @@ export const RangeDatePickerInput = ({
 		placeholder,
 		isOpen,
 		isDisabled,
+		isMobile,
 		size,
 		variant: contextVariant,
+		handleOpenChange,
 	} = useRangeDatePickerContext()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 
-	return (
-		<Popover.Trigger>
-			<button
-				{...rest}
-				type='button'
-				disabled={isDisabled}
-				aria-expanded={isOpen}
-				aria-label={placeholder}
-				data-slot='date-picker-input'
-				data-size={size}
-				data-variant={variant}
-				data-disabled={isDisabled ? '' : undefined}
-				data-open={isOpen ? '' : undefined}
-				className={cn(className)}
-			>
-				<span data-slot='date-picker-value' data-empty={displayValue ? undefined : ''}>
-					{displayValue || placeholder}
-				</span>
-				<span data-slot='date-picker-icon'>
-					<CalendarIcon />
-				</span>
-			</button>
-		</Popover.Trigger>
+	const handleClick: IRangeDatePickerInputProps['onClick'] = (event) => {
+		rest.onClick?.(event)
+
+		if (isMobile && !isDisabled) {
+			handleOpenChange(!isOpen)
+		}
+	}
+
+	const input = (
+		<button
+			{...rest}
+			type='button'
+			disabled={isDisabled}
+			aria-expanded={isOpen}
+			aria-label={placeholder}
+			data-slot='date-picker-input'
+			data-size={size}
+			data-variant={variant}
+			data-disabled={isDisabled ? '' : undefined}
+			data-open={isOpen ? '' : undefined}
+			className={cn(className)}
+			onClick={handleClick}
+		>
+			<span data-slot='date-picker-value' data-empty={displayValue ? undefined : ''}>
+				{displayValue || placeholder}
+			</span>
+			<span data-slot='date-picker-icon'>
+				<CalendarIcon />
+			</span>
+		</button>
 	)
+
+	if (isMobile) {
+		return input
+	}
+
+	return <Popover.Trigger>{input}</Popover.Trigger>
 }
 
 RangeDatePickerInput.displayName = RANGE_DATE_PICKER_DISPLAY_NAMES.INPUT

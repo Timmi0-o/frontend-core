@@ -12,6 +12,7 @@ export interface IRangeDatePickerContextValue {
 	placeholder: string
 	isOpen: boolean
 	isDisabled: boolean
+	isMobile: boolean
 	visibleMonth: Date
 	visibleMonthCount: number
 	viewMode: TDatePickerViewMode
@@ -33,6 +34,7 @@ export interface IRangeDatePickerContextValue {
 	handleShiftVisibleYear: (delta: number) => void
 	handleSelectDate: (date: Date) => void
 	handleSelectToday: () => void
+	handleOpenChange: (isOpen: boolean) => void
 	handleDayPointerEnter: (date: Date) => void
 	handleDayPointerLeave: () => void
 	isDateDisabled: (date: Date) => boolean
