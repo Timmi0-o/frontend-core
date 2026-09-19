@@ -76,8 +76,8 @@ export interface IPhotoGalleryProps {
 	onOpenChange: (open: boolean) => void
 	labels?: IPhotoGalleryLabels
 	/**
-	 * Боковые кнопки prev/next. По умолчанию обе включены;
-	 * кнопка скрывается сама, если в эту сторону больше нет кадров.
+	 * Боковые зоны prev/next. По умолчанию обе включены;
+	 * зона скрывается, если в эту сторону больше нет кадров.
 	 */
 	slideControls?: IPhotoGallerySlideControls
 	className?: string
@@ -505,7 +505,7 @@ const PhotoGalleryOverlay = ({
 									{isLeftSlideControlVisible ? (
 										<button
 											type='button'
-											data-slot='photo-gallery-icon-button'
+											data-slot='photo-gallery-slide-zone'
 											data-side='left'
 											onClick={goToPreviousSlide}
 											aria-label={resolvedLabels.prev}
@@ -517,7 +517,7 @@ const PhotoGalleryOverlay = ({
 									{isRightSlideControlVisible ? (
 										<button
 											type='button'
-											data-slot='photo-gallery-icon-button'
+											data-slot='photo-gallery-slide-zone'
 											data-side='right'
 											onClick={goToNextSlide}
 											aria-label={resolvedLabels.next}

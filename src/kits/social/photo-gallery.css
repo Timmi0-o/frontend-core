@@ -79,24 +79,80 @@
 	height: 1.25rem;
 }
 
-[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']){
 	position: absolute;
-	top: 50%;
+	top: 0;
+	bottom: 0;
 	z-index: 20;
-	transform: translateY(-50%);
+	display: flex;
+	width: min(28%, 10.5rem);
+	align-items: center;
+	border: 0;
+	padding: 0;
+	background: transparent;
+	color: #fff;
+	cursor: pointer;
+	touch-action: manipulation;
+	-webkit-tap-highlight-color: transparent;
 }
 
-[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left']:not([data-variant='unstyled']){
-	inset-inline-start: max(0.5rem, env(safe-area-inset-left));
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled'])::before{
+	content: '';
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	pointer-events: none;
+	transition: opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right']:not([data-variant='unstyled']){
-	inset-inline-end: max(0.5rem, env(safe-area-inset-right));
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='left']:not([data-variant='unstyled']){
+	inset-inline-start: 0;
+	justify-content: flex-start;
+	padding-inline-start: max(0.75rem, env(safe-area-inset-left));
 }
 
-[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left'] svg,
-[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right'] svg{
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='left']:not([data-variant='unstyled'])::before{
+	background: linear-gradient(to inline-end, rgb(0 0 0 / 0.42), transparent);
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='right']:not([data-variant='unstyled']){
+	inset-inline-end: 0;
+	justify-content: flex-end;
+	padding-inline-end: max(0.75rem, env(safe-area-inset-right));
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='right']:not([data-variant='unstyled'])::before{
+	background: linear-gradient(to inline-start, rgb(0 0 0 / 0.42), transparent);
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']) svg{
+	position: relative;
+	width: 1.75rem;
+	height: 1.75rem;
+	opacity: 0;
+	pointer-events: none;
+	filter: drop-shadow(0 1px 4px rgb(0 0 0 / 0.65));
+	transition: opacity var(--motion-duration-fast) var(--motion-easing-control);
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):focus-visible{
+	outline: none;
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):focus-visible svg,
+[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):focus-visible::before{
+	opacity: 1;
+}
+
+@media (hover: hover) {
+	[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):hover svg,
+	[data-ui-kit='social'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):hover::before{
+		opacity: 1;
+	}
+}
+
+[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='left'] svg,
+[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-slide-zone'][data-side='right'] svg{
 	transform: scaleX(-1);
 }
 
