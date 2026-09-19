@@ -23,7 +23,7 @@
 	[data-slot='dropdown-menu-content'],
 	[data-slot='context-menu-content'],
 	[data-slot='popover-panel'],
-	[data-slot='photo-gallery-overlay']
+	[data-slot='photo-gallery-root']
 ) {
 	overscroll-behavior: contain;
 }

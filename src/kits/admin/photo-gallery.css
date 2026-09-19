@@ -1,8 +1,9 @@
-[data-ui-kit='admin'] [data-slot='photo-gallery-overlay']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='photo-gallery-root']:not([data-variant='unstyled']){
 	position: absolute;
 	inset: 0;
 	display: flex;
 	flex-direction: column;
+	background: transparent;
 }
 
 [data-ui-kit='admin'] [data-slot='photo-gallery-backdrop']:not([data-variant='unstyled']){
@@ -92,6 +93,7 @@
 	background: transparent;
 	color: #fff;
 	cursor: pointer;
+	pointer-events: none;
 	touch-action: manipulation;
 	-webkit-tap-highlight-color: transparent;
 }
@@ -144,7 +146,11 @@
 	opacity: 1;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
+	[data-ui-kit='admin'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']){
+		pointer-events: auto;
+	}
+
 	[data-ui-kit='admin'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):hover svg,
 	[data-ui-kit='admin'] [data-slot='photo-gallery-slide-zone']:not([data-variant='unstyled']):hover::before{
 		opacity: 1;
@@ -172,7 +178,7 @@
 	position: relative;
 	width: 100%;
 	height: 100%;
-	touch-action: pan-x;
+	touch-action: none;
 }
 
 [data-ui-kit='admin'] [data-slot='photo-gallery-swiper']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='photo-gallery-swiper']:not([data-variant='unstyled']).swiper{

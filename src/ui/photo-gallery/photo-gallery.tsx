@@ -365,6 +365,34 @@ const PhotoGalleryOverlay = ({
 		swiperRef.current?.slideNext()
 	}
 
+	const handleSwiperTap = (
+		swiper: SwiperInstance,
+		event: MouseEvent | TouchEvent | PointerEvent,
+	): void => {
+		if (!swiper.allowClick) {
+			return
+		}
+
+		const clientX =
+			'clientX' in event ? event.clientX : event.changedTouches[0]?.clientX
+
+		if (clientX == null) {
+			return
+		}
+
+		const ratio = clientX / window.innerWidth
+		const startRatio = swiper.rtlTranslate ? 1 - ratio : ratio
+
+		if (startRatio < 0.28) {
+			swiper.slidePrev()
+			return
+		}
+
+		if (startRatio > 0.72) {
+			swiper.slideNext()
+		}
+	}
+
 	const overlay =
 		isMounted && total > 0
 			? createPortal(
@@ -373,6 +401,7 @@ const PhotoGalleryOverlay = ({
 							<m.div
 								key='photo-gallery-overlay'
 								data-ui-kit={uiKit}
+								data-slot='photo-gallery-host'
 								style={{
 									...overlayLayerStyle(overlayZ),
 									zIndex: overlayZ,
@@ -399,7 +428,7 @@ const PhotoGalleryOverlay = ({
 							>
 								<div
 									ref={overlayRef}
-									data-slot='photo-gallery-overlay'
+									data-slot='photo-gallery-root'
 									data-variant={variant}
 									className={cn(className)}
 									role='dialog'
@@ -461,6 +490,9 @@ const PhotoGalleryOverlay = ({
 											initialSlide={safeInitialIndex}
 											slidesPerView={1}
 											spaceBetween={0}
+											speed={240}
+											threshold={8}
+											longSwipesRatio={0.18}
 											zoom={{
 												maxRatio: 3,
 												minRatio: 1,
@@ -474,6 +506,7 @@ const PhotoGalleryOverlay = ({
 											onSwiper={(swiper: SwiperInstance) => {
 												swiperRef.current = swiper
 											}}
+											onClick={handleSwiperTap}
 											onSlideChange={(swiper: SwiperInstance) => {
 												setActiveIndex(swiper.activeIndex)
 												swiper.zoom.out()
