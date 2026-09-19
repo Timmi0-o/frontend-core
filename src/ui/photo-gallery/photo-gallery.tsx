@@ -25,7 +25,7 @@ import {
 } from '@/ui/photo-gallery/utils/media-overlay-dismiss'
 import {
 	AnimatePresence,
-	motion,
+	m,
 	useMotionValue,
 	useReducedMotion,
 	useTransform,
@@ -370,7 +370,7 @@ const PhotoGalleryOverlay = ({
 			? createPortal(
 					<AnimatePresence onExitComplete={handleExitComplete}>
 						{open ? (
-							<motion.div
+							<m.div
 								key='photo-gallery-overlay'
 								data-ui-kit={uiKit}
 								style={{
@@ -406,7 +406,7 @@ const PhotoGalleryOverlay = ({
 									aria-modal
 									aria-label={resolvedLabels.title}
 								>
-								<motion.div
+								<m.div
 									data-slot='photo-gallery-backdrop'
 									style={{ opacity: backdropOpacity }}
 									aria-hidden
@@ -416,7 +416,7 @@ const PhotoGalleryOverlay = ({
 									{resolvedLabels.title}
 								</h2>
 
-								<motion.div
+								<m.div
 									data-slot='photo-gallery-header'
 									variants={GALLERY_OVERLAY_CHROME_TOP_VARIANTS}
 									{...overlayEnterMotion}
@@ -442,14 +442,14 @@ const PhotoGalleryOverlay = ({
 											<CloseIcon />
 										</button>
 									</div>
-								</motion.div>
+								</m.div>
 
-								<motion.div
+								<m.div
 									data-slot='photo-gallery-stage'
 									variants={GALLERY_OVERLAY_STAGE_VARIANTS}
 									{...overlayEnterMotion}
 								>
-									<motion.div
+									<m.div
 										data-slot='photo-gallery-dismiss-layer'
 										style={{ y: dragY, scale: dismissScale }}
 										{...dismissHandlers}
@@ -500,7 +500,7 @@ const PhotoGalleryOverlay = ({
 												</SwiperSlide>
 											))}
 										</Swiper>
-									</motion.div>
+									</m.div>
 
 									{isLeftSlideControlVisible ? (
 										<button
@@ -525,9 +525,9 @@ const PhotoGalleryOverlay = ({
 											<ChevronRightIcon />
 										</button>
 									) : null}
-								</motion.div>
+								</m.div>
 
-								<motion.div
+								<m.div
 									data-slot='photo-gallery-footer'
 									variants={GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS}
 									{...overlayEnterMotion}
@@ -536,9 +536,9 @@ const PhotoGalleryOverlay = ({
 									<span data-slot='photo-gallery-counter'>
 										{resolvedLabels.counter(activeIndex + 1, total)}
 									</span>
-								</motion.div>
+								</m.div>
 								</div>
-							</motion.div>
+							</m.div>
 						) : null}
 					</AnimatePresence>,
 					document.body,
