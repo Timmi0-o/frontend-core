@@ -60,12 +60,26 @@ interface IResolvedPhotoGalleryLabels {
 	counter: (current: number, total: number) => string
 }
 
+export interface IPhotoGallerySlideControl {
+	isEnabled: boolean
+}
+
+export interface IPhotoGallerySlideControls {
+	left?: IPhotoGallerySlideControl
+	right?: IPhotoGallerySlideControl
+}
+
 export interface IPhotoGalleryProps {
 	images: IPhotoGalleryImage[]
 	open: boolean
 	initialIndex?: number
 	onOpenChange: (open: boolean) => void
 	labels?: IPhotoGalleryLabels
+	/**
+	 * Боковые кнопки prev/next. По умолчанию обе включены;
+	 * кнопка скрывается сама, если в эту сторону больше нет кадров.
+	 */
+	slideControls?: IPhotoGallerySlideControls
 	className?: string
 	variant?: TSlotVariant
 }
@@ -138,6 +152,46 @@ const CloseIcon = (): ReactElement => {
 	)
 }
 
+const ChevronLeftIcon = (): ReactElement => {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			width='20'
+			height='20'
+			fill='none'
+			aria-hidden='true'
+		>
+			<path
+				d='m15 18-6-6 6-6'
+				stroke='currentColor'
+				strokeWidth='2'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+		</svg>
+	)
+}
+
+const ChevronRightIcon = (): ReactElement => {
+	return (
+		<svg
+			viewBox='0 0 24 24'
+			width='20'
+			height='20'
+			fill='none'
+			aria-hidden='true'
+		>
+			<path
+				d='m9 18 6-6-6-6'
+				stroke='currentColor'
+				strokeWidth='2'
+				strokeLinecap='round'
+				strokeLinejoin='round'
+			/>
+		</svg>
+	)
+}
+
 const PhotoGalleryGrid = ({
 	images,
 	onSelect,
@@ -177,6 +231,7 @@ const PhotoGalleryOverlay = ({
 	initialIndex = 0,
 	onOpenChange,
 	labels,
+	slideControls,
 	className,
 	variant = 'default',
 }: IPhotoGalleryProps): ReactElement => {
@@ -211,6 +266,12 @@ const PhotoGalleryOverlay = ({
 		Math.max(0, total - 1),
 	)
 	const currentImage = images[activeIndex] ?? images[safeInitialIndex] ?? null
+	const isLeftSlideControlEnabled = slideControls?.left?.isEnabled ?? true
+	const isRightSlideControlEnabled = slideControls?.right?.isEnabled ?? true
+	const isLeftSlideControlVisible =
+		isLeftSlideControlEnabled && activeIndex > 0
+	const isRightSlideControlVisible =
+		isRightSlideControlEnabled && activeIndex < total - 1
 
 	useLockBodyScroll(open)
 
@@ -294,6 +355,14 @@ const PhotoGalleryOverlay = ({
 		} finally {
 			setIsDownloading(false)
 		}
+	}
+
+	const goToPreviousSlide = (): void => {
+		swiperRef.current?.slidePrev()
+	}
+
+	const goToNextSlide = (): void => {
+		swiperRef.current?.slideNext()
 	}
 
 	const overlay =
@@ -432,6 +501,30 @@ const PhotoGalleryOverlay = ({
 											))}
 										</Swiper>
 									</motion.div>
+
+									{isLeftSlideControlVisible ? (
+										<button
+											type='button'
+											data-slot='photo-gallery-icon-button'
+											data-side='left'
+											onClick={goToPreviousSlide}
+											aria-label={resolvedLabels.prev}
+										>
+											<ChevronLeftIcon />
+										</button>
+									) : null}
+
+									{isRightSlideControlVisible ? (
+										<button
+											type='button'
+											data-slot='photo-gallery-icon-button'
+											data-side='right'
+											onClick={goToNextSlide}
+											aria-label={resolvedLabels.next}
+										>
+											<ChevronRightIcon />
+										</button>
+									) : null}
 								</motion.div>
 
 								<motion.div

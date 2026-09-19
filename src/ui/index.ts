@@ -168,6 +168,8 @@ export type {
 	IPhotoGalleryImage,
 	IPhotoGalleryLabels,
 	IPhotoGalleryProps,
+	IPhotoGallerySlideControl,
+	IPhotoGallerySlideControls,
 } from './photo-gallery/photo-gallery'
 export { Popover } from './popover/popover'
 export type {

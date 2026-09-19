@@ -79,6 +79,27 @@
 	height: 1.25rem;
 }
 
+[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right']:not([data-variant='unstyled']){
+	position: absolute;
+	top: 50%;
+	z-index: 20;
+	transform: translateY(-50%);
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left']:not([data-variant='unstyled']){
+	inset-inline-start: max(0.5rem, env(safe-area-inset-left));
+}
+
+[data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right']:not([data-variant='unstyled']){
+	inset-inline-end: max(0.5rem, env(safe-area-inset-right));
+}
+
+[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='left'] svg,
+[dir='rtl'] [data-ui-kit='social'] [data-slot='photo-gallery-icon-button'][data-side='right'] svg{
+	transform: scaleX(-1);
+}
+
 [data-ui-kit='social'] [data-slot='photo-gallery-stage']:not([data-variant='unstyled']){
 	position: relative;
 	z-index: 10;
