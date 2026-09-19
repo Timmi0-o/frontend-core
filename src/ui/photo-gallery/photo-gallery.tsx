@@ -33,7 +33,7 @@ import {
 import { useCallback, useEffect, useRef, useState, type ReactElement } from 'react'
 import { createPortal } from 'react-dom'
 import type { Swiper as SwiperInstance } from 'swiper/types'
-import { A11y, Keyboard, Zoom } from 'swiper/modules'
+import { A11y, Keyboard, Mousewheel, Zoom } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/zoom'
@@ -486,13 +486,20 @@ const PhotoGalleryOverlay = ({
 										<Swiper
 											key={`gallery-${String(safeInitialIndex)}-${String(total)}`}
 											data-slot='photo-gallery-swiper'
-											modules={[Zoom, Keyboard, A11y]}
+											modules={[A11y, Keyboard, Mousewheel, Zoom]}
 											initialSlide={safeInitialIndex}
 											slidesPerView={1}
 											spaceBetween={0}
 											speed={240}
 											threshold={8}
 											longSwipesRatio={0.18}
+											mousewheel={{
+												enabled: true,
+												forceToAxis: true,
+												thresholdDelta: 12,
+												thresholdTime: 420,
+												eventsTarget: '[data-slot="photo-gallery-root"]',
+											}}
 											zoom={{
 												maxRatio: 3,
 												minRatio: 1,
