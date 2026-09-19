@@ -45,6 +45,8 @@
 	--menu-item-radius: 0.5rem;
 	--menu-padding: 0.25rem;
 	--menu-item-hover: color-mix(in srgb, var(--foreground) 12%, transparent);
+	--menu-section-fill: color-mix(in srgb, var(--foreground) 7%, var(--glass-bg-strong));
+	--menu-separator-block: 0.5rem;
 	--overlay-shadow:
 		0 1px 2px rgb(0 0 0 / 0.04),
 		0 8px 20px rgb(0 0 0 / 0.08),
@@ -160,6 +162,7 @@ html.dark [data-ui-kit='social'],
 		0 10px 28px rgb(0 0 0 / 0.4),
 		0 28px 64px rgb(0 0 0 / 0.38);
 	--switch-track: rgb(39 39 42 / 0.8);
+	--menu-section-fill: color-mix(in srgb, var(--foreground) 10%, var(--glass-bg-strong));
 	--surface-hover: rgb(255 255 255 / 0.06);
 	--surface-content-bg: rgb(28 28 30 / 1);
 	--surface-content-border: rgb(255 255 255 / 0.1);
