@@ -232,9 +232,11 @@ const DrawerContent = forwardRef<
 			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
-			<OverlayLayerProvider overlayZ={overlayZ}>
-				{children}
-			</OverlayLayerProvider>
+			<div data-slot='drawer-surface' data-variant={variant}>
+				<OverlayLayerProvider overlayZ={overlayZ}>
+					{children}
+				</OverlayLayerProvider>
+			</div>
 		</DrawerPrimitive.Content>
 	)
 })
@@ -340,7 +342,7 @@ const DrawerRoot = ({
 	onCloseAnimationEnd,
 	title = DEFAULT_DRAWER_TITLE,
 	children,
-	width = 'min(420px, 100vw)',
+	width = 'min(calc(420px + var(--drawer-inset, 0px)), 100vw)',
 	direction = 'right',
 	className,
 	variant = 'default',

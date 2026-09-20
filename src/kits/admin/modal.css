@@ -245,24 +245,53 @@
 }
 
 [data-ui-kit='admin'] [data-slot='drawer-content']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-content']:not([data-variant='unstyled']){
+	--drawer-inset: 12px;
 	position: fixed;
 	top: 0;
 	right: 0;
 	bottom: 0;
+	left: auto;
 	z-index: calc(var(--tg-overlay-z, 1100) + 1);
 	display: flex;
-	width: min(420px, 100vw);
+	width: min(calc(420px + var(--drawer-inset)), 100vw);
 	max-width: 100%;
 	height: 100%;
 	flex-direction: column;
-	overflow: hidden;
-	border-radius: 28px 0 0 28px;
-	background: var(--surface-primary);
-	box-shadow: var(--box-shadow-modal);
+	overflow: visible;
+	padding: var(--drawer-inset) var(--drawer-inset) var(--drawer-inset) 0;
+	border-radius: 0;
+	background: transparent;
+	background-color: transparent;
+	box-shadow: none;
 	outline: none;
 	overscroll-behavior: contain;
 	touch-action: pan-y;
 	will-change: transform;
+	pointer-events: none;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-content'][data-vaul-drawer-direction='left']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-content'][data-vaul-drawer-direction='left']:not([data-variant='unstyled']){
+	right: auto;
+	left: 0;
+	padding: var(--drawer-inset) 0 var(--drawer-inset) var(--drawer-inset);
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-content']:not([data-variant='unstyled'])::after,[data-ui-kit='admin'][data-slot='drawer-content']:not([data-variant='unstyled'])::after{
+	content: none;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-surface']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-content'] [data-slot='drawer-surface']:not([data-variant='unstyled']){
+	display: flex;
+	min-height: 0;
+	width: 100%;
+	height: 100%;
+	flex: 1 1 auto;
+	flex-direction: column;
+	overflow: hidden;
+	border-radius: 28px;
+	background: var(--surface-primary);
+	box-shadow: var(--box-shadow-modal);
+	pointer-events: auto;
 }
 
 [data-ui-kit='admin'] [data-slot='drawer-body']:not([data-variant='unstyled']),[data-ui-kit='admin'][data-slot='drawer-body']:not([data-variant='unstyled']){

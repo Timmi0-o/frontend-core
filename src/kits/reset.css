@@ -5,6 +5,10 @@
 	box-sizing: border-box;
 }
 
+[data-slot='drawer-surface'] {
+	display: contents;
+}
+
 /*
  * Только InternalBackdrop попапа/меню — сосед positioner.
  * Глобальный [data-base-ui-inert] нельзя: Base UI вешает его на контент
@@ -25,6 +29,7 @@
 	[data-slot='bottom-sheet-content'],
 	[data-slot='bottom-sheet-body'],
 	[data-slot='drawer-content'],
+	[data-slot='drawer-surface'],
 	[data-slot='drawer-body'],
 	[data-slot='select-dropdown'],
 	[data-slot='select-dropdown-list'],
