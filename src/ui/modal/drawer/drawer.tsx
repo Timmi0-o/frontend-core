@@ -7,6 +7,8 @@ import {
 	overlayBackdropStyle,
 	overlayLayerStyle,
 	useActiveOverlayZ,
+	useGuardedOverlayOpenChange,
+	useHasOverlayAbove,
 	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
@@ -52,28 +54,46 @@ function DrawerPrimitiveRoot({
 	modal = true,
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
-	const { hostRef, uiKit } = useInheritedUiKit()
 	const isOpen = props.open === true
 
 	return (
 		<OpenOverlayZProvider isOpen={isOpen}>
-			<DrawerKitContext.Provider value={uiKit}>
-				<DrawerPrimitive.Root
-					data-slot='drawer'
-					shouldScaleBackground={shouldScaleBackground}
-					repositionInputs={repositionInputs}
-					fixed={fixed}
-					setBackgroundColorOnScale={setBackgroundColorOnScale}
-					direction={direction}
-					dismissible={dismissible}
-					modal={modal}
-					{...props}
-				>
-					<span ref={hostRef} hidden />
-					{props.children}
-				</DrawerPrimitive.Root>
-			</DrawerKitContext.Provider>
+			<DrawerGuardedRoot
+				shouldScaleBackground={shouldScaleBackground}
+				repositionInputs={repositionInputs}
+				fixed={fixed}
+				setBackgroundColorOnScale={setBackgroundColorOnScale}
+				direction={direction}
+				dismissible={dismissible}
+				modal={modal}
+				{...props}
+			/>
 		</OpenOverlayZProvider>
+	)
+}
+
+function DrawerGuardedRoot({
+	dismissible = true,
+	onOpenChange,
+	children,
+	...props
+}: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
+	const { hostRef, uiKit } = useInheritedUiKit()
+	const { hasOverlayAbove, onOpenChange: handleOpenChange } =
+		useGuardedOverlayOpenChange(onOpenChange)
+
+	return (
+		<DrawerKitContext.Provider value={uiKit}>
+			<DrawerPrimitive.Root
+				data-slot='drawer'
+				dismissible={dismissible && !hasOverlayAbove}
+				onOpenChange={handleOpenChange}
+				{...props}
+			>
+				<span ref={hostRef} hidden />
+				{children}
+			</DrawerPrimitive.Root>
+		</DrawerKitContext.Provider>
 	)
 }
 
@@ -120,6 +140,7 @@ const DrawerOverlay = forwardRef<
 ): ReactElement {
 	const uiKit = useDrawerUiKit()
 	const overlayZ = useActiveOverlayZ()
+	const hasOverlayAbove = useHasOverlayAbove()
 
 	return (
 		<DrawerPrimitive.Overlay
@@ -131,6 +152,7 @@ const DrawerOverlay = forwardRef<
 			style={{
 				...overlayLayerStyle(overlayZ),
 				...overlayBackdropStyle(),
+				pointerEvents: hasOverlayAbove ? 'none' : 'auto',
 				zIndex: overlayZ,
 				...style,
 			}}

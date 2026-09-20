@@ -8,6 +8,8 @@ import {
 	OverlayLayerProvider,
 	overlayLayerStyle,
 	useActiveOverlayZ,
+	useGuardedOverlayOpenChange,
+	useHasOverlayAbove,
 	useOverlayPortalContainer,
 } from '@/core/overlay-layer'
 import type { WithUnstyledVariant } from '@/core/slot-variant'
@@ -57,29 +59,47 @@ function BottomSheetPrimitiveRoot({
 	handleOnly = false,
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
-	const { hostRef, uiKit } = useInheritedUiKit()
 	const isOpen = props.open === true
 
 	return (
 		<OpenOverlayZProvider isOpen={isOpen}>
-			<BottomSheetKitContext.Provider value={uiKit}>
-				<DrawerPrimitive.Root
-					data-slot='bottom-sheet'
-					shouldScaleBackground={shouldScaleBackground}
-					repositionInputs={repositionInputs}
-					fixed={fixed}
-					setBackgroundColorOnScale={setBackgroundColorOnScale}
-					direction={direction}
-					dismissible={dismissible}
-					modal={modal}
-					handleOnly={handleOnly}
-					{...props}
-				>
-					<span ref={hostRef} hidden />
-					{props.children}
-				</DrawerPrimitive.Root>
-			</BottomSheetKitContext.Provider>
+			<BottomSheetGuardedRoot
+				shouldScaleBackground={shouldScaleBackground}
+				repositionInputs={repositionInputs}
+				fixed={fixed}
+				setBackgroundColorOnScale={setBackgroundColorOnScale}
+				direction={direction}
+				dismissible={dismissible}
+				modal={modal}
+				handleOnly={handleOnly}
+				{...props}
+			/>
 		</OpenOverlayZProvider>
+	)
+}
+
+function BottomSheetGuardedRoot({
+	dismissible = true,
+	onOpenChange,
+	children,
+	...props
+}: ComponentProps<typeof DrawerPrimitive.Root>): ReactElement {
+	const { hostRef, uiKit } = useInheritedUiKit()
+	const { hasOverlayAbove, onOpenChange: handleOpenChange } =
+		useGuardedOverlayOpenChange(onOpenChange)
+
+	return (
+		<BottomSheetKitContext.Provider value={uiKit}>
+			<DrawerPrimitive.Root
+				data-slot='bottom-sheet'
+				dismissible={dismissible && !hasOverlayAbove}
+				onOpenChange={handleOpenChange}
+				{...props}
+			>
+				<span ref={hostRef} hidden />
+				{children}
+			</DrawerPrimitive.Root>
+		</BottomSheetKitContext.Provider>
 	)
 }
 
@@ -336,17 +356,19 @@ function BottomSheetConvenienceBody({
 >): ReactElement {
 	const uiKit = useBottomSheetUiKit()
 	const overlayZ = useActiveOverlayZ()
+	const hasOverlayAbove = useHasOverlayAbove()
 	const layerStyle = overlayLayerStyle(overlayZ)
 
 	const overlayStyle: CSSProperties = {
 		...layerStyle,
 		...overlayBackdropStyle(),
-		pointerEvents: 'auto',
+		pointerEvents: hasOverlayAbove ? 'none' : 'auto',
 		zIndex: overlayZ,
 	}
 	const contentStyle: CSSProperties = {
 		...layerStyle,
-		pointerEvents: variant === 'secondary' ? 'none' : 'auto',
+		pointerEvents:
+			hasOverlayAbove || variant === 'secondary' ? 'none' : 'auto',
 		zIndex: overlayZ + 1,
 		height,
 	}

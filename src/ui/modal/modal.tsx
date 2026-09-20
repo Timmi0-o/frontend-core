@@ -11,7 +11,14 @@ import {
 } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import { useLayoutEffect, useState, type ReactElement, type ReactNode } from 'react'
+import {
+	useCallback,
+	useLayoutEffect,
+	useState,
+	type PointerEvent as ReactPointerEvent,
+	type ReactElement,
+	type ReactNode,
+} from 'react'
 import { ModalBody } from './components/modal-body/modal-body'
 import { ModalFooter } from './components/modal-footer/modal-footer'
 import { ModalHeader } from './components/modal-header/modal-header'
@@ -44,6 +51,21 @@ const ModalRoot = ({
 	const overlayZ = useOpenOverlayZ(open)
 	const portalContainer = useOverlayPortalContainer()
 
+	const dismissFromBackdrop = useCallback(
+		(event: ReactPointerEvent<HTMLDivElement>) => {
+			if (event.button !== 0) {
+				return
+			}
+
+			if (event.target !== event.currentTarget) {
+				return
+			}
+
+			onOpenChange(false)
+		},
+		[onOpenChange],
+	)
+
 	return (
 		<Dialog.Root open={open} onOpenChange={onOpenChange}>
 			<span ref={hostRef} hidden />
@@ -54,17 +76,21 @@ const ModalRoot = ({
 					<Dialog.Portal container={portalContainer}>
 						<div data-ui-kit={uiKit} style={overlayLayerStyle(overlayZ)}>
 							<Dialog.Backdrop
+								forceRender
 								data-slot='modal-overlay'
 								style={{
 									...overlayBackdropStyle(),
 									zIndex: overlayZ,
+									pointerEvents: 'auto',
 								}}
+								onPointerDown={dismissFromBackdrop}
 							/>
 							<Dialog.Popup
 								data-slot='modal-content'
 								data-variant={variant}
 								data-animation={animation}
 								className={cn(className)}
+								style={{ pointerEvents: 'auto', zIndex: overlayZ + 1 }}
 							>
 								<OverlayLayerProvider overlayZ={overlayZ}>
 									{hasVisibleTitle ? null : (

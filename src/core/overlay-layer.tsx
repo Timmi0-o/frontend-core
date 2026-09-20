@@ -4,6 +4,7 @@ import {
 	createContext,
 	useCallback,
 	useContext,
+	useEffect,
 	useId,
 	useLayoutEffect,
 	useMemo,
@@ -81,6 +82,14 @@ const releaseOverlayStackId = (id: string): void => {
 const overlayZFromStackIndex = (index: number): number =>
 	OVERLAY_Z_BASE + index * OVERLAY_Z_STEP
 
+const getTopOverlayZ = (): number => {
+	if (overlayStackIds.length === 0) {
+		return 0
+	}
+
+	return overlayZFromStackIndex(overlayStackIds.length - 1)
+}
+
 /**
  * z открытого оверлея. Стек глобальный: соседний confirm-портал
  * тоже выше предыдущей модалки, не только Dialog, вложенный в React-дереве.
@@ -147,6 +156,77 @@ export const useActiveOverlayZ = (): number => {
 	const { overlayZ } = useOverlayLayer()
 
 	return scopedOverlayZ ?? overlayZ
+}
+
+/**
+ * Есть ли поверх текущего оверлея ещё один (вложенный Modal/Sheet).
+ * Нужен, чтобы родительский BottomSheet/Drawer не закрывался вместе с ним.
+ */
+export const useHasOverlayAbove = (): boolean => {
+	const overlayZ = useActiveOverlayZ()
+	const topOverlayZ = useSyncExternalStore(
+		subscribeOverlayStack,
+		getTopOverlayZ,
+		() => 0,
+	)
+
+	return topOverlayZ > overlayZ
+}
+
+/**
+ * Не закрывать родительский Sheet/Drawer, пока сверху другой оверлей,
+ * и до конца текущего pointer-жеста после его закрытия — иначе клик
+ * «проваливается» и закрывает родителя вместе с модалкой.
+ */
+export const useGuardedOverlayOpenChange = (
+	onOpenChange?: (isOpen: boolean) => void,
+): {
+	hasOverlayAbove: boolean
+	onOpenChange: (isNextOpen: boolean) => void
+} => {
+	const hasOverlayAbove = useHasOverlayAbove()
+	const isDismissLockedRef = useRef(false)
+
+	useEffect(() => {
+		if (hasOverlayAbove) {
+			isDismissLockedRef.current = true
+			return
+		}
+
+		if (!isDismissLockedRef.current) {
+			return
+		}
+
+		const unlock = (): void => {
+			window.setTimeout(() => {
+				isDismissLockedRef.current = false
+			}, 0)
+		}
+
+		document.addEventListener('pointerup', unlock, { once: true })
+		document.addEventListener('pointercancel', unlock, { once: true })
+
+		return () => {
+			document.removeEventListener('pointerup', unlock)
+			document.removeEventListener('pointercancel', unlock)
+		}
+	}, [hasOverlayAbove])
+
+	const handleOpenChange = useCallback(
+		(isNextOpen: boolean) => {
+			if (!isNextOpen && (hasOverlayAbove || isDismissLockedRef.current)) {
+				return
+			}
+
+			onOpenChange?.(isNextOpen)
+		},
+		[hasOverlayAbove, onOpenChange],
+	)
+
+	return {
+		hasOverlayAbove,
+		onOpenChange: handleOpenChange,
+	}
 }
 
 /**
