@@ -26,6 +26,7 @@ const PopoverRoot = ({
 	onOpenChange,
 	placement = 'bottom',
 	offset = 8,
+	modal = true,
 }: IPopoverProps): ReactNode => {
 	const [anchorElement, setAnchorElementState] = useState<HTMLElement | null>(
 		null,
@@ -71,7 +72,7 @@ const PopoverRoot = ({
 	return (
 		<PopoverPrimitive.Root
 			{...(isControlled ? { open } : { defaultOpen: false })}
-			modal={false}
+			modal={modal}
 			onOpenChange={onOpenChange}
 		>
 			<span ref={hostRef} hidden />

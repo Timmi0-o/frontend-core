@@ -39,6 +39,11 @@ export interface IPopoverProps {
 	onOpenChange?: (isOpen: boolean, details?: IPopoverOpenChangeDetails) => void
 	placement?: TPopoverPlacement
 	offset?: number
+	/**
+	 * Глотает клик снаружи: закрывает попап, не нажимая элемент под ним.
+	 * @default true
+	 */
+	modal?: boolean
 }
 
 export interface IPopoverTriggerProps {

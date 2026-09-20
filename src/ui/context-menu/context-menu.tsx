@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react'
 
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
-import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
+import { useFloatingPositionerProps } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { assertMenuSectionChildren } from '@/ui/menu/assert-menu-section-children'
@@ -111,14 +111,16 @@ const ContextMenuContent = ({
 	...props
 }: IContextMenuContentProps): ReactNode => {
 	const { uiKit } = useCompoundContext()
-	const { floatingZ } = useOverlayLayer()
+	const { ref: positionerRef, style: positionerStyle } =
+		useFloatingPositionerProps()
 
 	return (
 		<ContextMenuPrimitive.Portal>
 			<ContextMenuPrimitive.Positioner
+				ref={positionerRef}
 				data-slot='context-menu-positioner'
 				data-ui-kit={uiKit}
-				style={floatingLayerStyle(floatingZ)}
+				style={positionerStyle}
 				align={align}
 				alignOffset={alignOffset}
 				side={side}

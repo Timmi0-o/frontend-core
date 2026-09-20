@@ -5,6 +5,17 @@
 	box-sizing: border-box;
 }
 
+/*
+ * Только InternalBackdrop попапа/меню — сосед positioner.
+ * Глобальный [data-base-ui-inert] нельзя: Base UI вешает его на контент
+ * страницы при открытой модалке, и страница уезжает выше диалога.
+ */
+[data-base-ui-inert]:has(+ [data-slot='popover-positioner']),
+[data-base-ui-inert]:has(+ [data-slot='dropdown-menu-positioner']),
+[data-base-ui-inert]:has(+ [data-slot='context-menu-positioner']) {
+	z-index: 1205;
+}
+
 /* Жест скролла не уходит на страницу из оверлеев, списков и календаря. */
 [data-ui-kit] :where(
 	[data-slot='calendar'],

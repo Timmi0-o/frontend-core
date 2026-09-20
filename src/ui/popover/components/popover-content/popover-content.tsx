@@ -4,7 +4,7 @@ import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
 import type { ReactNode } from 'react'
 
 import { cn } from '@/core/cn'
-import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
+import { useFloatingPositionerProps } from '@/core/overlay-layer'
 import { POPOVER_DISPLAY_NAMES } from '../../constants/popover.constants'
 import { usePopoverContext } from '../../context/popover-context'
 import type { IPopoverContentProps } from '../../types/i-popover-props'
@@ -30,13 +30,15 @@ export const PopoverContent = ({
 }: IPopoverContentProps): ReactNode => {
 	const { side, align, sideOffset, anchorElement, uiKit, portalContainer } =
 		usePopoverContext()
-	const { floatingZ } = useOverlayLayer()
+	const { ref: positionerRef, style: positionerStyle } =
+		useFloatingPositionerProps()
 
 	return (
 		<PopoverPrimitive.Portal
 			container={container ?? portalContainer ?? undefined}
 		>
 			<PopoverPrimitive.Positioner
+				ref={positionerRef}
 				side={side}
 				align={align}
 				sideOffset={sideOffset}
@@ -45,7 +47,7 @@ export const PopoverContent = ({
 				{...(anchorElement ? { anchor: anchorElement } : {})}
 				data-slot='popover-positioner'
 				data-ui-kit={uiKit}
-				style={floatingLayerStyle(floatingZ)}
+				style={positionerStyle}
 			>
 				<PopoverPrimitive.Popup
 					data-slot='popover-content'

@@ -2,10 +2,12 @@
 
 import {
 	createContext,
+	useCallback,
 	useContext,
 	useId,
 	useLayoutEffect,
 	useMemo,
+	useRef,
 	useState,
 	useSyncExternalStore,
 	type CSSProperties,
@@ -198,6 +200,50 @@ export const floatingLayerStyle = (floatingZ: number): CSSProperties => ({
 	zIndex: floatingZ,
 	pointerEvents: 'auto',
 })
+
+/**
+ * Base UI InternalBackdrop — предыдущий сосед positioner.
+ * Без z-index он ниже модалки, и клик «снаружи» проваливается в кнопки.
+ */
+export const syncFloatingDismissLayerZ = (
+	positioner: HTMLElement | null,
+	floatingZ: number,
+): void => {
+	const dismissLayer = positioner?.previousElementSibling
+
+	if (!(dismissLayer instanceof HTMLElement)) {
+		return
+	}
+
+	if (!dismissLayer.hasAttribute('data-base-ui-inert')) {
+		return
+	}
+
+	dismissLayer.style.zIndex = String(floatingZ)
+}
+
+/** Стиль positioner + z-index невидимого слоя, который глотает outside-click. */
+export const useFloatingPositionerProps = () => {
+	const { floatingZ } = useOverlayLayer()
+	const positionerRef = useRef<HTMLDivElement | null>(null)
+
+	const setPositionerRef = useCallback(
+		(node: HTMLDivElement | null) => {
+			positionerRef.current = node
+			syncFloatingDismissLayerZ(node, floatingZ)
+		},
+		[floatingZ],
+	)
+
+	useLayoutEffect(() => {
+		syncFloatingDismissLayerZ(positionerRef.current, floatingZ)
+	}, [floatingZ])
+
+	return {
+		ref: setPositionerRef,
+		style: floatingLayerStyle(floatingZ),
+	}
+}
 
 /**
  * Сдвигает слой для вложенных Modal/BottomSheet.

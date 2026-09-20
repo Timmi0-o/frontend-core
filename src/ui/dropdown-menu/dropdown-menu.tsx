@@ -5,7 +5,7 @@ import type { ReactElement, ReactNode } from 'react'
 
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
-import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
+import { useFloatingPositionerProps } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { assertMenuSectionChildren } from '@/ui/menu/assert-menu-section-children'
@@ -23,7 +23,7 @@ export interface IDropdownMenuRootProps extends MenuPrimitive.Root.Props {
 
 const DropdownMenuRoot = ({
 	children,
-	modal = false,
+	modal = true,
 	variant = 'default',
 	...props
 }: IDropdownMenuRootProps): ReactNode => {
@@ -81,14 +81,16 @@ const DropdownMenuContent = ({
 	...props
 }: IDropdownMenuContentProps): ReactNode => {
 	const { uiKit } = useCompoundContext()
-	const { floatingZ } = useOverlayLayer()
+	const { ref: positionerRef, style: positionerStyle } =
+		useFloatingPositionerProps()
 
 	return (
 		<MenuPrimitive.Portal>
 			<MenuPrimitive.Positioner
+				ref={positionerRef}
 				data-slot='dropdown-menu-positioner'
 				data-ui-kit={uiKit}
-				style={floatingLayerStyle(floatingZ)}
+				style={positionerStyle}
 				align={align}
 				alignOffset={alignOffset}
 				side={side}

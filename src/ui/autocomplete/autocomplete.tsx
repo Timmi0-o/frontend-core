@@ -126,6 +126,7 @@ const AutoCompleteRoot = <T extends string | number = string>(
 					onOpenChange={handleOpenChange}
 					placement='bottom-start'
 					offset={AUTOCOMPLETE_DROPDOWN_OFFSET_PX}
+					modal={false}
 				>
 					{children ?? (
 						<>

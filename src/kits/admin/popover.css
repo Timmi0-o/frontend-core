@@ -9,6 +9,7 @@
 
 [data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled']){
 	outline: none;
+	background: transparent;
 }
 
 [data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open]{

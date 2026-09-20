@@ -9,12 +9,14 @@
 
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']) {
 	outline: none;
+	background: transparent;
 }
 
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='select-dropdown']),
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='autocomplete-dropdown']) {
-	max-height: min(18.5rem, 50dvh, var(--available-height, 100dvh));
 	overflow: hidden;
+	border-radius: var(--overlay-radius);
+	background: transparent;
 }
 
 [data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open] {

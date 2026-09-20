@@ -87,6 +87,7 @@
 	max-height: min(18.5rem, 50dvh, var(--available-height, 100dvh));
 	flex-direction: column;
 	overflow: hidden;
+	isolation: isolate;
 	border-radius: min(32px, var(--radius-3xl));
 	padding: calc(var(--spacing) * 1.5);
 	outline: none;
