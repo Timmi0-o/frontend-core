@@ -35,7 +35,6 @@
 	[data-slot='select-dropdown-list'],
 	[data-slot='autocomplete-dropdown'],
 	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='textarea'],
 	[data-slot='dropdown-menu-content'],
 	[data-slot='context-menu-content'],
 	[data-slot='popover-panel'],
