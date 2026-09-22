@@ -5,16 +5,19 @@
 }
 
 [data-ui-kit='admin'] [data-slot='tabs-list-container']:not([data-variant='unstyled']){
-	width: 100%;
+	width: fit-content;
+	max-width: 100%;
 	overflow-x: auto;
 }
 
 [data-ui-kit='admin'] [data-slot='tabs-list']:not([data-variant='unstyled']){
 	position: relative;
-	display: flex;
+	display: inline-flex;
 	flex-wrap: nowrap;
 	align-items: center;
 	overflow: hidden;
+	width: max-content;
+	max-width: 100%;
 	gap: 0.25rem;
 	padding: 0.25rem;
 	border-radius: var(--tabs-track-radius);
@@ -168,6 +171,9 @@
 }
 
 [data-ui-kit='admin'] [data-slot='tabs-panel']:not([data-variant='unstyled']){
+	align-self: stretch;
+	width: 100%;
+	min-width: 0;
 	padding-top: 0.75rem;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
