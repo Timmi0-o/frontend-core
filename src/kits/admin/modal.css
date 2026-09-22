@@ -332,9 +332,9 @@
 }
 
 [data-ui-kit='admin'] [data-slot='drawer-footer']:not([data-variant='unstyled']) > [data-slot='button'],[data-ui-kit='admin'][data-slot='drawer-footer']:not([data-variant='unstyled']) > [data-slot='button']{
-	flex: 1 1 0;
-	width: auto;
+	width: 100%;
 	min-width: 0;
+	flex: none;
 }
 
 @keyframes tg-admin-modal-overlay-in {
