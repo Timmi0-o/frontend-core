@@ -16,6 +16,8 @@ export interface ICalendarProps {
 	maxDate?: Date
 	locale?: string
 	extendMonthCount?: number
+	isTodayHidden?: boolean
+	isTodaySummaryHidden?: boolean
 }
 
 /**
@@ -35,6 +37,8 @@ export interface ICalendarProps {
 export const Calendar = ({
 	className,
 	variant = 'default',
+	isTodayHidden = false,
+	isTodaySummaryHidden = false,
 	...props
 }: ICalendarProps): ReactElement => {
 	const {
@@ -83,16 +87,18 @@ export const Calendar = ({
 
 	return (
 		<div data-slot='calendar' data-variant={variant} className={cn(className)}>
-			<div data-slot='calendar-headline'>
-				<p
-					data-slot='calendar-headline-weekday'
-					data-weekend={isWeekendDay(headlineDate) ? '' : undefined}
-				>
-					{headlineWeekday}
-				</p>
-				<p data-slot='calendar-headline-day'>{headlineDate.getDate()}</p>
-				<p data-slot='calendar-headline-month'>{headlineMonth}</p>
-			</div>
+			{isTodaySummaryHidden ? null : (
+				<div data-slot='calendar-headline'>
+					<p
+						data-slot='calendar-headline-weekday'
+						data-weekend={isWeekendDay(headlineDate) ? '' : undefined}
+					>
+						{headlineWeekday}
+					</p>
+					<p data-slot='calendar-headline-day'>{headlineDate.getDate()}</p>
+					<p data-slot='calendar-headline-month'>{headlineMonth}</p>
+				</div>
+			)}
 			<CalendarView
 				visibleMonth={visibleMonth}
 				visibleMonthCount={visibleMonthCount}
@@ -100,7 +106,7 @@ export const Calendar = ({
 				monthLabels={monthLabels}
 				yearRange={yearRange}
 				locale={locale}
-				showTodayAction
+				showTodayAction={!isTodayHidden}
 				isTodayDisabled={isDateDisabled(startOfDay(new Date()))}
 				handlePreviousMonth={handlePreviousMonth}
 				handleNextMonth={handleNextMonth}
