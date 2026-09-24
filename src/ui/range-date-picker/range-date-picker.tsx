@@ -3,9 +3,11 @@
 import { useMemo, type ReactElement } from 'react'
 
 import { cn } from '@/core/cn'
+import { useOpenOverlayZ } from '@/core/overlay-layer'
 import { useMobileCondition } from '@/hooks/use-mobile-condition'
 import { DATE_PICKER_POPOVER_OFFSET_PX } from '@/ui/date-picker/constants/date-picker.constants'
 import { Popover } from '@/ui/popover/popover'
+import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
 import { RangeDatePickerInput } from './components/range-date-picker-input/range-date-picker-input'
 import { RangeDatePickerPopover } from './components/range-date-picker-popover/range-date-picker-popover'
 import { RANGE_DATE_PICKER_DISPLAY_NAMES } from './constants/range-date-picker.constants'
@@ -75,6 +77,8 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 		isToday,
 		getCalendarDays,
 	} = useRangeDatePicker(props)
+
+	useOpenOverlayZ(isOpen && !isMobile)
 
 	const visualVariant = variant === 'unstyled' ? 'default' : variant
 
@@ -187,9 +191,17 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 				) : (
 					<Popover
 						open={isOpen}
-						onOpenChange={(isNextOpen) => {
+						onOpenChange={(
+							isNextOpen,
+							details?: IPopoverOpenChangeDetails,
+						) => {
 							if (isDisabled) {
 								return
+							}
+
+							if (!isNextOpen && details?.reason === 'outside-press') {
+								details.event?.preventDefault()
+								details.event?.stopPropagation()
 							}
 
 							handleOpenChange(isNextOpen)

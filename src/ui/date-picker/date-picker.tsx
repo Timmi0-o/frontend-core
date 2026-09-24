@@ -3,9 +3,11 @@
 import { useMemo, type ReactElement } from 'react'
 
 import { cn } from '@/core/cn'
+import { useOpenOverlayZ } from '@/core/overlay-layer'
 import { useMobileCondition } from '@/hooks/use-mobile-condition'
 
 import { Popover } from '../popover/popover'
+import type { IPopoverOpenChangeDetails } from '../popover/types/i-popover-props'
 import { DatePickerInput } from './components/date-picker-input/date-picker-input'
 import { DatePickerPopover } from './components/date-picker-popover/date-picker-popover'
 import {
@@ -74,6 +76,8 @@ const DatePickerRoot = (props: IDatePickerProps): ReactElement => {
 		isToday,
 		getCalendarDays,
 	} = useDatePicker(props)
+
+	useOpenOverlayZ(isOpen && !isMobile)
 
 	const visualVariant = variant === 'unstyled' ? 'default' : variant
 
@@ -176,9 +180,17 @@ const DatePickerRoot = (props: IDatePickerProps): ReactElement => {
 				) : (
 					<Popover
 						open={isOpen}
-						onOpenChange={(isNextOpen) => {
+						onOpenChange={(
+							isNextOpen,
+							details?: IPopoverOpenChangeDetails,
+						) => {
 							if (isDisabled) {
 								return
+							}
+
+							if (!isNextOpen && details?.reason === 'outside-press') {
+								details.event?.preventDefault()
+								details.event?.stopPropagation()
 							}
 
 							handleOpenChange(isNextOpen)
