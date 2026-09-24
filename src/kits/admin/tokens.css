@@ -34,6 +34,7 @@
 	--accent: oklch(0.6204 0.195 253.83);
 	--accent-foreground: var(--snow);
 	--field-background: var(--white);
+	--field-secondary-background: color-mix(in oklab, var(--surface-secondary) 70%, var(--surface));
 	--field-foreground: oklch(0.2103 0.0059 285.89);
 	--field-placeholder: var(--muted);
 	--field-border: transparent;
@@ -184,6 +185,7 @@ html.dark [data-ui-kit='admin'],
 	--default: oklch(27.4% 0.006 286.033);
 	--default-foreground: var(--snow);
 	--field-background: var(--surface-secondary);
+	--field-secondary-background: var(--surface-secondary);
 	--field-foreground: var(--foreground);
 	--field-border: var(--border);
 	--field-border-width: 1px;

@@ -10,7 +10,7 @@ export interface ITextareaProps
 	extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	size?: TTextareaSize
 	className?: string
-	variant?: TSlotVariant
+	variant?: TSlotVariant | 'secondary'
 }
 
 /**

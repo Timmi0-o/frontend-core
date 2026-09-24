@@ -35,6 +35,23 @@
 	background: var(--input-background);
 }
 
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='secondary']{
+	border: 1px solid var(--input-border-strong);
+	background: var(--field-secondary-background);
+	box-shadow: none;
+}
+
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='secondary']:hover:not([data-disabled]):not(:focus-within){
+	border-color: var(--border);
+	background: color-mix(in oklab, var(--field-secondary-background) 92%, var(--foreground) 8%);
+}
+
+[data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-variant='secondary']:focus-within{
+	border-color: var(--input-border-strong);
+	background: var(--field-secondary-background);
+	box-shadow: var(--focus-field-ring);
+}
+
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled']):focus-within{
 	background: var(--field-focus);
 	box-shadow: var(--field-shadow), var(--focus-field-ring);

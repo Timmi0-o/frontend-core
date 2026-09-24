@@ -34,11 +34,11 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light']):hover:not(:disabled):not([data-disabled]),[data-ui-kit='admin'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled']):not([data-variant='light']):hover:not(:disabled){
+[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light']):not([data-variant='secondary']):hover:not(:disabled):not([data-disabled]),[data-ui-kit='admin'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled']):not([data-variant='light']):not([data-variant='secondary']):hover:not(:disabled){
 	background: var(--input-background-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light'])[data-open],[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light'])[aria-expanded='true']{
+[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light']):not([data-variant='secondary'])[data-open],[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled']):not([data-variant='light']):not([data-variant='secondary'])[aria-expanded='true']{
 	box-shadow: var(--field-shadow), var(--focus-field-ring);
 }
 
@@ -57,6 +57,23 @@
 	border-color: var(--input-border-strong);
 	background: var(--input-background);
 	box-shadow: var(--field-shadow), var(--focus-field-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='secondary']{
+	border-color: var(--input-border-strong);
+	background: var(--field-secondary-background);
+	box-shadow: none;
+}
+
+[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='secondary']:hover:not(:disabled):not([data-disabled]):not([data-open]){
+	border-color: var(--border);
+	background: color-mix(in oklab, var(--field-secondary-background) 92%, var(--foreground) 8%);
+}
+
+[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='secondary'][data-open],[data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='secondary'][aria-expanded='true']{
+	border-color: var(--input-border-strong);
+	background: var(--field-secondary-background);
+	box-shadow: var(--focus-field-ring);
 }
 
 [data-ui-kit='admin'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='success']{

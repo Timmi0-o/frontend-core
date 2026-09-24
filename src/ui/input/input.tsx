@@ -20,7 +20,7 @@ import {
 } from 'react'
 
 export type IInputSize = 'xs' | 'sm' | 'md' | 'lg'
-export type TInputVariant = TSlotVariant | 'light'
+export type TInputVariant = TSlotVariant | 'light' | 'secondary'
 
 interface IInputContextValue {
 	size: IInputSize
