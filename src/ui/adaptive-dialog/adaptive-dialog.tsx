@@ -23,12 +23,18 @@ import { BottomSheet, type TBottomSheetVariant } from '../modal/bottom-sheet/bot
 import { ModalBody } from '../modal/components/modal-body/modal-body'
 import { ModalFooter } from '../modal/components/modal-footer/modal-footer'
 import { ModalHeader } from '../modal/components/modal-header/modal-header'
+import { Drawer } from '../modal/drawer/drawer'
 import { Modal } from '../modal/modal'
 
 const DEFAULT_DIALOG_TITLE = 'Диалог'
 
+export type TAdaptiveDialogMode = 'drawer' | 'modal'
+
+type TAdaptiveDialogShell = 'sheet' | TAdaptiveDialogMode
+
 interface IAdaptiveDialogContextValue {
 	isMobile: boolean
+	shell: TAdaptiveDialogShell
 	isOpen: boolean
 	onOpenChange: (isNextOpen: boolean) => void
 	title: string
@@ -66,6 +72,8 @@ export interface IAdaptiveDialogRootProps {
 	variant?: TBottomSheetVariant
 	height?: CSSProperties['height']
 	isMobileCondition?: TMobileCondition
+	/** `modal` — диалог по центру. `drawer` — боковая панель. На мобилке всегда шторка. */
+	mode?: TAdaptiveDialogMode
 }
 
 const AdaptiveDialogRoot = ({
@@ -77,8 +85,10 @@ const AdaptiveDialogRoot = ({
 	variant = 'default',
 	height = 'auto',
 	isMobileCondition,
+	mode = 'modal',
 }: IAdaptiveDialogRootProps): ReactElement => {
 	const isMobile = useMobileCondition(isMobileCondition)
+	const shell: TAdaptiveDialogShell = isMobile ? 'sheet' : mode
 
 	const [hasMounted, setHasMounted] = useState(false)
 	const [isUncontrolledOpen, setIsUncontrolledOpen] = useState(defaultOpen)
@@ -100,6 +110,7 @@ const AdaptiveDialogRoot = ({
 	const contextValue = useMemo(
 		(): IAdaptiveDialogContextValue => ({
 			isMobile,
+			shell,
 			isOpen,
 			onOpenChange: handleOpenChange,
 			title,
@@ -107,7 +118,16 @@ const AdaptiveDialogRoot = ({
 			height,
 			hasMounted,
 		}),
-		[handleOpenChange, hasMounted, height, isMobile, isOpen, title, variant],
+		[
+			handleOpenChange,
+			hasMounted,
+			height,
+			isMobile,
+			isOpen,
+			shell,
+			title,
+			variant,
+		],
 	)
 
 	useEffect(() => {
@@ -137,7 +157,7 @@ const AdaptiveDialogContent = ({
 	variant: variantProp,
 }: IAdaptiveDialogContentProps): ReactElement | null => {
 	const {
-		isMobile,
+		shell,
 		isOpen,
 		onOpenChange,
 		title,
@@ -151,7 +171,7 @@ const AdaptiveDialogContent = ({
 		return null
 	}
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<BottomSheet
 				open={isOpen}
@@ -163,6 +183,20 @@ const AdaptiveDialogContent = ({
 			>
 				{children}
 			</BottomSheet>
+		)
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer
+				open={isOpen}
+				onOpenChange={onOpenChange}
+				title={title}
+				className={className}
+				variant={variant === 'unstyled' ? 'unstyled' : 'default'}
+			>
+				{children}
+			</Drawer>
 		)
 	}
 
@@ -192,11 +226,19 @@ const AdaptiveDialogHeader = ({
 	children,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<BottomSheet.Header className={className}>{children}</BottomSheet.Header>
+		)
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer.Header className={className} variant={variant}>
+				{children}
+			</Drawer.Header>
 		)
 	}
 
@@ -214,10 +256,18 @@ const AdaptiveDialogBody = ({
 	children,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return <div className={cn(className)}>{children}</div>
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer.Body className={className} variant={variant}>
+				{children}
+			</Drawer.Body>
+		)
 	}
 
 	return (
@@ -234,11 +284,19 @@ const AdaptiveDialogFooter = ({
 	children,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<BottomSheet.Footer className={className}>{children}</BottomSheet.Footer>
+		)
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer.Footer className={className} variant={variant}>
+				{children}
+			</Drawer.Footer>
 		)
 	}
 
@@ -256,13 +314,21 @@ const AdaptiveDialogTitle = ({
 	children,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<h2 data-slot='modal-title' data-variant={variant} className={className}>
 				{children}
 			</h2>
+		)
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer.Title className={className} variant={variant}>
+				{children}
+			</Drawer.Title>
 		)
 	}
 
@@ -284,14 +350,18 @@ const AdaptiveDialogDescription = ({
 	children,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<BottomSheet.Description className={className}>
 				{children}
 			</BottomSheet.Description>
 		)
+	}
+
+	if (shell === 'drawer') {
+		return <Drawer.Description className={className}>{children}</Drawer.Description>
 	}
 
 	return (
@@ -332,12 +402,16 @@ const AdaptiveDialogClose = ({
 	className,
 	variant = 'default',
 }: IAdaptiveDialogSlotProps): ReactElement => {
-	const { isMobile } = useAdaptiveDialog()
+	const { shell } = useAdaptiveDialog()
 
-	if (isMobile) {
+	if (shell === 'sheet') {
 		return (
 			<BottomSheet.Close className={className}>{children}</BottomSheet.Close>
 		)
+	}
+
+	if (shell === 'drawer') {
+		return <Drawer.Close className={className}>{children}</Drawer.Close>
 	}
 
 	return (
@@ -362,6 +436,7 @@ type TAdaptiveDialogComponent = typeof AdaptiveDialogRoot & {
 
 /**
  * На десктопе — Modal, на мобилке — BottomSheet. Порог по умолчанию: max-width 1024px.
+ * `mode="drawer"` на десктопе открывает боковую панель, на мобилке остаётся шторка.
  * `isMobileCondition` — boolean или CSS media query.
  * `variant="secondary"` на мобилке даёт парящую шторку с отступами от краёв.
  *

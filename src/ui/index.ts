@@ -5,6 +5,7 @@ export type {
 	IAdaptiveDialogContentProps,
 	IAdaptiveDialogRootProps,
 	IAdaptiveDialogSlotProps,
+	TAdaptiveDialogMode,
 } from './adaptive-dialog/adaptive-dialog'
 export type {
 	IAccordionHeaderProps,

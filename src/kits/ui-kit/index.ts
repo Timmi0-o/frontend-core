@@ -67,6 +67,7 @@ export {
 export type {
 	IAccordionRootProps,
 	IAdaptiveDialogRootProps,
+	TAdaptiveDialogMode,
 	IAlertBannerProps,
 	IAutocompleteOption,
 	IAutocompleteProps,
