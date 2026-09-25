@@ -157,8 +157,10 @@
 	outline: none;
 }
 
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tabs-list']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] [data-slot='tabs-list']:not([data-variant='unstyled']) {
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list-container'] [data-slot='tabs-list']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list-container'] [data-slot='tabs-list']:not([data-variant='unstyled']) {
 	border: 0;
 	background: transparent;
 	box-shadow: none;
@@ -169,8 +171,10 @@
 	border-radius: 0;
 }
 
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tabs-indicator']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] [data-slot='tabs-indicator']:not([data-variant='unstyled']) {
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list'] > [data-slot='tabs-indicator']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list-container'] [data-slot='tabs-indicator']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list'] > [data-slot='tabs-indicator']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list-container'] [data-slot='tabs-indicator']:not([data-variant='unstyled']) {
 	top: auto;
 	bottom: 0;
 	height: 2px;
@@ -179,12 +183,16 @@
 	box-shadow: none;
 }
 
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tab']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] [data-slot='tab']:not([data-variant='unstyled']) {
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list'] [data-slot='tab']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list-container'] [data-slot='tab']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list'] [data-slot='tab']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list-container'] [data-slot='tab']:not([data-variant='unstyled']) {
 	border-radius: 0;
 }
 
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] [data-slot='tab']:not([data-variant='unstyled'])[data-active],
-[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] [data-slot='tab']:not([data-variant='unstyled'])[data-active] {
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list'] [data-slot='tab']:not([data-variant='unstyled'])[data-active],
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list-container'] [data-slot='tab']:not([data-variant='unstyled'])[data-active],
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list'] [data-slot='tab']:not([data-variant='unstyled'])[data-active],
+[data-ui-kit='social'] [data-slot='tabs'][data-variant='light'] > [data-slot='tabs-list-container'] [data-slot='tab']:not([data-variant='unstyled'])[data-active] {
 	color: var(--foreground);
 }
