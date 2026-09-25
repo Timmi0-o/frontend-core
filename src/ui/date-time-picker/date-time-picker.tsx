@@ -1,110 +1,134 @@
 'use client'
 
 import { cn } from '@/core/cn'
-import type { ReactElement } from 'react'
-import { DatePicker } from '../date-picker/date-picker'
-import { TimePicker } from '../time-picker/time-picker'
+import { useOpenOverlayZ } from '@/core/overlay-layer'
+import { useMobileCondition } from '@/hooks/use-mobile-condition'
+import { Popover } from '@/ui/popover/popover'
+import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
+import { useMemo, type ReactElement } from 'react'
 
-/**
- * Разбирает локальную дату-время (YYYY-MM-DDTHH:mm) в части для отдельных контролов.
- * Нужен DateTimePicker, чтобы синхронизировать DatePicker и TimePicker.
- */
-const splitLocalDateTime = (
-	value: string,
-): { date: Date | null; time: string } => {
-	if (!value) {
-		return { date: null, time: '09:00' }
-	}
+import {
+	DATE_TIME_PICKER_DISPLAY_NAMES,
+	DATE_TIME_PICKER_POPOVER_OFFSET_PX,
+	DEFAULT_DATE_TIME_PICKER_PLACEHOLDER,
+} from './constants/date-time-picker.constants'
+import { DateTimePickerInput } from './components/date-time-picker-input'
+import { DateTimePickerPopover } from './components/date-time-picker-popover'
+import { DateTimePickerContext } from './context/date-time-picker-context'
+import { useDateTimePicker } from './hooks/use-date-time-picker'
+import type {
+	IDateTimePickerProps,
+	TDateTimePickerComponent,
+} from './types/i-date-time-picker-props'
 
-	const normalized = value.includes('T') ? value : value.replace(' ', 'T')
-	const [datePart = '', timePart = '09:00'] = normalized.split('T')
+export type {
+	IDateTimePickerInputProps,
+	IDateTimePickerPopoverProps,
+	IDateTimePickerProps,
+} from './types/i-date-time-picker-props'
 
-	if (!datePart) {
-		return { date: null, time: timePart }
-	}
+const DateTimePickerRoot = (props: IDateTimePickerProps): ReactElement => {
+	const {
+		onBlur,
+		id,
+		className,
+		isDisabled = false,
+		variant = 'default',
+		size = 'md',
+		error,
+		label,
+		placeholder = DEFAULT_DATE_TIME_PICKER_PLACEHOLDER,
+		isMobileCondition,
+	} = props
 
-	return { date: new Date(`${datePart}T00:00:00`), time: timePart }
-}
+	const isMobile = useMobileCondition(isMobileCondition)
+	const picker = useDateTimePicker(props)
 
-/**
- * Склеивает дату и время в локальный формат YYYY-MM-DDTHH:mm.
- * Вызывать после изменения одной из частей DateTimePicker.
- */
-const composeLocalDateTime = (date: Date, time: string): string => {
-	const yyyy = String(date.getFullYear())
-	const mm = String(date.getMonth() + 1).padStart(2, '0')
-	const dd = String(date.getDate()).padStart(2, '0')
-	return `${yyyy}-${mm}-${dd}T${time}`
-}
+	useOpenOverlayZ(picker.isOpen && !isMobile)
 
-export interface IDateTimePickerProps {
-	value: string
-	onChange: (value: string) => void
-	onBlur?: () => void
-	id?: string
-	className?: string
-	dateId?: string
-	timeId?: string
-	isDisabled?: boolean
-	variant?: 'default' | 'light' | 'unstyled'
-	extendMonthCount?: number
-}
-
-/**
- * Дата + время в одном значении `YYYY-MM-DDTHH:mm` (локально, без зоны).
- *
- * @example
- * ```tsx
- * <DateTimePicker value={dateTime} onChange={setDateTime} />
- * ```
- */
-export const DateTimePicker = ({
-	value,
-	onChange,
-	onBlur,
-	className,
-	dateId,
-	timeId,
-	isDisabled = false,
-	variant = 'default',
-	extendMonthCount,
-}: IDateTimePickerProps): ReactElement => {
-	const { date, time } = splitLocalDateTime(value)
 	const visualVariant = variant === 'unstyled' ? 'default' : variant
 
+	const contextValue = useMemo(
+		() => ({
+			...picker,
+			placeholder,
+			isDisabled,
+			size,
+			variant: visualVariant,
+			error,
+			label,
+			isMobile,
+		}),
+		[error, isDisabled, isMobile, label, picker, placeholder, size, visualVariant],
+	)
+
+	const pickerContent = (
+		<>
+			<DateTimePickerInput id={id} onBlur={onBlur} />
+			<DateTimePickerPopover />
+		</>
+	)
+
 	return (
-		<div
-			data-slot='date-time-picker'
-			data-variant={variant}
-			className={cn('date-time-picker-grid', className)}
-			onBlur={onBlur}
-		>
-			<DatePicker
-				value={date}
-				onChange={(nextDate) => {
-					if (!nextDate) {
-						onChange('')
-						return
-					}
-					onChange(composeLocalDateTime(nextDate, time))
-				}}
-				isDisabled={isDisabled}
-				variant={visualVariant}
-				className={dateId}
-				extendMonthCount={extendMonthCount}
-			/>
-			<TimePicker
-				value={time}
-				onChange={(nextTime) => {
-					const baseDate = date ?? new Date()
-					onChange(composeLocalDateTime(baseDate, nextTime))
-				}}
-				isDisabled={isDisabled}
-				variant={visualVariant}
-				className={timeId}
-			/>
-		</div>
+		<DateTimePickerContext.Provider value={contextValue}>
+			<div
+				data-slot='date-time-picker'
+				data-variant={variant}
+				data-disabled={isDisabled ? '' : undefined}
+				data-invalid={error ? '' : undefined}
+				data-open={picker.isOpen ? '' : undefined}
+				className={cn(className)}
+			>
+				{label ? <label data-slot='date-time-picker-label'>{label}</label> : null}
+
+				{isMobile ? (
+					pickerContent
+				) : (
+					<Popover
+						open={picker.isOpen}
+						onOpenChange={(
+							isNextOpen,
+							details?: IPopoverOpenChangeDetails,
+						) => {
+							if (isDisabled) {
+								return
+							}
+
+							if (!isNextOpen && details?.reason === 'outside-press') {
+								details.event?.preventDefault()
+								details.event?.stopPropagation()
+							}
+
+							picker.handleOpenChange(isNextOpen)
+						}}
+						placement='bottom-start'
+						offset={DATE_TIME_PICKER_POPOVER_OFFSET_PX}
+					>
+						{pickerContent}
+					</Popover>
+				)}
+
+				{error ? (
+					<p data-slot='date-time-picker-error' role='alert'>
+						{error}
+					</p>
+				) : null}
+			</div>
+		</DateTimePickerContext.Provider>
 	)
 }
 
-DateTimePicker.displayName = 'DateTimePicker'
+DateTimePickerRoot.displayName = DATE_TIME_PICKER_DISPLAY_NAMES.ROOT
+
+/**
+ * Дата и время в одном поле. Значение — локальная строка `YYYY-MM-DDTHH:mm`.
+ * В попапе: календарь, колонки часов/минут, «Удалить» и «Сегодня».
+ */
+export const DateTimePicker: TDateTimePickerComponent = Object.assign(
+	DateTimePickerRoot,
+	{
+		Input: DateTimePickerInput,
+		Popover: DateTimePickerPopover,
+		Root: DateTimePickerRoot,
+	},
+)

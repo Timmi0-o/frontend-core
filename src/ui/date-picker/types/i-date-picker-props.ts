@@ -25,6 +25,7 @@ export interface IDatePickerProps {
 	nextMonth?: string
 	extendMonthCount?: number
 	isMobileCondition?: TMobileCondition
+	closeOnSelect?: boolean
 }
 
 export interface IDatePickerInputProps extends Omit<

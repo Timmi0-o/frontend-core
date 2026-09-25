@@ -30,6 +30,7 @@ export const useDatePicker = (props: IDatePickerProps) => {
 		extendMonthCount,
 	} = props
 	const isDisabled = props.isDisabled === true
+	const closeOnSelect = props.closeOnSelect !== false
 	const visibleMonthCount = resolveVisibleMonthCount(extendMonthCount)
 
 	const [isOpen, setIsOpen] = useState(false)
@@ -157,9 +158,12 @@ export const useDatePicker = (props: IDatePickerProps) => {
 					? current
 					: nextDay,
 			)
-			setIsOpen(false)
+
+			if (closeOnSelect) {
+				setIsOpen(false)
+			}
 		},
-		[isDateDisabled, onChange, visibleMonthCount],
+		[closeOnSelect, isDateDisabled, onChange, visibleMonthCount],
 	)
 
 	const handleSelectToday = useCallback((): void => {
@@ -173,8 +177,11 @@ export const useDatePicker = (props: IDatePickerProps) => {
 		}
 
 		onChange?.(today)
-		setIsOpen(false)
-	}, [isDateDisabled, onChange])
+
+		if (closeOnSelect) {
+			setIsOpen(false)
+		}
+	}, [closeOnSelect, isDateDisabled, onChange])
 
 	const isDateSelected = useCallback(
 		(date: Date): boolean => Boolean(value && isSameDay(date, value)),

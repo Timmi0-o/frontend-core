@@ -114,7 +114,11 @@ export type { IChipLabelProps, IChipRootProps, IChipVariant } from './chip/chip'
 export { DatePicker } from './date-picker/date-picker'
 export { RangeDatePicker } from './range-date-picker/range-date-picker'
 export { DateTimePicker } from './date-time-picker/date-time-picker'
-export type { IDateTimePickerProps } from './date-time-picker/date-time-picker'
+export type {
+	IDateTimePickerInputProps,
+	IDateTimePickerPopoverProps,
+	IDateTimePickerProps,
+} from './date-time-picker/types/i-date-time-picker-props'
 export { DropdownMenu } from './dropdown-menu/dropdown-menu'
 export type {
 	IDropdownMenuCheckboxItemProps,
