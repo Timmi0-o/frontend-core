@@ -12,6 +12,23 @@
 	box-shadow: var(--surface-shadow);
 }
 
+[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable] {
+	cursor: pointer;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	transition:
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
+}
+
+[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
+	box-shadow: var(--surface-shadow), var(--focus-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:active {
+	transform: scale(0.992);
+}
+
 [data-ui-kit='admin'] [data-slot='card-header']:not([data-variant='unstyled']){
 	display: flex;
 	flex-direction: column;

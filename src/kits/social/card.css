@@ -10,6 +10,23 @@
 	color: var(--foreground);
 }
 
+[data-ui-kit='social'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable] {
+	cursor: pointer;
+	outline: none;
+	-webkit-tap-highlight-color: transparent;
+	transition:
+		transform var(--motion-duration-fast) var(--motion-easing-control),
+		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
+}
+
+[data-ui-kit='social'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
+	box-shadow: var(--glass-shadow), var(--focus-ring);
+}
+
+[data-ui-kit='social'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:active {
+	transform: scale(0.992);
+}
+
 [data-ui-kit='social'] [data-slot='card-header']:not([data-variant='unstyled']) {
 	margin-bottom: 1rem;
 	display: flex;

@@ -3,25 +3,46 @@
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { ICompoundChildProps } from '@/core/types/i-create-compound-component.types'
-import type { HTMLAttributes, ReactElement } from 'react'
+import type { HTMLAttributes, KeyboardEvent, ReactElement } from 'react'
 
 export interface ICardRootProps
 	extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
 	className?: string
 	variant?: TSlotVariant
+	isClickable?: boolean
 }
 
 const CardRoot = ({
 	children,
 	className,
 	variant = 'default',
+	isClickable = false,
+	onKeyDown,
+	onClick,
 	...rest
 }: ICardRootProps): ReactElement => {
+	const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+		onKeyDown?.(event)
+
+		if (event.defaultPrevented || !isClickable || !onClick) {
+			return
+		}
+
+		if (event.key === 'Enter' || event.key === ' ') {
+			event.preventDefault()
+			event.currentTarget.click()
+		}
+	}
+
 	return (
 		<div
 			data-slot='card'
 			data-variant={variant}
+			data-clickable={isClickable ? '' : undefined}
 			className={cn(className)}
+			onClick={onClick}
+			onKeyDown={handleKeyDown}
+			{...(isClickable ? { role: 'button' as const, tabIndex: 0 } : {})}
 			{...rest}
 		>
 			{children}
@@ -163,10 +184,11 @@ CardFooter.displayName = 'Card.Footer'
 
 /**
  * Карточка: оболочка и слоты Header / Title / Description / Content / Footer.
+ * `isClickable` включает cursor pointer, лёгкий press-эффект и role=button.
  *
  * @example
  * ```tsx
- * <Card>
+ * <Card isClickable onClick={handleOpen}>
  *   <Card.Header>
  *     <Card.Title>Маршрут</Card.Title>
  *     <Card.Description>Москва — Санкт-Петербург</Card.Description>
