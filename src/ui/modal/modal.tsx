@@ -2,6 +2,7 @@
 
 import { Dialog } from '@base-ui/react/dialog'
 import { cn } from '@/core/cn'
+import { isOverlayParentDismissLocked } from '@/core/overlay-floating-dismiss-lock'
 import {
 	OverlayLayerProvider,
 	overlayBackdropStyle,
@@ -51,6 +52,23 @@ const ModalRoot = ({
 	const overlayZ = useOpenOverlayZ(open)
 	const portalContainer = useOverlayPortalContainer()
 
+	const handleOpenChange = useCallback(
+		(
+			isNextOpen: boolean,
+			eventDetails?: Parameters<
+				NonNullable<Dialog.Root.Props['onOpenChange']>
+			>[1],
+		) => {
+			if (!isNextOpen && isOverlayParentDismissLocked()) {
+				eventDetails?.cancel()
+				return
+			}
+
+			onOpenChange(isNextOpen)
+		},
+		[onOpenChange],
+	)
+
 	const dismissFromBackdrop = useCallback(
 		(event: ReactPointerEvent<HTMLDivElement>) => {
 			if (event.button !== 0) {
@@ -61,13 +79,17 @@ const ModalRoot = ({
 				return
 			}
 
+			if (isOverlayParentDismissLocked()) {
+				return
+			}
+
 			onOpenChange(false)
 		},
 		[onOpenChange],
 	)
 
 	return (
-		<Dialog.Root open={open} onOpenChange={onOpenChange}>
+		<Dialog.Root open={open} onOpenChange={handleOpenChange}>
 			<span ref={hostRef} hidden />
 			<ModalContext.Provider
 				value={{ isOpen: open, onOpenChange, setHasVisibleTitle }}

@@ -16,6 +16,8 @@ import {
 	type ReactNode,
 } from 'react'
 
+import { isOverlayParentDismissLocked } from './overlay-floating-dismiss-lock'
+
 export const OVERLAY_Z_BASE = 1100
 export const OVERLAY_Z_STEP = 200
 export const OVERLAY_FLOATING_OFFSET = 105
@@ -214,7 +216,12 @@ export const useGuardedOverlayOpenChange = (
 
 	const handleOpenChange = useCallback(
 		(isNextOpen: boolean) => {
-			if (!isNextOpen && (hasOverlayAbove || isDismissLockedRef.current)) {
+			if (
+				!isNextOpen &&
+				(hasOverlayAbove ||
+					isDismissLockedRef.current ||
+					isOverlayParentDismissLocked())
+			) {
 				return
 			}
 

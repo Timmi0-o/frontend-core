@@ -1,3 +1,5 @@
+import { isOverlayParentDismissLocked } from './overlay-floating-dismiss-lock'
+
 const OVERLAY_FLOATING_TARGET_SELECTOR = [
 	'[data-slot="popover-content"]',
 	'[data-slot="popover-positioner"]',
@@ -35,6 +37,10 @@ export const getOutsideDismissEventTarget = (
 export const shouldPreventOverlayDismiss = (
 	event: TOutsideDismissEvent,
 ): boolean => {
+	if (isOverlayParentDismissLocked()) {
+		return true
+	}
+
 	return isOverlayFloatingTarget(getOutsideDismissEventTarget(event))
 }
 
