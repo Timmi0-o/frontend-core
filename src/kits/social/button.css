@@ -9,7 +9,7 @@
 	max-width: 100%;
 	flex-shrink: 0;
 	gap: 0.375rem;
-	overflow: hidden;
+	overflow: visible;
 	border-radius: var(--button-radius);
 	border: 1px solid transparent;
 	background: transparent;

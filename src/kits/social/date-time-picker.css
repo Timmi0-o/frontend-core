@@ -21,6 +21,7 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: 0.5rem;
+	overflow: visible;
 	border: 1px solid var(--glass-border);
 	outline: none;
 	border-radius: var(--button-radius);

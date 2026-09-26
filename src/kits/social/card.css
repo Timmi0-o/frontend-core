@@ -1,7 +1,7 @@
 [data-ui-kit='social'] [data-slot='card']:not([data-variant='unstyled']) {
 	position: relative;
 	width: 100%;
-	overflow: hidden;
+	overflow: visible;
 	border-radius: var(--radius-2xl);
 	border: 1px solid var(--glass-border);
 	padding: 1rem;
