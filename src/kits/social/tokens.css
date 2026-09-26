@@ -52,6 +52,7 @@
 		0 8px 20px rgb(0 0 0 / 0.08),
 		0 24px 48px rgb(0 0 0 / 0.12);
 	--switch-track: rgb(228 228 231 / 0.8);
+	--switch-track-checked: var(--primary);
 	--surface-hover: rgb(24 24 27 / 0.04);
 	--surface-content-bg: rgb(255 255 255 / 1);
 	--surface-content-border: rgb(24 24 27 / 0.08);
@@ -161,7 +162,10 @@ html.dark [data-ui-kit='social'],
 		0 1px 2px rgb(0 0 0 / 0.28),
 		0 10px 28px rgb(0 0 0 / 0.4),
 		0 28px 64px rgb(0 0 0 / 0.38);
-	--switch-track: rgb(39 39 42 / 0.8);
+	--switch-track: rgb(16 16 18 / 1);
+	--switch-track-checked: rgb(250 250 250 / 0.94);
+	--switch-thumb-checked: rgb(24 24 27 / 1);
+	--switch-thumb-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
 	--menu-section-fill: color-mix(in srgb, var(--foreground) 10%, var(--glass-bg-strong));
 	--surface-hover: rgb(255 255 255 / 0.06);
 	--surface-content-bg: rgb(28 28 30 / 1);
