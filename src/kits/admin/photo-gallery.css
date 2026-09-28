@@ -207,6 +207,7 @@
 	max-height: 100dvh;
 	object-fit: contain;
 	user-select: none;
+	-webkit-user-drag: none;
 }
 
 [data-ui-kit='admin'] [data-slot='photo-gallery-footer']:not([data-variant='unstyled']){

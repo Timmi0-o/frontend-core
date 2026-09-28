@@ -143,6 +143,12 @@ export const useMediaOverlayDismissGesture = ({
 					return
 				}
 
+				// Горизонтальный жест — листание Swiper; dismiss только при явном vertical drag.
+				if (absX >= absY) {
+					gesture.mode = 'passthrough'
+					return
+				}
+
 				if (absY > absX * 1.15) {
 					gesture.mode = 'dismiss'
 					setDismissLocked(true)

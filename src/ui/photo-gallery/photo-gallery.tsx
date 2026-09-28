@@ -35,8 +35,11 @@ import {
 	useEffect,
 	useRef,
 	useState,
+	type DragEvent as ReactDragEvent,
+	type MouseEvent as ReactMouseEvent,
 	type PointerEvent as ReactPointerEvent,
 	type ReactElement,
+	type SyntheticEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
 import type { Swiper as SwiperInstance } from 'swiper/types'
@@ -372,12 +375,19 @@ const PhotoGalleryOverlay = ({
 		swiperRef.current?.slideNext()
 	}
 
-	const stopPointerBubble = useCallback(
-		(event: ReactPointerEvent<HTMLDivElement>) => {
-			event.stopPropagation()
-		},
-		[],
-	)
+	const stopOverlayEventBubble = useCallback((event: SyntheticEvent) => {
+		event.stopPropagation()
+	}, [])
+
+	const blockContextMenu = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
+		event.preventDefault()
+		event.stopPropagation()
+	}, [])
+
+	const blockNativeDrag = useCallback((event: ReactDragEvent) => {
+		event.preventDefault()
+		event.stopPropagation()
+	}, [])
 
 	const handleSwiperTap = (
 		swiper: SwiperInstance,
@@ -422,9 +432,15 @@ const PhotoGalleryOverlay = ({
 									position: 'fixed',
 									inset: 0,
 								}}
-								onPointerDown={stopPointerBubble}
-								onPointerUp={stopPointerBubble}
-								onPointerCancel={stopPointerBubble}
+								onPointerDown={stopOverlayEventBubble}
+								onPointerMove={stopOverlayEventBubble}
+								onPointerUp={stopOverlayEventBubble}
+								onPointerCancel={stopOverlayEventBubble}
+								onMouseDown={stopOverlayEventBubble}
+								onMouseMove={stopOverlayEventBubble}
+								onMouseUp={stopOverlayEventBubble}
+								onContextMenu={blockContextMenu}
+								onDragStart={blockNativeDrag}
 								variants={GALLERY_OVERLAY_ROOT_VARIANTS}
 								initial='initial'
 								animate='animate'
@@ -552,6 +568,7 @@ const PhotoGalleryOverlay = ({
 															}
 															data-slot='photo-gallery-image'
 															draggable={false}
+															onDragStart={blockNativeDrag}
 														/>
 													</div>
 												</SwiperSlide>
