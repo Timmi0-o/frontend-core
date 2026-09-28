@@ -8,15 +8,11 @@ import {
 	getMediaOverlayDismissFlingTransition,
 	shouldDismissMediaOverlay,
 } from '@/ui/photo-gallery/utils/media-overlay-dismiss'
+import { REDUCED_MOTION_TRANSITION } from '@/motion'
 import { animate, type MotionValue } from 'framer-motion'
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	type PointerEvent as ReactPointerEvent,
-} from 'react'
+import { useCallback, useEffect, useRef, type RefObject } from 'react'
 
-type GestureMode = 'idle' | 'pending' | 'dismiss' | 'passthrough'
+type GestureMode = 'pending' | 'dismiss' | 'passthrough'
 
 interface IGestureState {
 	pointerId: number
@@ -29,23 +25,40 @@ interface IGestureState {
 }
 
 interface IUseMediaOverlayDismissGestureParams {
+	stageRef: RefObject<HTMLElement | null>
 	dragY: MotionValue<number>
 	backdropOpacity: MotionValue<number>
 	enabled: boolean
+	prefersReducedMotion: boolean | null
 	onDismiss: () => void
 	isBlocked?: () => boolean
 	onDismissLockChange?: (isLocked: boolean) => void
 }
 
+const isTouchLikePointer = (event: PointerEvent): boolean =>
+	event.pointerType === 'touch' || event.pointerType === 'pen'
+
+const isEventInsideStage = (
+	event: PointerEvent,
+	stage: HTMLElement | null,
+): boolean => {
+	if (!stage) {
+		return false
+	}
+
+	return event.composedPath().includes(stage)
+}
+
 /**
- * Вертикальный жест закрытия медиа-оверлея: pending → dismiss или passthrough.
- * Нужен PhotoGallery (и потенциально другим fullscreen-просмотрщикам),
- * чтобы не конфликтовать со свайпом слайдера, пока жест не захвачен.
+ * Vertical dismiss через document capture (раньше Swiper).
+ * touch-action: none на stage — иначе pan-x у Swiper съедает vertical.
  */
 export const useMediaOverlayDismissGesture = ({
+	stageRef,
 	dragY,
 	backdropOpacity,
 	enabled,
+	prefersReducedMotion,
 	onDismiss,
 	isBlocked,
 	onDismissLockChange,
@@ -53,17 +66,20 @@ export const useMediaOverlayDismissGesture = ({
 	const gestureRef = useRef<IGestureState | null>(null)
 	const isDismissingRef = useRef(false)
 
-	const resetDrag = useCallback(() => {
-		void animate(dragY, 0, MEDIA_OVERLAY_DISMISS_SNAP_TRANSITION)
-		void animate(backdropOpacity, 1, MEDIA_OVERLAY_DISMISS_SNAP_TRANSITION)
-	}, [backdropOpacity, dragY])
+	const snapTransition = prefersReducedMotion
+		? REDUCED_MOTION_TRANSITION
+		: MEDIA_OVERLAY_DISMISS_SNAP_TRANSITION
 
-	const setDismissLocked = useCallback(
-		(isLocked: boolean) => {
-			onDismissLockChange?.(isLocked)
-		},
-		[onDismissLockChange],
-	)
+	const resetDrag = useCallback(() => {
+		if (prefersReducedMotion) {
+			dragY.set(0)
+			backdropOpacity.set(1)
+			return
+		}
+
+		void animate(dragY, 0, snapTransition)
+		void animate(backdropOpacity, 1, snapTransition)
+	}, [backdropOpacity, dragY, prefersReducedMotion, snapTransition])
 
 	const finishDismiss = useCallback(
 		async (offsetY: number) => {
@@ -72,6 +88,14 @@ export const useMediaOverlayDismissGesture = ({
 			}
 
 			isDismissingRef.current = true
+			onDismissLockChange?.(false)
+
+			if (prefersReducedMotion) {
+				onDismiss()
+				isDismissingRef.current = false
+				return
+			}
+
 			const direction = offsetY === 0 ? 1 : Math.sign(offsetY)
 			const flingDistance = Math.max(
 				typeof window !== 'undefined' ? window.innerHeight * 1.08 : 0,
@@ -88,23 +112,39 @@ export const useMediaOverlayDismissGesture = ({
 			])
 			onDismiss()
 			isDismissingRef.current = false
-			setDismissLocked(false)
 		},
-		[backdropOpacity, dragY, onDismiss, setDismissLocked],
+		[backdropOpacity, dragY, onDismiss, onDismissLockChange, prefersReducedMotion],
 	)
 
-	const onPointerDown = useCallback(
-		(event: ReactPointerEvent<HTMLDivElement>) => {
-			if (!enabled || isDismissingRef.current || isBlocked?.()) {
+	const setDismissLocked = useCallback(
+		(isLocked: boolean) => {
+			onDismissLockChange?.(isLocked)
+		},
+		[onDismissLockChange],
+	)
+
+	useEffect(() => {
+		if (!enabled) {
+			gestureRef.current = null
+			isDismissingRef.current = false
+			setDismissLocked(false)
+			return
+		}
+
+		const onPointerDown = (event: PointerEvent): void => {
+			if (isDismissingRef.current || isBlocked?.()) {
 				return
 			}
 
-			// Mouse drag — зона Swiper; vertical dismiss только touch.
-			if (event.pointerType === 'mouse') {
+			if (!isTouchLikePointer(event)) {
 				return
 			}
 
 			if (event.button !== 0) {
+				return
+			}
+
+			if (!isEventInsideStage(event, stageRef.current)) {
 				return
 			}
 
@@ -117,13 +157,10 @@ export const useMediaOverlayDismissGesture = ({
 				velocityY: 0,
 				mode: 'pending',
 			}
-		},
-		[enabled, isBlocked],
-	)
+		}
 
-	const onPointerMove = useCallback(
-		(event: ReactPointerEvent<HTMLDivElement>) => {
-			if (event.pointerType === 'mouse') {
+		const onPointerMove = (event: PointerEvent): void => {
+			if (!isTouchLikePointer(event)) {
 				return
 			}
 
@@ -152,20 +189,14 @@ export const useMediaOverlayDismissGesture = ({
 					return
 				}
 
-				// Горизонтальный жест — листание Swiper; dismiss только при явном vertical drag.
-				if (absX >= absY) {
-					gesture.mode = 'passthrough'
+				if (absX > absY) {
+					gestureRef.current = null
 					return
 				}
 
-				if (absY > absX * 1.15) {
-					gesture.mode = 'dismiss'
-					setDismissLocked(true)
-					event.currentTarget.setPointerCapture(event.pointerId)
-				} else {
-					gesture.mode = 'passthrough'
-					return
-				}
+				gesture.mode = 'dismiss'
+				setDismissLocked(true)
+				stageRef.current?.setPointerCapture(event.pointerId)
 			}
 
 			if (gesture.mode !== 'dismiss') {
@@ -173,15 +204,13 @@ export const useMediaOverlayDismissGesture = ({
 			}
 
 			event.preventDefault()
+			event.stopImmediatePropagation()
 			dragY.set(deltaY)
 			backdropOpacity.set(getMediaOverlayDismissBackdropOpacity(deltaY))
-		},
-		[backdropOpacity, dragY, setDismissLocked],
-	)
+		}
 
-	const endGesture = useCallback(
-		(event: ReactPointerEvent<HTMLDivElement>) => {
-			if (event.pointerType === 'mouse') {
+		const endGesture = (event: PointerEvent): void => {
+			if (!isTouchLikePointer(event)) {
 				return
 			}
 
@@ -194,15 +223,15 @@ export const useMediaOverlayDismissGesture = ({
 			const offsetY = dragY.get()
 			const velocityY = gesture.velocityY
 			const isDismissGesture = gesture.mode === 'dismiss'
+			const stage = stageRef.current
 
 			gestureRef.current = null
 
-			if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-				event.currentTarget.releasePointerCapture(event.pointerId)
+			if (stage?.hasPointerCapture(event.pointerId)) {
+				stage.releasePointerCapture(event.pointerId)
 			}
 
 			if (!isDismissGesture) {
-				setDismissLocked(false)
 				return
 			}
 
@@ -213,24 +242,41 @@ export const useMediaOverlayDismissGesture = ({
 
 			setDismissLocked(false)
 			resetDrag()
-		},
-		[dragY, finishDismiss, resetDrag, setDismissLocked],
-	)
-
-	useEffect(() => {
-		if (enabled) {
-			return
 		}
 
-		gestureRef.current = null
-		isDismissingRef.current = false
-		setDismissLocked(false)
-	}, [enabled, setDismissLocked])
+		const captureOptions: AddEventListenerOptions = { capture: true }
+		const moveOptions: AddEventListenerOptions = {
+			capture: true,
+			passive: false,
+		}
 
-	return {
-		onPointerDown,
-		onPointerMove,
-		onPointerUp: endGesture,
-		onPointerCancel: endGesture,
-	}
+		document.addEventListener('pointerdown', onPointerDown, captureOptions)
+		document.addEventListener('pointermove', onPointerMove, moveOptions)
+		document.addEventListener('pointerup', endGesture, captureOptions)
+		document.addEventListener('pointercancel', endGesture, captureOptions)
+
+		return () => {
+			document.removeEventListener('pointerdown', onPointerDown, captureOptions)
+			document.removeEventListener('pointermove', onPointerMove, moveOptions)
+			document.removeEventListener('pointerup', endGesture, captureOptions)
+			document.removeEventListener(
+				'pointercancel',
+				endGesture,
+				captureOptions,
+			)
+			gestureRef.current = null
+			isDismissingRef.current = false
+			setDismissLocked(false)
+		}
+	}, [
+		backdropOpacity,
+		dragY,
+		enabled,
+		finishDismiss,
+		isBlocked,
+		prefersReducedMotion,
+		resetDrag,
+		setDismissLocked,
+		stageRef,
+	])
 }

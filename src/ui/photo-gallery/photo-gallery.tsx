@@ -6,12 +6,13 @@ import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll'
 import { REDUCED_MOTION_TRANSITION } from '@/motion'
+import { useDismissLayerTransform } from '@/ui/photo-gallery/hooks/use-dismiss-layer-transform'
+import { usePhotoGalleryEdgeTap } from '@/ui/photo-gallery/hooks/use-photo-gallery-edge-tap'
 import { usePhotoGalleryDismissGesture } from '@/ui/photo-gallery/hooks/use-photo-gallery-dismiss-gesture'
 import {
 	GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS,
 	GALLERY_OVERLAY_CHROME_TOP_VARIANTS,
 	GALLERY_OVERLAY_ROOT_VARIANTS,
-	GALLERY_OVERLAY_STAGE_VARIANTS,
 	galleryOverlayEnterMotionProps,
 	galleryOverlayMotionProps,
 } from '@/ui/photo-gallery/photo-gallery.animation'
@@ -21,7 +22,7 @@ import {
 } from '@/ui/photo-gallery/photo-gallery.utils'
 import {
 	getMediaOverlayDismissChromeOpacity,
-	getMediaOverlayDismissScale,
+	MEDIA_OVERLAY_DISMISS_ACTIVATE_PX,
 } from '@/ui/photo-gallery/utils/media-overlay-dismiss'
 import {
 	AnimatePresence,
@@ -37,9 +38,7 @@ import {
 	useState,
 	type DragEvent as ReactDragEvent,
 	type MouseEvent as ReactMouseEvent,
-	type PointerEvent as ReactPointerEvent,
 	type ReactElement,
-	type SyntheticEvent,
 } from 'react'
 import { createPortal } from 'react-dom'
 import type { Swiper as SwiperInstance } from 'swiper/types'
@@ -103,7 +102,7 @@ export interface IPhotoGalleryGridProps {
 
 /**
  * Подставляет русские подписи оверлея, если потребитель не передал свои.
- * Нужен PhotoGallery, чтобы кит не зависел от i18n-пакета.
+ * Нужен PhotoGallery, чтобы кит не зависел от i18n-pакета.
  */
 const resolvePhotoGalleryLabels = (
 	labels: IPhotoGalleryLabels | undefined,
@@ -258,14 +257,12 @@ const PhotoGalleryOverlay = ({
 	const dragY = useMotionValue(0)
 	const backdropOpacity = useMotionValue(1)
 
-	const dismissScale = useTransform(dragY, (value) =>
-		getMediaOverlayDismissScale(value),
-	)
 	const chromeOpacity = useTransform(dragY, (value) =>
 		getMediaOverlayDismissChromeOpacity(value),
 	)
 
 	const [isMounted, setIsMounted] = useState(false)
+	const stageRef = useDismissLayerTransform(dragY, open && isMounted)
 	const [activeIndex, setActiveIndex] = useState(initialIndex)
 	const [isDownloading, setIsDownloading] = useState(false)
 	const [exitMode, setExitMode] = useState<'default' | 'gesture'>('default')
@@ -305,17 +302,27 @@ const PhotoGalleryOverlay = ({
 		onOpenChange(false)
 	}, [disableOverlayPointerEvents, onOpenChange])
 
-	const dismissHandlers = usePhotoGalleryDismissGesture({
+	useEffect(() => {
+		setIsMounted(true)
+	}, [])
+
+	usePhotoGalleryDismissGesture({
+		stageRef,
 		dragY,
 		backdropOpacity,
-		enabled: open && !prefersReducedMotion,
+		enabled: open && isMounted,
+		prefersReducedMotion,
 		swiperRef,
 		onDismiss: closeFromGesture,
 	})
 
-	useEffect(() => {
-		setIsMounted(true)
-	}, [])
+	usePhotoGalleryEdgeTap({
+		stageRef,
+		swiperRef,
+		enabled: open && isMounted,
+		canGoPrevious: isLeftSlideControlVisible,
+		canGoNext: isRightSlideControlVisible,
+	})
 
 	useEffect(() => {
 		if (!open) {
@@ -375,10 +382,6 @@ const PhotoGalleryOverlay = ({
 		swiperRef.current?.slideNext()
 	}
 
-	const stopOverlayEventBubble = useCallback((event: SyntheticEvent) => {
-		event.stopPropagation()
-	}, [])
-
 	const blockContextMenu = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
 		event.preventDefault()
 		event.stopPropagation()
@@ -388,34 +391,6 @@ const PhotoGalleryOverlay = ({
 		event.preventDefault()
 		event.stopPropagation()
 	}, [])
-
-	const handleSwiperTap = (
-		swiper: SwiperInstance,
-		event: MouseEvent | TouchEvent | PointerEvent,
-	): void => {
-		if (!swiper.allowClick) {
-			return
-		}
-
-		const clientX =
-			'clientX' in event ? event.clientX : event.changedTouches[0]?.clientX
-
-		if (clientX == null) {
-			return
-		}
-
-		const ratio = clientX / window.innerWidth
-		const startRatio = swiper.rtlTranslate ? 1 - ratio : ratio
-
-		if (startRatio < 0.28) {
-			swiper.slidePrev()
-			return
-		}
-
-		if (startRatio > 0.72) {
-			swiper.slideNext()
-		}
-	}
 
 	const overlay =
 		isMounted && total > 0
@@ -432,11 +407,7 @@ const PhotoGalleryOverlay = ({
 									position: 'fixed',
 									inset: 0,
 								}}
-								onPointerDown={stopOverlayEventBubble}
-								onPointerUp={stopOverlayEventBubble}
-								onPointerCancel={stopOverlayEventBubble}
 								onContextMenu={blockContextMenu}
-								onDragStart={blockNativeDrag}
 								variants={GALLERY_OVERLAY_ROOT_VARIANTS}
 								initial='initial'
 								animate='animate'
@@ -502,77 +473,63 @@ const PhotoGalleryOverlay = ({
 									</div>
 								</m.div>
 
-								<m.div
+								<div
+									ref={stageRef}
 									data-slot='photo-gallery-stage'
-									variants={GALLERY_OVERLAY_STAGE_VARIANTS}
-									{...overlayEnterMotion}
 								>
-									<m.div
-										data-slot='photo-gallery-dismiss-layer'
-										style={{ y: dragY, scale: dismissScale }}
-										{...dismissHandlers}
+									<Swiper
+										key={`gallery-${String(safeInitialIndex)}-${String(total)}`}
+										data-slot='photo-gallery-swiper'
+										modules={[A11y, Keyboard, Mousewheel, Zoom]}
+										initialSlide={safeInitialIndex}
+										slidesPerView={1}
+										spaceBetween={0}
+										threshold={MEDIA_OVERLAY_DISMISS_ACTIVATE_PX}
+										touchStartPreventDefault={false}
+										touchAngle={90}
+										zoom={{
+											maxRatio: 3,
+											minRatio: 1,
+											toggle: true,
+										}}
+										keyboard={{ enabled: true }}
+										mousewheel={{
+											forceToAxis: true,
+										}}
+										a11y={{
+											prevSlideMessage: resolvedLabels.prev,
+											nextSlideMessage: resolvedLabels.next,
+										}}
+										onSwiper={(swiper: SwiperInstance) => {
+											swiperRef.current = swiper
+										}}
+										onSlideChange={(swiper: SwiperInstance) => {
+											setActiveIndex(swiper.activeIndex)
+											swiper.zoom.out()
+											dragY.set(0)
+											backdropOpacity.set(1)
+										}}
 									>
-										<Swiper
-											key={`gallery-${String(safeInitialIndex)}-${String(total)}`}
-											data-slot='photo-gallery-swiper'
-											modules={[A11y, Keyboard, Mousewheel, Zoom]}
-											initialSlide={safeInitialIndex}
-											slidesPerView={1}
-											spaceBetween={0}
-											speed={240}
-											threshold={8}
-											longSwipesRatio={0.18}
-											simulateTouch
-											grabCursor
-											mousewheel={{
-												enabled: true,
-												forceToAxis: true,
-												thresholdDelta: 12,
-												thresholdTime: 420,
-												eventsTarget: '[data-slot="photo-gallery-root"]',
-											}}
-											zoom={{
-												maxRatio: 3,
-												minRatio: 1,
-												toggle: true,
-											}}
-											keyboard={{ enabled: true }}
-											a11y={{
-												prevSlideMessage: resolvedLabels.prev,
-												nextSlideMessage: resolvedLabels.next,
-											}}
-											onSwiper={(swiper: SwiperInstance) => {
-												swiperRef.current = swiper
-											}}
-											onClick={handleSwiperTap}
-											onSlideChange={(swiper: SwiperInstance) => {
-												setActiveIndex(swiper.activeIndex)
-												swiper.zoom.out()
-												dragY.set(0)
-												backdropOpacity.set(1)
-											}}
-										>
-											{images.map((image, index) => (
-												<SwiperSlide key={`${image.src}-${String(index)}`}>
-													<div
-														className='swiper-zoom-container'
-														data-slot='photo-gallery-zoom'
-													>
-														<img
-															src={image.src}
-															alt={
-																image.alt ??
-																resolvedLabels.imageAlt(index + 1, total)
-															}
-															data-slot='photo-gallery-image'
-															draggable={false}
-															onDragStart={blockNativeDrag}
-														/>
-													</div>
-												</SwiperSlide>
-											))}
-										</Swiper>
-									</m.div>
+										{images.map((image, index) => (
+											<SwiperSlide key={`${image.src}-${String(index)}`}>
+												<div
+													className='swiper-zoom-container'
+													data-slot='photo-gallery-zoom'
+												>
+													<img
+														src={image.src}
+														alt={
+															image.alt ??
+															resolvedLabels.imageAlt(index + 1, total)
+														}
+														data-slot='photo-gallery-image'
+														draggable={false}
+														onDragStart={blockNativeDrag}
+													/>
+												</div>
+											</SwiperSlide>
+										))}
+									</Swiper>
 
 									{isLeftSlideControlVisible ? (
 										<button
@@ -597,7 +554,7 @@ const PhotoGalleryOverlay = ({
 											<ChevronRightIcon />
 										</button>
 									) : null}
-								</m.div>
+								</div>
 
 								<m.div
 									data-slot='photo-gallery-footer'

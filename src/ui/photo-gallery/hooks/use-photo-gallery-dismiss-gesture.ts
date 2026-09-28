@@ -6,23 +6,22 @@ import { useCallback, type RefObject } from 'react'
 import type { Swiper as SwiperType } from 'swiper/types'
 
 interface IUsePhotoGalleryDismissGestureParams {
+	stageRef: RefObject<HTMLDivElement | null>
 	dragY: MotionValue<number>
 	backdropOpacity: MotionValue<number>
 	enabled: boolean
+	prefersReducedMotion: boolean | null
 	swiperRef: RefObject<SwiperType | null>
 	onDismiss: () => void
 }
 
-/**
- * Жест закрытия галереи поверх общего media-overlay dismiss:
- * при зуме dismiss выключен, на захвате — Swiper не листает.
- *
- * Нужен PhotoGallery, чтобы вертикальный свайп не спорил с pinch-zoom.
- */
+/** Vertical dismiss; при vertical drag блокируем листание Swiper. */
 export const usePhotoGalleryDismissGesture = ({
+	stageRef,
 	dragY,
 	backdropOpacity,
 	enabled,
+	prefersReducedMotion,
 	swiperRef,
 	onDismiss,
 }: IUsePhotoGalleryDismissGestureParams) => {
@@ -44,10 +43,12 @@ export const usePhotoGalleryDismissGesture = ({
 		[swiperRef],
 	)
 
-	return useMediaOverlayDismissGesture({
+	useMediaOverlayDismissGesture({
+		stageRef,
 		dragY,
 		backdropOpacity,
 		enabled,
+		prefersReducedMotion,
 		onDismiss,
 		isBlocked,
 		onDismissLockChange,

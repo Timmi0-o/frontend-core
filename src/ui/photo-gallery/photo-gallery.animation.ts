@@ -15,8 +15,8 @@ export const GALLERY_OVERLAY_TRANSITION: Transition = {
 }
 
 export const GALLERY_OVERLAY_TRANSITION_REDUCED: Transition = {
-	type: 'tween',
 	...REDUCED_MOTION_TRANSITION,
+	type: 'tween',
 }
 
 export const GALLERY_OVERLAY_ROOT_VARIANTS: Variants = {
@@ -39,14 +39,13 @@ export const GALLERY_OVERLAY_ROOT_VARIANTS: Variants = {
 	},
 }
 
+/** Без scale/transform — Swiper ломается внутри ancestor с transform. */
 export const GALLERY_OVERLAY_STAGE_VARIANTS: Variants = {
 	initial: {
 		opacity: 0,
-		scale: 0.92,
 	},
 	animate: {
 		opacity: 1,
-		scale: 1,
 	},
 }
 
