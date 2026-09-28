@@ -30,7 +30,14 @@ import {
 	useReducedMotion,
 	useTransform,
 } from 'framer-motion'
-import { useCallback, useEffect, useRef, useState, type ReactElement } from 'react'
+import {
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+	type PointerEvent as ReactPointerEvent,
+	type ReactElement,
+} from 'react'
 import { createPortal } from 'react-dom'
 import type { Swiper as SwiperInstance } from 'swiper/types'
 import { A11y, Keyboard, Mousewheel, Zoom } from 'swiper/modules'
@@ -365,6 +372,13 @@ const PhotoGalleryOverlay = ({
 		swiperRef.current?.slideNext()
 	}
 
+	const stopPointerBubble = useCallback(
+		(event: ReactPointerEvent<HTMLDivElement>) => {
+			event.stopPropagation()
+		},
+		[],
+	)
+
 	const handleSwiperTap = (
 		swiper: SwiperInstance,
 		event: MouseEvent | TouchEvent | PointerEvent,
@@ -408,6 +422,9 @@ const PhotoGalleryOverlay = ({
 									position: 'fixed',
 									inset: 0,
 								}}
+								onPointerDown={stopPointerBubble}
+								onPointerUp={stopPointerBubble}
+								onPointerCancel={stopPointerBubble}
 								variants={GALLERY_OVERLAY_ROOT_VARIANTS}
 								initial='initial'
 								animate='animate'
