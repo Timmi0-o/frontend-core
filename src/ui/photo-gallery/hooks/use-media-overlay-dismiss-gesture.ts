@@ -99,7 +99,12 @@ export const useMediaOverlayDismissGesture = ({
 				return
 			}
 
-			if (event.button !== 0 && event.pointerType === 'mouse') {
+			// Mouse drag — зона Swiper; vertical dismiss только touch.
+			if (event.pointerType === 'mouse') {
+				return
+			}
+
+			if (event.button !== 0) {
 				return
 			}
 
@@ -118,6 +123,10 @@ export const useMediaOverlayDismissGesture = ({
 
 	const onPointerMove = useCallback(
 		(event: ReactPointerEvent<HTMLDivElement>) => {
+			if (event.pointerType === 'mouse') {
+				return
+			}
+
 			const gesture = gestureRef.current
 
 			if (!gesture || gesture.pointerId !== event.pointerId) {
@@ -172,6 +181,10 @@ export const useMediaOverlayDismissGesture = ({
 
 	const endGesture = useCallback(
 		(event: ReactPointerEvent<HTMLDivElement>) => {
+			if (event.pointerType === 'mouse') {
+				return
+			}
+
 			const gesture = gestureRef.current
 
 			if (!gesture || gesture.pointerId !== event.pointerId) {

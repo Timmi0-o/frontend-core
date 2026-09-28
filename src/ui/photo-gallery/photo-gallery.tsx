@@ -433,12 +433,8 @@ const PhotoGalleryOverlay = ({
 									inset: 0,
 								}}
 								onPointerDown={stopOverlayEventBubble}
-								onPointerMove={stopOverlayEventBubble}
 								onPointerUp={stopOverlayEventBubble}
 								onPointerCancel={stopOverlayEventBubble}
-								onMouseDown={stopOverlayEventBubble}
-								onMouseMove={stopOverlayEventBubble}
-								onMouseUp={stopOverlayEventBubble}
 								onContextMenu={blockContextMenu}
 								onDragStart={blockNativeDrag}
 								variants={GALLERY_OVERLAY_ROOT_VARIANTS}
@@ -526,6 +522,8 @@ const PhotoGalleryOverlay = ({
 											speed={240}
 											threshold={8}
 											longSwipesRatio={0.18}
+											simulateTouch
+											grabCursor
 											mousewheel={{
 												enabled: true,
 												forceToAxis: true,
