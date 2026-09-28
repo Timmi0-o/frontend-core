@@ -441,6 +441,7 @@ export const Example = () => {
         label="Время заезда"
         value={timeValue}
         onChange={setTimeValue}
+        stepMinutes={30}
       />
       <DateTimePicker
         value={dateTimeValue}

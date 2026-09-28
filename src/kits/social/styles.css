@@ -34,5 +34,6 @@
 @import './toast.css' layer(components);
 @import './calendar.css' layer(components);
 @import './date-time-picker.css' layer(components);
+@import './time-picker.css' layer(components);
 @import './accordion.css' layer(components);
 @import './photo-gallery.css' layer(components);

@@ -226,7 +226,11 @@ export { Spinner } from './spinner/spinner'
 export { Textarea } from './textarea/textarea'
 export type { ITextareaProps, TTextareaSize } from './textarea/textarea'
 export { TimePicker } from './time-picker/time-picker'
-export type { ITimePickerProps } from './time-picker/time-picker'
+export type {
+	ITimePickerInputProps,
+	ITimePickerPopoverProps,
+	ITimePickerProps,
+} from './time-picker/types/i-time-picker-props'
 export { Tooltip } from './tooltip/tooltip'
 export type { ISpinnerProps, ISpinnerSize, TSpinnerVariant } from './spinner/types/i-spinner-props'
 export {
