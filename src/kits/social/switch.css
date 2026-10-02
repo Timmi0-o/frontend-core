@@ -26,7 +26,6 @@
 		background-color var(--motion-duration-fast) var(--motion-easing-control),
 		border-color var(--motion-duration-fast) var(--motion-easing-control),
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control),
-		transform var(--motion-duration-fast) var(--motion-easing-control),
 		opacity var(--motion-duration-fast) var(--motion-easing-control);
 }
 
@@ -37,10 +36,6 @@
 [data-ui-kit='social'] [data-slot='switch']:not([data-variant='unstyled']):focus-visible {
 	border-color: var(--ring);
 	box-shadow: var(--focus-ring);
-}
-
-[data-ui-kit='social'] [data-slot='switch']:not([data-variant='unstyled']):active:not([data-disabled]) {
-	transform: scale(0.96);
 }
 
 [data-ui-kit='social'] [data-slot='switch']:not([data-variant='unstyled']):active:not([data-disabled]):not([data-checked]) {
@@ -73,23 +68,35 @@
 	background: #fff;
 	box-shadow: var(--switch-thumb-shadow);
 	transform: scale(1);
+	transform-origin: center;
 	transition:
 		left var(--motion-duration-base) var(--motion-easing-control),
+		top var(--motion-duration-base) var(--motion-easing-control),
+		width var(--motion-duration-base) var(--motion-easing-control),
+		height var(--motion-duration-base) var(--motion-easing-control),
 		transform var(--motion-duration-fast) var(--motion-easing-control),
 		background-color var(--motion-duration-fast) var(--motion-easing-control),
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
 [data-ui-kit='social'] [data-slot='switch']:not([data-variant='unstyled']):active:not([data-disabled]) [data-slot='switch-thumb']:not([data-variant='unstyled']) {
-	transform: scale(1.06, 1);
+	transform: scale(1.12);
 	box-shadow:
 		0 1px 2px rgb(0 0 0 / 0.1),
 		0 2px 6px rgb(0 0 0 / 0.12);
 }
 
+/*
+ * У включённого трека border того же цвета, что и заливка, поэтому он
+ * становится частью капсулы. Thumb увеличивается на толщину border,
+ * чтобы зазор до края совпал с выключенным состоянием.
+ */
 [data-ui-kit='social'] [data-slot='switch'][data-checked] [data-slot='switch-thumb']:not([data-variant='unstyled']),
 [data-ui-kit='social'] [data-slot='switch-thumb']:not([data-variant='unstyled'])[data-checked] {
-	left: calc(100% - var(--switch-inset) - var(--switch-thumb-width));
+	top: calc(var(--switch-inset) - var(--switch-border-width));
+	height: calc(var(--switch-thumb-height) + var(--switch-border-width) * 2);
+	width: calc(var(--switch-thumb-width) + var(--switch-border-width) * 2);
+	left: calc(100% - var(--switch-inset) - var(--switch-thumb-width) - var(--switch-border-width));
 }
 
 html.dark [data-ui-kit='social'] [data-slot='switch'][data-checked] [data-slot='switch-thumb']:not([data-variant='unstyled']),
