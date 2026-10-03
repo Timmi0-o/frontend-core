@@ -5,7 +5,7 @@ import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { Popover } from '@/ui/popover/popover'
 import type { ReactNode } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import { useSelectChrome } from '../../context/select-context'
 import type { ISelectDropdownProps } from '../../types/i-select-props'
 import { SelectOption } from '../select-option/select-option'
 
@@ -15,7 +15,7 @@ export const SelectDropdown = ({
 	children,
 }: ISelectDropdownProps): ReactNode => {
 	const { options, isMultiselect, minDropdownWidth, variant: contextVariant } =
-		useSelectContext()
+		useSelectChrome()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 
 	return (

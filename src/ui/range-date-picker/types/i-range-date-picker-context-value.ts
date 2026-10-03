@@ -35,8 +35,6 @@ export interface IRangeDatePickerContextValue {
 	handleSelectDate: (date: Date) => void
 	handleSelectToday: () => void
 	handleOpenChange: (isOpen: boolean) => void
-	handleDayPointerEnter: (date: Date) => void
-	handleDayPointerLeave: () => void
 	isDateDisabled: (date: Date) => boolean
 	isMonthDisabled: (monthIndex: number) => boolean
 	isYearDisabled: (year: number) => boolean

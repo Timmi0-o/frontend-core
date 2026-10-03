@@ -3,13 +3,24 @@
 import { cn } from '@/core/cn'
 import type { TDatePickerVariant, TDatePickerViewMode } from '@/ui/date-picker/types/i-date-picker-props'
 import {
+	applyRangeHoverPreview,
+	clearRangeHoverPreview,
+} from '@/ui/date-picker/utils/range-hover-preview.util'
+import {
 	addCalendarMonths,
 	getCalendarWeekdayLabels,
 	isWeekendDay,
 	scrollElementToContainerCenter,
 	type ICalendarGridDay,
 } from '@/ui/date-picker/utils/date-picker-date.util'
-import { useLayoutEffect, useRef, useState, type ReactElement } from 'react'
+import {
+	useCallback,
+	useEffect,
+	useLayoutEffect,
+	useRef,
+	useState,
+	type ReactElement,
+} from 'react'
 
 const MONTH_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
 	month: 'long',
@@ -61,8 +72,9 @@ interface ICalendarDaysPanelProps {
 	isDateRangeStart?: (date: Date) => boolean
 	isDateRangeEnd?: (date: Date) => boolean
 	isDateInRange?: (date: Date) => boolean
-	onDayPointerEnter?: (date: Date) => void
+	rangePickStartDate?: Date | null
 	isToday: (date: Date) => boolean
+	onRangeDayPointerEnter?: (date: Date) => void
 }
 
 const CalendarDaysPanel = ({
@@ -78,7 +90,7 @@ const CalendarDaysPanel = ({
 	isDateRangeStart,
 	isDateRangeEnd,
 	isDateInRange,
-	onDayPointerEnter,
+	onRangeDayPointerEnter,
 	isToday,
 }: ICalendarDaysPanelProps): ReactElement => {
 	const caption = new Intl.DateTimeFormat(
@@ -129,6 +141,7 @@ const CalendarDaysPanel = ({
 							type='button'
 							disabled={isDisabled}
 							data-slot='date-picker-day'
+							data-ts={String(day.date.getTime())}
 							data-selected={isSelected ? '' : undefined}
 							data-range-start={isRangeStart ? '' : undefined}
 							data-range-end={isRangeEnd ? '' : undefined}
@@ -138,7 +151,7 @@ const CalendarDaysPanel = ({
 							data-outside={day.isOutsideMonth ? '' : undefined}
 							data-weekend={isWeekendDay(day.date) ? '' : undefined}
 							onClick={() => handleSelectDate(day.date)}
-							onPointerEnter={() => onDayPointerEnter?.(day.date)}
+							onPointerEnter={() => onRangeDayPointerEnter?.(day.date)}
 						>
 							{day.date.getDate()}
 						</button>
@@ -179,8 +192,7 @@ export interface ICalendarViewProps {
 	isDateRangeStart?: (date: Date) => boolean
 	isDateRangeEnd?: (date: Date) => boolean
 	isDateInRange?: (date: Date) => boolean
-	onDayPointerEnter?: (date: Date) => void
-	onDayPointerLeave?: () => void
+	rangePickStartDate?: Date | null
 	isToday: (date: Date) => boolean
 	getCalendarDays: (month: Date) => ICalendarGridDay[]
 }
@@ -215,11 +227,11 @@ export const CalendarView = ({
 	isDateRangeStart,
 	isDateRangeEnd,
 	isDateInRange,
-	onDayPointerEnter,
-	onDayPointerLeave,
+	rangePickStartDate = null,
 	isToday,
 	getCalendarDays,
 }: ICalendarViewProps): ReactElement => {
+	const daysPanelsRef = useRef<HTMLDivElement>(null)
 	const weekdays = getCalendarWeekdayLabels(locale)
 	const monthLabel = new Intl.DateTimeFormat(locale, MONTH_FORMAT_OPTIONS).format(
 		visibleMonth,
@@ -231,6 +243,43 @@ export const CalendarView = ({
 	const yearsRef = useRef<HTMLDivElement>(null)
 	const [canScrollYearsUp, setCanScrollYearsUp] = useState(false)
 	const [canScrollYearsDown, setCanScrollYearsDown] = useState(false)
+
+	const handleRangeDayPointerEnter = useCallback(
+		(date: Date): void => {
+			if (rangePickStartDate == null) {
+				return
+			}
+
+			const root = daysPanelsRef.current
+
+			if (root == null || isDateDisabled(date)) {
+				return
+			}
+
+			applyRangeHoverPreview(root, rangePickStartDate, date)
+		},
+		[isDateDisabled, rangePickStartDate],
+	)
+
+	const handleRangeDayPointerLeave = useCallback((): void => {
+		const root = daysPanelsRef.current
+
+		if (root == null) {
+			return
+		}
+
+		clearRangeHoverPreview(root)
+	}, [])
+
+	useEffect(() => {
+		const root = daysPanelsRef.current
+
+		if (root == null || rangePickStartDate != null) {
+			return
+		}
+
+		clearRangeHoverPreview(root)
+	}, [rangePickStartDate])
 
 	const isYearView = viewMode === 'years'
 	const isMonthView = viewMode === 'months'
@@ -342,6 +391,7 @@ export const CalendarView = ({
 			data-slot='date-picker-popover'
 			data-variant={variant}
 			data-view={viewMode}
+			data-range-picking={rangePickStartDate != null ? '' : undefined}
 			data-month-count={
 				viewMode === 'days' && isMultiMonth ? String(monthCount) : undefined
 			}
@@ -450,8 +500,9 @@ export const CalendarView = ({
 
 			{viewMode === 'days' ? (
 				<div
-					data-slot={isMultiMonth ? 'date-picker-month-panels' : undefined}
-					onPointerLeave={() => onDayPointerLeave?.()}
+					ref={daysPanelsRef}
+					data-slot={isMultiMonth ? 'date-picker-month-panels' : 'date-picker-days-root'}
+					onPointerLeave={handleRangeDayPointerLeave}
 				>
 					{visibleMonths.map((month) => (
 						<CalendarDaysPanel
@@ -468,7 +519,9 @@ export const CalendarView = ({
 							isDateRangeStart={isDateRangeStart}
 							isDateRangeEnd={isDateRangeEnd}
 							isDateInRange={isDateInRange}
-							onDayPointerEnter={onDayPointerEnter}
+							onRangeDayPointerEnter={
+								rangePickStartDate != null ? handleRangeDayPointerEnter : undefined
+							}
 							isToday={isToday}
 						/>
 					))}

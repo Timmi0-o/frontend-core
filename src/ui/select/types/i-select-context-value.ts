@@ -8,24 +8,39 @@ import type {
 
 export type TSelectValue = string | number
 
-export interface ISelectContextValue {
+/** Стабильные визуальные настройки и метаданные поля. */
+export interface ISelectChromeContextValue {
 	options: Array<ISelectOption<TSelectValue>>
-	selectedItems: Array<ISelectOption<TSelectValue>>
-	isOpen: boolean
-	isMultiselect: boolean
-	isDisabled: boolean
-	isClearable: boolean
-	isLoading: boolean
-	triggerLabel: string
-	fieldLabel?: string
-	placeholder: string
-	loadingLabel: string
 	size: TSelectSize
 	variant: TSelectVisualVariant
 	tone: TSelectTone
+	placeholder: string
+	loadingLabel: string
 	indicatorIcon?: ReactNode
+	fieldLabel?: string
 	minDropdownWidth: number
-	isOptionSelected: (option: ISelectOption<TSelectValue>) => boolean
-	handleSelect: (option: ISelectOption<TSelectValue>) => void
+	isMultiselect: boolean
+	isClearable: boolean
+}
+
+/** Открытие попапа и disabled/loading — меняется при клике по триггеру. */
+export interface ISelectInteractionContextValue {
+	isOpen: boolean
+	isDisabled: boolean
+	isLoading: boolean
 	handleClear: () => void
 }
+
+/** Выбранные значения и обработчики пунктов — не зависят от isOpen. */
+export interface ISelectSelectionContextValue {
+	selectedItems: Array<ISelectOption<TSelectValue>>
+	triggerLabel: string
+	isOptionSelected: (option: ISelectOption<TSelectValue>) => boolean
+	handleSelect: (option: ISelectOption<TSelectValue>) => void
+}
+
+/** @deprecated Используй split-контексты; оставлен для обратной совместимости внутри кита. */
+export interface ISelectContextValue
+	extends ISelectChromeContextValue,
+		ISelectInteractionContextValue,
+		ISelectSelectionContextValue {}

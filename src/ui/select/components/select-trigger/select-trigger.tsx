@@ -6,7 +6,11 @@ import { Popover } from '@/ui/popover/popover'
 import { Spinner } from '@/ui/spinner/spinner'
 import type { ReactElement, ReactNode } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import {
+	useSelectChrome,
+	useSelectInteraction,
+	useSelectSelection,
+} from '../../context/select-context'
 import { hasSelectValueChild } from '../../helpers/has-select-value-child'
 import type { ISelectTriggerProps } from '../../types/i-select-props'
 import { SelectClear } from '../select-clear/select-clear'
@@ -65,18 +69,10 @@ export const SelectTrigger = ({
 	children,
 	variant: variantProp,
 }: ISelectTriggerProps): ReactElement => {
-	const {
-		isOpen,
-		isDisabled,
-		isLoading,
-		loadingLabel,
-		placeholder,
-		triggerLabel,
-		selectedItems,
-		size,
-		variant: contextVariant,
-		tone,
-	} = useSelectContext()
+	const { isOpen, isDisabled, isLoading } = useSelectInteraction()
+	const { placeholder, loadingLabel, size, variant: contextVariant, tone } =
+		useSelectChrome()
+	const { triggerLabel, selectedItems } = useSelectSelection()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 	const isEmpty = !isLoading && selectedItems.length === 0
 

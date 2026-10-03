@@ -5,6 +5,7 @@ import type {
 	TScrollShadowOrientation,
 	TScrollShadowVisibility,
 } from '../types/i-scroll-shadow-props'
+import { supportsScrollTimeline } from '../utils/supports-scroll-timeline'
 
 interface IUseScrollShadowProps {
 	containerRef: RefObject<HTMLDivElement | null>
@@ -132,7 +133,12 @@ export const useScrollShadow = ({
 	useEffect(() => {
 		const element = containerRef.current
 
-		if (!element || !isEnabled || visibility !== 'auto') {
+		if (
+			!element ||
+			!isEnabled ||
+			visibility !== 'auto' ||
+			supportsScrollTimeline()
+		) {
 			return
 		}
 

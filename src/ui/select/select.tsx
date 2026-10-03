@@ -14,10 +14,18 @@ import {
 	SELECT_DISPLAY_NAMES,
 	SELECT_DROPDOWN_OFFSET_PX,
 } from './constants/select.constants'
-import { SelectContext } from './context/select-context'
+import {
+	SelectChromeContext,
+	SelectInteractionContext,
+	SelectSelectionContext,
+} from './context/select-context'
 import { splitSelectLabelFromChildren } from './helpers/split-select-label-from-children'
 import { useSelect } from './hooks/use-select'
-import type { ISelectContextValue } from './types/i-select-context-value'
+import type {
+	ISelectChromeContextValue,
+	ISelectInteractionContextValue,
+	ISelectSelectionContextValue,
+} from './types/i-select-context-value'
 import type {
 	ISelectProps,
 	TSelectComponent,
@@ -84,97 +92,105 @@ const SelectRoot = <T extends string | number = string>(
 
 	const visualVariant = variant === 'unstyled' ? 'default' : variant
 
-	const contextValue = useMemo<ISelectContextValue>(
+	const chromeContextValue = useMemo<ISelectChromeContextValue>(
 		() => ({
 			options,
-			selectedItems,
-			isOpen,
-			isMultiselect,
-			isDisabled,
-			isClearable,
-			isLoading,
-			triggerLabel,
-			placeholder,
-			loadingLabel,
 			size,
 			variant: visualVariant,
 			tone,
+			placeholder,
+			loadingLabel,
 			indicatorIcon,
 			minDropdownWidth,
-			isOptionSelected,
-			handleSelect,
-			handleClear,
+			isMultiselect,
+			isClearable,
 			fieldLabel: label,
 		}),
 		[
 			options,
-			selectedItems,
-			isOpen,
-			isMultiselect,
-			isDisabled,
-			isClearable,
-			isLoading,
-			triggerLabel,
-			placeholder,
-			loadingLabel,
 			size,
 			visualVariant,
 			tone,
+			placeholder,
+			loadingLabel,
 			indicatorIcon,
 			minDropdownWidth,
-			isOptionSelected,
-			handleSelect,
-			handleClear,
+			isMultiselect,
+			isClearable,
 			label,
 		],
+	)
+
+	const interactionContextValue = useMemo<ISelectInteractionContextValue>(
+		() => ({
+			isOpen,
+			isDisabled,
+			isLoading,
+			handleClear,
+		}),
+		[isOpen, isDisabled, isLoading, handleClear],
+	)
+
+	const selectionContextValue = useMemo<ISelectSelectionContextValue>(
+		() => ({
+			selectedItems,
+			triggerLabel,
+			isOptionSelected,
+			handleSelect,
+		}),
+		[selectedItems, triggerLabel, isOptionSelected, handleSelect],
 	)
 
 	const { labelSlots, rest: popoverChildren } =
 		splitSelectLabelFromChildren(children)
 
 	return (
-		<SelectContext.Provider value={contextValue}>
-			<div
-				data-slot='select'
-				data-variant={variant}
-				data-disabled={isDisabled ? '' : undefined}
-				data-invalid={error ? '' : undefined}
-				data-open={isOpen ? '' : undefined}
-				className={cn(className)}
-			>
-				{labelSlots.length > 0 ? labelSlots : label ? <SelectLabel /> : null}
+		<SelectChromeContext.Provider value={chromeContextValue}>
+			<SelectInteractionContext.Provider value={interactionContextValue}>
+				<SelectSelectionContext.Provider value={selectionContextValue}>
+					<div
+						data-slot='select'
+						data-variant={variant}
+						data-disabled={isDisabled ? '' : undefined}
+						data-invalid={error ? '' : undefined}
+						data-open={isOpen ? '' : undefined}
+						className={cn(className)}
+					>
+						{labelSlots.length > 0 ? labelSlots : label ? <SelectLabel /> : null}
 
-				<Popover
-					open={isOpen}
-					onOpenChange={(isNextOpen) => {
-						if (isDisabled) {
-							return
-						}
+						<Popover
+							open={isOpen}
+							onOpenChange={(isNextOpen) => {
+								if (isDisabled) {
+									return
+								}
 
-						setIsOpen(isNextOpen)
-					}}
-					placement='bottom-start'
-					offset={SELECT_DROPDOWN_OFFSET_PX}
-				>
-					{popoverChildren ?? (
-						<>
-							<SelectTrigger>
-								<SelectValue />
-								<SelectClear />
-								<SelectIndicator />
-							</SelectTrigger>
-							<SelectDropdown />
-						</>
-					)}
-				</Popover>
+								setIsOpen(isNextOpen)
+							}}
+							placement='bottom-start'
+							offset={SELECT_DROPDOWN_OFFSET_PX}
+						>
+							{popoverChildren ?? (
+								<>
+									<SelectTrigger>
+										<SelectValue />
+										<SelectClear />
+										<SelectIndicator />
+									</SelectTrigger>
+									<SelectDropdown />
+								</>
+							)}
+						</Popover>
 
-				{error ? (
-					<p data-slot='select-error' role='alert'>
-						{error}
-					</p>
-				) : null}
-			</div>
-		</SelectContext.Provider>
+						{error ? (
+							<p data-slot='select-error' role='alert'>
+								{error}
+							</p>
+						) : null}
+					</div>
+				</SelectSelectionContext.Provider>
+			</SelectInteractionContext.Provider>
+		</SelectChromeContext.Provider>
 	)
 }
 

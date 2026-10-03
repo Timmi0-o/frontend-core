@@ -4,7 +4,11 @@ import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import type { ReactElement } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import {
+	useSelectChrome,
+	useSelectInteraction,
+	useSelectSelection,
+} from '../../context/select-context'
 import { renderSelectSlot } from '../../helpers/render-select-slot'
 import type { ISelectValueProps } from '../../types/i-select-props'
 
@@ -13,14 +17,9 @@ export const SelectValue = ({
 	variant: variantProp,
 	children,
 }: ISelectValueProps): ReactElement => {
-	const {
-		selectedItems,
-		triggerLabel,
-		placeholder,
-		isLoading,
-		loadingLabel,
-		variant: contextVariant,
-	} = useSelectContext()
+	const { isLoading } = useSelectInteraction()
+	const { placeholder, loadingLabel, variant: contextVariant } = useSelectChrome()
+	const { selectedItems, triggerLabel } = useSelectSelection()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 	const isPlaceholder = !isLoading && selectedItems.length === 0
 	const defaultChildren = isLoading

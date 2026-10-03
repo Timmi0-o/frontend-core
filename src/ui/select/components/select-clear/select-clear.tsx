@@ -4,7 +4,11 @@ import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import type { MouseEvent, PointerEvent, ReactElement } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import {
+	useSelectChrome,
+	useSelectInteraction,
+	useSelectSelection,
+} from '../../context/select-context'
 import type { ISelectClearProps } from '../../types/i-select-props'
 
 const ClearIcon = (): ReactElement => {
@@ -30,13 +34,9 @@ export const SelectClear = ({
 	className,
 	variant: variantProp,
 }: ISelectClearProps): ReactElement | null => {
-	const {
-		isClearable,
-		isDisabled,
-		selectedItems,
-		handleClear,
-		variant: contextVariant,
-	} = useSelectContext()
+	const { isClearable, variant: contextVariant } = useSelectChrome()
+	const { isDisabled, handleClear } = useSelectInteraction()
+	const { selectedItems } = useSelectSelection()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 
 	if (!isClearable || isDisabled || selectedItems.length === 0) {

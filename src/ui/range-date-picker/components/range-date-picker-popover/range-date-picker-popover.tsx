@@ -17,6 +17,7 @@ export const RangeDatePickerPopover = ({
 	variant: variantProp,
 }: IRangeDatePickerPopoverProps): ReactNode => {
 	const {
+		value,
 		placeholder,
 		isOpen,
 		isMobile,
@@ -38,8 +39,6 @@ export const RangeDatePickerPopover = ({
 		handleSelectDate,
 		handleSelectToday,
 		handleOpenChange,
-		handleDayPointerEnter,
-		handleDayPointerLeave,
 		isDateDisabled,
 		isMonthDisabled,
 		isYearDisabled,
@@ -52,6 +51,8 @@ export const RangeDatePickerPopover = ({
 		variant: contextVariant,
 	} = useRangeDatePickerContext()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
+	const rangePickStartDate =
+		value.start != null && value.end == null ? value.start : null
 
 	const calendarView = (
 		<CalendarView
@@ -82,8 +83,7 @@ export const RangeDatePickerPopover = ({
 			isDateRangeStart={isDateRangeStart}
 			isDateRangeEnd={isDateRangeEnd}
 			isDateInRange={isDateInRange}
-			onDayPointerEnter={handleDayPointerEnter}
-			onDayPointerLeave={handleDayPointerLeave}
+			rangePickStartDate={rangePickStartDate}
 			isToday={isToday}
 			getCalendarDays={getCalendarDays}
 		/>

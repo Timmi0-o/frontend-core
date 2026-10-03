@@ -38,7 +38,6 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 
 	const [isOpen, setIsOpen] = useState(false)
 	const [viewMode, setViewMode] = useState<TDatePickerViewMode>('days')
-	const [hoveredDate, setHoveredDate] = useState<Date | null>(null)
 	const [visibleMonth, setVisibleMonth] = useState(() =>
 		startOfDay(rangeStart ?? rangeEnd ?? new Date()),
 	)
@@ -58,11 +57,8 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 		[maxDate, minDate],
 	)
 
-	const previewEnd = rangeEnd ?? hoveredDate
-
 	const handleOpenChange = useCallback((isPopoverOpen: boolean): void => {
 		setIsOpen(isPopoverOpen)
-		setHoveredDate(null)
 
 		if (!isPopoverOpen) {
 			setViewMode('days')
@@ -166,7 +162,6 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 						? current
 						: nextDay,
 				)
-				setHoveredDate(null)
 				return
 			}
 
@@ -178,7 +173,6 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 					? current
 					: nextRange.end,
 			)
-			setHoveredDate(null)
 			setIsOpen(false)
 		},
 		[isDateDisabled, onChange, rangeEnd, rangeStart, visibleMonthCount],
@@ -189,7 +183,6 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 
 		setVisibleMonth(today)
 		setViewMode('days')
-		setHoveredDate(null)
 
 		if (isDateDisabled(today)) {
 			return
@@ -199,25 +192,13 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 		setIsOpen(false)
 	}, [isDateDisabled, onChange])
 
-	const handleDayPointerEnter = useCallback((date: Date): void => {
-		if (isDateDisabled(date) || rangeEnd || !rangeStart) {
-			return
-		}
-
-		setHoveredDate(startOfDay(date))
-	}, [isDateDisabled, rangeEnd, rangeStart])
-
-	const handleDayPointerLeave = useCallback((): void => {
-		setHoveredDate(null)
-	}, [])
-
 	const previewRange = useMemo(() => {
-		if (!rangeStart || !previewEnd) {
+		if (!rangeStart || !rangeEnd) {
 			return null
 		}
 
-		return orderDateRange(rangeStart, previewEnd)
-	}, [previewEnd, rangeStart])
+		return orderDateRange(rangeStart, rangeEnd)
+	}, [rangeEnd, rangeStart])
 
 	const isDateSelected = useCallback(
 		(date: Date): boolean =>
@@ -280,8 +261,6 @@ export const useRangeDatePicker = (props: IRangeDatePickerProps) => {
 		handleShiftVisibleYear,
 		handleSelectDate,
 		handleSelectToday,
-		handleDayPointerEnter,
-		handleDayPointerLeave,
 		isDateDisabled,
 		isMonthDisabled: isMonthDisabledByRange,
 		isYearDisabled: isYearDisabledByRange,

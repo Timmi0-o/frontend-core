@@ -3,9 +3,9 @@
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { Checkbox } from '@/ui/checkbox/checkbox'
-import type { ReactElement, ReactNode } from 'react'
+import { memo, type ReactElement, type ReactNode } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import { useSelectChrome, useSelectSelection } from '../../context/select-context'
 import { renderSelectSlot } from '../../helpers/render-select-slot'
 import type { ISelectOptionItemProps } from '../../types/i-select-props'
 
@@ -46,14 +46,14 @@ const DefaultOptionContent = ({
  * </Select.Dropdown>
  * ```
  */
-export const SelectOption = ({
+const SelectOptionComponent = ({
 	option,
 	className,
 	variant: variantProp,
 	children,
 }: ISelectOptionItemProps): ReactElement => {
-	const { isMultiselect, isOptionSelected, handleSelect, variant: contextVariant } =
-		useSelectContext()
+	const { isMultiselect, variant: contextVariant } = useSelectChrome()
+	const { isOptionSelected, handleSelect } = useSelectSelection()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 	const isSelected = isOptionSelected(option)
 	const defaultChildren = (
@@ -102,4 +102,8 @@ export const SelectOption = ({
 	)
 }
 
-SelectOption.displayName = SELECT_DISPLAY_NAMES.OPTION
+SelectOptionComponent.displayName = SELECT_DISPLAY_NAMES.OPTION
+
+export const SelectOption = memo(
+	SelectOptionComponent,
+) as typeof SelectOptionComponent

@@ -80,6 +80,9 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 		[isMultiselect, valueMulti, selectedSingle],
 	)
 
+	const onChange = props.onChange
+	const onClear = props.onClear
+
 	const handleSelect = useCallback(
 		(option: ISelectOption<TSelectValue>): void => {
 			if (option.disabled) {
@@ -88,22 +91,22 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 
 			const selectedValue = option.value as T
 
-			if (isMultiselect && props.onChange) {
+			if (isMultiselect && onChange) {
 				const current = valueMulti ?? []
 				const next = current.includes(selectedValue)
 					? current.filter((value) => value !== selectedValue)
 					: [...current, selectedValue]
 
-				;(props.onChange as (value: T[]) => void)(next)
+				;(onChange as (value: T[]) => void)(next)
 				return
 			}
 
-			if (!isMultiselect && props.onChange) {
-				;(props.onChange as (value: T | null) => void)(selectedValue)
+			if (!isMultiselect && onChange) {
+				;(onChange as (value: T | null) => void)(selectedValue)
 				setIsOpen(false)
 			}
 		},
-		[isMultiselect, props, valueMulti],
+		[isMultiselect, onChange, valueMulti],
 	)
 
 	const handleClear = useCallback((): void => {
@@ -112,14 +115,14 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 		}
 
 		if (isMultiselect) {
-			;(props.onChange as ((value: T[]) => void) | undefined)?.([])
+			;(onChange as ((value: T[]) => void) | undefined)?.([])
 		} else {
-			;(props.onChange as ((value: T | null) => void) | undefined)?.(null)
+			;(onChange as ((value: T | null) => void) | undefined)?.(null)
 		}
 
 		setIsOpen(false)
-		props.onClear?.()
-	}, [isDisabled, isMultiselect, props])
+		onClear?.()
+	}, [isDisabled, isMultiselect, onChange, onClear])
 
 	return {
 		isOpen,

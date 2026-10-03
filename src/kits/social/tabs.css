@@ -47,17 +47,17 @@
 [data-ui-kit='social'] [data-slot='tabs-indicator']:not([data-variant='unstyled']) {
 	position: absolute;
 	z-index: 0;
-	left: var(--active-tab-left);
-	top: var(--active-tab-top);
+	left: 0;
+	top: 0;
 	width: var(--active-tab-width);
 	height: var(--active-tab-height);
 	border-radius: var(--button-radius);
 	background: var(--primary);
 	box-shadow: var(--button-primary-shadow);
 	pointer-events: none;
+	transform: translate3d(var(--active-tab-left), var(--active-tab-top), 0);
 	transition:
-		left var(--motion-duration-base) var(--motion-easing-control),
-		top var(--motion-duration-base) var(--motion-easing-control),
+		transform var(--motion-duration-base) var(--motion-easing-control),
 		width var(--motion-duration-base) var(--motion-easing-control),
 		height var(--motion-duration-base) var(--motion-easing-control);
 }
@@ -211,6 +211,7 @@
 	border-radius: 0;
 	background: var(--foreground);
 	box-shadow: none;
+	transform: translate3d(var(--active-tab-left), 0, 0);
 }
 
 [data-ui-kit='social'] [data-slot='tabs'][data-variant='solid'] > [data-slot='tabs-list'] [data-slot='tab']:not([data-variant='unstyled']),

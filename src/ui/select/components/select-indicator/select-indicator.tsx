@@ -4,7 +4,7 @@ import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import type { ReactElement, ReactNode } from 'react'
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
-import { useSelectContext } from '../../context/select-context'
+import { useSelectChrome, useSelectInteraction } from '../../context/select-context'
 import type { ISelectIndicatorProps } from '../../types/i-select-props'
 
 const DefaultChevronIcon = (): ReactElement => {
@@ -32,8 +32,8 @@ export const SelectIndicator = ({
 	icon: iconProp,
 	variant: variantProp,
 }: ISelectIndicatorProps): ReactElement | null => {
-	const { isLoading, isOpen, indicatorIcon, variant: contextVariant } =
-		useSelectContext()
+	const { isLoading, isOpen } = useSelectInteraction()
+	const { indicatorIcon, variant: contextVariant } = useSelectChrome()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 
 	if (isLoading) {
