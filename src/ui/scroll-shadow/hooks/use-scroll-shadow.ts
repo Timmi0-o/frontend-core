@@ -1,38 +1,45 @@
 'use client'
 
 import { useCallback, useEffect, useRef, type RefObject } from 'react'
-import type { TScrollShadowOrientation } from '../types/i-scroll-shadow-props'
+import type {
+	TScrollShadowOrientation,
+	TScrollShadowVisibility,
+} from '../types/i-scroll-shadow-props'
 
 interface IUseScrollShadowProps {
 	containerRef: RefObject<HTMLDivElement | null>
 	orientation: TScrollShadowOrientation
-	size: number
 	offset: number
+	visibility: TScrollShadowVisibility
 	isEnabled: boolean
-}
-
-const clampShadowDepth = (value: number, maxDepth: number): number => {
-	return Math.min(maxDepth, Math.max(0, value))
+	onVisibilityChange?: (visibility: TScrollShadowVisibility) => void
 }
 
 /**
- * Следит за overflow и scroll-позицией контейнера, выставляет --scroll-shadow-before/after
- * для плавного mask-fade на краях ScrollShadow.
+ * Fallback для браузеров без scroll-driven animations: выставляет data-*-scroll
+ * по overflow и scroll-позиции контейнера.
  */
 export const useScrollShadow = ({
 	containerRef,
 	orientation,
-	size,
 	offset,
+	visibility,
 	isEnabled,
+	onVisibilityChange,
 }: IUseScrollShadowProps): void => {
-	const prevDepthRef = useRef<{
-		scrollBeforeDepth: number
-		scrollAfterDepth: number
+	const onVisibilityChangeRef = useRef(onVisibilityChange)
+
+	useEffect(() => {
+		onVisibilityChangeRef.current = onVisibilityChange
+	}, [onVisibilityChange])
+
+	const prevStateRef = useRef<{
+		hasScrollBefore: boolean
+		hasScrollAfter: boolean
 	} | null>(null)
 	const rafIdRef = useRef<number | null>(null)
 
-	const updateShadowDepth = useCallback(() => {
+	const checkOverflow = useCallback(() => {
 		const element = containerRef.current
 
 		if (!element) {
@@ -43,26 +50,19 @@ export const useScrollShadow = ({
 		const scrollStart = isVertical ? element.scrollTop : Math.abs(element.scrollLeft)
 		const scrollSize = isVertical ? element.scrollHeight : element.scrollWidth
 		const clientSize = isVertical ? element.clientHeight : element.clientWidth
-		const maxScroll = scrollSize - clientSize
-		const scrollBeforeDepth =
-			maxScroll <= 0
-				? 0
-				: clampShadowDepth(scrollStart - offset, size)
-		const scrollAfterDepth =
-			maxScroll <= 0
-				? 0
-				: clampShadowDepth(maxScroll - scrollStart - offset, size)
-		const prevDepth = prevDepthRef.current
+		const hasScrollBefore = scrollStart > offset
+		const hasScrollAfter = scrollStart + clientSize + offset < scrollSize - 1
+		const prevState = prevStateRef.current
 
 		if (
-			prevDepth &&
-			prevDepth.scrollBeforeDepth === scrollBeforeDepth &&
-			prevDepth.scrollAfterDepth === scrollAfterDepth
+			prevState &&
+			prevState.hasScrollBefore === hasScrollBefore &&
+			prevState.hasScrollAfter === hasScrollAfter
 		) {
 			return
 		}
 
-		prevDepthRef.current = { scrollBeforeDepth, scrollAfterDepth }
+		prevStateRef.current = { hasScrollBefore, hasScrollAfter }
 
 		if (rafIdRef.current !== null) {
 			cancelAnimationFrame(rafIdRef.current)
@@ -70,27 +70,81 @@ export const useScrollShadow = ({
 
 		rafIdRef.current = requestAnimationFrame(() => {
 			rafIdRef.current = null
-			element.style.setProperty('--scroll-shadow-before', `${scrollBeforeDepth}px`)
-			element.style.setProperty('--scroll-shadow-after', `${scrollAfterDepth}px`)
+
+			const notify = onVisibilityChangeRef.current
+
+			if (isVertical) {
+				if (hasScrollBefore && hasScrollAfter) {
+					element.dataset.topBottomScroll = 'true'
+					delete element.dataset.topScroll
+					delete element.dataset.bottomScroll
+					notify?.('both')
+				} else {
+					element.dataset.topScroll = String(hasScrollBefore)
+					element.dataset.bottomScroll = String(hasScrollAfter)
+					delete element.dataset.topBottomScroll
+
+					if (notify) {
+						if (hasScrollBefore) {
+							notify('top')
+						} else if (hasScrollAfter) {
+							notify('bottom')
+						} else {
+							notify('none')
+						}
+					}
+				}
+
+				delete element.dataset.leftScroll
+				delete element.dataset.rightScroll
+				delete element.dataset.leftRightScroll
+
+				return
+			}
+
+			if (hasScrollBefore && hasScrollAfter) {
+				element.dataset.leftRightScroll = 'true'
+				delete element.dataset.leftScroll
+				delete element.dataset.rightScroll
+				notify?.('both')
+			} else {
+				element.dataset.leftScroll = String(hasScrollBefore)
+				element.dataset.rightScroll = String(hasScrollAfter)
+				delete element.dataset.leftRightScroll
+
+				if (notify) {
+					if (hasScrollBefore) {
+						notify('left')
+					} else if (hasScrollAfter) {
+						notify('right')
+					} else {
+						notify('none')
+					}
+				}
+			}
+
+			delete element.dataset.topScroll
+			delete element.dataset.bottomScroll
+			delete element.dataset.topBottomScroll
 		})
-	}, [containerRef, orientation, offset, size])
+	}, [containerRef, orientation, offset])
 
 	useEffect(() => {
 		const element = containerRef.current
 
-		if (!element || !isEnabled) {
+		if (!element || !isEnabled || visibility !== 'auto') {
 			return
 		}
 
-		updateShadowDepth()
+		checkOverflow()
 
-		element.addEventListener('scroll', updateShadowDepth, { passive: true })
+		element.addEventListener('scroll', checkOverflow, { passive: true })
 
-		const resizeObserver = new ResizeObserver(updateShadowDepth)
+		const resizeObserver = new ResizeObserver(checkOverflow)
 
 		resizeObserver.observe(element)
 
-		const mutationObserver = new MutationObserver(updateShadowDepth)
+		const mutationObserver = new MutationObserver(checkOverflow)
 
 		mutationObserver.observe(element, {
 			attributeFilter: ['class', 'style'],
@@ -101,18 +155,16 @@ export const useScrollShadow = ({
 		})
 
 		return () => {
-			element.removeEventListener('scroll', updateShadowDepth)
+			element.removeEventListener('scroll', checkOverflow)
 			resizeObserver.disconnect()
 			mutationObserver.disconnect()
-			element.style.removeProperty('--scroll-shadow-before')
-			element.style.removeProperty('--scroll-shadow-after')
 
 			if (rafIdRef.current !== null) {
 				cancelAnimationFrame(rafIdRef.current)
 				rafIdRef.current = null
 			}
 
-			prevDepthRef.current = null
+			prevStateRef.current = null
 		}
-	}, [containerRef, isEnabled, updateShadowDepth])
+	}, [containerRef, visibility, isEnabled, checkOverflow])
 }

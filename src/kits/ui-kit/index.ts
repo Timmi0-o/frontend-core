@@ -102,6 +102,7 @@ export type {
 	ISeparatorProps,
 	TSeparatorMode,
 	TScrollShadowOrientation,
+	TScrollShadowVisibility,
 	ISkeletonProps,
 	ISliderProps,
 	TSliderSize,

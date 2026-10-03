@@ -3,16 +3,30 @@ import type { HTMLAttributes, ReactNode } from 'react'
 
 export type TScrollShadowOrientation = 'horizontal' | 'vertical'
 
+export type TScrollShadowVisibility =
+	| 'auto'
+	| 'both'
+	| 'top'
+	| 'bottom'
+	| 'left'
+	| 'right'
+	| 'none'
+
 export interface IScrollShadowProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode
 	className?: string
 	variant?: TSlotVariant
 	/** Направление прокрутки. */
 	orientation?: TScrollShadowOrientation
-	/** Глубина градиента на краях, px. */
+	/** Глубина fade-градиента, px. */
 	size?: number
-	/** Отступ от края до появления тени, px. */
+	/** Отступ до начала fade, px. */
 	offset?: number
-	/** Выключает отслеживание overflow и сброс data-*-scroll. */
+	/** Управление видимостью теней; `auto` — scroll-driven CSS + fallback-хук. */
+	visibility?: TScrollShadowVisibility
+	/** Выключает детекцию overflow и scroll-driven fade. */
 	isEnabled?: boolean
+	/** Скрывает нативный scrollbar, сохраняя прокрутку. */
+	isScrollBarHidden?: boolean
+	onVisibilityChange?: (visibility: TScrollShadowVisibility) => void
 }

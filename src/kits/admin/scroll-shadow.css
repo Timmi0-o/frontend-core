@@ -1,35 +1,181 @@
+@property --scroll-shadow-start-fade {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0px;
+}
+
+@property --scroll-shadow-end-fade {
+	syntax: '<length>';
+	inherits: false;
+	initial-value: 0px;
+}
+
+@keyframes scroll-shadow-start-fade {
+	from {
+		--scroll-shadow-start-fade: 0px;
+	}
+
+	to {
+		--scroll-shadow-start-fade: var(--scroll-shadow-size);
+	}
+}
+
+@keyframes scroll-shadow-end-fade {
+	from {
+		--scroll-shadow-end-fade: var(--scroll-shadow-size);
+	}
+
+	to {
+		--scroll-shadow-end-fade: 0px;
+	}
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled']) {
+	position: relative;
+	--scroll-shadow-scrollbar-size: 4px;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-scroll-bar-hidden='true'] {
+	--scroll-shadow-scrollbar-size: 0px;
+	scrollbar-width: none;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-scroll-bar-hidden='true']::-webkit-scrollbar {
+	display: none;
+}
+
 [data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'] {
+	overflow-x: hidden;
 	overflow-y: auto;
-	-webkit-mask-image: linear-gradient(
-		to bottom,
-		transparent 0,
-		#000 var(--scroll-shadow-before, 0px),
-		#000 calc(100% - var(--scroll-shadow-after, 0px)),
-		transparent 100%
-	);
-	mask-image: linear-gradient(
-		to bottom,
-		transparent 0,
-		#000 var(--scroll-shadow-before, 0px),
-		#000 calc(100% - var(--scroll-shadow-after, 0px)),
-		transparent 100%
-	);
 }
 
 [data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'] {
+	overflow-y: hidden;
 	overflow-x: auto;
-	-webkit-mask-image: linear-gradient(
-		to right,
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical']:is(
+	[data-top-scroll='true'],
+	[data-bottom-scroll='true'],
+	[data-top-bottom-scroll='true'],
+	[data-scroll-shadow-mode='auto']
+) {
+	-webkit-mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+	mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+	-webkit-mask-position: left top, right top;
+	mask-position: left top, right top;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size:
+		calc(100% - var(--scroll-shadow-scrollbar-size)) 100%,
+		var(--scroll-shadow-scrollbar-size) 100%;
+	mask-size:
+		calc(100% - var(--scroll-shadow-scrollbar-size)) 100%,
+		var(--scroll-shadow-scrollbar-size) 100%;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'][data-top-scroll='true'] {
+	--scroll-linear-gradient: 0deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'][data-bottom-scroll='true'] {
+	--scroll-linear-gradient: 180deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'][data-top-bottom-scroll='true'] {
+	--scroll-linear-gradient:
+		#000,
+		#000,
 		transparent 0,
-		#000 var(--scroll-shadow-before, 0px),
-		#000 calc(100% - var(--scroll-shadow-after, 0px)),
-		transparent 100%
-	);
-	mask-image: linear-gradient(
+		#000 var(--scroll-shadow-size),
+		#000 calc(100% - var(--scroll-shadow-size)),
+		transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal']:is(
+	[data-left-scroll='true'],
+	[data-right-scroll='true'],
+	[data-left-right-scroll='true'],
+	[data-scroll-shadow-mode='auto']
+) {
+	-webkit-mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+	mask-image: linear-gradient(var(--scroll-linear-gradient)), linear-gradient(#000, #000);
+	-webkit-mask-position: left top, left bottom;
+	mask-position: left top, left bottom;
+	-webkit-mask-repeat: no-repeat;
+	mask-repeat: no-repeat;
+	-webkit-mask-size:
+		100% calc(100% - var(--scroll-shadow-scrollbar-size)),
+		100% var(--scroll-shadow-scrollbar-size);
+	mask-size:
+		100% calc(100% - var(--scroll-shadow-scrollbar-size)),
+		100% var(--scroll-shadow-scrollbar-size);
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-left-scroll='true'] {
+	--scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-left-scroll='true']:dir(rtl) {
+	--scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-right-scroll='true'] {
+	--scroll-linear-gradient: 90deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-right-scroll='true']:dir(rtl) {
+	--scroll-linear-gradient: 270deg, #000 calc(100% - var(--scroll-shadow-size)), transparent;
+}
+
+[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-left-right-scroll='true'] {
+	--scroll-linear-gradient:
 		to right,
+		#000,
+		#000,
 		transparent 0,
-		#000 var(--scroll-shadow-before, 0px),
-		#000 calc(100% - var(--scroll-shadow-after, 0px)),
-		transparent 100%
-	);
+		#000 var(--scroll-shadow-size),
+		#000 calc(100% - var(--scroll-shadow-size)),
+		transparent;
+}
+
+@supports (animation-timeline: scroll()) {
+	[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-scroll-shadow-mode='auto'] {
+		animation:
+			scroll-shadow-start-fade linear both,
+			scroll-shadow-end-fade linear both;
+		animation-range:
+			var(--scroll-shadow-offset) calc(var(--scroll-shadow-offset) + var(--scroll-shadow-size)),
+			calc(100% - var(--scroll-shadow-size) - var(--scroll-shadow-offset))
+				calc(100% - var(--scroll-shadow-offset));
+	}
+
+	[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'][data-scroll-shadow-mode='auto'] {
+		animation-timeline: scroll(self block), scroll(self block);
+		--scroll-linear-gradient:
+			180deg,
+			transparent 0,
+			#000 var(--scroll-shadow-start-fade),
+			#000 calc(100% - var(--scroll-shadow-end-fade)),
+			transparent 100%;
+	}
+
+	[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-scroll-shadow-mode='auto'] {
+		animation-timeline: scroll(self inline), scroll(self inline);
+		--scroll-linear-gradient:
+			90deg,
+			transparent 0,
+			#000 var(--scroll-shadow-start-fade),
+			#000 calc(100% - var(--scroll-shadow-end-fade)),
+			transparent 100%;
+	}
+
+	[data-ui-kit='admin'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'][data-scroll-shadow-mode='auto']:dir(rtl) {
+		--scroll-linear-gradient:
+			270deg,
+			transparent 0,
+			#000 var(--scroll-shadow-start-fade),
+			#000 calc(100% - var(--scroll-shadow-end-fade)),
+			transparent 100%;
+	}
 }

@@ -205,6 +205,7 @@ export { ScrollShadow } from './scroll-shadow/scroll-shadow'
 export type {
 	IScrollShadowProps,
 	TScrollShadowOrientation,
+	TScrollShadowVisibility,
 } from './scroll-shadow/scroll-shadow'
 export { Select } from './select/select'
 export type {

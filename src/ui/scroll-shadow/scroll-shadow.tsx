@@ -4,6 +4,7 @@ import { cn } from '@/core/cn'
 import {
 	forwardRef,
 	useCallback,
+	useLayoutEffect,
 	useRef,
 	type CSSProperties,
 	type ReactElement,
@@ -14,6 +15,7 @@ import type { IScrollShadowProps } from './types/i-scroll-shadow-props'
 export type {
 	IScrollShadowProps,
 	TScrollShadowOrientation,
+	TScrollShadowVisibility,
 } from './types/i-scroll-shadow-props'
 
 const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
@@ -25,7 +27,10 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 			orientation = 'horizontal',
 			size = 40,
 			offset = 0,
+			visibility = 'auto',
 			isEnabled = true,
+			isScrollBarHidden = false,
+			onVisibilityChange,
 			style,
 			...rest
 		},
@@ -36,10 +41,34 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 		useScrollShadow({
 			containerRef,
 			orientation,
-			size,
 			offset,
+			visibility,
 			isEnabled,
+			onVisibilityChange,
 		})
+
+		useLayoutEffect(() => {
+			const element = containerRef.current
+
+			if (!element || visibility === 'auto') {
+				return
+			}
+
+			delete element.dataset.topScroll
+			delete element.dataset.bottomScroll
+			delete element.dataset.topBottomScroll
+			delete element.dataset.leftScroll
+			delete element.dataset.rightScroll
+			delete element.dataset.leftRightScroll
+
+			if (visibility === 'both') {
+				element.dataset[
+					orientation === 'vertical' ? 'topBottomScroll' : 'leftRightScroll'
+				] = 'true'
+			} else if (visibility !== 'none') {
+				element.dataset[`${visibility}Scroll`] = 'true'
+			}
+		}, [visibility, orientation])
 
 		const handleRef = useCallback(
 			(node: HTMLDivElement | null) => {
@@ -59,6 +88,8 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 
 		const rootStyle = {
 			'--scroll-shadow-size': `${size}px`,
+			'--scroll-shadow-offset': `${offset}px`,
+			'--scroll-shadow-scrollbar-size': isScrollBarHidden ? '0px' : undefined,
 			...style,
 		} as CSSProperties
 
@@ -68,6 +99,8 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 				data-slot='scroll-shadow'
 				data-variant={variant}
 				data-orientation={orientation}
+				data-scroll-shadow-mode={isEnabled && visibility === 'auto' ? 'auto' : 'manual'}
+				data-scroll-bar-hidden={isScrollBarHidden ? 'true' : undefined}
 				className={cn(className)}
 				style={rootStyle}
 				{...rest}
@@ -81,8 +114,8 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 ScrollShadowRoot.displayName = 'ScrollShadow'
 
 /**
- * Обёртка для overflow-контента с fade на краях, когда есть куда скроллить.
- * Интенсивность fade на краях нарастает плавно в пределах `size` по мере прокрутки.
+ * Fade на краях overflow-контента. В `visibility="auto"` fade считается в CSS
+ * через scroll-driven animations; в старых браузерах — через data-*-scroll и mask.
  *
  * @example
  * ```tsx
