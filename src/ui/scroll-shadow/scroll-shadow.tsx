@@ -2,6 +2,8 @@
 
 import { cn } from '@/core/cn'
 import {
+	forwardRef,
+	useCallback,
 	useRef,
 	type CSSProperties,
 	type ReactElement,
@@ -14,46 +16,67 @@ export type {
 	TScrollShadowOrientation,
 } from './types/i-scroll-shadow-props'
 
-const ScrollShadowRoot = ({
-	children,
-	className,
-	variant = 'default',
-	orientation = 'horizontal',
-	size = 40,
-	offset = 0,
-	isEnabled = true,
-	style,
-	...rest
-}: IScrollShadowProps): ReactElement => {
-	const containerRef = useRef<HTMLDivElement>(null)
+const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
+	(
+		{
+			children,
+			className,
+			variant = 'default',
+			orientation = 'horizontal',
+			size = 40,
+			offset = 0,
+			isEnabled = true,
+			style,
+			...rest
+		},
+		ref,
+	): ReactElement => {
+		const containerRef = useRef<HTMLDivElement | null>(null)
 
-	useScrollShadow({
-		containerRef,
-		orientation,
-		size,
-		offset,
-		isEnabled,
-	})
+		useScrollShadow({
+			containerRef,
+			orientation,
+			size,
+			offset,
+			isEnabled,
+		})
 
-	const rootStyle = {
-		'--scroll-shadow-size': `${size}px`,
-		...style,
-	} as CSSProperties
+		const handleRef = useCallback(
+			(node: HTMLDivElement | null) => {
+				containerRef.current = node
 
-	return (
-		<div
-			ref={containerRef}
-			data-slot='scroll-shadow'
-			data-variant={variant}
-			data-orientation={orientation}
-			className={cn(className)}
-			style={rootStyle}
-			{...rest}
-		>
-			{children}
-		</div>
-	)
-}
+				if (typeof ref === 'function') {
+					ref(node)
+					return
+				}
+
+				if (ref) {
+					ref.current = node
+				}
+			},
+			[ref],
+		)
+
+		const rootStyle = {
+			'--scroll-shadow-size': `${size}px`,
+			...style,
+		} as CSSProperties
+
+		return (
+			<div
+				ref={handleRef}
+				data-slot='scroll-shadow'
+				data-variant={variant}
+				data-orientation={orientation}
+				className={cn(className)}
+				style={rootStyle}
+				{...rest}
+			>
+				{children}
+			</div>
+		)
+	},
+)
 
 ScrollShadowRoot.displayName = 'ScrollShadow'
 

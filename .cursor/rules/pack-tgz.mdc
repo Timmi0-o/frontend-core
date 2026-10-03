@@ -1,5 +1,5 @@
 ---
-description: npm pack — сразу удалять предыдущие tgz, оставлять только текущую версию
+description: npm pack — tgz только перед publish; потребители ставят версию из registry
 alwaysApply: true
 ---
 
@@ -8,5 +8,12 @@ alwaysApply: true
 После `npm run build && npm pack` в этом пакете:
 
 - Живёт один файл: `timmi0-o-frontend-core-<version>.tgz` (`version` из `package.json`).
-- Все прочие `timmi0-o-frontend-core-*.tgz` в этой папке и в приложениях-потребителях — удалить сразу.
-- Не копировать архив в `my-master-next-app/` / admin: там только `file:../frontend-core/...tgz`.
+- Все прочие `timmi0-o-frontend-core-*.tgz` в этой папке — удалить сразу.
+
+## Потребители (`my-master-next-app`, `my-master-admin-panel`)
+
+- Только `"@timmi0-o/frontend-core": "<version>"` из npm registry.
+- **Запрещено** `file:../frontend-core/...` и любые локальные `.tgz` в `package.json` приложений.
+- После publish — bump версии у потребителя и `npm install`, без file-линков.
+
+Правило у приложений: `frontend-core-npm-only.mdc`.
