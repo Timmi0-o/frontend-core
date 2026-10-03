@@ -201,6 +201,11 @@ export { Toaster } from './sonner/sonner'
  */
 export { toast } from 'sonner'
 export type { IToasterProps } from './sonner/sonner'
+export { ScrollShadow } from './scroll-shadow/scroll-shadow'
+export type {
+	IScrollShadowProps,
+	TScrollShadowOrientation,
+} from './scroll-shadow/scroll-shadow'
 export { Select } from './select/select'
 export type {
 	ISelectDropdownProps,

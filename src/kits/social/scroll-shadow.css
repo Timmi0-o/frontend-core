@@ -1,0 +1,35 @@
+[data-ui-kit='social'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='vertical'] {
+	overflow-y: auto;
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		transparent 0,
+		#000 var(--scroll-shadow-before, 0px),
+		#000 calc(100% - var(--scroll-shadow-after, 0px)),
+		transparent 100%
+	);
+	mask-image: linear-gradient(
+		to bottom,
+		transparent 0,
+		#000 var(--scroll-shadow-before, 0px),
+		#000 calc(100% - var(--scroll-shadow-after, 0px)),
+		transparent 100%
+	);
+}
+
+[data-ui-kit='social'] [data-slot='scroll-shadow']:not([data-variant='unstyled'])[data-orientation='horizontal'] {
+	overflow-x: auto;
+	-webkit-mask-image: linear-gradient(
+		to right,
+		transparent 0,
+		#000 var(--scroll-shadow-before, 0px),
+		#000 calc(100% - var(--scroll-shadow-after, 0px)),
+		transparent 100%
+	);
+	mask-image: linear-gradient(
+		to right,
+		transparent 0,
+		#000 var(--scroll-shadow-before, 0px),
+		#000 calc(100% - var(--scroll-shadow-after, 0px)),
+		transparent 100%
+	);
+}

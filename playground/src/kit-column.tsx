@@ -19,6 +19,7 @@ import {
 	Label,
 	PhotoGallery,
 	Separator,
+	ScrollShadow,
 	Select,
 	Spinner,
 	Slider,
@@ -96,7 +97,7 @@ interface IKitColumnProps {
 }
 
 /** Число `DemoSection` в колонке. Нужно subgrid, чтобы ряды китов совпадали по высоте. */
-export const KIT_CATALOG_SECTION_COUNT = 32
+export const KIT_CATALOG_SECTION_COUNT = 33
 
 /** Шапка колонки плюс секции каталога — сколько рядов занимает кит в общей сетке. */
 export const KIT_COLUMN_GRID_ROWS = 1 + KIT_CATALOG_SECTION_COUNT
@@ -691,6 +692,36 @@ export const KitColumn = ({
 								))}
 							</Select.Dropdown>
 						</Select>
+					</div>
+				</DemoSection>
+
+				<DemoSection title='ScrollShadow'>
+					<div className='kit-stack kit-stack--full'>
+						<ScrollShadow className='kit-scroll-shadow kit-scroll-shadow--horizontal'>
+							<div className='kit-scroll-shadow__row'>
+								{['Отели', 'Перелёты', 'Туры', 'Круизы', 'Ж/д', 'Авто', 'Страховка', 'Визы'].map(
+									(label) => (
+										<Chip key={label} variant='outline'>
+											{label}
+										</Chip>
+									),
+								)}
+							</div>
+						</ScrollShadow>
+						<ScrollShadow
+							orientation='vertical'
+							size={80}
+							className='kit-scroll-shadow kit-scroll-shadow--vertical'
+						>
+							<div className='kit-scroll-shadow__stack'>
+								{Array.from({ length: 8 }, (_, index) => (
+									<p key={index}>
+										Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+										eiusmod tempor incididunt ut labore et dolore magna aliqua.
+									</p>
+								))}
+							</div>
+						</ScrollShadow>
 					</div>
 				</DemoSection>
 

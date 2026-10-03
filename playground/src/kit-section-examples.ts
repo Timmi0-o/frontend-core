@@ -355,6 +355,35 @@ export const Example = () => {
 }
 `,
 
+	scrollshadow: `import { Chip, ScrollShadow } from '$KIT'
+
+const FILTERS = ['Отели', 'Перелёты', 'Туры', 'Круизы', 'Ж/д', 'Авто', 'Страховка', 'Визы']
+
+export const Example = () => {
+  return (
+    <>
+      <ScrollShadow className={styles.filters}>
+        <div className={styles.filtersRow}>
+          {FILTERS.map((label) => (
+            <Chip key={label} variant="outline">
+              {label}
+            </Chip>
+          ))}
+        </div>
+      </ScrollShadow>
+
+      <ScrollShadow orientation="vertical" size={80} className={styles.notes}>
+        {Array.from({ length: 10 }).map((_, index) => (
+          <p key={index}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+          </p>
+        ))}
+      </ScrollShadow>
+    </>
+  )
+}
+`,
+
 	autocomplete: `import { AutoComplete } from '$KIT'
 import { useState } from 'react'
 

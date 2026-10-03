@@ -33,6 +33,7 @@ const KIT_COMPONENT_NAMES = [
 	'Modal',
 	'PhotoGallery',
 	'Popover',
+	'ScrollShadow',
 	'Select',
 	'Separator',
 	'Skeleton',

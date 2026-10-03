@@ -824,6 +824,43 @@ a {
 	gap: 6px;
 }
 
+.kit-scroll-shadow {
+	width: 100%;
+	border: 1px solid color-mix(in srgb, var(--pg-line) 80%, transparent);
+	border-radius: 12px;
+	background: var(--pg-surface);
+}
+
+.kit-scroll-shadow--horizontal {
+	max-width: 100%;
+	padding: 12px;
+}
+
+.kit-scroll-shadow--vertical {
+	max-height: 240px;
+	padding: 16px;
+}
+
+.kit-scroll-shadow__row {
+	display: flex;
+	flex-wrap: nowrap;
+	gap: 8px;
+	width: max-content;
+}
+
+.kit-scroll-shadow__stack {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.kit-scroll-shadow__stack p {
+	margin: 0;
+	color: var(--pg-muted);
+	font-size: 14px;
+	line-height: 1.5;
+}
+
 .kit-spec-list {
 	display: flex;
 	flex-direction: column;
