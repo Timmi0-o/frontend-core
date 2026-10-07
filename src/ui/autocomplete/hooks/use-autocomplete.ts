@@ -25,7 +25,8 @@ export const useAutocomplete = <T extends string | number>(
 		filterOptions = filterAutocompleteOptions,
 	} = props
 
-	const isDisabled = props.isDisabled === true || isLoading
+	// Загрузка не дизейблит поле: disabled снимает фокус посреди ввода.
+	const isDisabled = props.isDisabled === true
 	const isInputControlled = inputValueProp !== undefined
 
 	const [isOpen, setIsOpen] = useState(false)
