@@ -151,3 +151,22 @@
 	font-weight: 500;
 	color: #dc2626;
 }
+
+[data-ui-kit='social'] [data-slot='autocomplete-input'][data-adaptive-trigger] {
+	text-align: left;
+	cursor: pointer;
+}
+
+[data-ui-kit='social'] [data-slot='autocomplete-input'][data-adaptive-trigger][data-empty] {
+	color: var(--light-gray);
+}
+
+[data-ui-kit='social'] [data-slot='adaptive-autocomplete-sheet'] {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+}
+
+[data-ui-kit='social'] [data-slot='adaptive-autocomplete-sheet'] [data-slot='autocomplete-dropdown-list'] {
+	max-height: min(50dvh, 24rem);
+}

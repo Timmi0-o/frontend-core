@@ -7,6 +7,10 @@ export type {
 	IAdaptiveDialogSlotProps,
 	TAdaptiveDialogMode,
 } from './adaptive-dialog/adaptive-dialog'
+export { AdaptiveAutocomplete } from './adaptive-autocomplete/adaptive-autocomplete'
+export type { IAdaptiveAutocompleteProps } from './adaptive-autocomplete/adaptive-autocomplete'
+export { AdaptiveSelect } from './adaptive-select/adaptive-select'
+export type { IAdaptiveSelectProps } from './adaptive-select/adaptive-select'
 export type {
 	IAccordionHeaderProps,
 	IAccordionItemProps,

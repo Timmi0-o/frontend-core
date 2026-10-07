@@ -287,3 +287,7 @@
 	line-height: 1rem;
 	color: var(--danger);
 }
+
+[data-ui-kit='admin'] [data-slot='adaptive-select-sheet'] [data-slot='select-dropdown-list'] {
+	max-height: min(50dvh, 24rem);
+}
