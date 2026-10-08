@@ -184,10 +184,15 @@
 
 [data-ui-kit='admin'] [data-slot='adaptive-autocomplete-sheet'] {
 	display: flex;
+	flex: 1 1 auto;
 	flex-direction: column;
 	gap: 0.75rem;
+	min-height: 0;
 }
 
 [data-ui-kit='admin'] [data-slot='adaptive-autocomplete-sheet'] [data-slot='autocomplete-dropdown-list'] {
+	flex: 1 1 auto;
+	min-height: min(36dvh, 18rem);
 	max-height: min(50dvh, 24rem);
+	overflow-y: auto;
 }

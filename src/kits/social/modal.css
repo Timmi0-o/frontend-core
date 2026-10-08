@@ -159,6 +159,30 @@
 	will-change: transform;
 }
 
+[data-ui-kit='social'] [data-slot='bottom-sheet-content']:has(
+		[data-slot='adaptive-select-sheet'],
+		[data-slot='adaptive-autocomplete-sheet']
+	):not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']:has(
+		[data-slot='adaptive-select-sheet'],
+		[data-slot='adaptive-autocomplete-sheet']
+	):not([data-variant='unstyled']) {
+	min-height: min(52dvh, 26rem);
+}
+
+[data-ui-kit='social'] [data-slot='bottom-sheet-body']:has(
+		[data-slot='adaptive-select-sheet'],
+		[data-slot='adaptive-autocomplete-sheet']
+	):not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-body']:has(
+		[data-slot='adaptive-select-sheet'],
+		[data-slot='adaptive-autocomplete-sheet']
+	):not([data-variant='unstyled']) {
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
 [data-ui-kit='social'] [data-slot='bottom-sheet-content'][data-variant='secondary']:not([data-variant='unstyled']),
 [data-ui-kit='social'][data-slot='bottom-sheet-content'][data-variant='secondary']:not([data-variant='unstyled']) {
 	--bottom-sheet-inset-inline: 0.75rem;
