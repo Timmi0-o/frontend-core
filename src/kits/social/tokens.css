@@ -100,9 +100,9 @@
 	--button-outline-hover: var(--surface-hover);
 	--button-ghost-fg: color-mix(in srgb, var(--foreground) 80%, transparent);
 	--button-ghost-hover: var(--surface-hover);
-	--button-danger-bg: var(--danger-soft);
-	--button-danger-hover: var(--danger-soft-hover);
-	--button-danger-active: color-mix(in srgb, var(--destructive) 28%, transparent);
+	--button-danger-bg: color-mix(in srgb, var(--destructive) 10%, var(--background));
+	--button-danger-hover: color-mix(in srgb, var(--destructive) 20%, var(--background));
+	--button-danger-active: color-mix(in srgb, var(--destructive) 28%, var(--background));
 	--button-primary-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
 	--button-radius: 9999px;
 
@@ -179,8 +179,9 @@ html.dark [data-ui-kit='social'],
 	--skeleton-base: color-mix(in srgb, var(--foreground) 8%, transparent);
 	--skeleton-highlight: color-mix(in srgb, var(--foreground) 16%, transparent);
 	--button-ghost-fg: #d4d4d8;
-	--button-danger-bg: color-mix(in srgb, var(--destructive) 20%, transparent);
-	--button-danger-hover: color-mix(in srgb, var(--destructive) 30%, transparent);
+	--button-danger-bg: color-mix(in srgb, var(--destructive) 20%, var(--background));
+	--button-danger-hover: color-mix(in srgb, var(--destructive) 30%, var(--background));
+	--button-danger-active: color-mix(in srgb, var(--destructive) 36%, var(--background));
 	--button-primary-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
 	--success-foreground: #86efac;
 }
