@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 
 /**
- * Base UI Trigger ставит native-button defaults только если render — настоящий `<button>`.
+ * Base UI `render` ставит native-button defaults только если элемент — настоящий `<button>`.
  * Наш `Button` тоже рендерит button; div/span должны идти с `nativeButton={false}`.
  */
 export const isNativeButtonTrigger = (element: ReactElement): boolean => {

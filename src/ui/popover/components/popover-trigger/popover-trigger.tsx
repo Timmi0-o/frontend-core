@@ -2,9 +2,11 @@
 
 import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
 import type { ReactNode } from 'react'
+
+import { isNativeButtonTrigger } from '@/core/is-native-button-trigger'
+
 import { POPOVER_DISPLAY_NAMES } from '../../constants/popover.constants'
 import type { IPopoverTriggerProps } from '../../types/i-popover-props'
-import { isNativeButtonTrigger } from '../../utils/is-native-button-trigger'
 
 /**
  * Элемент, клик по которому открывает Popover. Ребёнок — один React-элемент (`Button`).

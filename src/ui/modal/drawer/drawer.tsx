@@ -25,6 +25,7 @@ import {
 	type ReactNode,
 } from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
+import { OverlayCloseIcon } from '../components/overlay-close-icon/overlay-close-icon'
 
 const DEFAULT_DRAWER_TITLE = 'Панель'
 
@@ -128,6 +129,52 @@ function DrawerClose({
 }: ComponentProps<typeof DrawerPrimitive.Close>): ReactElement {
 	return <DrawerPrimitive.Close data-slot='drawer-close' {...props} />
 }
+
+export type IDrawerCloseButtonProps = Omit<
+	ComponentProps<typeof DrawerPrimitive.Close>,
+	'asChild' | 'children'
+> & {
+	children?: ReactElement
+	variant?: TSlotVariant
+}
+
+function DrawerCloseButton({
+	children,
+	className,
+	variant = 'default',
+	'aria-label': ariaLabel = 'Close',
+	...props
+}: IDrawerCloseButtonProps): ReactElement {
+	if (children) {
+		return (
+			<DrawerPrimitive.Close
+				asChild
+				data-slot='drawer-close-button'
+				data-variant={variant}
+				data-custom-control=''
+				className={className}
+				aria-label={ariaLabel}
+				{...props}
+			>
+				{children}
+			</DrawerPrimitive.Close>
+		)
+	}
+
+	return (
+		<DrawerPrimitive.Close
+			data-slot='drawer-close-button'
+			data-variant={variant}
+			className={className}
+			aria-label={ariaLabel}
+			{...props}
+		>
+			<OverlayCloseIcon data-slot='overlay-close-icon' />
+		</DrawerPrimitive.Close>
+	)
+}
+
+DrawerCloseButton.displayName = 'Drawer.CloseButton'
 
 const DrawerOverlay = forwardRef<
 	HTMLDivElement,
@@ -380,6 +427,7 @@ type TDrawerComponent = typeof DrawerRoot & {
 	Trigger: typeof DrawerTrigger
 	Portal: typeof DrawerPortal
 	Close: typeof DrawerClose
+	CloseButton: typeof DrawerCloseButton
 	Overlay: typeof DrawerOverlay
 	Content: typeof DrawerContent
 	Header: typeof DrawerHeader
@@ -397,6 +445,7 @@ type TDrawerComponent = typeof DrawerRoot & {
  * <Drawer open={isOpen} onOpenChange={setIsOpen} title="Фильтры">
  *   <Drawer.Header>
  *     <Drawer.Title>Фильтры</Drawer.Title>
+ *     <Drawer.CloseButton />
  *   </Drawer.Header>
  *   <Drawer.Body>
  *     <Checkbox label="Только активные" checked={isActive} onCheckedChange={setIsActive} />
@@ -412,6 +461,7 @@ export const Drawer: TDrawerComponent = Object.assign(DrawerRoot, {
 	Trigger: DrawerTrigger,
 	Portal: DrawerPortal,
 	Close: DrawerClose,
+	CloseButton: DrawerCloseButton,
 	Overlay: DrawerOverlay,
 	Content: DrawerContent,
 	Header: DrawerHeader,

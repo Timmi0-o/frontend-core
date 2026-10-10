@@ -2,6 +2,7 @@
 
 import { Dialog } from '@base-ui/react/dialog'
 import { cn } from '@/core/cn'
+import { isNativeButtonTrigger } from '@/core/is-native-button-trigger'
 import { isOverlayParentDismissLocked } from '@/core/overlay-floating-dismiss-lock'
 import {
 	OverlayLayerProvider,
@@ -16,6 +17,7 @@ import {
 	useCallback,
 	useLayoutEffect,
 	useState,
+	type ComponentProps,
 	type PointerEvent as ReactPointerEvent,
 	type ReactElement,
 	type ReactNode,
@@ -23,6 +25,7 @@ import {
 import { ModalBody } from './components/modal-body/modal-body'
 import { ModalFooter } from './components/modal-footer/modal-footer'
 import { ModalHeader } from './components/modal-header/modal-header'
+import { OverlayCloseIcon } from './components/overlay-close-icon/overlay-close-icon'
 import { MODAL_DISPLAY_NAMES } from './constants/modal.constants'
 import { ModalContext, useModalContext } from './context/modal-context'
 
@@ -215,6 +218,51 @@ const ModalClose = ({
 
 ModalClose.displayName = MODAL_DISPLAY_NAMES.CLOSE
 
+export type IModalCloseButtonProps = Omit<
+	ComponentProps<typeof Dialog.Close>,
+	'children' | 'render'
+> & {
+	children?: ReactElement
+	variant?: TSlotVariant
+}
+
+const ModalCloseButton = ({
+	children,
+	className,
+	variant = 'default',
+	'aria-label': ariaLabel = 'Close',
+	...props
+}: IModalCloseButtonProps): ReactElement => {
+	if (children) {
+		return (
+			<Dialog.Close
+				data-slot='modal-close-button'
+				data-variant={variant}
+				data-custom-control=''
+				className={className}
+				aria-label={ariaLabel}
+				nativeButton={isNativeButtonTrigger(children)}
+				render={children}
+				{...props}
+			/>
+		)
+	}
+
+	return (
+		<Dialog.Close
+			data-slot='modal-close-button'
+			data-variant={variant}
+			className={className}
+			aria-label={ariaLabel}
+			{...props}
+		>
+			<OverlayCloseIcon data-slot='overlay-close-icon' />
+		</Dialog.Close>
+	)
+}
+
+ModalCloseButton.displayName = MODAL_DISPLAY_NAMES.CLOSE_BUTTON
+
 type TModalComponent = typeof ModalRoot & {
 	Header: typeof ModalHeader
 	Body: typeof ModalBody
@@ -222,6 +270,7 @@ type TModalComponent = typeof ModalRoot & {
 	Title: typeof ModalTitle
 	Description: typeof ModalDescription
 	Close: typeof ModalClose
+	CloseButton: typeof ModalCloseButton
 	Root: typeof ModalRoot
 }
 
@@ -234,7 +283,7 @@ type TModalComponent = typeof ModalRoot & {
  *   <Modal.Header>
  *     <Modal.Title>Отменить заказ?</Modal.Title>
  *     <Modal.Description>Бронь снимется.</Modal.Description>
- *     <Modal.Close />
+ *     <Modal.CloseButton />
  *   </Modal.Header>
  *   <Modal.Body>Бронь снимется.</Modal.Body>
  *   <Modal.Footer>
@@ -252,4 +301,5 @@ export const Modal: TModalComponent = Object.assign(ModalRoot, {
 	Title: ModalTitle,
 	Description: ModalDescription,
 	Close: ModalClose,
+	CloseButton: ModalCloseButton,
 })

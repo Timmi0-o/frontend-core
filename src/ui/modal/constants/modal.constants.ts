@@ -6,4 +6,5 @@ export const MODAL_DISPLAY_NAMES = {
 	TITLE: 'Modal.Title',
 	DESCRIPTION: 'Modal.Description',
 	CLOSE: 'Modal.Close',
+	CLOSE_BUTTON: 'Modal.CloseButton',
 } as const

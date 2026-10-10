@@ -42,6 +42,7 @@ import { KitOfferCard } from './kit-offer-card'
 import { KitOfferSkeleton } from './kit-offer-skeleton'
 import {
 	KitAdaptiveDialogPreview,
+	KitDrawerPreview,
 	KitModalPreview,
 	KitPopoverPreview,
 	KitSheetPreview,
@@ -577,6 +578,10 @@ export const KitColumn = ({
 
 				<DemoSection title='Modal'>
 					<KitModalPreview />
+				</DemoSection>
+
+				<DemoSection title='Drawer'>
+					<KitDrawerPreview />
 				</DemoSection>
 
 				<DemoSection title='PhotoGallery'>

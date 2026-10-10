@@ -7,6 +7,7 @@ import {
 	Button,
 	Checkbox,
 	Chip,
+	Drawer,
 	Modal,
 	Popover,
 	Separator,
@@ -49,6 +50,7 @@ export const KitAdaptiveDialogPreview = (): ReactElement => {
 				<AdaptiveDialog.Content className='kit-modal-preview'>
 					<AdaptiveDialog.Header>
 						<AdaptiveDialog.Title>Подтвердить бронь</AdaptiveDialog.Title>
+						<AdaptiveDialog.CloseButton />
 					</AdaptiveDialog.Header>
 					<AdaptiveDialog.Body>
 						<div className='kit-modal-preview__content'>
@@ -90,6 +92,7 @@ export const KitModalPreview = (): ReactElement => {
 			>
 				<Modal.Header>
 					<Modal.Title>Подтвердить бронь</Modal.Title>
+					<Modal.CloseButton />
 				</Modal.Header>
 				<Modal.Body>
 					<div className='kit-modal-preview__content'>
@@ -130,6 +133,37 @@ export const KitModalPreview = (): ReactElement => {
 					<Button onClick={() => setIsOpen(false)}>Подтвердить</Button>
 				</Modal.Footer>
 			</Modal>
+		</>
+	)
+}
+
+export const KitDrawerPreview = (): ReactElement => {
+	const [isOpen, setIsOpen] = useState(false)
+
+	return (
+		<>
+			<Button variant='outline' onClick={() => setIsOpen(true)}>
+				Панель бронирования
+			</Button>
+			<Drawer
+				open={isOpen}
+				onOpenChange={setIsOpen}
+				title='Панель бронирования'
+			>
+				<Drawer.Header>
+					<Drawer.Title>Панель бронирования</Drawer.Title>
+					<Drawer.CloseButton>
+						<Button size='xs' variant='ghost'>
+							Закрыть
+						</Button>
+					</Drawer.CloseButton>
+				</Drawer.Header>
+				<Drawer.Body>
+					<p className='kit-modal-preview__meta'>
+						Пользовательский контрол закрытия передаётся целиком.
+					</p>
+				</Drawer.Body>
+			</Drawer>
 		</>
 	)
 }

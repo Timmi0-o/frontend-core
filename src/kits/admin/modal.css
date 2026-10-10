@@ -84,12 +84,70 @@
 	color: inherit;
 }
 
+[data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]),[data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]){
+	position: absolute;
+	z-index: 1;
+	display: inline-flex;
+	width: 24px;
+	height: 24px;
+	align-items: center;
+	justify-content: center;
+	padding: 0;
+	border: 0;
+	border-radius: 12px;
+	background: color-mix(in srgb, var(--foreground) 6%, var(--default));
+	color: var(--muted);
+	cursor: pointer;
+	transition: transform var(--motion-duration-fast),background-color var(--motion-duration-fast),color var(--motion-duration-fast);
+}
+
+[data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]){
+	top: 12px;
+	right: 12px;
+}
+
+[data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]){
+	top: calc(var(--drawer-inset, 0px) + 12px);
+	right: calc(var(--drawer-inset, 0px) + 12px);
+}
+
+[data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,[data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover{
+	background: color-mix(in srgb, var(--foreground) 10%, var(--default));
+	color: var(--foreground);
+}
+
+html.dark [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]),.dark [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]),[data-theme='dark'] [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]),html.dark [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]),.dark [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]),[data-theme='dark'] [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]){
+	background: var(--default);
+}
+
+html.dark [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,.dark [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,[data-theme='dark'] [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,html.dark [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,.dark [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover,[data-theme='dark'] [data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):hover{
+	background: color-mix(in srgb, var(--foreground) 10%, var(--default));
+}
+
+[data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):active,[data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):active{
+	transform: scale(0.93);
+}
+
+[data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-variant='unstyled']):not([data-custom-control]):focus-visible,[data-ui-kit='admin'] [data-slot='drawer-close-button']:not([data-variant='unstyled']):not([data-custom-control]):focus-visible{
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+[data-ui-kit='admin'] [data-slot='overlay-close-icon']{
+	width: 16px;
+	height: 16px;
+}
+
 [data-ui-kit='admin'] [data-slot='modal-header']:not([data-variant='unstyled']){
 	display: flex;
 	flex-direction: column;
 	gap: 0.375rem;
 	margin-bottom: 0;
 	color: var(--foreground);
+}
+
+[data-ui-kit='admin'] [data-slot='modal-header']:has([data-slot='modal-close-button']):not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='drawer-header']:has([data-slot='drawer-close-button']):not([data-variant='unstyled']){
+	padding-right: 36px;
 }
 
 [data-ui-kit='admin'] [data-slot='modal-description']:not([data-variant='unstyled']){

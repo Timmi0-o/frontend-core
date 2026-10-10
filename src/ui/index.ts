@@ -2,6 +2,7 @@ export type { TSlotVariant, WithUnstyledVariant } from '@/core/slot-variant'
 export { Accordion } from './accordion/accordion'
 export { AdaptiveDialog, useAdaptiveDialog } from './adaptive-dialog/adaptive-dialog'
 export type {
+	IAdaptiveDialogCloseButtonProps,
 	IAdaptiveDialogContentProps,
 	IAdaptiveDialogRootProps,
 	IAdaptiveDialogSlotProps,
@@ -43,7 +44,10 @@ export type {
 	TBottomSheetVariant,
 } from './modal/bottom-sheet/bottom-sheet'
 export { Drawer } from './modal/drawer/drawer'
-export type { IDrawerRootProps } from './modal/drawer/drawer'
+export type {
+	IDrawerCloseButtonProps,
+	IDrawerRootProps,
+} from './modal/drawer/drawer'
 export {
 	Breadcrumbs,
 	BreadcrumbsHome,
@@ -167,6 +171,7 @@ export type {
 } from './input/input'
 export { Modal } from './modal/modal'
 export type {
+	IModalCloseButtonProps,
 	IModalCloseProps,
 	IModalRootProps,
 	IModalTitleProps,

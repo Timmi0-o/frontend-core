@@ -221,6 +221,13 @@ export interface IAdaptiveDialogSlotProps {
 	variant?: TSlotVariant
 }
 
+export interface IAdaptiveDialogCloseButtonProps {
+	'aria-label'?: string
+	children?: ReactElement
+	className?: string
+	variant?: TSlotVariant
+}
+
 const AdaptiveDialogHeader = ({
 	className,
 	children,
@@ -423,9 +430,47 @@ const AdaptiveDialogClose = ({
 
 AdaptiveDialogClose.displayName = 'AdaptiveDialog.Close'
 
+const AdaptiveDialogCloseButton = ({
+	children,
+	className,
+	variant = 'default',
+	'aria-label': ariaLabel,
+}: IAdaptiveDialogCloseButtonProps): ReactElement | null => {
+	const { shell } = useAdaptiveDialog()
+
+	if (shell === 'sheet') {
+		return null
+	}
+
+	if (shell === 'drawer') {
+		return (
+			<Drawer.CloseButton
+				className={className}
+				variant={variant}
+				aria-label={ariaLabel}
+			>
+				{children}
+			</Drawer.CloseButton>
+		)
+	}
+
+	return (
+		<Modal.CloseButton
+			className={className}
+			variant={variant}
+			aria-label={ariaLabel}
+		>
+			{children}
+		</Modal.CloseButton>
+	)
+}
+
+AdaptiveDialogCloseButton.displayName = 'AdaptiveDialog.CloseButton'
+
 type TAdaptiveDialogComponent = typeof AdaptiveDialogRoot & {
 	Trigger: typeof AdaptiveDialogTrigger
 	Close: typeof AdaptiveDialogClose
+	CloseButton: typeof AdaptiveDialogCloseButton
 	Content: typeof AdaptiveDialogContent
 	Header: typeof AdaptiveDialogHeader
 	Body: typeof AdaptiveDialogBody
@@ -446,6 +491,7 @@ type TAdaptiveDialogComponent = typeof AdaptiveDialogRoot & {
  *   <AdaptiveDialog.Content>
  *     <AdaptiveDialog.Header>
  *       <AdaptiveDialog.Title>Фильтры</AdaptiveDialog.Title>
+ *       <AdaptiveDialog.CloseButton />
  *     </AdaptiveDialog.Header>
  *     <AdaptiveDialog.Body>…</AdaptiveDialog.Body>
  *   </AdaptiveDialog.Content>
@@ -457,6 +503,7 @@ export const AdaptiveDialog: TAdaptiveDialogComponent = Object.assign(
 	{
 		Trigger: AdaptiveDialogTrigger,
 		Close: AdaptiveDialogClose,
+		CloseButton: AdaptiveDialogCloseButton,
 		Content: AdaptiveDialogContent,
 		Header: AdaptiveDialogHeader,
 		Body: AdaptiveDialogBody,

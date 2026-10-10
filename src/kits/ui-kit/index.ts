@@ -69,6 +69,7 @@ export {
 } from '../../ui'
 export type {
 	IAccordionRootProps,
+	IAdaptiveDialogCloseButtonProps,
 	IAdaptiveDialogRootProps,
 	TAdaptiveDialogMode,
 	IAdaptiveAutocompleteProps,
@@ -78,6 +79,7 @@ export type {
 	IAutocompleteProps,
 	IBottomSheetRootProps,
 	TBottomSheetVariant,
+	IDrawerCloseButtonProps,
 	IDrawerRootProps,
 	IBreadcrumbsRootProps,
 	IButtonGroupProps,
@@ -93,6 +95,7 @@ export type {
 	IRangeDatePickerProps,
 	IInputProps,
 	IInputGroupRootProps,
+	IModalCloseButtonProps,
 	IModalRootProps,
 	IPhotoGalleryImage,
 	IPhotoGalleryLabels,
