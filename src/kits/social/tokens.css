@@ -34,11 +34,10 @@
 
 	--glass-bg: rgb(255 255 255 / 0.94);
 	--glass-bg-strong: rgb(255 255 255 / 0.98);
-	--glass-border: rgb(24 24 27 / 0.06);
+	--glass-border: rgb(24 24 27 / 0.08);
 	--glass-sheen:
-		0 -1px 0 rgb(255 255 255 / 1),
-		inset 0 1px 0 rgb(255 255 255 / 1),
-		inset 0 -1px 0 rgb(24 24 27 / 0.2);
+		inset 0 1px 0 rgb(255 255 255 / 0.85),
+		inset 0 -1px 0 rgb(24 24 27 / 0.06);
 	--glass-shadow:
 		var(--glass-sheen),
 		0 2px 8px rgb(0 0 0 / 0.06),
@@ -169,8 +168,8 @@ html.dark [data-ui-kit='social'],
 	--glass-bg-strong: rgb(28 28 30 / 0.97);
 	--glass-border: rgb(255 255 255 / 0.12);
 	--glass-sheen:
-		inset 0 1px 0 rgb(255 255 255 / 0.22),
-		inset 0 -1px 0 rgb(0 0 0 / 0.4);
+		inset 0 1px 0 rgb(255 255 255 / 0.18),
+		inset 0 -2px 5px rgb(255 255 255 / 0.045);
 	--glass-shadow:
 		var(--glass-sheen),
 		0 2px 8px rgb(0 0 0 / 0.28),
