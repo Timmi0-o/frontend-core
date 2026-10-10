@@ -34,8 +34,15 @@
 
 	--glass-bg: rgb(255 255 255 / 0.94);
 	--glass-bg-strong: rgb(255 255 255 / 0.98);
-	--glass-border: rgb(24 24 27 / 0.1);
-	--glass-shadow: 0 2px 8px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.04);
+	--glass-border: rgb(24 24 27 / 0.06);
+	--glass-sheen:
+		0 -1px 0 rgb(255 255 255 / 1),
+		inset 0 1px 0 rgb(255 255 255 / 1),
+		inset 0 -1px 0 rgb(24 24 27 / 0.2);
+	--glass-shadow:
+		var(--glass-sheen),
+		0 2px 8px rgb(0 0 0 / 0.06),
+		0 1px 2px rgb(0 0 0 / 0.04);
 	--glass-blur: 0px;
 	--glass-blur-float: 0px;
 	--overlay-radius: 1.5rem;
@@ -48,6 +55,7 @@
 	--menu-section-fill: color-mix(in srgb, var(--foreground) 7%, var(--glass-bg-strong));
 	--menu-separator-block: 0.5rem;
 	--overlay-shadow:
+		var(--glass-sheen),
 		0 1px 2px rgb(0 0 0 / 0.04),
 		0 4px 12px rgb(0 0 0 / 0.06),
 		0 8px 20px rgb(0 0 0 / 0.08);
@@ -55,8 +63,11 @@
 	--switch-track-checked: var(--primary);
 	--surface-hover: rgb(24 24 27 / 0.04);
 	--surface-content-bg: rgb(255 255 255 / 1);
-	--surface-content-border: rgb(24 24 27 / 0.08);
-	--surface-content-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 2px 6px rgb(0 0 0 / 0.04);
+	--surface-content-border: rgb(24 24 27 / 0.06);
+	--surface-content-shadow:
+		var(--glass-sheen),
+		0 1px 2px rgb(0 0 0 / 0.04),
+		0 2px 6px rgb(0 0 0 / 0.04);
 	--surface-primary: var(--surface-content-bg);
 
 	--input-background: var(--glass-bg);
@@ -103,7 +114,7 @@
 	--button-danger-bg: color-mix(in srgb, var(--destructive) 10%, var(--background));
 	--button-danger-hover: color-mix(in srgb, var(--destructive) 20%, var(--background));
 	--button-danger-active: color-mix(in srgb, var(--destructive) 28%, var(--background));
-	--button-primary-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+	--button-primary-shadow: var(--glass-sheen), 0 1px 2px rgb(0 0 0 / 0.08);
 	--button-radius: 9999px;
 
 	font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -157,8 +168,15 @@ html.dark [data-ui-kit='social'],
 	--glass-bg: rgb(28 28 30 / 0.94);
 	--glass-bg-strong: rgb(28 28 30 / 0.97);
 	--glass-border: rgb(255 255 255 / 0.12);
-	--glass-shadow: 0 2px 8px rgb(0 0 0 / 0.28), 0 1px 2px rgb(0 0 0 / 0.18);
+	--glass-sheen:
+		inset 0 1px 0 rgb(255 255 255 / 0.22),
+		inset 0 -1px 0 rgb(0 0 0 / 0.4);
+	--glass-shadow:
+		var(--glass-sheen),
+		0 2px 8px rgb(0 0 0 / 0.28),
+		0 1px 2px rgb(0 0 0 / 0.18);
 	--overlay-shadow:
+		var(--glass-sheen),
 		0 1px 2px rgb(0 0 0 / 0.24),
 		0 4px 14px rgb(0 0 0 / 0.32),
 		0 10px 28px rgb(0 0 0 / 0.28);
@@ -170,7 +188,10 @@ html.dark [data-ui-kit='social'],
 	--surface-hover: rgb(255 255 255 / 0.06);
 	--surface-content-bg: rgb(28 28 30 / 1);
 	--surface-content-border: rgb(255 255 255 / 0.1);
-	--surface-content-shadow: 0 1px 2px rgb(0 0 0 / 0.18), 0 2px 6px rgb(0 0 0 / 0.2);
+	--surface-content-shadow:
+		var(--glass-sheen),
+		0 1px 2px rgb(0 0 0 / 0.18),
+		0 2px 6px rgb(0 0 0 / 0.2);
 	--surface-primary: var(--surface-content-bg);
 
 	--input-border-strong: rgb(255 255 255 / 0.14);
@@ -182,6 +203,6 @@ html.dark [data-ui-kit='social'],
 	--button-danger-bg: color-mix(in srgb, var(--destructive) 20%, var(--background));
 	--button-danger-hover: color-mix(in srgb, var(--destructive) 30%, var(--background));
 	--button-danger-active: color-mix(in srgb, var(--destructive) 36%, var(--background));
-	--button-primary-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+	--button-primary-shadow: var(--glass-sheen), 0 1px 2px rgb(0 0 0 / 0.35);
 	--success-foreground: #86efac;
 }
