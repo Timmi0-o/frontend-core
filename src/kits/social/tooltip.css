@@ -1,18 +1,22 @@
 [data-ui-kit='social'][data-slot='tooltip-positioner']:not([data-variant='unstyled']) {
 	z-index: 1205;
+	max-width: var(--available-width);
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
-	max-width: 16rem;
-	border-radius: var(--button-radius);
+	width: max-content;
+	max-width: min(16rem, var(--available-width, 16rem));
+	border-radius: var(--radius);
 	border: 1px solid var(--glass-border);
 	background: var(--glass-bg-strong);
-	padding: 0.375rem 0.75rem;
+	padding: 0.5rem 0.75rem;
 	font-size: 0.75rem;
 	font-weight: 500;
-	line-height: 1.25;
+	line-height: 1.35;
 	color: var(--foreground);
+	white-space: normal;
+	overflow-wrap: break-word;
 	box-shadow: var(--overlay-shadow);
 	backdrop-filter: blur(var(--glass-blur-float));
 	-webkit-backdrop-filter: blur(var(--glass-blur-float));

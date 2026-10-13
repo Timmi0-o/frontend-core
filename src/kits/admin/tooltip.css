@@ -1,18 +1,22 @@
 [data-ui-kit='admin'][data-slot='tooltip-positioner']:not([data-variant='unstyled']){
 	z-index: 1205;
+	max-width: var(--available-width);
 }
 
 [data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled']){
 	box-sizing: border-box;
-	max-width: 20rem;
-	border-radius: min(32px, var(--radius-xl));
+	width: max-content;
+	max-width: min(20rem, var(--available-width, 20rem));
+	border-radius: 0.75rem;
 	border: 0;
 	background: var(--overlay-bg);
-	padding: 0.5rem;
+	padding: 0.5rem 0.75rem;
 	font-size: 0.75rem;
 	font-weight: 400;
-	line-height: 1.25;
+	line-height: 1.35;
 	color: var(--overlay-foreground);
+	white-space: normal;
+	overflow-wrap: break-word;
 	box-shadow: var(--overlay-shadow);
 	outline: none;
 }
