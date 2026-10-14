@@ -6,10 +6,50 @@ import { createCompoundContext } from '@/core/create-compound-context'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import type { ReactNode } from 'react'
+import {
+	useRef,
+	useState,
+	type MouseEvent,
+	type PointerEvent,
+	type ReactNode,
+} from 'react'
+
+type TTooltipOpenChange = NonNullable<
+	TooltipPrimitive.Root.Props['onOpenChange']
+>
+type TTooltipOpenChangeDetails = Parameters<TTooltipOpenChange>[1]
 
 interface ITooltipContextValue {
 	uiKit: string | undefined
+	isTouchPointer: boolean
+	onTriggerPointerDown: (event: PointerEvent<HTMLElement>) => void
+	onTriggerClick: (event: MouseEvent<HTMLElement>) => void
+}
+
+const createTouchPressDetails = (
+	event: MouseEvent<HTMLElement>,
+): TTooltipOpenChangeDetails => {
+	let isCanceled = false
+	let isPropagationAllowed = false
+
+	return {
+		reason: 'trigger-press',
+		event: event.nativeEvent,
+		cancel() {
+			isCanceled = true
+		},
+		allowPropagation() {
+			isPropagationAllowed = true
+		},
+		get isCanceled() {
+			return isCanceled
+		},
+		get isPropagationAllowed() {
+			return isPropagationAllowed
+		},
+		trigger: event.currentTarget,
+		preventUnmountOnClose() {},
+	}
 }
 
 const { Context, useCompoundContext } =
@@ -40,16 +80,80 @@ export interface ITooltipRootProps extends TooltipPrimitive.Root.Props {
 
 const TooltipRoot = ({
 	variant = 'default',
+	open: isOpenProp,
+	defaultOpen = false,
+	disabled = false,
+	onOpenChange,
 	...props
 }: ITooltipRootProps): ReactNode => {
 	const { hostRef, uiKit } = useInheritedUiKit()
+	const isOpenControlled = isOpenProp !== undefined
+	const [isUncontrolledOpen, setIsUncontrolledOpen] = useState(defaultOpen)
+	const [isTouchPointer, setIsTouchPointer] = useState(false)
+	const isOpenedByTouchRef = useRef(false)
+	const pointerTypeRef = useRef('')
+	const isOpenOnPointerDownRef = useRef(false)
+	const isOpen = isOpenControlled ? isOpenProp : isUncontrolledOpen
+
+	const setOpen = (isNextOpen: boolean, eventDetails: TTooltipOpenChangeDetails) => {
+		if (
+			!isNextOpen &&
+			isOpenedByTouchRef.current &&
+			eventDetails.reason === 'trigger-hover'
+		) {
+			eventDetails.cancel()
+			return
+		}
+
+		onOpenChange?.(isNextOpen, eventDetails)
+		if (eventDetails.isCanceled) return
+
+		if (!isNextOpen) {
+			isOpenedByTouchRef.current = false
+		}
+
+		if (!isOpenControlled) {
+			setIsUncontrolledOpen(isNextOpen)
+		}
+	}
+
+	const handleOpenChange: TTooltipOpenChange = (isNextOpen, eventDetails) => {
+		setOpen(isNextOpen, eventDetails)
+	}
 
 	return (
-		<Context.Provider value={{ uiKit }}>
+		<Context.Provider
+			value={{
+				uiKit,
+				isTouchPointer,
+				onTriggerPointerDown: (event) => {
+					pointerTypeRef.current = event.pointerType
+					isOpenOnPointerDownRef.current = isOpen
+					const isNextTouchPointer = event.pointerType === 'touch'
+					setIsTouchPointer((isCurrentTouchPointer) =>
+						isCurrentTouchPointer === isNextTouchPointer
+							? isCurrentTouchPointer
+							: isNextTouchPointer,
+					)
+				},
+				onTriggerClick: (event) => {
+					const pointerType = pointerTypeRef.current
+					pointerTypeRef.current = ''
+					if (disabled || pointerType !== 'touch') return
+
+					const isNextOpen = !isOpenOnPointerDownRef.current
+					isOpenedByTouchRef.current = isNextOpen
+					setOpen(isNextOpen, createTouchPressDetails(event))
+				},
+			}}
+		>
 			<span ref={hostRef} hidden />
 			<TooltipPrimitive.Root
 				data-slot='tooltip'
 				data-variant={variant}
+				disabled={disabled}
+				open={isOpen}
+				onOpenChange={handleOpenChange}
 				{...props}
 			/>
 		</Context.Provider>
@@ -62,12 +166,28 @@ export interface ITooltipTriggerProps extends TooltipPrimitive.Trigger.Props {
 
 const TooltipTrigger = ({
 	variant = 'default',
+	closeOnClick,
+	onPointerDown,
+	onClick,
 	...props
 }: ITooltipTriggerProps): ReactNode => {
+	const { isTouchPointer, onTriggerPointerDown, onTriggerClick } =
+		useCompoundContext()
+
 	return (
 		<TooltipPrimitive.Trigger
 			data-slot='tooltip-trigger'
 			data-variant={variant}
+			closeOnClick={closeOnClick ?? !isTouchPointer}
+			onPointerDown={(event) => {
+				onPointerDown?.(event)
+				onTriggerPointerDown(event)
+			}}
+			onClick={(event) => {
+				onClick?.(event)
+				if (event.defaultPrevented) return
+				onTriggerClick(event)
+			}}
 			{...props}
 		/>
 	)
@@ -127,7 +247,8 @@ TooltipContent.displayName = 'Tooltip.Content'
 TooltipProvider.displayName = 'Tooltip.Provider'
 
 /**
- * Подсказка по hover/focus. Provider — если общая задержка для дерева.
+ * Подсказка по hover/focus. На тач-экране открывается тапом по триггеру.
+ * Provider — если общая задержка для дерева.
  *
  * @example
  * ```tsx
