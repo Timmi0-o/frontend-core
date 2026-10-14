@@ -6,7 +6,6 @@ import { isNativeButtonTrigger } from '@/core/is-native-button-trigger'
 import { isOverlayParentDismissLocked } from '@/core/overlay-floating-dismiss-lock'
 import {
 	OverlayLayerProvider,
-	overlayBackdropStyle,
 	overlayLayerStyle,
 	useOpenOverlayZ,
 	useOverlayPortalContainer,
@@ -104,7 +103,6 @@ const ModalRoot = ({
 								forceRender
 								data-slot='modal-overlay'
 								style={{
-									...overlayBackdropStyle(),
 									zIndex: overlayZ,
 									pointerEvents: 'auto',
 								}}

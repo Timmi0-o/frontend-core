@@ -84,9 +84,7 @@
 	--card-shadow: var(--surface-content-shadow);
 	--background-secondary: var(--muted);
 	--background-header-table: var(--muted);
-	--overlay: rgb(0 0 0 / 0.4);
-	--overlay-backdrop-blur: 3px;
-	--overlay-backdrop-filter: blur(3px);
+	--overlay: rgb(0 0 0 / 0.5);
 
 	--danger: var(--destructive);
 	--danger-soft: color-mix(in srgb, var(--destructive) 10%, transparent);
@@ -136,8 +134,6 @@
 
 [data-ui-kit='social'] [data-slot$='-overlay']:not([data-variant='unstyled']) {
 	background: var(--overlay);
-	backdrop-filter: blur(3px);
-	-webkit-backdrop-filter: blur(3px);
 }
 
 html.dark [data-ui-kit='social'],
@@ -195,7 +191,7 @@ html.dark [data-ui-kit='social'],
 
 	--input-border-strong: rgb(255 255 255 / 0.14);
 	--input-focus-ring: color-mix(in srgb, var(--ring) 50%, transparent);
-	--overlay: rgb(0 0 0 / 0.4);
+	--overlay: rgb(0 0 0 / 0.5);
 	--skeleton-base: color-mix(in srgb, var(--foreground) 8%, transparent);
 	--skeleton-highlight: color-mix(in srgb, var(--foreground) 16%, transparent);
 	--button-ghost-fg: #d4d4d8;

@@ -21,7 +21,6 @@ import { isOverlayParentDismissLocked } from './overlay-floating-dismiss-lock'
 export const OVERLAY_Z_BASE = 1100
 export const OVERLAY_Z_STEP = 200
 export const OVERLAY_FLOATING_OFFSET = 105
-export const OVERLAY_BACKDROP_BLUR = '6px'
 
 export interface IOverlayLayer {
 	overlayZ: number
@@ -238,8 +237,8 @@ export const useGuardedOverlayOpenChange = (
 
 /**
  * Контейнер для Modal/BottomSheet portal.
- * Вешаем на `documentElement`, а не на `body`: при scroll-lock на body
- * `overflow: hidden` ломает `backdrop-filter` у оверлеев внутри body.
+ * Вешаем на `documentElement`, а не на `body`: scroll-lock ставит body
+ * `overflow: hidden`, и fixed-оверлей внутри body клипится.
  */
 export const getOverlayPortalContainer = (): HTMLElement | null => {
 	if (typeof document === 'undefined') {
@@ -267,16 +266,6 @@ export const useOverlayPortalContainer = (): HTMLElement | null => {
 export const overlayLayerStyle = (overlayZ: number): CSSProperties =>
 	({
 		'--tg-overlay-z': overlayZ,
-	}) as CSSProperties
-
-/**
- * Blur оверлея через inline-style: Lightning CSS в Next/Tailwind вырезает
- * стандартный `backdrop-filter` из глобальных CSS-файлов.
- */
-export const overlayBackdropStyle = (): CSSProperties =>
-	({
-		backdropFilter: `blur(${OVERLAY_BACKDROP_BLUR})`,
-		WebkitBackdropFilter: `blur(${OVERLAY_BACKDROP_BLUR})`,
 	}) as CSSProperties
 
 /**

@@ -4,7 +4,6 @@ import { cn } from '@/core/cn'
 import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
 import {
 	OpenOverlayZProvider,
-	overlayBackdropStyle,
 	OverlayLayerProvider,
 	overlayLayerStyle,
 	useActiveOverlayZ,
@@ -152,7 +151,7 @@ const BottomSheetOverlay = forwardRef<
 			data-slot='bottom-sheet-overlay'
 			data-variant={variant}
 			className={cn(className)}
-			style={{ ...overlayBackdropStyle(), ...style }}
+			style={style}
 			{...props}
 		/>
 	)
@@ -361,7 +360,6 @@ function BottomSheetConvenienceBody({
 
 	const overlayStyle: CSSProperties = {
 		...layerStyle,
-		...overlayBackdropStyle(),
 		pointerEvents: hasOverlayAbove ? 'none' : 'auto',
 		zIndex: overlayZ,
 	}

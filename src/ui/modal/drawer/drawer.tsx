@@ -4,7 +4,6 @@ import { cn } from '@/core/cn'
 import {
 	OpenOverlayZProvider,
 	OverlayLayerProvider,
-	overlayBackdropStyle,
 	overlayLayerStyle,
 	useActiveOverlayZ,
 	useGuardedOverlayOpenChange,
@@ -198,7 +197,6 @@ const DrawerOverlay = forwardRef<
 			className={cn(className)}
 			style={{
 				...overlayLayerStyle(overlayZ),
-				...overlayBackdropStyle(),
 				pointerEvents: hasOverlayAbove ? 'none' : 'auto',
 				zIndex: overlayZ,
 				...style,
