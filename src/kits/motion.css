@@ -17,8 +17,7 @@
 	--motion-easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 	--motion-easing-control: cubic-bezier(0.2, 0.8, 0.2, 1);
 
-	/* Popover / menu / tooltip: раскрытие от левого верхнего угла (вправо и вниз). */
-	--overlay-surface-transform-origin: top left;
+	/* Popover / menu / tooltip: scale от угла по data-side / data-align на positioner (Base UI). */
 	--overlay-surface-scale-in: 0.8;
 	--overlay-surface-scale-peak: 1.01;
 	--overlay-surface-scale-out: 0.9;
@@ -30,11 +29,196 @@
 	--motion-easing-overlay-surface-exit: var(--motion-easing-exit);
 }
 
-[data-ui-kit] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']),
-[data-ui-kit] [data-slot='context-menu-content']:not([data-variant='unstyled']),
-[data-ui-kit] [data-slot='popover-content']:not([data-variant='unstyled']):not(:has([data-slot='select-dropdown'])),
-[data-ui-kit] [data-slot='tooltip-content']:not([data-variant='unstyled']) {
-	transform-origin: var(--overlay-surface-transform-origin);
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: top inline-start;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='bottom'][data-align='end']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: top inline-end;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='bottom'][data-align='center']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: top center;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='top'][data-align='start']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: bottom inline-start;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='top'][data-align='end']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: bottom inline-end;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='top'][data-align='center']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: bottom center;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='left'][data-align='start']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-end top;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='left'][data-align='end']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-end bottom;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='left'][data-align='center']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-end center;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='right'][data-align='start']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-start top;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='right'][data-align='end']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-start bottom;
+}
+
+[data-ui-kit]
+	:is(
+		[data-slot='dropdown-menu-positioner'],
+		[data-slot='context-menu-positioner'],
+		[data-slot='popover-positioner'],
+		[data-slot='tooltip-positioner']
+	)[data-side='right'][data-align='center']
+	:is(
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-content'],
+		[data-slot='tooltip-content']
+	):not([data-variant='unstyled']) {
+	transform-origin: inline-start center;
 }
 
 @keyframes tg-overlay-surface-in {
