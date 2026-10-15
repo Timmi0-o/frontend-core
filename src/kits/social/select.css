@@ -211,7 +211,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	display: flex;
-	min-height: var(--control-min-height);
+	min-height: var(--control-field-height-sm);
 	height: auto;
 	width: 100%;
 	flex-shrink: 0;
@@ -254,7 +254,7 @@
 
 [data-ui-kit='social'] [data-slot='select-option']:not([data-variant='unstyled'])[data-rich] {
 	height: auto;
-	min-height: var(--control-min-height);
+	min-height: var(--control-field-height-sm);
 	padding-block: 0.5rem;
 	white-space: normal;
 }

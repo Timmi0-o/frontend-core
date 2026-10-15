@@ -58,18 +58,27 @@
 	box-shadow: var(--field-shadow), var(--focus-field-ring);
 }
 
-[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='sm'] {
-	height: 2rem;
+[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='sm'],
+[data-ui-kit='admin'] [data-slot='time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='sm'] {
+	height: var(--control-field-height-sm);
+	min-height: var(--control-field-height-sm);
+	min-width: var(--control-field-height-sm);
 	padding: 0 0.75rem;
 }
 
-[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='md'] {
-	height: 2.25rem;
+[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='md'],
+[data-ui-kit='admin'] [data-slot='time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='md'] {
+	height: var(--control-field-height-md);
+	min-height: var(--control-field-height-md);
+	min-width: var(--control-field-height-md);
 	padding: 0 0.75rem;
 }
 
-[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='lg'] {
-	height: 2.5rem;
+[data-ui-kit='admin'] [data-slot='time-picker-input']:not([data-variant='unstyled'])[data-size='lg'],
+[data-ui-kit='admin'] [data-slot='time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='lg'] {
+	height: var(--control-field-height-lg);
+	min-height: var(--control-field-height-lg);
+	min-width: var(--control-field-height-lg);
 	padding: 0 1rem;
 }
 

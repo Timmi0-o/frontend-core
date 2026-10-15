@@ -236,7 +236,7 @@
 	position: relative;
 	margin: 0;
 	display: flex;
-	min-height: var(--control-min-height);
+	min-height: var(--control-field-height-sm);
 	width: 100%;
 	cursor: pointer;
 	align-items: center;
@@ -286,7 +286,7 @@
 
 [data-ui-kit='admin'] [data-slot='select-option']:not([data-variant='unstyled'])[data-rich]{
 	height: auto;
-	min-height: var(--control-min-height);
+	min-height: var(--control-field-height-sm);
 	padding-block: calc(var(--spacing) * 1.5);
 	white-space: normal;
 }

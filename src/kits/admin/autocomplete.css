@@ -61,17 +61,23 @@
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='sm']{
-	height: 2.25rem;
+	height: var(--control-field-height-sm);
+	min-height: var(--control-field-height-sm);
+	min-width: var(--control-field-height-sm);
 	padding: 0 0.75rem;
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='md']{
-	height: 2.5rem;
+	height: var(--control-field-height-md);
+	min-height: var(--control-field-height-md);
+	min-width: var(--control-field-height-md);
 	padding: 0 0.875rem 0 1rem;
 }
 
 [data-ui-kit='admin'] [data-slot='autocomplete-input']:not([data-variant='unstyled'])[data-size='lg']{
-	height: 3rem;
+	height: var(--control-field-height-lg);
+	min-height: var(--control-field-height-lg);
+	min-width: var(--control-field-height-lg);
 	padding: 0 1rem;
 	font-size: 1rem;
 }
