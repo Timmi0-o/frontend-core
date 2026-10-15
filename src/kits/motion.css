@@ -16,9 +16,60 @@
 	--motion-easing-exit: cubic-bezier(0.28, 0.08, 0.16, 1);
 	--motion-easing-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 	--motion-easing-control: cubic-bezier(0.2, 0.8, 0.2, 1);
+
+	/* Popover / menu / tooltip: раскрытие от левого верхнего угла (вправо и вниз). */
+	--overlay-surface-transform-origin: top left;
+	--overlay-surface-scale-in: 0.8;
+	--overlay-surface-scale-peak: 1.01;
+	--overlay-surface-scale-out: 0.9;
+	--overlay-surface-duration-in: var(--motion-duration-medium);
+	--overlay-surface-duration-out: var(--motion-duration-micro);
+	--motion-easing-overlay-surface-expand: cubic-bezier(0.2, 0.9, 0.28, 1);
+	--motion-easing-overlay-surface-settle: cubic-bezier(0.1, 0.75, 0.06, 1);
+	--motion-easing-overlay-surface-enter: var(--motion-easing-overlay-surface-expand);
+	--motion-easing-overlay-surface-exit: var(--motion-easing-exit);
+}
+
+[data-ui-kit] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='context-menu-content']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='popover-content']:not([data-variant='unstyled']):not(:has([data-slot='select-dropdown'])),
+[data-ui-kit] [data-slot='tooltip-content']:not([data-variant='unstyled']) {
+	transform-origin: var(--overlay-surface-transform-origin);
+}
+
+@keyframes tg-overlay-surface-in {
+	0% {
+		opacity: 0;
+		transform: scale(var(--overlay-surface-scale-in));
+		animation-timing-function: var(--motion-easing-overlay-surface-expand);
+	}
+
+	65% {
+		opacity: 1;
+		transform: scale(var(--overlay-surface-scale-peak));
+		animation-timing-function: var(--motion-easing-overlay-surface-settle);
+	}
+
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes tg-overlay-surface-out {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(var(--overlay-surface-scale-out));
+	}
 }
 
 @media (prefers-reduced-motion: reduce) {
+
 	:root,
 	[data-ui-kit] {
 		--motion-duration-instant: 0ms;

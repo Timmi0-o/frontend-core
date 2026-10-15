@@ -12,24 +12,37 @@
 	background: transparent;
 }
 
-[data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open]{
-	animation: tg-admin-popover-in var(--motion-duration-fast) var(--motion-easing-enter);
+[data-ui-kit='admin']
+	[data-slot='popover-content']:not([data-variant='unstyled']):not(
+		:has([data-slot='select-dropdown'])
+	)[data-open]{
+	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
+		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-admin-popover-out var(--motion-duration-micro) var(--motion-easing-exit);
+[data-ui-kit='admin']
+	[data-slot='popover-content']:not([data-variant='unstyled']):not(
+		:has([data-slot='select-dropdown'])
+	)[data-ending-style]{
+	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
+		var(--motion-easing-overlay-surface-exit) both;
 }
 
-[data-ui-kit='admin'] [data-slot='popover-panel']:not([data-variant='unstyled']){
-	border-radius: min(32px, var(--radius-3xl));
-	padding: 1rem;
-	z-index: 50;
-	border: 0;
-	background: var(--overlay-bg);
-	box-shadow: var(--overlay-shadow);
+[data-ui-kit='admin']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has(
+		[data-slot='select-dropdown']
+	)[data-open]{
+	animation: tg-admin-popover-select-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
 
-@keyframes tg-admin-popover-in {
+[data-ui-kit='admin']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has(
+		[data-slot='select-dropdown']
+	)[data-ending-style]{
+	animation: tg-admin-popover-select-out var(--motion-duration-micro) var(--motion-easing-exit);
+}
+
+@keyframes tg-admin-popover-select-in {
 	from {
 		opacity: 0;
 		transform: translateY(-4px) scale(0.96);
@@ -41,7 +54,7 @@
 	}
 }
 
-@keyframes tg-admin-popover-out {
+@keyframes tg-admin-popover-select-out {
 	from {
 		opacity: 1;
 		transform: translateY(0) scale(1);
@@ -52,3 +65,13 @@
 		transform: translateY(-2px) scale(0.98);
 	}
 }
+
+[data-ui-kit='admin'] [data-slot='popover-panel']:not([data-variant='unstyled']){
+	border-radius: min(32px, var(--radius-3xl));
+	padding: 1rem;
+	z-index: 50;
+	border: 0;
+	background: var(--overlay-bg);
+	box-shadow: var(--overlay-shadow);
+}
+

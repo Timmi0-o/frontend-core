@@ -21,15 +21,16 @@
 	outline: none;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
-	transform-origin: var(--transform-origin);
 }
 
 [data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open]{
-	animation: tg-admin-dropdown-menu-in var(--motion-duration-fast) var(--motion-easing-enter);
+	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
+		var(--motion-easing-overlay-surface-enter) both;
 }
 
 [data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style]{
-	animation: tg-admin-dropdown-menu-out var(--motion-duration-micro) var(--motion-easing-exit);
+	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
+		var(--motion-easing-overlay-surface-exit) both;
 }
 
 [data-ui-kit='admin'] [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
@@ -147,26 +148,3 @@
 	transform: rotate(45deg) translateY(-1px);
 }
 
-@keyframes tg-admin-dropdown-menu-in {
-	from {
-		opacity: 0;
-		transform: scale(0.9);
-	}
-
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-@keyframes tg-admin-dropdown-menu-out {
-	from {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	to {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-}

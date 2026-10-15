@@ -24,11 +24,13 @@
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-open] {
-	animation: tg-tooltip-in var(--motion-duration-micro) var(--motion-easing-enter);
+	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
+		var(--motion-easing-overlay-surface-enter) both;
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style] {
-	animation: tg-tooltip-out var(--motion-duration-micro) var(--motion-easing-exit);
+	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
+		var(--motion-easing-overlay-surface-exit) both;
 }
 
 [data-ui-kit='social'] [data-slot='tooltip-arrow']:not([data-variant='unstyled']) {
@@ -41,26 +43,3 @@
 	border-bottom: 1px solid var(--glass-border);
 }
 
-@keyframes tg-tooltip-in {
-	from {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-@keyframes tg-tooltip-out {
-	from {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	to {
-		opacity: 0;
-		transform: scale(0.98);
-	}
-}

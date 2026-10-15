@@ -19,12 +19,59 @@
 	background: transparent;
 }
 
-[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-open] {
-	animation: tg-popover-in var(--motion-duration-fast) var(--motion-easing-enter);
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):not(
+		:has([data-slot='select-dropdown'])
+	)[data-open] {
+	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
+		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled'])[data-ending-style] {
-	animation: tg-popover-out var(--motion-duration-micro) var(--motion-easing-exit);
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):not(
+		:has([data-slot='select-dropdown'])
+	)[data-ending-style] {
+	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
+		var(--motion-easing-overlay-surface-exit) both;
+}
+
+/* Select: прежняя анимация popover, без раскрытия от угла. */
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has(
+		[data-slot='select-dropdown']
+	)[data-open] {
+	animation: tg-popover-select-in var(--motion-duration-fast) var(--motion-easing-enter);
+}
+
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has(
+		[data-slot='select-dropdown']
+	)[data-ending-style] {
+	animation: tg-popover-select-out var(--motion-duration-micro) var(--motion-easing-exit);
+}
+
+@keyframes tg-popover-select-in {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes tg-popover-select-out {
+	from {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	to {
+		opacity: 0;
+		transform: scale(0.95);
+	}
 }
 
 [data-ui-kit='social'] [data-slot='popover-panel']:not([data-variant='unstyled']) {
@@ -41,26 +88,3 @@
 	overflow: hidden;
 }
 
-@keyframes tg-popover-in {
-	from {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-
-	to {
-		opacity: 1;
-		transform: scale(1);
-	}
-}
-
-@keyframes tg-popover-out {
-	from {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	to {
-		opacity: 0;
-		transform: scale(0.95);
-	}
-}

@@ -21,7 +21,6 @@
 	padding: 0;
 	box-shadow: var(--overlay-shadow);
 	outline: none;
-	transform-origin: var(--transform-origin);
 }
 
 [data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),
