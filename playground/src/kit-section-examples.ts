@@ -21,6 +21,7 @@ export const Example = () => {
       <Button size="sm">sm</Button>
       <Button size="md">md</Button>
       <Button size="lg">lg</Button>
+      <Button size="xl">xl</Button>
 
       {/* Состояния */}
       <Button isPending>pending</Button>

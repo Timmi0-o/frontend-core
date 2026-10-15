@@ -30,6 +30,7 @@ import type {
 	ISelectProps,
 	TSelectComponent,
 	TSelectSelectionMode,
+	TSelectSize,
 	TSelectTone,
 	TSelectVariant,
 } from './types/i-select-props'

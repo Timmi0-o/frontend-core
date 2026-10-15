@@ -314,6 +314,7 @@ export type {
 	ITabsSeparatorProps,
 	ITabsTabProps,
 	TTabActionColor,
+	TTabsSize,
 	TTabsVariant,
 } from './tabs/tabs'
 export { Table } from './table/table'

@@ -6,6 +6,11 @@
 	--eclipse: oklch(0.2103 0.0059 285.89);
 
 	--spacing: 0.25rem;
+	--control-min-height: 44px;
+	--control-field-height-sm: 36px;
+	--control-field-height-md: 40px;
+	--control-field-height-lg: 44px;
+	--control-field-height-xl: 48px;
 	--border-width: 1px;
 	--field-border-width: 0px;
 	--disabled-opacity: 0.5;
@@ -230,4 +235,10 @@ html.dark [data-ui-kit='admin'],
 	--skeleton-base: var(--default);
 	--skeleton-highlight: var(--surface-secondary);
 	--switch-thumb-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
+}
+
+@media (min-width: 1025px) {
+	[data-ui-kit='admin'] {
+		--control-min-height: 40px;
+	}
 }

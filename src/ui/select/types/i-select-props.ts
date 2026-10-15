@@ -1,7 +1,7 @@
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { ReactElement, ReactNode } from 'react'
 
-export type TSelectSize = 'sm' | 'md' | 'lg'
+export type TSelectSize = 'sm' | 'md' | 'lg' | 'xl'
 export type TSelectVariant = 'default' | 'light' | 'secondary' | 'unstyled'
 export type TSelectVisualVariant = Exclude<TSelectVariant, 'unstyled'>
 export type TSelectTone =

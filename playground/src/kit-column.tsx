@@ -70,7 +70,7 @@ const VARIANTS: IButtonVariant[] = [
 	'soft-danger',
 ]
 
-const SIZES: IButtonSize[] = ['xxs', 'xs', 'sm', 'md', 'lg']
+const SIZES: IButtonSize[] = ['xxs', 'xs', 'sm', 'md', 'lg', 'xl']
 
 const CITY_OPTIONS = [
 	{ label: 'Москва', value: 'msk' },

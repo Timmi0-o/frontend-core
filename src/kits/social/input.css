@@ -99,24 +99,32 @@
 	--input-padding-inline: 0.625rem;
 	--input-addon-inline: 1.25rem;
 	height: 2rem;
+	min-height: 2rem;
+	min-width: 2rem;
 }
 
 [data-ui-kit='social'] [data-slot='input']:not([data-variant='unstyled'])[data-size='sm'] {
 	--input-padding-inline: 0.75rem;
 	--input-addon-inline: 1.25rem;
-	height: 2.25rem;
+	height: var(--control-field-height-sm);
+	min-height: var(--control-field-height-sm);
+	min-width: var(--control-field-height-sm);
 }
 
 [data-ui-kit='social'] [data-slot='input']:not([data-variant='unstyled'])[data-size='md'] {
 	--input-padding-inline: 0.875rem;
 	--input-addon-inline: 1.5rem;
-	height: 2.25rem;
+	height: var(--control-field-height-md);
+	min-height: var(--control-field-height-md);
+	min-width: var(--control-field-height-md);
 }
 
 [data-ui-kit='social'] [data-slot='input']:not([data-variant='unstyled'])[data-size='lg'] {
 	--input-padding-inline: 1rem;
 	--input-addon-inline: 1.5rem;
-	height: 2.75rem;
+	height: var(--control-field-height-lg);
+	min-height: var(--control-field-height-lg);
+	min-width: var(--control-field-height-lg);
 }
 
 [data-ui-kit='social'] [data-slot='input'][data-size='lg'] [data-slot='input-field']:not([data-variant='unstyled']) {

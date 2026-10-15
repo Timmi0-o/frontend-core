@@ -23,7 +23,7 @@ export type {
  * Масштаб спиннера внутри кнопки: на `lg` он крупнее, иначе не раздувает мелкие размеры.
  */
 const getSpinnerSize = (size: IButtonSize): 'sm' | 'md' => {
-	return size === 'lg' ? 'md' : 'sm'
+	return size === 'lg' || size === 'xl' ? 'md' : 'sm'
 }
 
 const ButtonSpinner = ({

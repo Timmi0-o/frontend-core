@@ -137,6 +137,8 @@
 	--input-padding-inline: 0.75rem;
 	--input-addon-inline: 1.625rem;
 	height: 2rem;
+	min-height: 2rem;
+	min-width: 2rem;
 	border-radius: var(--field-radius);
 }
 
@@ -147,7 +149,9 @@
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-size='sm']{
 	--input-padding-inline: 0.75rem;
 	--input-addon-inline: 1.625rem;
-	height: 2rem;
+	height: var(--control-field-height-sm);
+	min-height: var(--control-field-height-sm);
+	min-width: var(--control-field-height-sm);
 	border-radius: var(--field-radius);
 }
 
@@ -158,7 +162,9 @@
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-size='md']{
 	--input-padding-inline: 0.75rem;
 	--input-addon-inline: 1.625rem;
-	height: 2.25rem;
+	height: var(--control-field-height-md);
+	min-height: var(--control-field-height-md);
+	min-width: var(--control-field-height-md);
 	border-radius: var(--field-radius);
 }
 
@@ -169,7 +175,9 @@
 [data-ui-kit='admin'] [data-slot='input']:not([data-variant='unstyled'])[data-size='lg']{
 	--input-padding-inline: 0.75rem;
 	--input-addon-inline: 1.625rem;
-	height: 2.5rem;
+	height: var(--control-field-height-lg);
+	min-height: var(--control-field-height-lg);
+	min-width: var(--control-field-height-lg);
 	border-radius: var(--field-radius);
 }
 

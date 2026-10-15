@@ -13,7 +13,7 @@ export type IButtonVariant =
 	/** Без chrome кита: внешний вид задаёт className потребителя (хедер, иконки). */
 	| 'unstyled'
 
-export type IButtonSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg'
+export type IButtonSize = 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl'
 
 export interface IButtonProps extends Omit<
 	ButtonHTMLAttributes<HTMLButtonElement>,

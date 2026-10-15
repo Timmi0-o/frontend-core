@@ -129,5 +129,6 @@ export type {
 	ITextareaProps,
 	TBreadcrumbsVariant,
 	TTabsVariant,
+	TTabsSize,
 	TSlotVariant,
 } from '../../ui'

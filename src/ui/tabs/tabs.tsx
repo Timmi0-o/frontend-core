@@ -5,7 +5,9 @@ import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { Spinner } from '@/ui/spinner/spinner'
 import type { ReactElement, ReactNode } from 'react'
+import { TabsSizeProvider, useTabsSize, type TTabsSize } from './tabs-size-context'
 
+export type { TTabsSize } from './tabs-size-context'
 export type TTabsVariant = 'default' | 'solid' | 'light' | 'unstyled'
 export type TTabActionColor = 'default' | 'danger' | 'soft-danger'
 
@@ -59,6 +61,7 @@ export interface ITabsRootProps {
 	onChange?: (value: string) => void
 	items?: ITabItem[]
 	variant?: TTabsVariant
+	size?: TTabsSize
 	className?: string
 	children?: ReactNode
 }
@@ -111,6 +114,7 @@ const TabsRoot = ({
 	onChange,
 	items,
 	variant = 'default',
+	size = 'md',
 	className,
 	children,
 }: ITabsRootProps): ReactElement => {
@@ -118,6 +122,7 @@ const TabsRoot = ({
 	const isControlled = value !== undefined
 
 	return (
+		<TabsSizeProvider value={size}>
 		<TabsPrimitive.Root
 			{...(isControlled
 				? { value }
@@ -131,11 +136,13 @@ const TabsRoot = ({
 			}}
 			data-slot='tabs'
 			data-variant={variant}
+			data-size={size}
 			className={cn(className)}
 		>
 			{items != null ? <TabsItems items={items} /> : null}
 			{children}
 		</TabsPrimitive.Root>
+		</TabsSizeProvider>
 	)
 }
 
@@ -165,11 +172,14 @@ const TabsList = ({
 	variant = 'default',
 	'aria-label': ariaLabel,
 }: ITabsListProps): ReactElement => {
+	const size = useTabsSize()
+
 	return (
 		<TabsPrimitive.List
 			aria-label={ariaLabel}
 			data-slot='tabs-list'
 			data-variant={variant}
+			data-size={size}
 			className={cn(className)}
 		>
 			<TabsIndicator variant={variant} />
@@ -188,12 +198,15 @@ const TabsTab = ({
 	children,
 	variant = 'default',
 }: ITabsTabProps): ReactElement => {
+	const size = useTabsSize()
+
 	return (
 		<TabsPrimitive.Tab
 			value={value}
 			disabled={isDisabled}
 			data-slot='tab'
 			data-variant={variant}
+			data-size={size}
 			className={cn(className)}
 		>
 			{icon != null ? (
@@ -280,12 +293,14 @@ interface ITabsActionProps {
 }
 
 const TabsAction = ({ item }: ITabsActionProps): ReactElement => {
+	const size = useTabsSize()
 	const isPressDisabled = Boolean(item.isDisabled) || Boolean(item.isLoading)
 
 	return (
 		<button
 			type='button'
 			data-slot='tab'
+			data-size={size}
 			data-type='action'
 			data-color={item.color ?? 'default'}
 			data-loading={item.isLoading ? '' : undefined}

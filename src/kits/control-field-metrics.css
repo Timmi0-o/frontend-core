@@ -1,0 +1,14 @@
+/*
+ * Минимальные размеры полей: ширина не меньше высоты. Токен --control-min-height в tokens.css.
+ * Импорт в конце styles.css — перекрывает остаточные min-/height.
+ */
+[data-ui-kit] [data-slot='select-option']:not([data-variant='unstyled']):not([data-rich]),
+[data-ui-kit] [data-slot='autocomplete-input']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='date-picker-input']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='date-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='range-date-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='date-time-picker-input']:not([data-variant='unstyled']),
+[data-ui-kit] [data-slot='time-picker-input']:not([data-variant='unstyled']) {
+	min-width: var(--control-min-height);
+	min-height: var(--control-min-height);
+}

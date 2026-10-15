@@ -74,6 +74,11 @@
 	--input-border-strong: rgb(24 24 27 / 0.12);
 	--input-focus-ring: color-mix(in srgb, var(--ring) 50%, transparent);
 	--focus-ring: 0 0 0 3px var(--input-focus-ring);
+	--control-min-height: 44px;
+	--control-field-height-sm: 36px;
+	--control-field-height-md: 40px;
+	--control-field-height-lg: 44px;
+	--control-field-height-xl: 48px;
 
 	--border-color-blue: var(--glass-border);
 	--border-primary: 1px solid var(--glass-border);
@@ -117,6 +122,12 @@
 
 	font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 	color: var(--foreground);
+}
+
+@media (min-width: 1025px) {
+	[data-ui-kit='social'] {
+		--control-min-height: 40px;
+	}
 }
 
 /*
