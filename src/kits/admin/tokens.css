@@ -131,6 +131,7 @@
 	--status-danger-fg: var(--danger);
 	--skeleton-base: var(--default);
 	--skeleton-highlight: var(--surface);
+	--skeleton-shimmer-delay: 400ms;
 	--switch-thumb-shadow: var(--field-shadow);
 	--link-color: var(--foreground);
 	--link-color-hover: var(--accent);

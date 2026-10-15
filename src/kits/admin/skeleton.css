@@ -17,7 +17,8 @@
 		var(--surface-tertiary) 50%,
 		transparent 100%
 	);
-	animation: tg-admin-skeleton-shimmer 1.6s ease-in-out infinite;
+	animation: tg-admin-skeleton-shimmer 1.6s ease-in-out var(--skeleton-shimmer-delay)
+		infinite backwards;
 }
 
 @keyframes tg-admin-skeleton-shimmer {
