@@ -21,6 +21,16 @@
 	justify-content: center;
 }
 
+[data-ui-kit='social'] [data-slot='adaptive-dropdown-menu-sheet'] {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	min-height: min(36dvh, 18rem);
+	max-height: min(50dvh, 24rem);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
 [data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']) {
 	display: block;
 	width: 5px;

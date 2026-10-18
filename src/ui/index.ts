@@ -12,6 +12,8 @@ export { AdaptiveAutocomplete } from './adaptive-autocomplete/adaptive-autocompl
 export type { IAdaptiveAutocompleteProps } from './adaptive-autocomplete/adaptive-autocomplete'
 export { AdaptiveSelect } from './adaptive-select/adaptive-select'
 export type { IAdaptiveSelectProps } from './adaptive-select/adaptive-select'
+export { AdaptiveDropdownMenu } from './adaptive-dropdown-menu/adaptive-dropdown-menu'
+export type { IAdaptiveDropdownMenuRootProps } from './adaptive-dropdown-menu/adaptive-dropdown-menu'
 export type {
 	IAccordionHeaderProps,
 	IAccordionItemProps,

@@ -207,22 +207,26 @@ html.dark [data-ui-kit='admin'] [data-slot='modal-close-button']:not([data-varia
 
 [data-ui-kit='admin'] [data-slot='bottom-sheet-content']:has(
 		[data-slot='adaptive-select-sheet'],
-		[data-slot='adaptive-autocomplete-sheet']
+		[data-slot='adaptive-autocomplete-sheet'],
+		[data-slot='adaptive-dropdown-menu-sheet']
 	):not([data-variant='unstyled']),
 [data-ui-kit='admin'][data-slot='bottom-sheet-content']:has(
 		[data-slot='adaptive-select-sheet'],
-		[data-slot='adaptive-autocomplete-sheet']
+		[data-slot='adaptive-autocomplete-sheet'],
+		[data-slot='adaptive-dropdown-menu-sheet']
 	):not([data-variant='unstyled']) {
 	min-height: min(52dvh, 26rem);
 }
 
 [data-ui-kit='admin'] [data-slot='bottom-sheet-body']:has(
 		[data-slot='adaptive-select-sheet'],
-		[data-slot='adaptive-autocomplete-sheet']
+		[data-slot='adaptive-autocomplete-sheet'],
+		[data-slot='adaptive-dropdown-menu-sheet']
 	):not([data-variant='unstyled']),
 [data-ui-kit='admin'][data-slot='bottom-sheet-body']:has(
 		[data-slot='adaptive-select-sheet'],
-		[data-slot='adaptive-autocomplete-sheet']
+		[data-slot='adaptive-autocomplete-sheet'],
+		[data-slot='adaptive-dropdown-menu-sheet']
 	):not([data-variant='unstyled']) {
 	display: flex;
 	flex-direction: column;
