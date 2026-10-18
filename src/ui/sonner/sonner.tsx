@@ -26,7 +26,7 @@ export interface IToasterProps {
 const TOAST_SWIPE_DIRECTIONS = ['top', 'right', 'bottom', 'left'] as const
 
 const TOASTER_WIDTH_STYLE = {
-	'--width': 'min(44rem, calc(100vw - 1.5rem))',
+	'--width': 'min(33rem, calc(100vw - 1.5rem))',
 } as CSSProperties
 
 /**

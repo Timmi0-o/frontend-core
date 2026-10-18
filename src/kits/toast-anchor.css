@@ -6,7 +6,7 @@
 	left: 50% !important;
 	right: auto !important;
 	width: max-content !important;
-	max-width: min(44rem, calc(100vw - 1.5rem)) !important;
+	max-width: min(33rem, calc(100vw - 1.5rem)) !important;
 	margin: 0 !important;
 	transform: translateX(-50%) var(--y) !important;
 }
