@@ -26,7 +26,7 @@ export interface IToasterProps {
 const TOAST_SWIPE_DIRECTIONS = ['top', 'right', 'bottom', 'left'] as const
 
 const TOASTER_WIDTH_STYLE = {
-	'--width': 'min(32rem, calc(100vw - 2rem))',
+	'--width': 'min(44rem, calc(100vw - 1.5rem))',
 } as CSSProperties
 
 /**
@@ -71,8 +71,8 @@ export const Toaster = ({
 				id={id}
 				theme={theme}
 				position={position}
-				closeButton
-				gap={10}
+				closeButton={false}
+				gap={8}
 				visibleToasts={3}
 				swipeDirections={[...TOAST_SWIPE_DIRECTIONS]}
 				style={TOASTER_WIDTH_STYLE}

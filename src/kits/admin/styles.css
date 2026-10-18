@@ -39,3 +39,4 @@
 @import './photo-gallery.css' layer(components);
 @import './scroll-shadow.css' layer(components);
 @import '../control-field-metrics.css' layer(components);
+@import '../toast-anchor.css';

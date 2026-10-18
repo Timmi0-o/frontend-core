@@ -822,10 +822,15 @@ export const Example = () => {
 }
 `,
 
-	'tooltip-toaster': `import { Button, Toaster, Tooltip } from '$KIT'
+	'tooltip-toaster': `import { useState } from 'react'
+import { Button, Input, Label, Textarea, Toaster, Tooltip } from '$KIT'
 import { toast } from 'sonner'
 
 export const Example = () => {
+  const [toastTitle, setToastTitle] = useState('Настройки сохранены')
+  const [toastDescription, setToastDescription] = useState('')
+  const description = toastDescription.trim()
+
   return (
     <>
       {/* Один Toaster на корень приложения; toasterId связывает toast с ним */}
@@ -861,6 +866,35 @@ export const Example = () => {
         }
       >
         Показать error toast
+      </Button>
+
+      <Label htmlFor="toast-title">Заголовок</Label>
+      <Input
+        id="toast-title"
+        size="sm"
+        value={toastTitle}
+        onChange={(event) => setToastTitle(event.target.value)}
+      />
+      <Label htmlFor="toast-description">Описание</Label>
+      <Textarea
+        id="toast-description"
+        size="sm"
+        rows={2}
+        value={toastDescription}
+        placeholder="Необязательно"
+        onChange={(event) => setToastDescription(event.target.value)}
+      />
+      <Button
+        size="sm"
+        isDisabled={toastTitle.trim().length === 0}
+        onClick={() =>
+          toast.success(toastTitle.trim(), {
+            toasterId: 'app',
+            ...(description ? { description } : {}),
+          })
+        }
+      >
+        Свой success
       </Button>
     </>
   )

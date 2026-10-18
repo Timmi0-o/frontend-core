@@ -1,0 +1,22 @@
+/*
+ * Sonner вставляет свои стили без @layer, поэтому они перекрывают toast.css из layer(components).
+ * Эти правила остаются вне слоя и задают ширину по контенту и центр.
+ */
+[data-sonner-toaster] [data-sonner-toast]:not([data-swiping='true']) {
+	left: 50% !important;
+	right: auto !important;
+	width: max-content !important;
+	max-width: min(44rem, calc(100vw - 1.5rem)) !important;
+	margin: 0 !important;
+	transform: translateX(-50%) var(--y) !important;
+}
+
+@media (max-width: 600px) {
+	[data-sonner-toaster] {
+		left: 0 !important;
+		right: 0 !important;
+		width: 100% !important;
+		margin: 0 !important;
+		transform: none !important;
+	}
+}

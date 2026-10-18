@@ -137,6 +137,8 @@ export const KitColumn = ({
 	const [galleryOpen, setGalleryOpen] = useState(false)
 	const [galleryIndex, setGalleryIndex] = useState(0)
 	const [isScenarioOpen, setIsScenarioOpen] = useState(false)
+	const [toastTitle, setToastTitle] = useState('Настройки сохранены')
+	const [toastDescription, setToastDescription] = useState('')
 
 	return (
 		<article className='kit-column' data-ui-kit={uiKit}>
@@ -941,37 +943,89 @@ export const KitColumn = ({
 				</DemoSection>
 
 				<DemoSection title='Tooltip + Toaster'>
-					<div className='kit-row'>
-						<Tooltip>
-							<Tooltip.Trigger render={<Button variant='ghost' size='sm' />}>
-								Почему цена изменилась?
-							</Tooltip.Trigger>
-							<Tooltip.Content>
-								Цена обновляется после пересчёта доступности номера.
-							</Tooltip.Content>
-						</Tooltip>
-						<Button
-							size='sm'
-							variant='outline'
-							onClick={() =>
-								toast.success('Бронь сохранена как черновик', {
-									toasterId: uiKit,
-								})
-							}
-						>
-							Показать success toast
-						</Button>
-						<Button
-							size='sm'
-							variant='outline'
-							onClick={() =>
-								toast.error('Не удалось отправить ваучер', {
-									toasterId: uiKit,
-								})
-							}
-						>
-							Показать error toast
-						</Button>
+					<div className='kit-stack kit-stack--full'>
+						<div className='kit-row'>
+							<Tooltip>
+								<Tooltip.Trigger render={<Button variant='ghost' size='sm' />}>
+									Почему цена изменилась?
+								</Tooltip.Trigger>
+								<Tooltip.Content>
+									Цена обновляется после пересчёта доступности номера.
+								</Tooltip.Content>
+							</Tooltip>
+							<Button
+								size='sm'
+								variant='outline'
+								onClick={() =>
+									toast.success('Бронь сохранена как черновик', {
+										toasterId: uiKit,
+									})
+								}
+							>
+								Показать success toast
+							</Button>
+							<Button
+								size='sm'
+								variant='outline'
+								onClick={() =>
+									toast.error('Не удалось отправить ваучер', {
+										toasterId: uiKit,
+									})
+								}
+							>
+								Показать error toast
+							</Button>
+						</div>
+						<div className='kit-stack kit-stack--compact'>
+							<Label htmlFor={`toast-title-${uiKit}`}>Заголовок</Label>
+							<Input
+								id={`toast-title-${uiKit}`}
+								size='sm'
+								value={toastTitle}
+								placeholder='Заголовок toast'
+								onChange={(event) => setToastTitle(event.target.value)}
+							/>
+							<Label htmlFor={`toast-description-${uiKit}`}>Описание</Label>
+							<Textarea
+								id={`toast-description-${uiKit}`}
+								size='sm'
+								rows={2}
+								value={toastDescription}
+								placeholder='Необязательно'
+								onChange={(event) => setToastDescription(event.target.value)}
+							/>
+						</div>
+						<div className='kit-row'>
+							<Button
+								size='sm'
+								isDisabled={toastTitle.trim().length === 0}
+								onClick={() =>
+									toast.success(toastTitle.trim(), {
+										toasterId: uiKit,
+										...(toastDescription.trim()
+											? { description: toastDescription.trim() }
+											: {}),
+									})
+								}
+							>
+								Свой success
+							</Button>
+							<Button
+								size='sm'
+								variant='outline'
+								isDisabled={toastTitle.trim().length === 0}
+								onClick={() =>
+									toast.error(toastTitle.trim(), {
+										toasterId: uiKit,
+										...(toastDescription.trim()
+											? { description: toastDescription.trim() }
+											: {}),
+									})
+								}
+							>
+								Свой error
+							</Button>
+						</div>
 					</div>
 				</DemoSection>
 			</div>
