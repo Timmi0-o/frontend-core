@@ -384,12 +384,18 @@ export const KitColumn = ({
 					</div>
 					<div className='kit-row'>
 						<ButtonGroup>
+							<Button size='sm'>Сохранить</Button>
+							<Button size='sm' variant='outline'>
+								Отмена
+							</Button>
+						</ButtonGroup>
+						<ButtonGroup variant='secondary'>
 							<Button variant='primary'>Фильтры</Button>
 							<Button isIconOnly variant='primary' aria-label='Сбросить'>
 								×
 							</Button>
 						</ButtonGroup>
-						<ButtonGroup>
+						<ButtonGroup variant='secondary'>
 							<Button size='sm' variant='outline'>
 								Слева
 							</Button>

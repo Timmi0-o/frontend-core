@@ -73,7 +73,10 @@ export type {
 } from './breadcrumbs/breadcrumbs'
 export { Button } from './button/button'
 export { ButtonGroup } from './button-group/button-group'
-export type { IButtonGroupProps } from './button-group/button-group'
+export type {
+	IButtonGroupProps,
+	TButtonGroupVariant,
+} from './button-group/button-group'
 export { Calendar } from './calendar/calendar'
 export type { ICalendarProps } from './calendar/calendar'
 export type {

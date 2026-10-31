@@ -85,6 +85,7 @@ export type {
 	IDrawerRootProps,
 	IBreadcrumbsRootProps,
 	IButtonGroupProps,
+	TButtonGroupVariant,
 	IButtonProps,
 	IButtonSize,
 	IButtonVariant,

@@ -1,12 +1,13 @@
 'use client'
 
 import { cn } from '@/core/cn'
-import type { TSlotVariant } from '@/core/slot-variant'
 import type { HTMLAttributes, ReactElement } from 'react'
+
+export type TButtonGroupVariant = 'default' | 'secondary' | 'unstyled'
 
 export interface IButtonGroupProps extends HTMLAttributes<HTMLDivElement> {
 	className?: string
-	variant?: TSlotVariant
+	variant?: TButtonGroupVariant
 }
 
 const ButtonGroupRoot = ({
@@ -28,13 +29,19 @@ const ButtonGroupRoot = ({
 ButtonGroupRoot.displayName = 'ButtonGroup'
 
 /**
- * Склеивает соседние `Button` в один контрол: общие внешние радиусы, без щели.
+ * Группирует соседние `Button`: `default` — один склеенный контрол,
+ * `secondary` — glass-трек с отдельными сегментами внутри.
  *
  * @example
  * ```tsx
  * <ButtonGroup>
+ *   <Button>Сохранить</Button>
+ *   <Button variant="outline">Отмена</Button>
+ * </ButtonGroup>
+ *
+ * <ButtonGroup variant="secondary">
  *   <Button variant="primary">Фильтры</Button>
- *   <Button variant="primary" isIconOnly aria-label="Сбросить">
+ *   <Button isIconOnly variant="primary" aria-label="Сбросить">
  *     ×
  *   </Button>
  * </ButtonGroup>
