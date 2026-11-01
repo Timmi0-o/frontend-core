@@ -102,6 +102,7 @@ export default defineConfig({
 				/^swiper(?:\/|$)/,
 				/^framer-motion(?:\/|$)/,
 				'sonner',
+				'input-otp',
 				'vaul',
 				'next',
 				/^next(?:\/|$)/,

@@ -1,0 +1,33 @@
+@import '../input-otp.css';
+
+[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled']) {
+	border: var(--field-border-width) solid var(--field-border);
+	border-radius: var(--field-radius);
+	background: var(--input-background);
+	box-shadow: var(--field-shadow);
+	color: var(--header);
+}
+
+[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled']):hover {
+	background: var(--input-background-hover);
+}
+
+[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-active] {
+	z-index: 1;
+	background: var(--field-focus);
+	box-shadow: var(--field-shadow), var(--focus-field-ring);
+}
+
+[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-invalid] {
+	outline: 1px solid var(--danger);
+	outline-offset: 0;
+}
+
+[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-invalid][data-active] {
+	outline: none;
+	box-shadow: var(--field-shadow), 0 0 0 2px var(--danger);
+}
+
+[data-ui-kit='admin'] [data-slot='input-otp-separator']:not([data-variant='unstyled']) {
+	background: var(--placeholder);
+}

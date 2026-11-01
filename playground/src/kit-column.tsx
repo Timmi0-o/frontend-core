@@ -15,6 +15,7 @@ import {
 	RangeDatePicker,
 	DateTimePicker,
 	Input,
+	InputOTP,
 	InputGroup,
 	Label,
 	PhotoGallery,
@@ -98,7 +99,7 @@ interface IKitColumnProps {
 }
 
 /** Число `DemoSection` в колонке. Нужно subgrid, чтобы ряды китов совпадали по высоте. */
-export const KIT_CATALOG_SECTION_COUNT = 33
+export const KIT_CATALOG_SECTION_COUNT = 34
 
 /** Шапка колонки плюс секции каталога — сколько рядов занимает кит в общей сетке. */
 export const KIT_COLUMN_GRID_ROWS = 1 + KIT_CATALOG_SECTION_COUNT
@@ -119,6 +120,7 @@ export const KitColumn = ({
 	const [priceRange, setPriceRange] = useState<readonly number[]>([20, 80])
 	const [city, setCity] = useState<string | null>('msk')
 	const [clearableQuery, setClearableQuery] = useState('Москва')
+	const [otpCode, setOtpCode] = useState('')
 	const [cityLight, setCityLight] = useState<string | null>('msk')
 	const [hotelId, setHotelId] = useState<string | null>('sea')
 	const [hotelRichId, setHotelRichId] = useState<string | null>('sea')
@@ -537,6 +539,27 @@ export const KitColumn = ({
 						value={clearableQuery}
 						onChange={(event) => setClearableQuery(event.target.value)}
 					/>
+				</DemoSection>
+
+				<DemoSection title='InputOTP'>
+					<InputOTP
+						maxLength={6}
+						size='sm'
+						value={otpCode}
+						onChange={setOtpCode}
+					>
+						<InputOTP.Group>
+							<InputOTP.Slot index={0} />
+							<InputOTP.Slot index={1} />
+							<InputOTP.Slot index={2} />
+						</InputOTP.Group>
+						<InputOTP.Separator />
+						<InputOTP.Group>
+							<InputOTP.Slot index={3} />
+							<InputOTP.Slot index={4} />
+							<InputOTP.Slot index={5} />
+						</InputOTP.Group>
+					</InputOTP>
 				</DemoSection>
 
 				<DemoSection title='InputGroup'>

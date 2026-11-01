@@ -158,6 +158,18 @@ export type {
 	IRangeDatePickerProps,
 } from './range-date-picker/range-date-picker'
 export { Input } from './input/input'
+export {
+	InputOTP,
+	REGEXP_ONLY_CHARS,
+	REGEXP_ONLY_DIGITS,
+	REGEXP_ONLY_DIGITS_AND_CHARS,
+} from './input-otp/input-otp'
+export type {
+	IInputOTPGroupProps,
+	IInputOTPRootProps,
+	IInputOTPSeparatorProps,
+	IInputOTPSlotProps,
+} from './input-otp/input-otp'
 export { InputGroup } from './input-group/input-group'
 export type {
 	IInputGroupAddonProps,

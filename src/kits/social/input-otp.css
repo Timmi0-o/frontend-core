@@ -1,0 +1,28 @@
+@import '../input-otp.css';
+
+[data-ui-kit='social'] [data-slot='input-otp-slot']:not([data-variant='unstyled']) {
+	border: 1px solid var(--glass-border);
+	border-radius: var(--button-radius);
+	background: var(--glass-bg);
+	box-shadow: var(--glass-shadow);
+	color: var(--foreground);
+}
+
+[data-ui-kit='social'] [data-slot='input-otp-slot']:not([data-variant='unstyled']):hover {
+	border-color: color-mix(in srgb, var(--ring) 40%, transparent);
+}
+
+[data-ui-kit='social'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-active] {
+	z-index: 1;
+	border-color: var(--ring);
+	box-shadow: var(--focus-ring);
+}
+
+[data-ui-kit='social'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-invalid] {
+	border-color: var(--destructive);
+	box-shadow: 0 0 0 3px color-mix(in srgb, var(--destructive) 20%, transparent);
+}
+
+[data-ui-kit='social'] [data-slot='input-otp-separator']:not([data-variant='unstyled']) {
+	background: var(--muted-foreground);
+}

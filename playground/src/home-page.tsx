@@ -28,6 +28,7 @@ const KIT_COMPONENT_NAMES = [
 	'DateTimePicker',
 	'DropdownMenu',
 	'Input',
+	'InputOTP',
 	'InputGroup',
 	'Label',
 	'Modal',

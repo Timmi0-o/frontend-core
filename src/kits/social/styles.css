@@ -9,6 +9,7 @@
 @import './switch.css' layer(components);
 @import './slider.css' layer(components);
 @import './input.css' layer(components);
+@import './input-otp.css' layer(components);
 @import './text-field.css' layer(components);
 @import './modal.css' layer(components);
 @import './select.css' layer(components);
