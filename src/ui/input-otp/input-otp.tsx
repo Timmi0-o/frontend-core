@@ -21,8 +21,7 @@ interface IInputOTPContextValue {
 	isInvalid: boolean
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<IInputOTPContextValue>('InputOTP')
+const { Context, useCompoundContext } = createCompoundContext<IInputOTPContextValue>('InputOTP')
 
 export interface IInputOTPRootProps extends Omit<
 	InputHTMLAttributes<HTMLInputElement>,
@@ -63,7 +62,7 @@ const InputOTPRoot = forwardRef<HTMLInputElement, IInputOTPRootProps>(
 		return (
 			<Context.Provider value={{ size, isDisabled, isInvalid }}>
 				<div
-					data-slot='input-otp'
+					data-slot="input-otp"
 					data-size={size}
 					data-variant={variant}
 					data-disabled={isDisabled ? '' : undefined}
@@ -89,18 +88,8 @@ InputOTPRoot.displayName = 'InputOTP'
 
 export interface IInputOTPGroupProps extends HTMLAttributes<HTMLDivElement> {}
 
-const InputOTPGroup = ({
-	className,
-	...props
-}: IInputOTPGroupProps): ReactElement => {
-	return (
-		<div
-			aria-hidden
-			data-slot='input-otp-group'
-			className={cn(className)}
-			{...props}
-		/>
-	)
+const InputOTPGroup = ({ className, ...props }: IInputOTPGroupProps): ReactElement => {
+	return <div aria-hidden data-slot="input-otp-group" className={cn(className)} {...props} />
 }
 
 InputOTPGroup.displayName = 'InputOTP.Group'
@@ -109,11 +98,7 @@ export interface IInputOTPSlotProps extends HTMLAttributes<HTMLDivElement> {
 	index: number
 }
 
-const InputOTPSlot = ({
-	index,
-	className,
-	...props
-}: IInputOTPSlotProps): ReactElement => {
+const InputOTPSlot = ({ index, className, ...props }: IInputOTPSlotProps): ReactElement => {
 	const { isDisabled, isInvalid } = useCompoundContext()
 	const otp = useContext(OTPInputContext)
 	const slot = otp.slots?.[index]
@@ -124,19 +109,15 @@ const InputOTPSlot = ({
 	return (
 		<div
 			{...props}
-			data-slot='input-otp-slot'
+			data-slot="input-otp-slot"
 			data-active={isActive ? '' : undefined}
 			data-disabled={isDisabled ? '' : undefined}
 			data-filled={isFilled ? '' : undefined}
 			data-invalid={isInvalid ? '' : undefined}
 			className={cn(className)}
 		>
-			{isFilled ? (
-				<div data-slot='input-otp-slot-value'>{char}</div>
-			) : null}
-			{slot?.hasFakeCaret === true && isActive ? (
-				<div data-slot='input-otp-caret' />
-			) : null}
+			{isFilled ? <div data-slot="input-otp-slot-value">{char}</div> : null}
+			{slot?.hasFakeCaret === true && isActive ? <div data-slot="input-otp-caret" /> : null}
 		</div>
 	)
 }
@@ -145,18 +126,8 @@ InputOTPSlot.displayName = 'InputOTP.Slot'
 
 export interface IInputOTPSeparatorProps extends HTMLAttributes<HTMLDivElement> {}
 
-const InputOTPSeparator = ({
-	className,
-	...props
-}: IInputOTPSeparatorProps): ReactElement => {
-	return (
-		<div
-			aria-hidden
-			data-slot='input-otp-separator'
-			className={cn(className)}
-			{...props}
-		/>
-	)
+const InputOTPSeparator = ({ className, ...props }: IInputOTPSeparatorProps): ReactElement => {
+	return <div aria-hidden data-slot="input-otp-separator" className={cn(className)} {...props} />
 }
 
 InputOTPSeparator.displayName = 'InputOTP.Separator'
@@ -189,8 +160,4 @@ export const InputOTP = Object.assign(InputOTPRoot, {
 	Separator: InputOTPSeparator,
 })
 
-export {
-	REGEXP_ONLY_CHARS,
-	REGEXP_ONLY_DIGITS,
-	REGEXP_ONLY_DIGITS_AND_CHARS,
-} from 'input-otp'
+export { REGEXP_ONLY_CHARS, REGEXP_ONLY_DIGITS, REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp'

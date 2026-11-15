@@ -1,7 +1,6 @@
 import { orderDateRange, startOfDay } from './date-picker-date.util'
 
-const RANGE_PREVIEW_SELECTOR =
-	'[data-slot="date-picker-day"][data-range-preview]'
+const RANGE_PREVIEW_SELECTOR = '[data-slot="date-picker-day"][data-range-preview]'
 
 /**
  * Сбрасывает preview-диапазон, выставленный при hover во время выбора конца периода.
@@ -27,10 +26,7 @@ export const applyRangeHoverPreview = (
 ): void => {
 	clearRangeHoverPreview(root)
 
-	const orderedRange = orderDateRange(
-		startOfDay(rangeStart),
-		startOfDay(hoverDate),
-	)
+	const orderedRange = orderDateRange(startOfDay(rangeStart), startOfDay(hoverDate))
 	const rangeStartTs = orderedRange.start.getTime()
 	const rangeEndTs = orderedRange.end.getTime()
 

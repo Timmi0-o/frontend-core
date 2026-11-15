@@ -1,11 +1,12 @@
 'use client'
 
+import { useMemo, type ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { useOpenOverlayZ } from '@/core/overlay-layer'
 import { useMobileCondition } from '@/hooks/use-mobile-condition'
 import { Popover } from '@/ui/popover/popover'
 import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
-import { useMemo, type ReactElement } from 'react'
 
 import { TimePickerInput } from './components/time-picker-input'
 import { TimePickerPopover } from './components/time-picker-popover'
@@ -15,10 +16,7 @@ import {
 } from './constants/time-picker.constants'
 import { TimePickerContext } from './context/time-picker-context'
 import { useTimePicker } from './hooks/use-time-picker'
-import type {
-	ITimePickerProps,
-	TTimePickerComponent,
-} from './types/i-time-picker-props'
+import type { ITimePickerProps, TTimePickerComponent } from './types/i-time-picker-props'
 import { DEFAULT_TIME_PICKER_PLACEHOLDER } from './utils/time-picker.util'
 
 export type { ITimePickerProps } from './types/i-time-picker-props'
@@ -83,24 +81,21 @@ const TimePickerRoot = (props: ITimePickerProps): ReactElement => {
 	return (
 		<TimePickerContext.Provider value={contextValue}>
 			<div
-				data-slot='time-picker'
+				data-slot="time-picker"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-invalid={error ? '' : undefined}
 				data-open={picker.isOpen ? '' : undefined}
 				className={cn(className)}
 			>
-				{label ? <label data-slot='time-picker-label'>{label}</label> : null}
+				{label ? <label data-slot="time-picker-label">{label}</label> : null}
 
 				{isMobile ? (
 					pickerContent
 				) : (
 					<Popover
 						open={picker.isOpen}
-						onOpenChange={(
-							isNextOpen,
-							details?: IPopoverOpenChangeDetails,
-						) => {
+						onOpenChange={(isNextOpen, details?: IPopoverOpenChangeDetails) => {
 							if (isDisabled) {
 								return
 							}
@@ -112,7 +107,7 @@ const TimePickerRoot = (props: ITimePickerProps): ReactElement => {
 
 							picker.handleOpenChange(isNextOpen)
 						}}
-						placement='bottom-start'
+						placement="bottom-start"
 						offset={TIME_PICKER_POPOVER_OFFSET_PX}
 					>
 						{pickerContent}
@@ -120,7 +115,7 @@ const TimePickerRoot = (props: ITimePickerProps): ReactElement => {
 				)}
 
 				{error ? (
-					<p data-slot='time-picker-error' role='alert'>
+					<p data-slot="time-picker-error" role="alert">
 						{error}
 					</p>
 				) : null}

@@ -28,7 +28,8 @@
 
 [data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='danger'],
 [data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='error'],
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
 	--alert-accent: var(--danger);
 }
 
@@ -43,7 +44,9 @@
 	color: var(--alert-accent);
 }
 
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-icon'] {
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='default']
+	[data-slot='alert-icon'] {
 	color: var(--text-primary);
 }
 
@@ -66,8 +69,12 @@
 	color: var(--alert-accent);
 }
 
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-body'],
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success'] [data-slot='alert-body'] {
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='default']
+	[data-slot='alert-body'],
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='success']
+	[data-slot='alert-body'] {
 	color: var(--text-primary);
 }
 
@@ -79,8 +86,12 @@
 	color: var(--alert-accent);
 }
 
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='default'] [data-slot='alert-title'],
-[data-ui-kit='social'] [data-slot='alert']:not([data-variant='unstyled'])[data-variant='success'] [data-slot='alert-title'] {
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='default']
+	[data-slot='alert-title'],
+[data-ui-kit='social']
+	[data-slot='alert']:not([data-variant='unstyled'])[data-variant='success']
+	[data-slot='alert-title'] {
 	color: var(--text-primary);
 }
 
@@ -92,7 +103,9 @@
 	color: var(--text-muted);
 }
 
-[data-ui-kit='social'] [data-slot='alert-body']:not(:has([data-slot='alert-title'])) > [data-slot='alert-description']:not([data-variant='unstyled']) {
+[data-ui-kit='social']
+	[data-slot='alert-body']:not(:has([data-slot='alert-title']))
+	> [data-slot='alert-description']:not([data-variant='unstyled']) {
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 	color: var(--text-primary);

@@ -88,9 +88,7 @@ export const DatePickerPopover = ({
 				title={placeholder}
 				isMobileCondition={true}
 			>
-				<AdaptiveDialog.Content className={cn(className)}>
-					{calendarView}
-				</AdaptiveDialog.Content>
+				<AdaptiveDialog.Content className={cn(className)}>{calendarView}</AdaptiveDialog.Content>
 			</AdaptiveDialog>
 		)
 	}

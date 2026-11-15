@@ -3,10 +3,7 @@
 import { useCallback, useMemo, useState } from 'react'
 
 import type { ITimePickerProps } from '../types/i-time-picker-props'
-import {
-	formatTimePickerValue,
-	parseTimePickerValue,
-} from '../utils/time-picker.util'
+import { formatTimePickerValue, parseTimePickerValue } from '../utils/time-picker.util'
 
 export const useTimePicker = (props: ITimePickerProps) => {
 	const {

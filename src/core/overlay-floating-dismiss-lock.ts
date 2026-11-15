@@ -1,7 +1,4 @@
-const FLOATING_OUTSIDE_DISMISS_REASONS = new Set([
-	'outside-press',
-	'focus-out',
-])
+const FLOATING_OUTSIDE_DISMISS_REASONS = new Set(['outside-press', 'focus-out'])
 
 let openFloatingCount = 0
 let dismissLockedUntilPointerUp = false
@@ -44,6 +41,5 @@ export const lockOverlayParentDismissUntilPointerUp = (): void => {
 export const isOverlayParentDismissLocked = (): boolean =>
 	openFloatingCount > 0 || dismissLockedUntilPointerUp
 
-export const shouldLockOverlayParentAfterFloatingClose = (
-	reason?: string,
-): boolean => (reason ? FLOATING_OUTSIDE_DISMISS_REASONS.has(reason) : false)
+export const shouldLockOverlayParentAfterFloatingClose = (reason?: string): boolean =>
+	reason ? FLOATING_OUTSIDE_DISMISS_REASONS.has(reason) : false

@@ -1,4 +1,5 @@
 import type { MotionProps, Transition, Variants } from 'framer-motion'
+
 import {
 	MOTION_DURATION_FAST,
 	MOTION_DURATION_MICRO,

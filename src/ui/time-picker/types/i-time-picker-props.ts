@@ -1,5 +1,6 @@
-import type { TMobileCondition } from '@/hooks/use-mobile-condition'
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
+
+import type { TMobileCondition } from '@/hooks/use-mobile-condition'
 
 export interface ITimePickerProps {
 	value: string
@@ -19,8 +20,10 @@ export interface ITimePickerProps {
 	isMobileCondition?: TMobileCondition
 }
 
-export interface ITimePickerInputProps
-	extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'value' | 'onChange' | 'type'> {
+export interface ITimePickerInputProps extends Omit<
+	ButtonHTMLAttributes<HTMLButtonElement>,
+	'value' | 'onChange' | 'type'
+> {
 	className?: string
 	variant?: 'default' | 'light' | 'unstyled'
 }
@@ -29,9 +32,7 @@ export interface ITimePickerPopoverProps {
 	className?: string
 }
 
-export type TTimePickerRootComponent = (
-	props: ITimePickerProps,
-) => ReactElement
+export type TTimePickerRootComponent = (props: ITimePickerProps) => ReactElement
 
 export type TTimePickerComponent = TTimePickerRootComponent & {
 	Root: TTimePickerRootComponent

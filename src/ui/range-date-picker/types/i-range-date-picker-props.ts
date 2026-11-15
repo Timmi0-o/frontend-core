@@ -1,6 +1,7 @@
+import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { TMobileCondition } from '@/hooks/use-mobile-condition'
-import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
 import type {
 	TDatePickerSize,
 	TDatePickerVariant,
@@ -44,9 +45,7 @@ export interface IRangeDatePickerPopoverProps {
 	variant?: TSlotVariant
 }
 
-export type TRangeDatePickerRootComponent = (
-	props: IRangeDatePickerProps,
-) => ReactElement
+export type TRangeDatePickerRootComponent = (props: IRangeDatePickerProps) => ReactElement
 
 export type TRangeDatePickerComponent = TRangeDatePickerRootComponent & {
 	Root: TRangeDatePickerRootComponent

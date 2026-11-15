@@ -58,9 +58,7 @@ export const parseKitIds = (search: string): TKitId[] => {
 }
 
 export const serializeKitIds = (ids: TKitId[]): string => {
-	const unique = KIT_OPTIONS.map((kit) => kit.id).filter((id) =>
-		ids.includes(id),
-	)
+	const unique = KIT_OPTIONS.map((kit) => kit.id).filter((id) => ids.includes(id))
 
 	return unique.join(',')
 }

@@ -1,8 +1,10 @@
 'use client'
 
+import type { ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
-import type { ReactElement } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import { useSelectChrome } from '../../context/select-context'
 import type { ISelectLabelProps } from '../../types/i-select-props'
@@ -21,11 +23,7 @@ export const SelectLabel = ({
 	}
 
 	return (
-		<label
-			data-slot='select-label'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<label data-slot="select-label" data-variant={variant} className={cn(className)}>
 			{content}
 		</label>
 	)

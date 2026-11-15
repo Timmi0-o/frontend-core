@@ -1,8 +1,10 @@
 'use client'
 
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableHeaderCellContentProps extends HTMLAttributes<HTMLDivElement> {
@@ -12,25 +14,18 @@ export interface ITableHeaderCellContentProps extends HTMLAttributes<HTMLDivElem
 	variant?: TSlotVariant
 }
 
-const TableSortIcon = ({
-	direction,
-}: {
-	direction: false | 'asc' | 'desc'
-}): ReactElement => {
+const TableSortIcon = ({ direction }: { direction: false | 'asc' | 'desc' }): ReactElement => {
 	return (
 		<svg
-			data-slot='table-sort-icon'
+			data-slot="table-sort-icon"
 			data-direction={direction === false ? undefined : direction}
-			viewBox='0 0 16 16'
-			width='16'
-			height='16'
-			fill='none'
-			aria-hidden='true'
+			viewBox="0 0 16 16"
+			width="16"
+			height="16"
+			fill="none"
+			aria-hidden="true"
 		>
-			<path
-				d='M8 3.5L11.5 8h-7L8 3.5zM8 12.5L4.5 8h7L8 12.5z'
-				fill='currentColor'
-			/>
+			<path d="M8 3.5L11.5 8h-7L8 3.5zM8 12.5L4.5 8h7L8 12.5z" fill="currentColor" />
 		</svg>
 	)
 }
@@ -46,7 +41,7 @@ export const TableHeaderCellContent = ({
 }: ITableHeaderCellContentProps): ReactElement => {
 	return (
 		<div
-			data-slot='table-header-cell-content'
+			data-slot="table-header-cell-content"
 			data-variant={variant}
 			data-sortable={sortable ? '' : undefined}
 			className={cn(className)}

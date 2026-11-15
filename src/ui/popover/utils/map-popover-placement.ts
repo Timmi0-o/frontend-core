@@ -13,10 +13,7 @@ export const mapPopoverPlacement = (
 	side: TPopoverSide
 	align: TPopoverAlign
 } => {
-	const [side, align] = placement.split('-') as [
-		TPopoverSide,
-		TPopoverAlign | undefined,
-	]
+	const [side, align] = placement.split('-') as [TPopoverSide, TPopoverAlign | undefined]
 
 	return {
 		side,

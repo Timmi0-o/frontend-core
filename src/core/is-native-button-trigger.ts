@@ -13,7 +13,5 @@ export const isNativeButtonTrigger = (element: ReactElement): boolean => {
 		return false
 	}
 
-	return (
-		'displayName' in element.type && element.type.displayName === 'Button'
-	)
+	return 'displayName' in element.type && element.type.displayName === 'Button'
 }

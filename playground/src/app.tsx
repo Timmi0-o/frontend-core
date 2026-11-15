@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react'
+
 import { HomePage } from './home-page'
 import { LocationProvider, usePlaygroundLocation } from './location-context'
 import { PlaygroundShell } from './playground-shell'
@@ -8,9 +9,7 @@ const PlaygroundRoutes = (): ReactElement => {
 	const { pathname } = usePlaygroundLocation()
 
 	return (
-		<PlaygroundShell>
-			{pathname === '/ui-kits' ? <UiKitsPage /> : <HomePage />}
-		</PlaygroundShell>
+		<PlaygroundShell>{pathname === '/ui-kits' ? <UiKitsPage /> : <HomePage />}</PlaygroundShell>
 	)
 }
 

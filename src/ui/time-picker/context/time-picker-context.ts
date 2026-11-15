@@ -16,9 +16,7 @@ export interface ITimePickerContextValue extends ReturnType<typeof useTimePicker
 	isClearable: boolean
 }
 
-export const TimePickerContext = createContext<ITimePickerContextValue | null>(
-	null,
-)
+export const TimePickerContext = createContext<ITimePickerContextValue | null>(null)
 
 export const useTimePickerContext = (): ITimePickerContextValue => {
 	const context = useContext(TimePickerContext)

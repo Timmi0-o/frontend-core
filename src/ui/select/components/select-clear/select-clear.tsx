@@ -1,8 +1,10 @@
 'use client'
 
+import type { MouseEvent, PointerEvent, ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
-import type { MouseEvent, PointerEvent, ReactElement } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import {
 	useSelectChrome,
@@ -13,19 +15,8 @@ import type { ISelectClearProps } from '../../types/i-select-props'
 
 const ClearIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 16 16'
-			width='16'
-			height='16'
-			fill='none'
-			aria-hidden='true'
-		>
-			<path
-				d='M4 4l8 8M12 4l-8 8'
-				stroke='currentColor'
-				strokeWidth='1.5'
-				strokeLinecap='round'
-			/>
+		<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+			<path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
 		</svg>
 	)
 }
@@ -52,11 +43,11 @@ export const SelectClear = ({
 
 	return (
 		<span
-			data-slot='select-clear'
+			data-slot="select-clear"
 			data-variant={variant}
-			role='button'
+			role="button"
 			tabIndex={-1}
-			aria-label='Очистить'
+			aria-label="Очистить"
 			className={cn(className)}
 			onPointerDown={stopTriggerToggle}
 			onClick={(event) => {

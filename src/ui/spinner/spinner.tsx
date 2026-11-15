@@ -1,14 +1,12 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import type { ReactElement } from 'react'
+
+import { cn } from '@/core/cn'
+
 import type { ISpinnerProps } from './types/i-spinner-props'
 
-export type {
-	ISpinnerProps,
-	ISpinnerSize,
-	TSpinnerVariant,
-} from './types/i-spinner-props'
+export type { ISpinnerProps, ISpinnerSize, TSpinnerVariant } from './types/i-spinner-props'
 
 const SpinnerRoot = ({
 	size = 'md',
@@ -17,12 +15,12 @@ const SpinnerRoot = ({
 }: ISpinnerProps): ReactElement => {
 	return (
 		<span
-			data-slot='spinner'
+			data-slot="spinner"
 			data-size={size}
 			data-variant={variant}
 			className={cn(className)}
-			role='status'
-			aria-label='Loading'
+			role="status"
+			aria-label="Loading"
 		/>
 	)
 }

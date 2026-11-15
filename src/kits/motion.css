@@ -253,7 +253,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-
 	:root,
 	[data-ui-kit] {
 		--motion-duration-instant: 0ms;

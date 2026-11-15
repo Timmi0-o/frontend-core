@@ -18,8 +18,7 @@ export function resolveSliderRangeInteraction(
 	const isRange = Array.isArray(value ?? defaultValue)
 
 	return {
-		thumbCollisionBehavior:
-			thumbCollisionBehavior ?? (isRange ? 'none' : 'push'),
+		thumbCollisionBehavior: thumbCollisionBehavior ?? (isRange ? 'none' : 'push'),
 		minStepsBetweenValues: minStepsBetweenValues ?? (isRange ? 1 : 0),
 	}
 }

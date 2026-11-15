@@ -1,11 +1,5 @@
 'use client'
 
-import { cn } from '@/core/cn'
-import {
-	createCompoundContext,
-	type ICompoundChildProps,
-} from '@/core/create-compound-context'
-import type { TSlotVariant } from '@/core/slot-variant'
 import {
 	forwardRef,
 	useContext,
@@ -13,6 +7,11 @@ import {
 	type ReactElement,
 	type ReactNode,
 } from 'react'
+
+import { cn } from '@/core/cn'
+import { createCompoundContext, type ICompoundChildProps } from '@/core/create-compound-context'
+import type { TSlotVariant } from '@/core/slot-variant'
+
 import { Input, type IInputProps, type IInputSize } from '../input/input'
 
 interface ITextFieldContextValue {
@@ -22,8 +21,7 @@ interface ITextFieldContextValue {
 	inputId?: string
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<ITextFieldContextValue>('TextField')
+const { Context, useCompoundContext } = createCompoundContext<ITextFieldContextValue>('TextField')
 
 /**
  * Контекст TextField, если слот внутри поля; иначе `null`.
@@ -64,11 +62,7 @@ const TextFieldRoot = ({
 				inputId,
 			}}
 		>
-			<div
-				data-slot='text-field'
-				data-variant={variant}
-				className={cn(className)}
-			>
+			<div data-slot="text-field" data-variant={variant} className={cn(className)}>
 				{children}
 			</div>
 		</Context.Provider>
@@ -102,14 +96,14 @@ const TextFieldLabel = ({
 	return (
 		<label
 			htmlFor={htmlFor ?? inputId}
-			data-slot='text-field-label'
+			data-slot="text-field-label"
 			data-variant={variant}
 			className={cn(className)}
 			{...rest}
 		>
 			{children}
 			{required ? (
-				<span data-slot='text-field-required' aria-hidden='true'>
+				<span data-slot="text-field-required" aria-hidden="true">
 					*
 				</span>
 			) : null}
@@ -144,9 +138,7 @@ const TextFieldInput = forwardRef<HTMLInputElement, ITextFieldInputProps>(
 				ref={ref}
 				id={resolvedId}
 				invalid={invalid}
-				aria-describedby={
-					invalid && context.errorMessage ? `${resolvedId}-error` : undefined
-				}
+				aria-describedby={invalid && context.errorMessage ? `${resolvedId}-error` : undefined}
 				{...rest}
 			/>
 		)
@@ -188,10 +180,10 @@ const TextFieldError = ({
 	return (
 		<p
 			id={inputId ? `${inputId}-error` : undefined}
-			data-slot='text-field-error'
+			data-slot="text-field-error"
 			data-variant={variant}
 			className={cn(className)}
-			role='alert'
+			role="alert"
 		>
 			{message}
 		</p>

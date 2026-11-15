@@ -1,11 +1,6 @@
+import type { CSSProperties, ReactElement, ReactNode, Ref, RefObject } from 'react'
+
 import type { TSlotVariant } from '@/core/slot-variant'
-import type {
-	CSSProperties,
-	ReactElement,
-	ReactNode,
-	Ref,
-	RefObject,
-} from 'react'
 
 export type TPopoverPortalContainer =
 	| HTMLElement

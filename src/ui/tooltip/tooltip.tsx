@@ -1,22 +1,15 @@
 'use client'
 
 import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip'
+import { useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { createCompoundContext } from '@/core/create-compound-context'
 import { floatingLayerStyle, useOverlayLayer } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import {
-	useRef,
-	useState,
-	type MouseEvent,
-	type PointerEvent,
-	type ReactNode,
-} from 'react'
 
-type TTooltipOpenChange = NonNullable<
-	TooltipPrimitive.Root.Props['onOpenChange']
->
+type TTooltipOpenChange = NonNullable<TooltipPrimitive.Root.Props['onOpenChange']>
 type TTooltipOpenChangeDetails = Parameters<TTooltipOpenChange>[1]
 
 interface ITooltipContextValue {
@@ -26,9 +19,7 @@ interface ITooltipContextValue {
 	onTriggerClick: (event: MouseEvent<HTMLElement>) => void
 }
 
-const createTouchPressDetails = (
-	event: MouseEvent<HTMLElement>,
-): TTooltipOpenChangeDetails => {
+const createTouchPressDetails = (event: MouseEvent<HTMLElement>): TTooltipOpenChangeDetails => {
 	let isCanceled = false
 	let isPropagationAllowed = false
 
@@ -52,8 +43,7 @@ const createTouchPressDetails = (
 	}
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<ITooltipContextValue>('Tooltip')
+const { Context, useCompoundContext } = createCompoundContext<ITooltipContextValue>('Tooltip')
 
 export interface ITooltipProviderProps extends TooltipPrimitive.Provider.Props {
 	variant?: TSlotVariant
@@ -66,7 +56,7 @@ const TooltipProvider = ({
 }: ITooltipProviderProps): ReactNode => {
 	return (
 		<TooltipPrimitive.Provider
-			data-slot='tooltip-provider'
+			data-slot="tooltip-provider"
 			data-variant={variant}
 			delay={delay}
 			{...props}
@@ -96,11 +86,7 @@ const TooltipRoot = ({
 	const isOpen = isOpenControlled ? isOpenProp : isUncontrolledOpen
 
 	const setOpen = (isNextOpen: boolean, eventDetails: TTooltipOpenChangeDetails) => {
-		if (
-			!isNextOpen &&
-			isOpenedByTouchRef.current &&
-			eventDetails.reason === 'trigger-hover'
-		) {
+		if (!isNextOpen && isOpenedByTouchRef.current && eventDetails.reason === 'trigger-hover') {
 			eventDetails.cancel()
 			return
 		}
@@ -149,7 +135,7 @@ const TooltipRoot = ({
 		>
 			<span ref={hostRef} hidden />
 			<TooltipPrimitive.Root
-				data-slot='tooltip'
+				data-slot="tooltip"
 				data-variant={variant}
 				disabled={disabled}
 				open={isOpen}
@@ -171,12 +157,11 @@ const TooltipTrigger = ({
 	onClick,
 	...props
 }: ITooltipTriggerProps): ReactNode => {
-	const { isTouchPointer, onTriggerPointerDown, onTriggerClick } =
-		useCompoundContext()
+	const { isTouchPointer, onTriggerPointerDown, onTriggerClick } = useCompoundContext()
 
 	return (
 		<TooltipPrimitive.Trigger
-			data-slot='tooltip-trigger'
+			data-slot="tooltip-trigger"
 			data-variant={variant}
 			closeOnClick={closeOnClick ?? !isTouchPointer}
 			onPointerDown={(event) => {
@@ -194,11 +179,9 @@ const TooltipTrigger = ({
 }
 
 export interface ITooltipContentProps
-	extends TooltipPrimitive.Popup.Props,
-		Pick<
-			TooltipPrimitive.Positioner.Props,
-			'align' | 'alignOffset' | 'side' | 'sideOffset'
-		> {
+	extends
+		TooltipPrimitive.Popup.Props,
+		Pick<TooltipPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -219,7 +202,7 @@ const TooltipContent = ({
 	return (
 		<TooltipPrimitive.Portal>
 			<TooltipPrimitive.Positioner
-				data-slot='tooltip-positioner'
+				data-slot="tooltip-positioner"
 				data-ui-kit={uiKit}
 				style={floatingLayerStyle(floatingZ)}
 				align={align}
@@ -228,13 +211,13 @@ const TooltipContent = ({
 				sideOffset={sideOffset}
 			>
 				<TooltipPrimitive.Popup
-					data-slot='tooltip-content'
+					data-slot="tooltip-content"
 					data-variant={variant}
 					className={cn(className)}
 					{...props}
 				>
 					{children}
-					<TooltipPrimitive.Arrow data-slot='tooltip-arrow' />
+					<TooltipPrimitive.Arrow data-slot="tooltip-arrow" />
 				</TooltipPrimitive.Popup>
 			</TooltipPrimitive.Positioner>
 		</TooltipPrimitive.Portal>

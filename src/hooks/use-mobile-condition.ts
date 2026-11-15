@@ -12,17 +12,13 @@ export type TMobileCondition = boolean | string
  * Резолвит мобильный режим: готовый boolean или CSS media query.
  * Нужен AdaptiveDialog и DatePicker, чтобы один проп принимал и JS-условие, и matchMedia.
  */
-export const useMobileCondition = (
-	mobileCondition?: TMobileCondition,
-): boolean => {
+export const useMobileCondition = (mobileCondition?: TMobileCondition): boolean => {
 	const isBooleanCondition = typeof mobileCondition === 'boolean'
 	const mediaQuery =
 		typeof mobileCondition === 'string' && mobileCondition.trim() !== ''
 			? mobileCondition
 			: DEFAULT_MOBILE_MEDIA_QUERY
-	const isMediaMobile = useMediaQuery(
-		isBooleanCondition ? NEVER_MATCH_MEDIA_QUERY : mediaQuery,
-	)
+	const isMediaMobile = useMediaQuery(isBooleanCondition ? NEVER_MATCH_MEDIA_QUERY : mediaQuery)
 
 	if (isBooleanCondition) {
 		return mobileCondition

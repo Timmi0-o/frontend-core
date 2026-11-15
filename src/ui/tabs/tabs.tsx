@@ -1,10 +1,12 @@
 'use client'
 
 import { Tabs as TabsPrimitive } from '@base-ui/react/tabs'
+import type { ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { Spinner } from '@/ui/spinner/spinner'
-import type { ReactElement, ReactNode } from 'react'
+
 import { TabsSizeProvider, useTabsSize, type TTabsSize } from './tabs-size-context'
 
 export type { TTabsSize } from './tabs-size-context'
@@ -49,9 +51,7 @@ const isDisplayTabItem = (item: ITabItem): item is IDisplayTabItem => {
  * Вызывает onClick action-вкладки и дожидается Promise, если он есть.
  * Использовать из обработчика клика по пункту с `type: 'action'`.
  */
-const invokeTabAction = async (
-	action: () => void | Promise<void>,
-): Promise<void> => {
+const invokeTabAction = async (action: () => void | Promise<void>): Promise<void> => {
 	await Promise.resolve(action())
 }
 
@@ -123,25 +123,23 @@ const TabsRoot = ({
 
 	return (
 		<TabsSizeProvider value={size}>
-		<TabsPrimitive.Root
-			{...(isControlled
-				? { value }
-				: { defaultValue: defaultValue ?? firstTabValue })}
-			onValueChange={(nextValue) => {
-				if (nextValue == null) {
-					return
-				}
+			<TabsPrimitive.Root
+				{...(isControlled ? { value } : { defaultValue: defaultValue ?? firstTabValue })}
+				onValueChange={(nextValue) => {
+					if (nextValue == null) {
+						return
+					}
 
-				onChange?.(String(nextValue))
-			}}
-			data-slot='tabs'
-			data-variant={variant}
-			data-size={size}
-			className={cn(className)}
-		>
-			{items != null ? <TabsItems items={items} /> : null}
-			{children}
-		</TabsPrimitive.Root>
+					onChange?.(String(nextValue))
+				}}
+				data-slot="tabs"
+				data-variant={variant}
+				data-size={size}
+				className={cn(className)}
+			>
+				{items != null ? <TabsItems items={items} /> : null}
+				{children}
+			</TabsPrimitive.Root>
 		</TabsSizeProvider>
 	)
 }
@@ -154,11 +152,7 @@ const TabsListContainer = ({
 	variant = 'default',
 }: ITabsListContainerProps): ReactElement => {
 	return (
-		<div
-			data-slot='tabs-list-container'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="tabs-list-container" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)
@@ -177,7 +171,7 @@ const TabsList = ({
 	return (
 		<TabsPrimitive.List
 			aria-label={ariaLabel}
-			data-slot='tabs-list'
+			data-slot="tabs-list"
 			data-variant={variant}
 			data-size={size}
 			className={cn(className)}
@@ -204,32 +198,27 @@ const TabsTab = ({
 		<TabsPrimitive.Tab
 			value={value}
 			disabled={isDisabled}
-			data-slot='tab'
+			data-slot="tab"
 			data-variant={variant}
 			data-size={size}
 			className={cn(className)}
 		>
 			{icon != null ? (
-				<span data-slot='tab-icon' aria-hidden>
+				<span data-slot="tab-icon" aria-hidden>
 					{icon}
 				</span>
 			) : null}
-			{children != null && children !== '' ? (
-				<span data-slot='tab-label'>{children}</span>
-			) : null}
+			{children != null && children !== '' ? <span data-slot="tab-label">{children}</span> : null}
 		</TabsPrimitive.Tab>
 	)
 }
 
 TabsTab.displayName = 'Tabs.Tab'
 
-const TabsIndicator = ({
-	className,
-	variant = 'default',
-}: ITabsIndicatorProps): ReactElement => {
+const TabsIndicator = ({ className, variant = 'default' }: ITabsIndicatorProps): ReactElement => {
 	return (
 		<TabsPrimitive.Indicator
-			data-slot='tabs-indicator'
+			data-slot="tabs-indicator"
 			data-variant={variant}
 			className={cn(className)}
 		/>
@@ -238,17 +227,9 @@ const TabsIndicator = ({
 
 TabsIndicator.displayName = 'Tabs.Indicator'
 
-const TabsSeparator = ({
-	className,
-	variant = 'default',
-}: ITabsSeparatorProps): ReactElement => {
+const TabsSeparator = ({ className, variant = 'default' }: ITabsSeparatorProps): ReactElement => {
 	return (
-		<span
-			data-slot='tabs-separator'
-			data-variant={variant}
-			aria-hidden
-			className={cn(className)}
-		/>
+		<span data-slot="tabs-separator" data-variant={variant} aria-hidden className={cn(className)} />
 	)
 }
 
@@ -277,7 +258,7 @@ const TabsPanel = ({
 		<TabsPrimitive.Panel
 			value={value}
 			keepMounted={keepMounted}
-			data-slot='tabs-panel'
+			data-slot="tabs-panel"
 			data-variant={variant}
 			className={cn(className)}
 		>
@@ -298,10 +279,10 @@ const TabsAction = ({ item }: ITabsActionProps): ReactElement => {
 
 	return (
 		<button
-			type='button'
-			data-slot='tab'
+			type="button"
+			data-slot="tab"
 			data-size={size}
-			data-type='action'
+			data-type="action"
 			data-color={item.color ?? 'default'}
 			data-loading={item.isLoading ? '' : undefined}
 			disabled={isPressDisabled || undefined}
@@ -311,14 +292,14 @@ const TabsAction = ({ item }: ITabsActionProps): ReactElement => {
 			}}
 		>
 			{item.icon != null ? (
-				<span data-slot='tab-icon' aria-hidden>
+				<span data-slot="tab-icon" aria-hidden>
 					{item.icon}
 				</span>
 			) : null}
-			<span data-slot='tab-label'>{item.label}</span>
+			<span data-slot="tab-label">{item.label}</span>
 			{item.isLoading ? (
-				<span data-slot='tab-spinner' aria-hidden>
-					<Spinner size='sm' />
+				<span data-slot="tab-spinner" aria-hidden>
+					<Spinner size="sm" />
 				</span>
 			) : null}
 		</button>

@@ -1,9 +1,6 @@
 import type { IApiResponseMapper } from './contracts/api-response/types/i-api-response-mapper'
 import type { IAppActionResponseError } from './contracts/api-response/types/i-app-action-response.type'
-import type {
-	TActionErrorLogger,
-	TResolveActionError,
-} from './types/i-action-request-workers'
+import type { TActionErrorLogger, TResolveActionError } from './types/i-action-request-workers'
 
 /**
  * Если HTTP-статус не ok, читает тело ответа через mapper и возвращает `IAppActionResponse` с error.

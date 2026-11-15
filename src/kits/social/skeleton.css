@@ -20,8 +20,7 @@
 		color-mix(in srgb, var(--foreground) 5%, transparent) 82%,
 		transparent 95%
 	);
-	animation: tg-social-skeleton-shimmer 1.6s linear var(--skeleton-shimmer-delay)
-		infinite backwards;
+	animation: tg-social-skeleton-shimmer 1.6s linear var(--skeleton-shimmer-delay) infinite backwards;
 }
 
 @keyframes tg-social-skeleton-shimmer {

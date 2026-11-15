@@ -24,9 +24,7 @@ export interface IMultiTypeFieldParserConfig<
 > {
 	field: unknown
 	parseType: TParseType
-	onSuccessTransform?: (
-		parsedValue: TMultiTypeFieldParsedValue[TParseType],
-	) => TTransformed
+	onSuccessTransform?: (parsedValue: TMultiTypeFieldParsedValue[TParseType]) => TTransformed
 	errorFallback?: TFallback
 	customParser?: (value: unknown) => TMultiTypeFieldParsedValue[TParseType]
 }

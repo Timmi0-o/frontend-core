@@ -4,9 +4,7 @@ import type {
 	TMultiTypeFieldParseType,
 } from './types/i-multi-type-field-parser-config'
 
-type TParseAttempt<TValue> =
-	| { isOk: true; value: TValue }
-	| { isOk: false }
+type TParseAttempt<TValue> = { isOk: true; value: TValue } | { isOk: false }
 
 /**
  * Парсит одно поле или пачку полей в заявленный тип, без доменных микропарсеров.
@@ -19,9 +17,7 @@ export function multiTypeFieldParser<
 	TTransformed = TMultiTypeFieldParsedValue[TParseType],
 	TFallback = TTransformed | null | undefined,
 >(
-	configs: ReadonlyArray<
-		IMultiTypeFieldParserConfig<TParseType, TTransformed, TFallback>
-	>,
+	configs: ReadonlyArray<IMultiTypeFieldParserConfig<TParseType, TTransformed, TFallback>>,
 ): Array<TTransformed | TFallback>
 export function multiTypeFieldParser<
 	TParseType extends TMultiTypeFieldParseType,
@@ -51,9 +47,7 @@ const isConfigBatch = (
  * Прогоняет один конфиг: customParser либо parseType, затем onSuccessTransform.
  * Нужен и одиночному вызову, и map по массиву конфигов.
  */
-const parseOneField = (
-	config: IMultiTypeFieldParserConfig,
-): unknown => {
+const parseOneField = (config: IMultiTypeFieldParserConfig): unknown => {
 	const parsedAttempt = tryParseField(config)
 
 	if (!parsedAttempt.isOk) {
@@ -164,9 +158,7 @@ const parseDateField = (field: unknown): Date | undefined => {
 /**
  * Обычный объект, не массив и не Date.
  */
-const isPlainObjectField = (
-	field: unknown,
-): field is Record<string, unknown> => {
+const isPlainObjectField = (field: unknown): field is Record<string, unknown> => {
 	if (field == null || typeof field !== 'object') {
 		return false
 	}

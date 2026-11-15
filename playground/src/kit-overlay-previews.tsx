@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type ReactElement } from 'react'
+
 import {
 	AdaptiveDialog,
 	BottomSheet,
@@ -18,17 +19,17 @@ export const KitPopoverPreview = (): ReactElement => {
 	return (
 		<Popover>
 			<Popover.Trigger>
-				<Button variant='outline'>Что входит в номер</Button>
+				<Button variant="outline">Что входит в номер</Button>
 			</Popover.Trigger>
-			<Popover.Content panelClassName='kit-popover-preview'>
-				<p className='kit-popover-preview__title'>River Palace, 4*</p>
-				<p className='kit-popover-preview__lead'>Казань · 2 ночи · завтрак</p>
-				<ul className='kit-popover-preview__list'>
+			<Popover.Content panelClassName="kit-popover-preview">
+				<p className="kit-popover-preview__title">River Palace, 4*</p>
+				<p className="kit-popover-preview__lead">Казань · 2 ночи · завтрак</p>
+				<ul className="kit-popover-preview__list">
 					<li>Завтрак «шведский стол»</li>
 					<li>Трансфер из аэропорта</li>
 					<li>Бесплатная отмена за 24 часа</li>
 				</ul>
-				<p className='kit-popover-preview__price'>18 400 ₽</p>
+				<p className="kit-popover-preview__price">18 400 ₽</p>
 			</Popover.Content>
 		</Popover>
 	)
@@ -39,34 +40,28 @@ export const KitAdaptiveDialogPreview = (): ReactElement => {
 
 	return (
 		<>
-			<Button variant='outline' onClick={() => setIsOpen(true)}>
+			<Button variant="outline" onClick={() => setIsOpen(true)}>
 				AdaptiveDialog
 			</Button>
-			<AdaptiveDialog
-				open={isOpen}
-				onOpenChange={setIsOpen}
-				title='Подтвердить бронь'
-			>
-				<AdaptiveDialog.Content className='kit-modal-preview'>
+			<AdaptiveDialog open={isOpen} onOpenChange={setIsOpen} title="Подтвердить бронь">
+				<AdaptiveDialog.Content className="kit-modal-preview">
 					<AdaptiveDialog.Header>
 						<AdaptiveDialog.Title>Подтвердить бронь</AdaptiveDialog.Title>
 						<AdaptiveDialog.CloseButton />
 					</AdaptiveDialog.Header>
 					<AdaptiveDialog.Body>
-						<div className='kit-modal-preview__content'>
-							<p className='kit-modal-preview__hotel'>River Palace, 4*</p>
-							<p className='kit-modal-preview__meta'>
-								Казань · заезд 29 авг, 14:00 · 2 ночи
-							</p>
-							<div className='kit-row'>
-								<Chip variant='accent'>Завтрак</Chip>
+						<div className="kit-modal-preview__content">
+							<p className="kit-modal-preview__hotel">River Palace, 4*</p>
+							<p className="kit-modal-preview__meta">Казань · заезд 29 авг, 14:00 · 2 ночи</p>
+							<div className="kit-row">
+								<Chip variant="accent">Завтрак</Chip>
 								<Chip>2 гостя</Chip>
 							</div>
-							<p className='kit-modal-preview__sum'>К оплате 18 400 ₽</p>
+							<p className="kit-modal-preview__sum">К оплате 18 400 ₽</p>
 						</div>
 					</AdaptiveDialog.Body>
 					<AdaptiveDialog.Footer>
-						<Button variant='outline' onClick={() => setIsOpen(false)}>
+						<Button variant="outline" onClick={() => setIsOpen(false)}>
 							Позже
 						</Button>
 						<Button onClick={() => setIsOpen(false)}>Подтвердить</Button>
@@ -82,30 +77,24 @@ export const KitModalPreview = (): ReactElement => {
 
 	return (
 		<>
-			<Button variant='outline' onClick={() => setIsOpen(true)}>
+			<Button variant="outline" onClick={() => setIsOpen(true)}>
 				Подтвердить бронь
 			</Button>
-			<Modal
-				open={isOpen}
-				onOpenChange={setIsOpen}
-				className='kit-modal-preview'
-			>
+			<Modal open={isOpen} onOpenChange={setIsOpen} className="kit-modal-preview">
 				<Modal.Header>
 					<Modal.Title>Подтвердить бронь</Modal.Title>
 					<Modal.CloseButton />
 				</Modal.Header>
 				<Modal.Body>
-					<div className='kit-modal-preview__content'>
-						<p className='kit-modal-preview__hotel'>River Palace, 4*</p>
-						<p className='kit-modal-preview__meta'>
-							Казань · заезд 29 авг, 14:00 · 2 ночи
-						</p>
-						<div className='kit-row'>
-							<Chip variant='accent'>Завтрак</Chip>
+					<div className="kit-modal-preview__content">
+						<p className="kit-modal-preview__hotel">River Palace, 4*</p>
+						<p className="kit-modal-preview__meta">Казань · заезд 29 авг, 14:00 · 2 ночи</p>
+						<div className="kit-row">
+							<Chip variant="accent">Завтрак</Chip>
 							<Chip>2 гостя</Chip>
-							<Chip variant='outline'>Бесплатная отмена</Chip>
+							<Chip variant="outline">Бесплатная отмена</Chip>
 						</div>
-						<dl className='kit-modal-preview__details'>
+						<dl className="kit-modal-preview__details">
 							<div>
 								<dt>Номер</dt>
 								<dd>Делюкс с видом на море</dd>
@@ -123,11 +112,11 @@ export const KitModalPreview = (): ReactElement => {
 								<dd>4 000 ₽</dd>
 							</div>
 						</dl>
-						<p className='kit-modal-preview__sum'>К оплате 18 400 ₽</p>
+						<p className="kit-modal-preview__sum">К оплате 18 400 ₽</p>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant='outline' onClick={() => setIsOpen(false)}>
+					<Button variant="outline" onClick={() => setIsOpen(false)}>
 						Позже
 					</Button>
 					<Button onClick={() => setIsOpen(false)}>Подтвердить</Button>
@@ -142,24 +131,20 @@ export const KitDrawerPreview = (): ReactElement => {
 
 	return (
 		<>
-			<Button variant='outline' onClick={() => setIsOpen(true)}>
+			<Button variant="outline" onClick={() => setIsOpen(true)}>
 				Панель бронирования
 			</Button>
-			<Drawer
-				open={isOpen}
-				onOpenChange={setIsOpen}
-				title='Панель бронирования'
-			>
+			<Drawer open={isOpen} onOpenChange={setIsOpen} title="Панель бронирования">
 				<Drawer.Header>
 					<Drawer.Title>Панель бронирования</Drawer.Title>
 					<Drawer.CloseButton>
-						<Button size='xs' variant='ghost'>
+						<Button size="xs" variant="ghost">
 							Закрыть
 						</Button>
 					</Drawer.CloseButton>
 				</Drawer.Header>
 				<Drawer.Body>
-					<p className='kit-modal-preview__meta'>
+					<p className="kit-modal-preview__meta">
 						Пользовательский контрол закрытия передаётся целиком.
 					</p>
 				</Drawer.Body>
@@ -198,9 +183,7 @@ const DISTRICT_OPTIONS = [
  * Нужен чипам BottomSheet, чтобы не дублировать setState по каждой группе.
  */
 const toggleFilterValue = (current: string[], value: string): string[] => {
-	return current.includes(value)
-		? current.filter((item) => item !== value)
-		: [...current, value]
+	return current.includes(value) ? current.filter((item) => item !== value) : [...current, value]
 }
 
 export const KitSheetPreview = (): ReactElement => {
@@ -244,28 +227,26 @@ export const KitSheetPreview = (): ReactElement => {
 
 	return (
 		<>
-			<div className='kit-row'>
-				<Button variant='outline' onClick={() => setIsOpen(true)}>
+			<div className="kit-row">
+				<Button variant="outline" onClick={() => setIsOpen(true)}>
 					Фильтры поиска
 				</Button>
-				<Button variant='outline' onClick={() => setIsSecondaryOpen(true)}>
+				<Button variant="outline" onClick={() => setIsSecondaryOpen(true)}>
 					Парящая шторка
 				</Button>
 			</div>
 			<BottomSheet
 				open={isOpen}
 				onOpenChange={setIsOpen}
-				title='Фильтры поиска'
-				height='min(86vh, 760px)'
+				title="Фильтры поиска"
+				height="min(86vh, 760px)"
 			>
-				<div className='kit-sheet-preview'>
-					<p className='kit-sheet-preview__lead'>
-						Казань · 29–31 авг · 2 взрослых · без детей
-					</p>
+				<div className="kit-sheet-preview">
+					<p className="kit-sheet-preview__lead">Казань · 29–31 авг · 2 взрослых · без детей</p>
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Стоимость за ночь</p>
-						<div className='kit-row'>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Стоимость за ночь</p>
+						<div className="kit-row">
 							{PRICE_OPTIONS.map((option) => (
 								<Chip
 									key={option.value}
@@ -279,17 +260,15 @@ export const KitSheetPreview = (): ReactElement => {
 						</div>
 					</div>
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Категория отеля</p>
-						<div className='kit-row'>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Категория отеля</p>
+						<div className="kit-row">
 							{STAR_OPTIONS.map((option) => (
 								<Chip
 									key={option}
 									clickable
 									variant={stars.includes(option) ? 'accent' : 'outline'}
-									onClick={() =>
-										setStars((current) => toggleFilterValue(current, option))
-									}
+									onClick={() => setStars((current) => toggleFilterValue(current, option))}
 								>
 									{option}
 								</Chip>
@@ -297,41 +276,29 @@ export const KitSheetPreview = (): ReactElement => {
 						</div>
 					</div>
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Питание</p>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Питание</p>
+						<Checkbox label="Завтрак включён" checked={breakfast} onCheckedChange={setBreakfast} />
 						<Checkbox
-							label='Завтрак включён'
-							checked={breakfast}
-							onCheckedChange={setBreakfast}
-						/>
-						<Checkbox
-							label='Всё включено'
+							label="Всё включено"
 							checked={allInclusive}
 							onCheckedChange={setAllInclusive}
 						/>
-						<Checkbox
-							label='Полупансион'
-							checked={halfBoard}
-							onCheckedChange={setHalfBoard}
-						/>
+						<Checkbox label="Полупансион" checked={halfBoard} onCheckedChange={setHalfBoard} />
 					</div>
 
 					<Separator />
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Удобства</p>
-						<div className='kit-row'>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Удобства</p>
+						<div className="kit-row">
 							{AMENITY_OPTIONS.map((option) => (
 								<Chip
 									key={option.value}
 									clickable
-									variant={
-										amenities.includes(option.value) ? 'accent' : 'outline'
-									}
+									variant={amenities.includes(option.value) ? 'accent' : 'outline'}
 									onClick={() =>
-										setAmenities((current) =>
-											toggleFilterValue(current, option.value),
-										)
+										setAmenities((current) => toggleFilterValue(current, option.value))
 									}
 								>
 									{option.label}
@@ -340,20 +307,16 @@ export const KitSheetPreview = (): ReactElement => {
 						</div>
 					</div>
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Район</p>
-						<div className='kit-row'>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Район</p>
+						<div className="kit-row">
 							{DISTRICT_OPTIONS.map((option) => (
 								<Chip
 									key={option.value}
 									clickable
-									variant={
-										districts.includes(option.value) ? 'accent' : 'outline'
-									}
+									variant={districts.includes(option.value) ? 'accent' : 'outline'}
 									onClick={() =>
-										setDistricts((current) =>
-											toggleFilterValue(current, option.value),
-										)
+										setDistricts((current) => toggleFilterValue(current, option.value))
 									}
 								>
 									{option.label}
@@ -364,41 +327,37 @@ export const KitSheetPreview = (): ReactElement => {
 
 					<Separator />
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Условия брони</p>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Условия брони</p>
 						<Checkbox
-							label='Бесплатная отмена за 24 часа'
+							label="Бесплатная отмена за 24 часа"
 							checked={freeCancel}
 							onCheckedChange={setFreeCancel}
 						/>
+						<Checkbox label="Можно с питомцами" checked={pets} onCheckedChange={setPets} />
 						<Checkbox
-							label='Можно с питомцами'
-							checked={pets}
-							onCheckedChange={setPets}
-						/>
-						<Checkbox
-							label='Поздний выезд до 16:00'
+							label="Поздний выезд до 16:00"
 							checked={lateCheckout}
 							onCheckedChange={setLateCheckout}
 						/>
 					</div>
 
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Выдача результатов</p>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Выдача результатов</p>
 						<Switch
-							label='Только с фото номеров'
+							label="Только с фото номеров"
 							isChecked={withPhoto}
 							onCheckedChange={setWithPhoto}
 						/>
 						<Switch
-							label='Мгновенное подтверждение'
+							label="Мгновенное подтверждение"
 							isChecked={instantConfirm}
 							onCheckedChange={setInstantConfirm}
 						/>
 					</div>
 
-					<div className='kit-sheet-preview__actions'>
-						<Button variant='ghost' onClick={resetFilters}>
+					<div className="kit-sheet-preview__actions">
+						<Button variant="ghost" onClick={resetFilters}>
 							Сбросить
 						</Button>
 						<Button onClick={() => setIsOpen(false)}>
@@ -410,23 +369,16 @@ export const KitSheetPreview = (): ReactElement => {
 			<BottomSheet
 				open={isSecondaryOpen}
 				onOpenChange={setIsSecondaryOpen}
-				title='Действия'
-				variant='secondary'
+				title="Действия"
+				variant="secondary"
 			>
-				<div className='kit-sheet-preview'>
-					<p className='kit-sheet-preview__lead'>
-						Парящий блок с отступами от краёв экрана
-					</p>
-					<div className='kit-sheet-preview__actions'>
-						<Button
-							variant='ghost'
-							onClick={() => setIsSecondaryOpen(false)}
-						>
+				<div className="kit-sheet-preview">
+					<p className="kit-sheet-preview__lead">Парящий блок с отступами от краёв экрана</p>
+					<div className="kit-sheet-preview__actions">
+						<Button variant="ghost" onClick={() => setIsSecondaryOpen(false)}>
 							Закрыть
 						</Button>
-						<Button onClick={() => setIsSecondaryOpen(false)}>
-							Продолжить
-						</Button>
+						<Button onClick={() => setIsSecondaryOpen(false)}>Продолжить</Button>
 					</div>
 				</div>
 			</BottomSheet>

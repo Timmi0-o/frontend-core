@@ -41,15 +41,9 @@ export type {
 	TAutocompleteVariant,
 } from './autocomplete/autocomplete'
 export { BottomSheet } from './modal/bottom-sheet/bottom-sheet'
-export type {
-	IBottomSheetRootProps,
-	TBottomSheetVariant,
-} from './modal/bottom-sheet/bottom-sheet'
+export type { IBottomSheetRootProps, TBottomSheetVariant } from './modal/bottom-sheet/bottom-sheet'
 export { Drawer } from './modal/drawer/drawer'
-export type {
-	IDrawerCloseButtonProps,
-	IDrawerRootProps,
-} from './modal/drawer/drawer'
+export type { IDrawerCloseButtonProps, IDrawerRootProps } from './modal/drawer/drawer'
 export {
 	Breadcrumbs,
 	BreadcrumbsHome,
@@ -73,10 +67,7 @@ export type {
 } from './breadcrumbs/breadcrumbs'
 export { Button } from './button/button'
 export { ButtonGroup } from './button-group/button-group'
-export type {
-	IButtonGroupProps,
-	TButtonGroupVariant,
-} from './button-group/button-group'
+export type { IButtonGroupProps, TButtonGroupVariant } from './button-group/button-group'
 export { Calendar } from './calendar/calendar'
 export type { ICalendarProps } from './calendar/calendar'
 export type {
@@ -276,12 +267,7 @@ export {
 	type TAvatarSize,
 } from './avatar/avatar'
 export { Badge } from './badge/badge'
-export type {
-	IBadgeProps,
-	TBadgePlacement,
-	TBadgePosition,
-	TBadgeVariant,
-} from './badge/badge'
+export type { IBadgeProps, TBadgePlacement, TBadgePosition, TBadgeVariant } from './badge/badge'
 export { Slider } from './slider/slider'
 export type {
 	ISliderControlProps,

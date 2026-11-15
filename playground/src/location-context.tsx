@@ -1,9 +1,5 @@
-import {
-	createContext,
-	useContext,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
+import { createContext, useContext, type ReactElement, type ReactNode } from 'react'
+
 import { useLocation } from './use-location'
 
 interface ILocationContextValue {
@@ -14,16 +10,10 @@ interface ILocationContextValue {
 
 const LocationContext = createContext<ILocationContextValue | null>(null)
 
-export const LocationProvider = ({
-	children,
-}: {
-	children: ReactNode
-}): ReactElement => {
+export const LocationProvider = ({ children }: { children: ReactNode }): ReactElement => {
 	const value = useLocation()
 
-	return (
-		<LocationContext.Provider value={value}>{children}</LocationContext.Provider>
-	)
+	return <LocationContext.Provider value={value}>{children}</LocationContext.Provider>
 }
 
 /**

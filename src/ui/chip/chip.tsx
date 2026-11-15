@@ -1,9 +1,10 @@
 'use client'
 
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { ICompoundChildProps } from '@/core/types/i-create-compound-component.types'
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
 
 export type IChipVariant =
 	| 'default'
@@ -34,7 +35,7 @@ const ChipRoot = ({
 	return (
 		<span
 			{...rest}
-			data-slot='chip'
+			data-slot="chip"
 			data-variant={variant}
 			data-clickable={clickable ? '' : undefined}
 			{...(clickable ? { role: 'button' as const, tabIndex: 0 } : {})}
@@ -52,17 +53,9 @@ export interface IChipLabelProps extends ICompoundChildProps {
 	variant?: TSlotVariant
 }
 
-const ChipLabel = ({
-	children,
-	className,
-	variant = 'default',
-}: IChipLabelProps): ReactElement => {
+const ChipLabel = ({ children, className, variant = 'default' }: IChipLabelProps): ReactElement => {
 	return (
-		<span
-			data-slot='chip-label'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<span data-slot="chip-label" data-variant={variant} className={cn(className)}>
 			{children}
 		</span>
 	)

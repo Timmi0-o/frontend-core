@@ -50,21 +50,14 @@ const ContextMenuRoot = ({
 	const { hostRef, uiKit } = useInheritedUiKit()
 
 	return (
-		<ContextMenuPrimitive.Root
-			data-slot='context-menu'
-			data-variant={variant}
-			{...props}
-		>
+		<ContextMenuPrimitive.Root data-slot="context-menu" data-variant={variant} {...props}>
 			<span ref={hostRef} hidden />
-			<Context.Provider value={{ uiKit }}>
-				{children as ReactNode}
-			</Context.Provider>
+			<Context.Provider value={{ uiKit }}>{children as ReactNode}</Context.Provider>
 		</ContextMenuPrimitive.Root>
 	)
 }
 
-export interface IContextMenuTriggerProps
-	extends ContextMenuPrimitive.Trigger.Props {
+export interface IContextMenuTriggerProps extends ContextMenuPrimitive.Trigger.Props {
 	variant?: TSlotVariant
 }
 
@@ -84,7 +77,7 @@ const ContextMenuTrigger = ({
 }: IContextMenuTriggerProps): ReactNode => {
 	return (
 		<ContextMenuPrimitive.Trigger
-			data-slot='context-menu-trigger'
+			data-slot="context-menu-trigger"
 			data-variant={variant}
 			{...props}
 		/>
@@ -92,11 +85,9 @@ const ContextMenuTrigger = ({
 }
 
 export interface IContextMenuContentProps
-	extends ContextMenuPrimitive.Popup.Props,
-		Pick<
-			ContextMenuPrimitive.Positioner.Props,
-			'align' | 'alignOffset' | 'side' | 'sideOffset'
-		> {
+	extends
+		ContextMenuPrimitive.Popup.Props,
+		Pick<ContextMenuPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -111,14 +102,13 @@ const ContextMenuContent = ({
 	...props
 }: IContextMenuContentProps): ReactNode => {
 	const { uiKit } = useCompoundContext()
-	const { ref: positionerRef, style: positionerStyle } =
-		useFloatingPositionerProps()
+	const { ref: positionerRef, style: positionerStyle } = useFloatingPositionerProps()
 
 	return (
 		<ContextMenuPrimitive.Portal>
 			<ContextMenuPrimitive.Positioner
 				ref={positionerRef}
-				data-slot='context-menu-positioner'
+				data-slot="context-menu-positioner"
 				data-ui-kit={uiKit}
 				style={positionerStyle}
 				align={align}
@@ -127,7 +117,7 @@ const ContextMenuContent = ({
 				sideOffset={sideOffset}
 			>
 				<ContextMenuPrimitive.Popup
-					data-slot='context-menu-content'
+					data-slot="context-menu-content"
 					data-variant={variant}
 					className={cn(className)}
 					{...props}
@@ -152,7 +142,7 @@ const ContextMenuItem = ({
 	return (
 		<ContextMenuPrimitive.Item
 			{...props}
-			data-slot='context-menu-item'
+			data-slot="context-menu-item"
 			data-inset={inset ? '' : undefined}
 			data-variant={variant}
 			className={cn(className)}
@@ -160,8 +150,7 @@ const ContextMenuItem = ({
 	)
 }
 
-export interface IContextMenuSeparatorProps
-	extends ContextMenuPrimitive.Separator.Props {
+export interface IContextMenuSeparatorProps extends ContextMenuPrimitive.Separator.Props {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -173,7 +162,7 @@ const ContextMenuSeparator = ({
 }: IContextMenuSeparatorProps): ReactNode => {
 	return (
 		<ContextMenuPrimitive.Separator
-			data-slot='context-menu-separator'
+			data-slot="context-menu-separator"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -181,8 +170,7 @@ const ContextMenuSeparator = ({
 	)
 }
 
-export interface IContextMenuLabelProps
-	extends ContextMenuPrimitive.GroupLabel.Props {
+export interface IContextMenuLabelProps extends ContextMenuPrimitive.GroupLabel.Props {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -194,7 +182,7 @@ const ContextMenuLabel = ({
 }: IContextMenuLabelProps): ReactNode => {
 	return (
 		<ContextMenuPrimitive.GroupLabel
-			data-slot='context-menu-label'
+			data-slot="context-menu-label"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -209,8 +197,10 @@ export type TContextMenuSectionChild =
 	| null
 	| undefined
 
-export interface IContextMenuSectionProps
-	extends Omit<ContextMenuPrimitive.Group.Props, 'title' | 'children'> {
+export interface IContextMenuSectionProps extends Omit<
+	ContextMenuPrimitive.Group.Props,
+	'title' | 'children'
+> {
 	title?: ReactNode
 	className?: string
 	variant?: TSlotVariant
@@ -236,14 +226,12 @@ const ContextMenuSection = ({
 
 	return (
 		<ContextMenuPrimitive.Group
-			data-slot='context-menu-section'
+			data-slot="context-menu-section"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
 		>
-			{title != null && title !== '' ? (
-				<ContextMenuLabel>{title}</ContextMenuLabel>
-			) : null}
+			{title != null && title !== '' ? <ContextMenuLabel>{title}</ContextMenuLabel> : null}
 			{children}
 		</ContextMenuPrimitive.Group>
 	)

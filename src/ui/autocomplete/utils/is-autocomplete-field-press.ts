@@ -5,8 +5,5 @@
 export const isAutocompleteFieldPress = (event: Event | undefined): boolean => {
 	const target = event?.target
 
-	return (
-		target instanceof Element &&
-		target.closest('[data-slot="autocomplete"]') !== null
-	)
+	return target instanceof Element && target.closest('[data-slot="autocomplete"]') !== null
 }

@@ -1,5 +1,9 @@
 'use client'
 
+import { animate, type MotionValue } from 'framer-motion'
+import { useCallback, useEffect, useRef, type RefObject } from 'react'
+
+import { REDUCED_MOTION_TRANSITION } from '@/motion'
 import {
 	MEDIA_OVERLAY_DISMISS_ACTIVATE_PX,
 	MEDIA_OVERLAY_DISMISS_FLING_PX,
@@ -8,9 +12,6 @@ import {
 	getMediaOverlayDismissFlingTransition,
 	shouldDismissMediaOverlay,
 } from '@/ui/photo-gallery/utils/media-overlay-dismiss'
-import { REDUCED_MOTION_TRANSITION } from '@/motion'
-import { animate, type MotionValue } from 'framer-motion'
-import { useCallback, useEffect, useRef, type RefObject } from 'react'
 
 type GestureMode = 'pending' | 'dismiss' | 'passthrough'
 
@@ -38,10 +39,7 @@ interface IUseMediaOverlayDismissGestureParams {
 const isTouchLikePointer = (event: PointerEvent): boolean =>
 	event.pointerType === 'touch' || event.pointerType === 'pen'
 
-const isEventInsideStage = (
-	event: PointerEvent,
-	stage: HTMLElement | null,
-): boolean => {
+const isEventInsideStage = (event: PointerEvent, stage: HTMLElement | null): boolean => {
 	if (!stage) {
 		return false
 	}
@@ -102,9 +100,7 @@ export const useMediaOverlayDismissGesture = ({
 				MEDIA_OVERLAY_DISMISS_FLING_PX,
 			)
 			const target = direction * flingDistance
-			const flingTransition = getMediaOverlayDismissFlingTransition(
-				Math.abs(target - offsetY),
-			)
+			const flingTransition = getMediaOverlayDismissFlingTransition(Math.abs(target - offsetY))
 
 			await Promise.all([
 				animate(dragY, target, flingTransition),
@@ -182,10 +178,7 @@ export const useMediaOverlayDismissGesture = ({
 				const absX = Math.abs(deltaX)
 				const absY = Math.abs(deltaY)
 
-				if (
-					absX < MEDIA_OVERLAY_DISMISS_ACTIVATE_PX &&
-					absY < MEDIA_OVERLAY_DISMISS_ACTIVATE_PX
-				) {
+				if (absX < MEDIA_OVERLAY_DISMISS_ACTIVATE_PX && absY < MEDIA_OVERLAY_DISMISS_ACTIVATE_PX) {
 					return
 				}
 
@@ -259,11 +252,7 @@ export const useMediaOverlayDismissGesture = ({
 			document.removeEventListener('pointerdown', onPointerDown, captureOptions)
 			document.removeEventListener('pointermove', onPointerMove, moveOptions)
 			document.removeEventListener('pointerup', endGesture, captureOptions)
-			document.removeEventListener(
-				'pointercancel',
-				endGesture,
-				captureOptions,
-			)
+			document.removeEventListener('pointercancel', endGesture, captureOptions)
 			gestureRef.current = null
 			isDismissingRef.current = false
 			setDismissLocked(false)

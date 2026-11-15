@@ -1,8 +1,9 @@
 'use client'
 
+import type { ComponentProps, ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { ComponentProps, ReactElement } from 'react'
 
 /**
  * Алиас `Breadcrumbs` в виде `<nav>`. Предпочтительнее составной `Breadcrumbs` + `Home`/`Item`.
@@ -29,9 +30,9 @@ export const Breadcrumb = ({
 }: ComponentProps<'nav'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<nav
-			aria-label='Хлебные крошки'
+			aria-label="Хлебные крошки"
 			{...props}
-			data-slot='breadcrumbs'
+			data-slot="breadcrumbs"
 			data-variant={variant}
 			className={cn(className)}
 		/>
@@ -55,13 +56,7 @@ export const BreadcrumbList = ({
 	variant = 'default',
 	...props
 }: ComponentProps<'ol'> & { variant?: TSlotVariant }): ReactElement => {
-	return (
-		<ol
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
-	)
+	return <ol data-variant={variant} className={cn(className)} {...props} />
 }
 
 /**
@@ -80,12 +75,7 @@ export const BreadcrumbItem = ({
 	...props
 }: ComponentProps<'li'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
-		<li
-			data-slot='breadcrumbs-item'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<li data-slot="breadcrumbs-item" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -103,12 +93,7 @@ export const BreadcrumbLink = ({
 	...props
 }: ComponentProps<'a'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
-		<a
-			data-slot='breadcrumbs-link'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<a data-slot="breadcrumbs-link" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -127,9 +112,9 @@ export const BreadcrumbPage = ({
 }: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<span
-			data-slot='breadcrumbs-current'
+			data-slot="breadcrumbs-current"
 			data-variant={variant}
-			aria-current='page'
+			aria-current="page"
 			className={cn(className)}
 			{...props}
 		/>
@@ -152,7 +137,7 @@ export const BreadcrumbSeparator = ({
 }: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<span
-			data-slot='breadcrumbs-separator'
+			data-slot="breadcrumbs-separator"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -178,7 +163,7 @@ export const BreadcrumbEllipsis = ({
 }: ComponentProps<'span'> & { variant?: TSlotVariant }): ReactElement => {
 	return (
 		<span
-			data-slot='breadcrumb-ellipsis'
+			data-slot="breadcrumb-ellipsis"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}

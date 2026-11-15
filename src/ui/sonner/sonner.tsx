@@ -1,14 +1,10 @@
 'use client'
 
+import { useLayoutEffect, useRef, type CSSProperties, type ReactElement } from 'react'
+import { Toaster as SonnerToaster } from 'sonner'
+
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import {
-	useLayoutEffect,
-	useRef,
-	type CSSProperties,
-	type ReactElement,
-} from 'react'
-import { Toaster as SonnerToaster } from 'sonner'
 
 export interface IToasterProps {
 	id?: string

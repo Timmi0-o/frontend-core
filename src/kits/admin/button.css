@@ -33,11 +33,14 @@
 	-webkit-tap-highlight-color: transparent;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled']):active:not(:disabled):not([data-pending]) {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled']):active:not(:disabled):not([data-pending]) {
 	transform: scale(0.97);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-pending],[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled']):disabled,[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[aria-disabled='true']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-pending],
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled']):disabled,
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[aria-disabled='true'] {
 	pointer-events: none;
 	opacity: 0.5;
 }
@@ -51,97 +54,118 @@
 	box-shadow: var(--focus-ring);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='primary']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='primary'] {
 	background: var(--main-blue);
 	color: var(--text-contrast);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='primary']:hover,[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='primary']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='primary']:hover,
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='primary']:active {
 	background: var(--hard-main-blue);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary']{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary'] {
 	background: var(--button-secondary-bg);
 	color: var(--button-secondary-fg);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary']:hover{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary']:hover {
 	background: var(--button-secondary-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='secondary']:active {
 	background: var(--button-secondary-active);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary'] {
 	background: var(--button-tertiary-bg);
 	color: var(--text-primary);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary']:hover{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary']:hover {
 	background: var(--button-secondary-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='tertiary']:active {
 	background: var(--button-secondary-active);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='outline']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='outline'] {
 	border-color: var(--button-secondary-border);
 	background: transparent;
 	color: var(--text-primary);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='outline']:hover{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='outline']:hover {
 	background: var(--button-outline-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='outline']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='outline']:active {
 	background: var(--button-ghost-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost'] {
 	background: transparent;
 	color: var(--button-ghost-fg);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost']:hover{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost']:hover {
 	background: var(--button-ghost-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='ghost']:active {
 	background: var(--button-secondary-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='light']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='light'] {
 	background: var(--accent-soft);
 	color: var(--accent-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='light']:hover,[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='light']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='light']:hover,
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='light']:active {
 	background: var(--accent-soft-hover);
 	color: var(--accent-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='danger']{
+[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='danger'] {
 	background: var(--button-danger-bg);
 	color: var(--text-contrast);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='danger']:hover{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='danger']:hover {
 	background: var(--button-danger-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='danger']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='danger']:active {
 	background: var(--button-danger-active);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger']{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
 	background: var(--danger-soft);
 	color: var(--danger-soft-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger']:hover,[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger']:active{
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger']:hover,
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-variant='soft-danger']:active {
 	background: var(--danger-soft-hover);
 	color: var(--danger-soft-foreground);
 }
@@ -172,7 +196,10 @@
 	font-size: 0.75rem;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-size='sm']:active:not(:disabled):not([data-pending]) {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-size='sm']:active:not(:disabled):not(
+		[data-pending]
+	) {
 	transform: scale(0.98);
 }
 
@@ -192,7 +219,10 @@
 	font-size: 1rem;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-size='lg']:active:not(:disabled):not([data-pending]) {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-size='lg']:active:not(:disabled):not(
+		[data-pending]
+	) {
 	transform: scale(0.96);
 }
 
@@ -204,7 +234,10 @@
 	font-size: 1rem;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-size='xl']:active:not(:disabled):not([data-pending]) {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-size='xl']:active:not(:disabled):not(
+		[data-pending]
+	) {
 	transform: scale(0.96);
 }
 
@@ -213,42 +246,48 @@
 	padding: 0;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xxs'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xxs'] {
 	width: 1.5rem;
 	min-width: 1.5rem;
 	height: 1.5rem;
 	min-height: 1.5rem;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xs'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xs'] {
 	width: 1.75rem;
 	min-width: 1.75rem;
 	height: 1.75rem;
 	min-height: 1.75rem;
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='sm'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='sm'] {
 	width: var(--control-field-height-sm);
 	min-width: var(--control-field-height-sm);
 	height: var(--control-field-height-sm);
 	min-height: var(--control-field-height-sm);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='md'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='md'] {
 	width: var(--control-field-height-md);
 	min-width: var(--control-field-height-md);
 	height: var(--control-field-height-md);
 	min-height: var(--control-field-height-md);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='lg'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='lg'] {
 	width: var(--control-field-height-lg);
 	min-width: var(--control-field-height-lg);
 	height: var(--control-field-height-lg);
 	min-height: var(--control-field-height-lg);
 }
 
-[data-ui-kit='admin'] [data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xl'] {
+[data-ui-kit='admin']
+	[data-slot='button']:not([data-variant='unstyled'])[data-icon-only][data-size='xl'] {
 	width: var(--control-field-height-xl);
 	min-width: var(--control-field-height-xl);
 	height: var(--control-field-height-xl);

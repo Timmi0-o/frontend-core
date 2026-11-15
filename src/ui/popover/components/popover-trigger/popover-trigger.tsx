@@ -28,7 +28,7 @@ export const PopoverTrigger = ({
 			render={children}
 			nativeButton={isNativeButtonTrigger(children)}
 			className={className}
-			data-slot='popover-trigger'
+			data-slot="popover-trigger"
 			data-variant={variant}
 		/>
 	)

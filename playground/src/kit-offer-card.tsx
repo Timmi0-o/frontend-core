@@ -1,5 +1,6 @@
-import { Button, Card, Chip } from '../../src/ui'
 import type { ReactElement } from 'react'
+
+import { Button, Card, Chip } from '../../src/ui'
 
 /**
  * Наполненная карточка отеля для каталога кита.
@@ -10,22 +11,16 @@ export const KitOfferCard = (): ReactElement => {
 		<Card>
 			<Card.Header>
 				<Card.Title>River Palace, 4*</Card.Title>
-				<Card.Description>
-					Казань, центр · 800 м до Кремля
-				</Card.Description>
+				<Card.Description>Казань, центр · 800 м до Кремля</Card.Description>
 			</Card.Header>
-			<Card.Content className='kit-offer'>
-				<img
-					className='kit-offer__cover'
-					src='/slides/stay.jpg'
-					alt='River Palace'
-				/>
-				<div className='kit-row'>
-					<Chip variant='accent'>Завтрак</Chip>
+			<Card.Content className="kit-offer">
+				<img className="kit-offer__cover" src="/slides/stay.jpg" alt="River Palace" />
+				<div className="kit-row">
+					<Chip variant="accent">Завтрак</Chip>
 					<Chip>2 ночи</Chip>
-					<Chip variant='outline'>Отмена 24 ч</Chip>
+					<Chip variant="outline">Отмена 24 ч</Chip>
 				</div>
-				<dl className='kit-offer__facts'>
+				<dl className="kit-offer__facts">
 					<div>
 						<dt>Заезд</dt>
 						<dd>29 авг, 14:00</dd>
@@ -36,12 +31,12 @@ export const KitOfferCard = (): ReactElement => {
 					</div>
 				</dl>
 			</Card.Content>
-			<Card.Footer className='kit-offer__footer'>
-				<div className='kit-offer__price'>
+			<Card.Footer className="kit-offer__footer">
+				<div className="kit-offer__price">
 					<strong>18 400 ₽</strong>
 					<span>за номер</span>
 				</div>
-				<Button size='sm'>Выбрать</Button>
+				<Button size="sm">Выбрать</Button>
 			</Card.Footer>
 		</Card>
 	)

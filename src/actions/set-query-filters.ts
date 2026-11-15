@@ -1,12 +1,10 @@
 import type { ZodSchema } from 'zod'
+
 import { defaultQueryFormatter } from './default-query-formatter'
 import { sanitizeQueryFiltersBySchema } from './sanitize-query-filters-by-schema'
 import type { IActionFilters } from './types/i-action.types'
 
-const appendRequiredIds = (
-	searchParams: URLSearchParams,
-	requiredIds: unknown,
-): void => {
+const appendRequiredIds = (searchParams: URLSearchParams, requiredIds: unknown): void => {
 	if (Array.isArray(requiredIds)) {
 		requiredIds.forEach((id) => {
 			if (typeof id === 'string' && id.length > 0) {
@@ -29,15 +27,10 @@ export const setQueryFilters = async <TFilters>(
 	url: string,
 	filters: IActionFilters<TFilters> | undefined,
 	queryFilterSchema?: ZodSchema<TFilters>,
-	customFormatter?: (
-		filters: IActionFilters<TFilters>,
-	) => Record<string, string> | undefined,
+	customFormatter?: (filters: IActionFilters<TFilters>) => Record<string, string> | undefined,
 ): Promise<string> => {
 	if (queryFilterSchema && filters) {
-		const sanitizedFilters = sanitizeQueryFiltersBySchema(
-			queryFilterSchema,
-			filters,
-		)
+		const sanitizedFilters = sanitizeQueryFiltersBySchema(queryFilterSchema, filters)
 
 		if (Object.keys(sanitizedFilters).length) {
 			const formattedParams = customFormatter
@@ -52,10 +45,7 @@ export const setQueryFilters = async <TFilters>(
 				})
 			}
 
-			appendRequiredIds(
-				searchParams,
-				(sanitizedFilters as Record<string, unknown>).requiredIds,
-			)
+			appendRequiredIds(searchParams, (sanitizedFilters as Record<string, unknown>).requiredIds)
 
 			if ([...searchParams.keys()].length > 0) {
 				url += `?${searchParams.toString()}`

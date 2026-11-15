@@ -1,9 +1,10 @@
 'use client'
 
-import { useMediaOverlayDismissGesture } from '@/ui/photo-gallery/hooks/use-media-overlay-dismiss-gesture'
 import type { MotionValue } from 'framer-motion'
 import { useCallback, type RefObject } from 'react'
 import type { Swiper as SwiperType } from 'swiper/types'
+
+import { useMediaOverlayDismissGesture } from '@/ui/photo-gallery/hooks/use-media-overlay-dismiss-gesture'
 
 interface IUsePhotoGalleryDismissGestureParams {
 	stageRef: RefObject<HTMLDivElement | null>

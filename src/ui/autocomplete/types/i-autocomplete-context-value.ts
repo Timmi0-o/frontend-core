@@ -1,4 +1,5 @@
 import type { ChangeEvent, FocusEvent } from 'react'
+
 import type {
 	IAutocompleteOption,
 	TAutocompleteSize,

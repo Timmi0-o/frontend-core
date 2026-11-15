@@ -1,12 +1,9 @@
 'use client'
 
+import type { CSSProperties, ReactElement, ReactNode, ThHTMLAttributes } from 'react'
+
 import { cn } from '@/core/cn'
-import type {
-	CSSProperties,
-	ReactElement,
-	ReactNode,
-	ThHTMLAttributes,
-} from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableHeaderCellProps extends ThHTMLAttributes<HTMLTableCellElement> {
@@ -27,15 +24,13 @@ export const TableHeaderCell = ({
 }: ITableHeaderCellProps): ReactElement => {
 	const columnStyle: CSSProperties = {
 		...(width != null ? { width: `${String(width)}px` } : {}),
-		...(minColumnWidth != null
-			? { minWidth: `${String(minColumnWidth)}px` }
-			: {}),
+		...(minColumnWidth != null ? { minWidth: `${String(minColumnWidth)}px` } : {}),
 		...style,
 	}
 
 	return (
 		<th
-			data-slot='table-header-cell'
+			data-slot="table-header-cell"
 			data-variant={variant}
 			className={cn(className)}
 			style={columnStyle}

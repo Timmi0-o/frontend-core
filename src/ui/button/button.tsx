@@ -1,15 +1,11 @@
 'use client'
 
 import { Button as ButtonPrimitive } from '@base-ui/react/button'
+import { forwardRef, isValidElement, type MouseEvent, type ReactElement, useCallback } from 'react'
+
 import { cn } from '@/core/cn'
 import { Spinner } from '@/ui/spinner/spinner'
-import {
-	forwardRef,
-	isValidElement,
-	type MouseEvent,
-	type ReactElement,
-	useCallback,
-} from 'react'
+
 import type { IButtonProps, IButtonSize } from './types/i-button-props'
 
 export type {
@@ -26,13 +22,9 @@ const getSpinnerSize = (size: IButtonSize): 'sm' | 'md' => {
 	return size === 'lg' || size === 'xl' ? 'md' : 'sm'
 }
 
-const ButtonSpinner = ({
-	size = 'md',
-}: {
-	size?: IButtonSize
-}): ReactElement => {
+const ButtonSpinner = ({ size = 'md' }: { size?: IButtonSize }): ReactElement => {
 	return (
-		<span data-slot='button-spinner'>
+		<span data-slot="button-spinner">
 			<Spinner size={getSpinnerSize(size)} />
 		</span>
 	)
@@ -88,7 +80,7 @@ const ButtonRoot = forwardRef<HTMLElement, IButtonProps>(
 				type={type}
 				disabled={isButtonDisabled}
 				nativeButton={isNativeButton}
-				data-slot='button'
+				data-slot="button"
 				data-variant={variant}
 				data-size={size}
 				data-pending={isPending ? '' : undefined}

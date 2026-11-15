@@ -11,7 +11,7 @@ export interface IKitSlideProps {
  */
 export const KitSlide = ({ src, title }: IKitSlideProps): ReactElement => {
 	return (
-		<figure className='kit-slide'>
+		<figure className="kit-slide">
 			<img src={src} alt={title} />
 			<figcaption>{title}</figcaption>
 		</figure>

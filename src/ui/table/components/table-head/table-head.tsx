@@ -1,8 +1,10 @@
 'use client'
 
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableHeadProps extends HTMLAttributes<HTMLTableSectionElement> {
@@ -21,7 +23,7 @@ export const TableHead = ({
 }: ITableHeadProps): ReactElement => {
 	return (
 		<thead
-			data-slot='table-head'
+			data-slot="table-head"
 			data-variant={variant}
 			className={cn(className)}
 			style={{

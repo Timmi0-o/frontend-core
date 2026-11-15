@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+
 import type {
 	ISelectOption,
 	TSelectSize,
@@ -41,6 +42,4 @@ export interface ISelectSelectionContextValue {
 
 /** @deprecated Используй split-контексты; оставлен для обратной совместимости внутри кита. */
 export interface ISelectContextValue
-	extends ISelectChromeContextValue,
-		ISelectInteractionContextValue,
-		ISelectSelectionContextValue {}
+	extends ISelectChromeContextValue, ISelectInteractionContextValue, ISelectSelectionContextValue {}

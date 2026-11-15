@@ -1,9 +1,9 @@
-[data-ui-kit='admin'][data-slot='tooltip-positioner']:not([data-variant='unstyled']){
+[data-ui-kit='admin'][data-slot='tooltip-positioner']:not([data-variant='unstyled']) {
 	z-index: 1205;
 	max-width: var(--available-width);
 }
 
-[data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	width: max-content;
 	max-width: min(20rem, var(--available-width, 20rem));
@@ -21,17 +21,18 @@
 	outline: none;
 }
 
-[data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-open]{
+[data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
 		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='admin'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style]{
+[data-ui-kit='admin']
+	[data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style] {
 	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
 		var(--motion-easing-overlay-surface-exit) both;
 }
 
-[data-ui-kit='admin'] [data-slot='tooltip-arrow']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='tooltip-arrow']:not([data-variant='unstyled']) {
 	display: block;
 	width: 8px;
 	height: 8px;
@@ -40,4 +41,3 @@
 	border-right: 0;
 	border-bottom: 0;
 }
-

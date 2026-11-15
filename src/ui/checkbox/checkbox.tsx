@@ -1,17 +1,12 @@
 'use client'
 
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
+import { type FocusEventHandler, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
-import {
-	createCompoundContext,
-	type ICompoundChildProps,
-} from '@/core/create-compound-context'
+import { createCompoundContext, type ICompoundChildProps } from '@/core/create-compound-context'
 import type { TSlotVariant } from '@/core/slot-variant'
-import {
-	type FocusEventHandler,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
+
 import { type CheckboxTextColor } from './data/checkbox-text-color'
 
 export type TCheckboxSize = 'sm' | 'md'
@@ -31,8 +26,7 @@ interface ICheckboxContextValue {
 	onCheckedChange: (isChecked: boolean) => void
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<ICheckboxContextValue>('Checkbox')
+const { Context, useCompoundContext } = createCompoundContext<ICheckboxContextValue>('Checkbox')
 
 export interface ICheckboxRootProps extends ICompoundChildProps {
 	checked?: boolean
@@ -71,8 +65,7 @@ const CheckboxRoot = ({
 	className,
 	label,
 }: ICheckboxRootProps): ReactElement => {
-	const appearance: TCheckboxAppearance =
-		variant === 'radio' ? 'radio' : 'checkbox'
+	const appearance: TCheckboxAppearance = variant === 'radio' ? 'radio' : 'checkbox'
 
 	return (
 		<Context.Provider
@@ -90,7 +83,7 @@ const CheckboxRoot = ({
 			}}
 		>
 			<label
-				data-slot='checkbox'
+				data-slot="checkbox"
 				data-variant={variant}
 				data-size={size}
 				data-disabled={isDisabled ? '' : undefined}
@@ -121,13 +114,13 @@ export interface ICheckboxControlProps {
  */
 const CheckboxCheckIcon = (): ReactElement => {
 	return (
-		<svg viewBox='0 0 16 16' fill='none' aria-hidden='true'>
+		<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
 			<path
-				d='M3.2 8.2 6.6 11.2 12.8 4.6'
-				stroke='currentColor'
-				strokeWidth='2.2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M3.2 8.2 6.6 11.2 12.8 4.6"
+				stroke="currentColor"
+				strokeWidth="2.2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -135,13 +128,8 @@ const CheckboxCheckIcon = (): ReactElement => {
 
 const CheckboxIndeterminateIcon = (): ReactElement => {
 	return (
-		<svg viewBox='0 0 16 16' fill='none' aria-hidden='true'>
-			<path
-				d='M4 8h8'
-				stroke='currentColor'
-				strokeWidth='2.2'
-				strokeLinecap='round'
-			/>
+		<svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+			<path d="M4 8h8" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
 		</svg>
 	)
 }
@@ -151,8 +139,8 @@ const CheckboxIndeterminateIcon = (): ReactElement => {
  */
 const CheckboxRadioDot = (): ReactElement => {
 	return (
-		<svg viewBox='0 0 16 16' aria-hidden='true'>
-			<circle cx='8' cy='8' r='4.25' fill='currentColor' />
+		<svg viewBox="0 0 16 16" aria-hidden="true">
+			<circle cx="8" cy="8" r="4.25" fill="currentColor" />
 		</svg>
 	)
 }
@@ -186,11 +174,11 @@ const CheckboxControl = ({
 			name={name}
 			onBlur={onBlur}
 			onCheckedChange={onCheckedChange}
-			data-slot='checkbox-control'
+			data-slot="checkbox-control"
 			data-variant={variantProp === 'unstyled' ? 'unstyled' : contextAppearance}
 			className={className}
 		>
-			<CheckboxPrimitive.Indicator data-slot='checkbox-indicator'>
+			<CheckboxPrimitive.Indicator data-slot="checkbox-indicator">
 				{contextAppearance === 'radio' ? (
 					<CheckboxRadioDot />
 				) : indeterminate ? (
@@ -219,7 +207,7 @@ const CheckboxLabel = ({
 
 	return (
 		<span
-			data-slot='checkbox-label'
+			data-slot="checkbox-label"
 			data-variant={variant}
 			data-text-color={textColor}
 			className={cn(className)}
@@ -286,13 +274,8 @@ const CheckboxCombined = ({
 		>
 			{children ?? (
 				<>
-					<CheckboxControl
-						className={boxClassName}
-						defaultChecked={defaultChecked}
-					/>
-					{label ? (
-						<CheckboxLabel className={labelClassName}>{label}</CheckboxLabel>
-					) : null}
+					<CheckboxControl className={boxClassName} defaultChecked={defaultChecked} />
+					{label ? <CheckboxLabel className={labelClassName}>{label}</CheckboxLabel> : null}
 				</>
 			)}
 		</CheckboxRoot>

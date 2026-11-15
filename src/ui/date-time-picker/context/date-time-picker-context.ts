@@ -18,8 +18,7 @@ export interface IDateTimePickerContextValue extends IDatePickerContextValue {
 	handleClear: () => void
 }
 
-export const DateTimePickerContext =
-	createContext<IDateTimePickerContextValue | null>(null)
+export const DateTimePickerContext = createContext<IDateTimePickerContextValue | null>(null)
 
 export const useDateTimePickerContext = (): IDateTimePickerContextValue => {
 	const context = useContext(DateTimePickerContext)

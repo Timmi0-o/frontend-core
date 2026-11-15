@@ -8,6 +8,7 @@ import { useMobileCondition } from '@/hooks/use-mobile-condition'
 import { DATE_PICKER_POPOVER_OFFSET_PX } from '@/ui/date-picker/constants/date-picker.constants'
 import { Popover } from '@/ui/popover/popover'
 import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
+
 import { RangeDatePickerInput } from './components/range-date-picker-input/range-date-picker-input'
 import { RangeDatePickerPopover } from './components/range-date-picker-popover/range-date-picker-popover'
 import { RANGE_DATE_PICKER_DISPLAY_NAMES } from './constants/range-date-picker.constants'
@@ -171,24 +172,21 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 	return (
 		<RangeDatePickerContext.Provider value={contextValue}>
 			<div
-				data-slot='range-date-picker'
+				data-slot="range-date-picker"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-invalid={error ? '' : undefined}
 				data-open={isOpen ? '' : undefined}
 				className={cn(className)}
 			>
-				{label ? <label data-slot='date-picker-label'>{label}</label> : null}
+				{label ? <label data-slot="date-picker-label">{label}</label> : null}
 
 				{isMobile ? (
 					pickerContent
 				) : (
 					<Popover
 						open={isOpen}
-						onOpenChange={(
-							isNextOpen,
-							details?: IPopoverOpenChangeDetails,
-						) => {
+						onOpenChange={(isNextOpen, details?: IPopoverOpenChangeDetails) => {
 							if (isDisabled) {
 								return
 							}
@@ -200,7 +198,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 
 							handleOpenChange(isNextOpen)
 						}}
-						placement='bottom-start'
+						placement="bottom-start"
 						offset={DATE_PICKER_POPOVER_OFFSET_PX}
 					>
 						{pickerContent}
@@ -208,7 +206,7 @@ const RangeDatePickerRoot = (props: IRangeDatePickerProps): ReactElement => {
 				)}
 
 				{error ? (
-					<p data-slot='date-picker-error' role='alert'>
+					<p data-slot="date-picker-error" role="alert">
 						{error}
 					</p>
 				) : null}
@@ -233,11 +231,8 @@ RangeDatePickerRoot.displayName = RANGE_DATE_PICKER_DISPLAY_NAMES.ROOT
  * />
  * ```
  */
-export const RangeDatePicker: TRangeDatePickerComponent = Object.assign(
-	RangeDatePickerRoot,
-	{
-		Input: RangeDatePickerInput,
-		Popover: RangeDatePickerPopover,
-		Root: RangeDatePickerRoot,
-	},
-)
+export const RangeDatePicker: TRangeDatePickerComponent = Object.assign(RangeDatePickerRoot, {
+	Input: RangeDatePickerInput,
+	Popover: RangeDatePickerPopover,
+	Root: RangeDatePickerRoot,
+})

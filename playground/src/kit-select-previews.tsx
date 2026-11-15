@@ -1,6 +1,7 @@
+import type { ReactElement } from 'react'
+
 import { Chip, Separator } from '../../src/ui'
 import type { ISelectOption } from '../../src/ui/select/select'
-import type { ReactElement } from 'react'
 
 export interface IHotelSelectItem {
 	value: string
@@ -48,11 +49,12 @@ export const HOTEL_SELECT_ITEMS: IHotelSelectItem[] = [
 	},
 ]
 
-export const HOTEL_SELECT_OPTIONS: Array<ISelectOption<string>> =
-	HOTEL_SELECT_ITEMS.map((item) => ({
+export const HOTEL_SELECT_OPTIONS: Array<ISelectOption<string>> = HOTEL_SELECT_ITEMS.map(
+	(item) => ({
 		label: item.name,
 		value: item.value,
-	}))
+	}),
+)
 
 /**
  * Находит карточку отеля по value опции Select.
@@ -76,14 +78,8 @@ const HotelStars = ({ count }: { count: number }): ReactElement | null => {
 	return (
 		<span aria-hidden style={{ display: 'inline-flex', gap: 2, flexShrink: 0 }}>
 			{Array.from({ length: count }, (_, index) => (
-				<svg
-					key={index}
-					width='12'
-					height='12'
-					viewBox='0 0 12 12'
-					fill='#E8B931'
-				>
-					<path d='M6 0.8l1.4 3 3.3.5-2.4 2.3.6 3.3L6 8.4 3.1 9.9l.6-3.3L1.3 4.3l3.3-.5L6 .8z' />
+				<svg key={index} width="12" height="12" viewBox="0 0 12 12" fill="#E8B931">
+					<path d="M6 0.8l1.4 3 3.3.5-2.4 2.3.6 3.3L6 8.4 3.1 9.9l.6-3.3L1.3 4.3l3.3-.5L6 .8z" />
 				</svg>
 			))}
 		</span>
@@ -94,21 +90,14 @@ const HotelStars = ({ count }: { count: number }): ReactElement | null => {
  * Строка выбранного отеля: название, звёзды, тип, статус.
  * Используется в Select.Value playground.
  */
-export function HotelSelectValueContent({
-	hotel,
-}: {
-	hotel: IHotelSelectItem
-}): ReactElement {
+export function HotelSelectValueContent({ hotel }: { hotel: IHotelSelectItem }): ReactElement {
 	return (
 		<>
 			<span style={{ fontWeight: 700 }}>{hotel.name}</span>
 			<HotelStars count={hotel.stars} />
-			<Separator
-				orientation='vertical'
-				style={{ height: '0.875rem', alignSelf: 'center' }}
-			/>
+			<Separator orientation="vertical" style={{ height: '0.875rem', alignSelf: 'center' }} />
 			<span style={{ color: 'var(--text, var(--gray))' }}>{hotel.category}</span>
-			<Chip variant='success'>{hotel.status}</Chip>
+			<Chip variant="success">{hotel.status}</Chip>
 		</>
 	)
 }
@@ -116,11 +105,7 @@ export function HotelSelectValueContent({
 /**
  * Строка опции с названием, звёздами и типом — без статуса.
  */
-export function HotelSelectOptionContent({
-	hotel,
-}: {
-	hotel: IHotelSelectItem
-}): ReactElement {
+export function HotelSelectOptionContent({ hotel }: { hotel: IHotelSelectItem }): ReactElement {
 	return (
 		<>
 			<span>{hotel.name}</span>

@@ -1,9 +1,10 @@
 'use client'
 
 import { Avatar as AvatarPrimitive } from '@base-ui/react/avatar'
+import type { HTMLAttributes, ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { HTMLAttributes, ReactElement } from 'react'
 
 export type TAvatarSize = 'sm' | 'default' | 'lg'
 
@@ -21,7 +22,7 @@ const AvatarRoot = ({
 }: IAvatarRootProps): ReactElement => {
 	return (
 		<AvatarPrimitive.Root
-			data-slot='avatar'
+			data-slot="avatar"
 			data-size={size}
 			data-variant={variant}
 			className={cn(className)}
@@ -42,7 +43,7 @@ const AvatarImage = ({
 }: IAvatarImageProps): ReactElement => {
 	return (
 		<AvatarPrimitive.Image
-			data-slot='avatar-image'
+			data-slot="avatar-image"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -62,7 +63,7 @@ const AvatarFallback = ({
 }: IAvatarFallbackProps): ReactElement => {
 	return (
 		<AvatarPrimitive.Fallback
-			data-slot='avatar-fallback'
+			data-slot="avatar-fallback"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -81,12 +82,7 @@ const AvatarBadge = ({
 	...props
 }: IAvatarBadgeProps): ReactElement => {
 	return (
-		<span
-			data-slot='avatar-badge'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<span data-slot="avatar-badge" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -101,12 +97,7 @@ const AvatarGroup = ({
 	...props
 }: IAvatarGroupProps): ReactElement => {
 	return (
-		<div
-			data-slot='avatar-group'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<div data-slot="avatar-group" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -122,7 +113,7 @@ const AvatarGroupCount = ({
 }: IAvatarGroupCountProps): ReactElement => {
 	return (
 		<div
-			data-slot='avatar-group-count'
+			data-slot="avatar-group-count"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}

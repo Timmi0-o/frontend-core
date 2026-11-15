@@ -1,11 +1,7 @@
 'use client'
 
-import {
-	useEffect,
-	useState,
-	type Dispatch,
-	type SetStateAction,
-} from 'react'
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react'
+
 import { replaceLocalStorageValue } from './helpers/replace-local-storage-value'
 import { reviveLocalStorageValue } from './helpers/revive-local-storage-value'
 
@@ -41,10 +37,7 @@ export const useLocalStorage = <T>(
 		}
 
 		try {
-			window.localStorage.setItem(
-				key,
-				JSON.stringify(storedValue, replaceLocalStorageValue),
-			)
+			window.localStorage.setItem(key, JSON.stringify(storedValue, replaceLocalStorageValue))
 		} catch (error) {
 			console.error(error)
 		}

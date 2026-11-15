@@ -6,7 +6,5 @@ export interface IBreadcrumbsItemContextValue {
 	index: number
 }
 
-export const {
-	Context: BreadcrumbsItemContext,
-	useCompoundContext: useBreadcrumbsItemContext,
-} = createCompoundContext<IBreadcrumbsItemContextValue>('Breadcrumbs')
+export const { Context: BreadcrumbsItemContext, useCompoundContext: useBreadcrumbsItemContext } =
+	createCompoundContext<IBreadcrumbsItemContextValue>('Breadcrumbs')

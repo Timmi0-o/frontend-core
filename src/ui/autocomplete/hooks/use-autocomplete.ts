@@ -1,19 +1,16 @@
 'use client'
 
-import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
 import { useCallback, useId, useMemo, useState, type ChangeEvent, type FocusEvent } from 'react'
+
+import type { IPopoverOpenChangeDetails } from '@/ui/popover/types/i-popover-props'
+
 import { AUTOCOMPLETE_DROPDOWN_MIN_WIDTH_PX } from '../constants/autocomplete.constants'
 import type { TAutocompleteValue } from '../types/i-autocomplete-context-value'
-import type {
-	IAutocompleteOption,
-	IAutocompleteProps,
-} from '../types/i-autocomplete-props'
+import type { IAutocompleteOption, IAutocompleteProps } from '../types/i-autocomplete-props'
 import { filterAutocompleteOptions } from '../utils/filter-autocomplete-options'
 import { isAutocompleteFieldPress } from '../utils/is-autocomplete-field-press'
 
-export const useAutocomplete = <T extends string | number>(
-	props: IAutocompleteProps<T>,
-) => {
+export const useAutocomplete = <T extends string | number>(props: IAutocompleteProps<T>) => {
 	const {
 		options,
 		value,
@@ -39,8 +36,7 @@ export const useAutocomplete = <T extends string | number>(
 		[options, value],
 	)
 
-	const fallbackInputValue =
-		isFocused || !selectedOption ? query : selectedOption.label
+	const fallbackInputValue = isFocused || !selectedOption ? query : selectedOption.label
 	const inputValue = isInputControlled ? inputValueProp : fallbackInputValue
 
 	const filteredOptions = useMemo(
@@ -88,10 +84,7 @@ export const useAutocomplete = <T extends string | number>(
 		(event: FocusEvent<HTMLInputElement>): void => {
 			const nextTarget = event.relatedTarget
 
-			if (
-				nextTarget instanceof Node &&
-				document.getElementById(listboxId)?.contains(nextTarget)
-			) {
+			if (nextTarget instanceof Node && document.getElementById(listboxId)?.contains(nextTarget)) {
 				return
 			}
 
@@ -111,10 +104,7 @@ export const useAutocomplete = <T extends string | number>(
 				return
 			}
 
-			if (
-				details?.reason === 'outside-press' &&
-				isAutocompleteFieldPress(details.event)
-			) {
+			if (details?.reason === 'outside-press' && isAutocompleteFieldPress(details.event)) {
 				details.cancel?.()
 				return
 			}
@@ -139,8 +129,7 @@ export const useAutocomplete = <T extends string | number>(
 	)
 
 	const isOptionSelected = useCallback(
-		(option: IAutocompleteOption<TAutocompleteValue>): boolean =>
-			option.value === value,
+		(option: IAutocompleteOption<TAutocompleteValue>): boolean => option.value === value,
 		[value],
 	)
 

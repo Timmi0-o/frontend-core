@@ -37,10 +37,7 @@ export const isAfterDay = (left: Date, right: Date): boolean =>
 /**
  * Форматирует выбранную дату для поля ввода (день, месяц и год).
  */
-export const formatDatePickerValue = (
-	date: Date | null | undefined,
-	locale: string,
-): string => {
+export const formatDatePickerValue = (date: Date | null | undefined, locale: string): string => {
 	if (!date) {
 		return ''
 	}
@@ -74,10 +71,7 @@ export const formatDateRangeValue = (
 /**
  * Ставит две даты в календарный порядок start ≤ end.
  */
-export const orderDateRange = (
-	left: Date,
-	right: Date,
-): { start: Date; end: Date } => {
+export const orderDateRange = (left: Date, right: Date): { start: Date; end: Date } => {
 	const start = startOfDay(left)
 	const end = startOfDay(right)
 
@@ -92,11 +86,7 @@ export const orderDateRange = (
  * День строго внутри отрезка, не включая границы.
  * Нужен полосе диапазона: края рисуются как выбранные дни.
  */
-export const isDateInsideRange = (
-	date: Date,
-	start: Date,
-	end: Date,
-): boolean => {
+export const isDateInsideRange = (date: Date, start: Date, end: Date): boolean => {
 	const { start: rangeStart, end: rangeEnd } = orderDateRange(start, end)
 
 	return isAfterDay(date, rangeStart) && isBeforeDay(date, rangeEnd)
@@ -151,16 +141,8 @@ export const isDateInVisibleMonths = (
 	visibleMonth: Date,
 	monthCount: number,
 ): boolean => {
-	const windowStart = new Date(
-		visibleMonth.getFullYear(),
-		visibleMonth.getMonth(),
-		1,
-	)
-	const windowEnd = new Date(
-		visibleMonth.getFullYear(),
-		visibleMonth.getMonth() + monthCount,
-		0,
-	)
+	const windowStart = new Date(visibleMonth.getFullYear(), visibleMonth.getMonth(), 1)
+	const windowEnd = new Date(visibleMonth.getFullYear(), visibleMonth.getMonth() + monthCount, 0)
 	const day = startOfDay(date)
 
 	return !isBeforeDay(day, windowStart) && !isAfterDay(day, windowEnd)
@@ -173,9 +155,7 @@ export const isDateInVisibleMonths = (
 export const getCalendarWeekdayLabels = (locale: string): string[] => {
 	const formatter = new Intl.DateTimeFormat(locale, { weekday: 'short' })
 
-	return Array.from({ length: 7 }, (_, index) =>
-		formatter.format(new Date(2024, 0, 1 + index)),
-	)
+	return Array.from({ length: 7 }, (_, index) => formatter.format(new Date(2024, 0, 1 + index)))
 }
 
 /**
@@ -204,10 +184,7 @@ export const getDatePickerMonthLabels = (locale: string): string[] =>
  * Строит диапазон годов: 120 назад и 10 вперёд от текущего.
  * min/max только расширяют окно, если они выходят за эти границы.
  */
-export const getDatePickerYearRange = (
-	minDate?: Date,
-	maxDate?: Date,
-): number[] => {
+export const getDatePickerYearRange = (minDate?: Date, maxDate?: Date): number[] => {
 	const currentYear = new Date().getFullYear()
 	const startYear = Math.min(
 		currentYear - DATE_PICKER_YEAR_RANGE_BACK,
@@ -238,20 +215,13 @@ export const scrollElementToContainerCenter = (
 	const elementRect = element.getBoundingClientRect()
 
 	container.scrollTop +=
-		elementRect.top -
-		containerRect.top -
-		container.clientHeight / 2 +
-		elementRect.height / 2
+		elementRect.top - containerRect.top - container.clientHeight / 2 + elementRect.height / 2
 }
 
 /**
  * Отключает год, если он целиком вне допустимого диапазона дат.
  */
-export const isYearDisabled = (
-	year: number,
-	minDate?: Date,
-	maxDate?: Date,
-): boolean => {
+export const isYearDisabled = (year: number, minDate?: Date, maxDate?: Date): boolean => {
 	const firstDay = new Date(year, 0, 1)
 	const lastDay = new Date(year, 11, 31)
 

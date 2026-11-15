@@ -11,9 +11,7 @@ export type TBadgeResolvedPlacement =
  * Сводит короткие `top`/`bottom` и старый `absolute` к углу.
  * Нужен, чтобы CSS держал один набор сторон, а в API можно писать просто «верх» или «низ».
  */
-export const resolveBadgePlacement = (
-	placement: TBadgePosition,
-): TBadgeResolvedPlacement => {
+export const resolveBadgePlacement = (placement: TBadgePosition): TBadgeResolvedPlacement => {
 	if (placement === 'top' || placement === 'absolute') {
 		return 'top-right'
 	}

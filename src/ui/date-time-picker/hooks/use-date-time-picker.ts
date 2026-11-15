@@ -12,13 +12,7 @@ import {
 } from '../utils/date-time-picker.util'
 
 export const useDateTimePicker = (props: IDateTimePickerProps) => {
-	const {
-		value,
-		onChange,
-		locale = 'ru',
-		todayLabel = 'Сегодня',
-		clearLabel = 'Удалить',
-	} = props
+	const { value, onChange, locale = 'ru', todayLabel = 'Сегодня', clearLabel = 'Удалить' } = props
 
 	const { date, time } = splitLocalDateTime(value)
 	const [hourValue = '9', minuteValue = '0'] = time.split(':')
@@ -52,10 +46,7 @@ export const useDateTimePicker = (props: IDateTimePickerProps) => {
 		closeOnSelect: false,
 	})
 
-	const displayValue = useMemo(
-		() => formatDateTimePickerValue(value, locale),
-		[locale, value],
-	)
+	const displayValue = useMemo(() => formatDateTimePickerValue(value, locale), [locale, value])
 
 	const handleSelectHour = useCallback(
 		(nextHour: number) => {

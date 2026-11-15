@@ -23,13 +23,10 @@ type TBreadcrumbsComponent = typeof BreadcrumbsRoot & {
  * </Breadcrumbs>
  * ```
  */
-export const Breadcrumbs: TBreadcrumbsComponent = Object.assign(
-	BreadcrumbsRoot,
-	{
-		Home: BreadcrumbsHome,
-		Item: BreadcrumbsItem,
-	},
-)
+export const Breadcrumbs: TBreadcrumbsComponent = Object.assign(BreadcrumbsRoot, {
+	Home: BreadcrumbsHome,
+	Item: BreadcrumbsItem,
+})
 
 export type { TBreadcrumbsVariant } from './constants/breadcrumbs.constants'
 export type { IBreadcrumbsHomeProps } from './components/breadcrumbs-home/breadcrumbs-home'

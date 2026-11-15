@@ -1,4 +1,5 @@
 import { createContext, useContext } from 'react'
+
 import type {
 	ISelectChromeContextValue,
 	ISelectContextValue,
@@ -6,15 +7,11 @@ import type {
 	ISelectSelectionContextValue,
 } from '../types/i-select-context-value'
 
-export const SelectChromeContext = createContext<ISelectChromeContextValue | null>(
-	null,
-)
+export const SelectChromeContext = createContext<ISelectChromeContextValue | null>(null)
 
-export const SelectInteractionContext =
-	createContext<ISelectInteractionContextValue | null>(null)
+export const SelectInteractionContext = createContext<ISelectInteractionContextValue | null>(null)
 
-export const SelectSelectionContext =
-	createContext<ISelectSelectionContextValue | null>(null)
+export const SelectSelectionContext = createContext<ISelectSelectionContextValue | null>(null)
 
 const useSelectChromeContext = (): ISelectChromeContextValue => {
 	const context = useContext(SelectChromeContext)

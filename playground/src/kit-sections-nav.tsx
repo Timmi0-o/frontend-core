@@ -1,10 +1,5 @@
-import {
-	useLayoutEffect,
-	useRef,
-	useState,
-	type CSSProperties,
-	type ReactElement,
-} from 'react'
+import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactElement } from 'react'
+
 import { measureKitsTocIndicator } from './measure-kits-toc-indicator'
 import { scrollKitColumnsToSection } from './scroll-kit-columns-to-section'
 
@@ -34,25 +29,19 @@ const readCatalogSections = (): IKitSectionNavItem[] => {
 		return []
 	}
 
-	return [...column.querySelectorAll('[data-demo-section]')].flatMap(
-		(section) => {
-			const id = section.getAttribute('data-demo-section')
-			const title = section
-				.querySelector('.demo-section__title')
-				?.textContent?.trim()
+	return [...column.querySelectorAll('[data-demo-section]')].flatMap((section) => {
+		const id = section.getAttribute('data-demo-section')
+		const title = section.querySelector('.demo-section__title')?.textContent?.trim()
 
-			if (!id || !title) {
-				return []
-			}
+		if (!id || !title) {
+			return []
+		}
 
-			return [{ id, title }]
-		},
-	)
+		return [{ id, title }]
+	})
 }
 
-export const KitSectionsNav = ({
-	observeKey,
-}: IKitSectionsNavProps): ReactElement | null => {
+export const KitSectionsNav = ({ observeKey }: IKitSectionsNavProps): ReactElement | null => {
 	const listRef = useRef<HTMLUListElement>(null)
 	const [items, setItems] = useState<IKitSectionNavItem[]>([])
 	const [activeId, setActiveId] = useState<string | null>(null)
@@ -76,16 +65,12 @@ export const KitSectionsNav = ({
 		}
 
 		const sections = column.querySelectorAll('[data-demo-section]')
-		const boardScrolls =
-			board instanceof HTMLElement && board.scrollHeight > board.clientHeight + 1
+		const boardScrolls = board instanceof HTMLElement && board.scrollHeight > board.clientHeight + 1
 		const observer = new IntersectionObserver(
 			(entries) => {
 				const visible = entries
 					.filter((entry) => entry.isIntersecting)
-					.sort(
-						(left, right) =>
-							left.boundingClientRect.top - right.boundingClientRect.top,
-					)
+					.sort((left, right) => left.boundingClientRect.top - right.boundingClientRect.top)
 				const nextId = visible[0]?.target.getAttribute('data-demo-section')
 
 				if (nextId) {
@@ -126,23 +111,16 @@ export const KitSectionsNav = ({
 
 		syncIndicator()
 		const frame = window.requestAnimationFrame(() => {
-			setIndicator((current) =>
-				current.height === 0 ? current : { ...current, ready: true },
-			)
+			setIndicator((current) => (current.height === 0 ? current : { ...current, ready: true }))
 		})
 
 		const resizeObserver = new ResizeObserver(syncIndicator)
 		resizeObserver.observe(list)
 
-		const activeButton = list.querySelector(
-			`[data-section-id="${CSS.escape(activeId)}"]`,
-		)
+		const activeButton = list.querySelector(`[data-section-id="${CSS.escape(activeId)}"]`)
 		const scroller = list.closest('.kits-toc__scroller')
 
-		if (
-			activeButton instanceof HTMLElement &&
-			scroller instanceof HTMLElement
-		) {
+		if (activeButton instanceof HTMLElement && scroller instanceof HTMLElement) {
 			const itemTop = activeButton.offsetTop
 			const itemBottom = itemTop + activeButton.offsetHeight
 			const viewTop = scroller.scrollTop
@@ -166,15 +144,15 @@ export const KitSectionsNav = ({
 	}
 
 	return (
-		<nav className='kits-toc' aria-label='Разделы каталога'>
-			<p className='kits-toc__kicker'>
+		<nav className="kits-toc" aria-label="Разделы каталога">
+			<p className="kits-toc__kicker">
 				<span>Разделы</span>
-				<span className='kits-toc__count'>{items.length}</span>
+				<span className="kits-toc__count">{items.length}</span>
 			</p>
-			<div className='kits-toc__scroller'>
+			<div className="kits-toc__scroller">
 				<ul
 					ref={listRef}
-					className='kits-toc__list'
+					className="kits-toc__list"
 					style={
 						{
 							'--kits-toc-indicator-top': `${indicator.top}px`,
@@ -182,14 +160,14 @@ export const KitSectionsNav = ({
 						} as CSSProperties
 					}
 				>
-					<li className='kits-toc__indicator' aria-hidden>
+					<li className="kits-toc__indicator" aria-hidden>
 						<span data-ready={indicator.ready ? '' : undefined} />
 					</li>
 					{items.map((item) => (
 						<li key={item.id}>
 							<button
-								type='button'
-								className='kits-toc__link'
+								type="button"
+								className="kits-toc__link"
 								data-section-id={item.id}
 								data-active={activeId === item.id ? '' : undefined}
 								onClick={() => {

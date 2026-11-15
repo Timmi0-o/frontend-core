@@ -13,9 +13,7 @@ export interface IGetActionOptions<
 	TFilters = Record<string, IActionQueryFieldValue>,
 > extends Partial<IBaseActionOptions> {
 	filters?: IActionFilters<TFilters>
-	customFormatter?: (
-		filters: IActionFilters<TFilters>,
-	) => Record<string, string> | undefined
+	customFormatter?: (filters: IActionFilters<TFilters>) => Record<string, string> | undefined
 	isArray?: boolean
 	isPublic?: boolean
 }

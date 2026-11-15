@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled']) {
 	position: relative;
 	pointer-events: none;
 	overflow: hidden;
@@ -6,19 +6,14 @@
 	background: color-mix(in oklab, var(--surface-tertiary) 70%, transparent);
 }
 
-[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled'])::after{
+[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled'])::after {
 	content: '';
 	position: absolute;
 	inset: 0;
 	transform: translateX(-100%);
-	background: linear-gradient(
-		90deg,
-		transparent 0%,
-		var(--surface-tertiary) 50%,
-		transparent 100%
-	);
-	animation: tg-admin-skeleton-shimmer 1.6s ease-in-out var(--skeleton-shimmer-delay)
-		infinite backwards;
+	background: linear-gradient(90deg, transparent 0%, var(--surface-tertiary) 50%, transparent 100%);
+	animation: tg-admin-skeleton-shimmer 1.6s ease-in-out var(--skeleton-shimmer-delay) infinite
+		backwards;
 }
 
 @keyframes tg-admin-skeleton-shimmer {
@@ -28,7 +23,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-	[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled'])::after{
+	[data-ui-kit='admin'] [data-slot='skeleton']:not([data-variant='unstyled'])::after {
 		animation: none;
 		opacity: 0.35;
 		transform: none;

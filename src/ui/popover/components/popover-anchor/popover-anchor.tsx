@@ -1,7 +1,9 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import type { ReactNode } from 'react'
+
+import { cn } from '@/core/cn'
+
 import { POPOVER_DISPLAY_NAMES } from '../../constants/popover.constants'
 import { usePopoverContext } from '../../context/popover-context'
 import type { IPopoverAnchorProps } from '../../types/i-popover-props'
@@ -14,12 +16,7 @@ export const PopoverAnchor = ({
 }: IPopoverAnchorProps): ReactNode => {
 	const { setAnchorElement } = usePopoverContext()
 
-	return mergePopoverAnchorProps(
-		children,
-		setAnchorElement,
-		cn(className),
-		variant,
-	)
+	return mergePopoverAnchorProps(children, setAnchorElement, cn(className), variant)
 }
 
 PopoverAnchor.displayName = POPOVER_DISPLAY_NAMES.ANCHOR

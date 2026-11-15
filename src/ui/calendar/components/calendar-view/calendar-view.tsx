@@ -1,11 +1,12 @@
 'use client'
 
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
-import type { TDatePickerVariant, TDatePickerViewMode } from '@/ui/date-picker/types/i-date-picker-props'
-import {
-	applyRangeHoverPreview,
-	clearRangeHoverPreview,
-} from '@/ui/date-picker/utils/range-hover-preview.util'
+import type {
+	TDatePickerVariant,
+	TDatePickerViewMode,
+} from '@/ui/date-picker/types/i-date-picker-props'
 import {
 	addCalendarMonths,
 	getCalendarWeekdayLabels,
@@ -14,13 +15,9 @@ import {
 	type ICalendarGridDay,
 } from '@/ui/date-picker/utils/date-picker-date.util'
 import {
-	useCallback,
-	useEffect,
-	useLayoutEffect,
-	useRef,
-	useState,
-	type ReactElement,
-} from 'react'
+	applyRangeHoverPreview,
+	clearRangeHoverPreview,
+} from '@/ui/date-picker/utils/range-hover-preview.util'
 
 const MONTH_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
 	month: 'long',
@@ -33,13 +30,13 @@ const MONTH_CAPTION_FORMAT_OPTIONS: Intl.DateTimeFormatOptions = {
 
 const ChevronLeftIcon = (): ReactElement => {
 	return (
-		<svg viewBox='0 0 16 16' width='16' height='16' fill='none' aria-hidden='true'>
+		<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
 			<path
-				d='M10 4L6 8l4 4'
-				stroke='currentColor'
-				strokeWidth='1.5'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M10 4L6 8l4 4"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -47,13 +44,13 @@ const ChevronLeftIcon = (): ReactElement => {
 
 const ChevronRightIcon = (): ReactElement => {
 	return (
-		<svg viewBox='0 0 16 16' width='16' height='16' fill='none' aria-hidden='true'>
+		<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
 			<path
-				d='M6 4l4 4-4 4'
-				stroke='currentColor'
-				strokeWidth='1.5'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M6 4l4 4-4 4"
+				stroke="currentColor"
+				strokeWidth="1.5"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -93,38 +90,31 @@ const CalendarDaysPanel = ({
 	onRangeDayPointerEnter,
 	isToday,
 }: ICalendarDaysPanelProps): ReactElement => {
-	const caption = new Intl.DateTimeFormat(
-		locale,
-		MONTH_CAPTION_FORMAT_OPTIONS,
-	).format(month)
+	const caption = new Intl.DateTimeFormat(locale, MONTH_CAPTION_FORMAT_OPTIONS).format(month)
 
 	return (
-		<div data-slot='date-picker-month-panel'>
-			{isCaptionVisible ? (
-				<p data-slot='date-picker-month-caption'>{caption}</p>
-			) : null}
-			<div data-slot='date-picker-weekdays'>
+		<div data-slot="date-picker-month-panel">
+			{isCaptionVisible ? <p data-slot="date-picker-month-caption">{caption}</p> : null}
+			<div data-slot="date-picker-weekdays">
 				{weekdays.map((weekday, index) => (
 					<div
 						key={weekday}
-						data-slot='date-picker-weekday'
-						data-weekend={
-							isWeekendDay(new Date(2024, 0, 1 + index)) ? '' : undefined
-						}
+						data-slot="date-picker-weekday"
+						data-weekend={isWeekendDay(new Date(2024, 0, 1 + index)) ? '' : undefined}
 					>
 						{weekday}
 					</div>
 				))}
 			</div>
-			<div data-slot='date-picker-days'>
+			<div data-slot="date-picker-days">
 				{days.map((day) => {
 					if (isHideOutsideDays && day.isOutsideMonth) {
 						return (
 							<span
 								key={day.date.toISOString()}
-								data-slot='date-picker-day'
-								data-empty=''
-								aria-hidden='true'
+								data-slot="date-picker-day"
+								data-empty=""
+								aria-hidden="true"
 							/>
 						)
 					}
@@ -138,9 +128,9 @@ const CalendarDaysPanel = ({
 					return (
 						<button
 							key={day.date.toISOString()}
-							type='button'
+							type="button"
 							disabled={isDisabled}
-							data-slot='date-picker-day'
+							data-slot="date-picker-day"
 							data-ts={String(day.date.getTime())}
 							data-selected={isSelected ? '' : undefined}
 							data-range-start={isRangeStart ? '' : undefined}
@@ -233,9 +223,7 @@ export const CalendarView = ({
 }: ICalendarViewProps): ReactElement => {
 	const daysPanelsRef = useRef<HTMLDivElement>(null)
 	const weekdays = getCalendarWeekdayLabels(locale)
-	const monthLabel = new Intl.DateTimeFormat(locale, MONTH_FORMAT_OPTIONS).format(
-		visibleMonth,
-	)
+	const monthLabel = new Intl.DateTimeFormat(locale, MONTH_FORMAT_OPTIONS).format(visibleMonth)
 	const yearLabel = visibleMonth.getFullYear()
 	const currentYear = new Date().getFullYear()
 	const firstYear = yearRange[0]
@@ -301,21 +289,15 @@ export const CalendarView = ({
 		}
 
 		const selectedYear =
-			container.querySelector<HTMLElement>(
-				'[data-slot="date-picker-year"][data-selected]',
-			) ??
-			container.querySelector<HTMLElement>(
-				'[data-slot="date-picker-year"][data-current]',
-			)
+			container.querySelector<HTMLElement>('[data-slot="date-picker-year"][data-selected]') ??
+			container.querySelector<HTMLElement>('[data-slot="date-picker-year"][data-current]')
 
 		if (selectedYear != null) {
 			scrollElementToContainerCenter(container, selectedYear)
 		}
 
 		setCanScrollYearsUp(container.scrollTop > 1)
-		setCanScrollYearsDown(
-			container.scrollTop < container.scrollHeight - container.clientHeight - 1,
-		)
+		setCanScrollYearsDown(container.scrollTop < container.scrollHeight - container.clientHeight - 1)
 	}, [isYearView, yearLabel])
 
 	const isPrevDisabled =
@@ -376,11 +358,7 @@ export const CalendarView = ({
 		: isMonthView
 			? 'Предыдущий год'
 			: previousMonth
-	const nextLabel = isYearView
-		? 'Следующие годы'
-		: isMonthView
-			? 'Следующий год'
-			: nextMonth
+	const nextLabel = isYearView ? 'Следующие годы' : isMonthView ? 'Следующий год' : nextMonth
 	const yearToggleLabel =
 		isYearView && firstYear != null && lastYear != null
 			? `${String(firstYear)} – ${String(lastYear)}`
@@ -388,22 +366,20 @@ export const CalendarView = ({
 
 	return (
 		<div
-			data-slot='date-picker-popover'
+			data-slot="date-picker-popover"
 			data-variant={variant}
 			data-view={viewMode}
 			data-range-picking={rangePickStartDate != null ? '' : undefined}
-			data-month-count={
-				viewMode === 'days' && isMultiMonth ? String(monthCount) : undefined
-			}
+			data-month-count={viewMode === 'days' && isMultiMonth ? String(monthCount) : undefined}
 			className={cn(className)}
 			onWheel={(event) => {
 				event.stopPropagation()
 			}}
 		>
-			<div data-slot='date-picker-nav'>
+			<div data-slot="date-picker-nav">
 				<button
-					type='button'
-					data-slot='date-picker-nav-previous'
+					type="button"
+					data-slot="date-picker-nav-previous"
 					onClick={handleNavigatePrevious}
 					disabled={isPrevDisabled}
 					aria-label={previousLabel}
@@ -413,8 +389,8 @@ export const CalendarView = ({
 				<div>
 					{isYearView ? null : (
 						<button
-							type='button'
-							data-slot='date-picker-month-toggle'
+							type="button"
+							data-slot="date-picker-month-toggle"
 							data-open={viewMode === 'months' ? '' : undefined}
 							onClick={handleToggleMonthPicker}
 							aria-expanded={viewMode === 'months'}
@@ -423,8 +399,8 @@ export const CalendarView = ({
 						</button>
 					)}
 					<button
-						type='button'
-						data-slot='date-picker-year-toggle'
+						type="button"
+						data-slot="date-picker-year-toggle"
 						data-open={isYearView ? '' : undefined}
 						onClick={handleToggleYearPicker}
 						aria-expanded={isYearView}
@@ -433,8 +409,8 @@ export const CalendarView = ({
 					</button>
 				</div>
 				<button
-					type='button'
-					data-slot='date-picker-nav-next'
+					type="button"
+					data-slot="date-picker-nav-next"
 					onClick={handleNavigateNext}
 					disabled={isNextDisabled}
 					aria-label={nextLabel}
@@ -444,16 +420,14 @@ export const CalendarView = ({
 			</div>
 
 			{viewMode === 'months' ? (
-				<div data-slot='date-picker-months'>
+				<div data-slot="date-picker-months">
 					{monthLabels.map((monthName, monthIndex) => (
 						<button
 							key={monthName}
-							type='button'
+							type="button"
 							disabled={isMonthDisabled(monthIndex)}
-							data-slot='date-picker-month'
-							data-selected={
-								visibleMonth.getMonth() === monthIndex ? '' : undefined
-							}
+							data-slot="date-picker-month"
+							data-selected={visibleMonth.getMonth() === monthIndex ? '' : undefined}
 							data-disabled={isMonthDisabled(monthIndex) ? '' : undefined}
 							onClick={() => handleSelectMonth(monthIndex)}
 						>
@@ -466,14 +440,13 @@ export const CalendarView = ({
 			{isYearView ? (
 				<div
 					ref={yearsRef}
-					data-slot='date-picker-years'
+					data-slot="date-picker-years"
 					onScroll={(event) => {
 						const container = event.currentTarget
 
 						setCanScrollYearsUp(container.scrollTop > 1)
 						setCanScrollYearsDown(
-							container.scrollTop <
-								container.scrollHeight - container.clientHeight - 1,
+							container.scrollTop < container.scrollHeight - container.clientHeight - 1,
 						)
 					}}
 				>
@@ -483,9 +456,9 @@ export const CalendarView = ({
 						return (
 							<button
 								key={year}
-								type='button'
+								type="button"
 								disabled={isDisabled}
-								data-slot='date-picker-year'
+								data-slot="date-picker-year"
 								data-selected={yearLabel === year ? '' : undefined}
 								data-current={currentYear === year ? '' : undefined}
 								data-disabled={isDisabled ? '' : undefined}
@@ -530,8 +503,8 @@ export const CalendarView = ({
 
 			{showTodayAction ? (
 				<button
-					type='button'
-					data-slot='calendar-today'
+					type="button"
+					data-slot="calendar-today"
 					disabled={isTodayDisabled}
 					onClick={handleSelectToday}
 				>

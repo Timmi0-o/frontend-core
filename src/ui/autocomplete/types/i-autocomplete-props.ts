@@ -1,5 +1,6 @@
-import type { TSlotVariant } from '@/core/slot-variant'
 import type { InputHTMLAttributes, ReactElement, ReactNode } from 'react'
+
+import type { TSlotVariant } from '@/core/slot-variant'
 
 export type TAutocompleteSize = 'sm' | 'md' | 'lg'
 export type TAutocompleteVariant = 'default' | 'light' | 'unstyled'

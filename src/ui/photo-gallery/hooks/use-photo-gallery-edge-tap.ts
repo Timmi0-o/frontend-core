@@ -1,12 +1,13 @@
 'use client'
 
+import { useEffect, useRef, type RefObject } from 'react'
+import type { Swiper as SwiperType } from 'swiper/types'
+
 import {
 	getPhotoGalleryEdgeZoneWidthPx,
 	PHOTO_GALLERY_EDGE_TAP_MAX_MOVE_PX,
 	PHOTO_GALLERY_EDGE_TAP_MAX_MS,
 } from '@/ui/photo-gallery/photo-gallery-edge.constants'
-import { useEffect, useRef, type RefObject } from 'react'
-import type { Swiper as SwiperType } from 'swiper/types'
 
 interface IEdgeTapStart {
 	pointerId: number
@@ -48,8 +49,7 @@ export const usePhotoGalleryEdgeTap = ({
 		}
 
 		const isCoarsePointer =
-			typeof window !== 'undefined' &&
-			window.matchMedia('(pointer: coarse)').matches
+			typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches
 
 		if (!isCoarsePointer) {
 			return

@@ -17,10 +17,7 @@ import {
 import { DatePickerContext } from './context/date-picker-context'
 import { useDatePicker } from './hooks/use-date-picker'
 import type { IDatePickerContextValue } from './types/i-date-picker-context-value'
-import type {
-	IDatePickerProps,
-	TDatePickerComponent,
-} from './types/i-date-picker-props'
+import type { IDatePickerProps, TDatePickerComponent } from './types/i-date-picker-props'
 
 export type {
 	IDatePickerInputProps,
@@ -166,24 +163,21 @@ const DatePickerRoot = (props: IDatePickerProps): ReactElement => {
 	return (
 		<DatePickerContext.Provider value={contextValue}>
 			<div
-				data-slot='date-picker'
+				data-slot="date-picker"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-invalid={error ? '' : undefined}
 				data-open={isOpen ? '' : undefined}
 				className={cn(className)}
 			>
-				{label ? <label data-slot='date-picker-label'>{label}</label> : null}
+				{label ? <label data-slot="date-picker-label">{label}</label> : null}
 
 				{isMobile ? (
 					pickerContent
 				) : (
 					<Popover
 						open={isOpen}
-						onOpenChange={(
-							isNextOpen,
-							details?: IPopoverOpenChangeDetails,
-						) => {
+						onOpenChange={(isNextOpen, details?: IPopoverOpenChangeDetails) => {
 							if (isDisabled) {
 								return
 							}
@@ -195,7 +189,7 @@ const DatePickerRoot = (props: IDatePickerProps): ReactElement => {
 
 							handleOpenChange(isNextOpen)
 						}}
-						placement='bottom-start'
+						placement="bottom-start"
 						offset={DATE_PICKER_POPOVER_OFFSET_PX}
 					>
 						{pickerContent}
@@ -203,7 +197,7 @@ const DatePickerRoot = (props: IDatePickerProps): ReactElement => {
 				)}
 
 				{error ? (
-					<p data-slot='date-picker-error' role='alert'>
+					<p data-slot="date-picker-error" role="alert">
 						{error}
 					</p>
 				) : null}

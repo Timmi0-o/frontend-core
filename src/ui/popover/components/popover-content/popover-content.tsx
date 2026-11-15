@@ -5,6 +5,7 @@ import type { ReactNode } from 'react'
 
 import { cn } from '@/core/cn'
 import { useFloatingPositionerProps } from '@/core/overlay-layer'
+
 import { POPOVER_DISPLAY_NAMES } from '../../constants/popover.constants'
 import { usePopoverContext } from '../../context/popover-context'
 import type { IPopoverContentProps } from '../../types/i-popover-props'
@@ -28,29 +29,25 @@ export const PopoverContent = ({
 	variant = 'default',
 	container,
 }: IPopoverContentProps): ReactNode => {
-	const { side, align, sideOffset, anchorElement, uiKit, portalContainer } =
-		usePopoverContext()
-	const { ref: positionerRef, style: positionerStyle } =
-		useFloatingPositionerProps()
+	const { side, align, sideOffset, anchorElement, uiKit, portalContainer } = usePopoverContext()
+	const { ref: positionerRef, style: positionerStyle } = useFloatingPositionerProps()
 
 	return (
-		<PopoverPrimitive.Portal
-			container={container ?? portalContainer ?? undefined}
-		>
+		<PopoverPrimitive.Portal container={container ?? portalContainer ?? undefined}>
 			<PopoverPrimitive.Positioner
 				ref={positionerRef}
 				side={side}
 				align={align}
 				sideOffset={sideOffset}
 				collisionPadding={8}
-				positionMethod='fixed'
+				positionMethod="fixed"
 				{...(anchorElement ? { anchor: anchorElement } : {})}
-				data-slot='popover-positioner'
+				data-slot="popover-positioner"
 				data-ui-kit={uiKit}
 				style={positionerStyle}
 			>
 				<PopoverPrimitive.Popup
-					data-slot='popover-content'
+					data-slot="popover-content"
 					data-variant={variant}
 					initialFocus={initialFocus}
 					finalFocus={finalFocus}
@@ -58,10 +55,7 @@ export const PopoverContent = ({
 					style={style}
 				>
 					{hasPanel ? (
-						<div
-							data-slot='popover-panel'
-							className={cn(className, panelClassName)}
-						>
+						<div data-slot="popover-panel" className={cn(className, panelClassName)}>
 							{children}
 						</div>
 					) : (

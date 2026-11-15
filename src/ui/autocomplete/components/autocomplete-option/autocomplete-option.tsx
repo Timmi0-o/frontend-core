@@ -1,7 +1,9 @@
 'use client'
 
-import { resolveChildSlotVariant } from '@/core/slot-variant'
 import type { ReactElement } from 'react'
+
+import { resolveChildSlotVariant } from '@/core/slot-variant'
+
 import { useAutocompleteContext } from '../../context/autocomplete-context'
 import type { IAutocompleteOptionItemProps } from '../../types/i-autocomplete-props'
 
@@ -20,11 +22,11 @@ export const AutocompleteOption = ({
 
 	return (
 		<button
-			type='button'
-			role='option'
+			type="button"
+			role="option"
 			aria-selected={isSelected}
 			disabled={option.disabled}
-			data-slot='autocomplete-option'
+			data-slot="autocomplete-option"
 			data-variant={variant}
 			data-selected={isSelected ? '' : undefined}
 			data-disabled={option.disabled ? '' : undefined}

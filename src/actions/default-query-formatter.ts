@@ -1,12 +1,6 @@
 import type { IActionFilters } from './types/i-action.types'
 
-const SCALAR_FILTER_KEYS = new Set([
-	'limit',
-	'page',
-	'preset',
-	'orderField',
-	'orderDir',
-])
+const SCALAR_FILTER_KEYS = new Set(['limit', 'page', 'preset', 'orderField', 'orderDir'])
 
 const QUERY_PARAMS_HANDLED_SEPARATELY = new Set(['requiredIds'])
 

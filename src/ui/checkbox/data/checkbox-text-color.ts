@@ -3,5 +3,4 @@ export const CHECKBOX_TEXT_COLOR = {
 	secondary: 'secondary',
 } as const
 
-export type CheckboxTextColor =
-	(typeof CHECKBOX_TEXT_COLOR)[keyof typeof CHECKBOX_TEXT_COLOR]
+export type CheckboxTextColor = (typeof CHECKBOX_TEXT_COLOR)[keyof typeof CHECKBOX_TEXT_COLOR]

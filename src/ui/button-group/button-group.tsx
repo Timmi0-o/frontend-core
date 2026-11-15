@@ -1,7 +1,8 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import type { HTMLAttributes, ReactElement } from 'react'
+
+import { cn } from '@/core/cn'
 
 export type TButtonGroupVariant = 'default' | 'secondary' | 'unstyled'
 
@@ -17,8 +18,8 @@ const ButtonGroupRoot = ({
 }: IButtonGroupProps): ReactElement => {
 	return (
 		<div
-			role='group'
-			data-slot='button-group'
+			role="group"
+			data-slot="button-group"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}

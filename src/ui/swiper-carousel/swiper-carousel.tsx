@@ -3,9 +3,6 @@
 import 'swiper/css'
 import 'swiper/css/free-mode'
 
-import { createCompoundContext } from '@/core/create-compound-context'
-import { cn } from '@/core/cn'
-import type { TSlotVariant } from '@/core/slot-variant'
 import {
 	Children,
 	isValidElement,
@@ -16,12 +13,12 @@ import {
 	type ReactNode,
 } from 'react'
 import { FreeMode } from 'swiper/modules'
-import {
-	Swiper as SwiperViewportPrimitive,
-	SwiperSlide,
-	type SwiperProps,
-} from 'swiper/react'
+import { Swiper as SwiperViewportPrimitive, SwiperSlide, type SwiperProps } from 'swiper/react'
 import type { Swiper as SwiperInstance, SwiperOptions } from 'swiper/types'
+
+import { cn } from '@/core/cn'
+import { createCompoundContext } from '@/core/create-compound-context'
+import type { TSlotVariant } from '@/core/slot-variant'
 
 interface ISwiperCarouselContextValue {
 	swiper: SwiperInstance | null
@@ -37,8 +34,7 @@ interface ISwiperCarouselContextValue {
 const { Context, useCompoundContext } =
 	createCompoundContext<ISwiperCarouselContextValue>('SwiperCarousel')
 
-export interface ISwiperCarouselRootProps
-	extends Omit<SwiperProps, 'children' | 'className'> {
+export interface ISwiperCarouselRootProps extends Omit<SwiperProps, 'children' | 'className'> {
 	children: ReactNode
 	className?: string
 	variant?: TSlotVariant
@@ -54,19 +50,13 @@ export interface ISwiperCarouselRootProps
 
 const ChevronLeftIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='24'
-			height='24'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
 			<path
-				d='M15 6l-6 6 6 6'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M15 6l-6 6 6 6"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -74,19 +64,13 @@ const ChevronLeftIcon = (): ReactElement => {
 
 const ChevronRightIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='24'
-			height='24'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true">
 			<path
-				d='M9 6l6 6-6 6'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M9 6l6 6-6 6"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -99,13 +83,8 @@ const SwiperCarouselPrevious = ({
 	className?: string
 	variant?: TSlotVariant
 }): ReactElement | null => {
-	const {
-		swiper,
-		canSlidePrevious,
-		navigationButtonClassName,
-		previousLabel,
-		previousIcon,
-	} = useCompoundContext()
+	const { swiper, canSlidePrevious, navigationButtonClassName, previousLabel, previousIcon } =
+		useCompoundContext()
 
 	if (!canSlidePrevious) {
 		return null
@@ -113,10 +92,10 @@ const SwiperCarouselPrevious = ({
 
 	return (
 		<button
-			data-slot='carousel-previous'
+			data-slot="carousel-previous"
 			data-variant={variant}
 			className={cn(navigationButtonClassName, className)}
-			type='button'
+			type="button"
 			aria-label={previousLabel}
 			onClick={() => swiper?.slidePrev()}
 		>
@@ -134,13 +113,8 @@ const SwiperCarouselNext = ({
 	className?: string
 	variant?: TSlotVariant
 }): ReactElement | null => {
-	const {
-		swiper,
-		canSlideNext,
-		navigationButtonClassName,
-		nextLabel,
-		nextIcon,
-	} = useCompoundContext()
+	const { swiper, canSlideNext, navigationButtonClassName, nextLabel, nextIcon } =
+		useCompoundContext()
 
 	if (!canSlideNext) {
 		return null
@@ -148,10 +122,10 @@ const SwiperCarouselNext = ({
 
 	return (
 		<button
-			data-slot='carousel-next'
+			data-slot="carousel-next"
 			data-variant={variant}
 			className={cn(navigationButtonClassName, className)}
-			type='button'
+			type="button"
 			aria-label={nextLabel}
 			onClick={() => swiper?.slideNext()}
 		>
@@ -172,11 +146,7 @@ const SwiperCarouselSlide = ({
 	variant?: TSlotVariant
 }): ReactElement => {
 	return (
-		<SwiperSlide
-			data-slot='carousel-slide'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<SwiperSlide data-slot="carousel-slide" data-variant={variant} className={cn(className)}>
 			{children}
 		</SwiperSlide>
 	)
@@ -243,10 +213,7 @@ const SwiperCarouselRoot = ({
 		onResize?.(instance)
 	}
 
-	const handleBreakpoint = (
-		instance: SwiperInstance,
-		breakpointParams: SwiperOptions,
-	): void => {
+	const handleBreakpoint = (instance: SwiperInstance, breakpointParams: SwiperOptions): void => {
 		updateNavigation(instance)
 		onBreakpoint?.(instance, breakpointParams)
 	}
@@ -265,7 +232,7 @@ const SwiperCarouselRoot = ({
 			}}
 		>
 			<div
-				data-slot='carousel'
+				data-slot="carousel"
 				data-variant={variant}
 				data-slides-per-view={slidesPerView === 'auto' ? 'auto' : undefined}
 				className={cn(className)}
@@ -289,7 +256,7 @@ const SwiperCarouselRoot = ({
 					{slides.map((child, index) => (
 						<SwiperSlide
 							key={isValidElement(child) ? child.key : `slide-${String(index)}`}
-							data-slot='carousel-slide'
+							data-slot="carousel-slide"
 							className={cn(slideClassName)}
 						>
 							{child}

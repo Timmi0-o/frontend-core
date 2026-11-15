@@ -1,10 +1,10 @@
-[data-ui-kit='social'] [data-slot='date-time-picker']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker']:not([data-variant='unstyled']) {
 	display: flex;
 	width: 100%;
 	flex-direction: column;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-label']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-label']:not([data-variant='unstyled']) {
 	margin-bottom: 0.5rem;
 	font-size: 0.875rem;
 	font-weight: 500;
@@ -12,8 +12,10 @@
 	color: var(--text-primary);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker']
+	[data-slot='popover-trigger']:not([data-variant='unstyled']),
+[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	display: flex;
 	width: 100%;
@@ -35,37 +37,49 @@
 		border-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled']):hover:not(:disabled){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled']):hover:not(:disabled) {
 	background: var(--input-background-hover);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-open]{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-open] {
 	box-shadow: var(--glass-shadow), var(--focus-ring);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-variant='light']{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-variant='light'] {
 	border-color: var(--glass-border);
 	background: var(--surface-content-bg);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='sm'],
-[data-ui-kit='social'] [data-slot='date-time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='sm']{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='sm'],
+[data-ui-kit='social']
+	[data-slot='date-time-picker']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='sm'] {
 	height: var(--control-field-height-sm);
 	min-height: var(--control-field-height-sm);
 	min-width: var(--control-field-height-sm);
 	padding: 0 0.75rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='md'],
-[data-ui-kit='social'] [data-slot='date-time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='md']{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='md'],
+[data-ui-kit='social']
+	[data-slot='date-time-picker']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='md'] {
 	height: var(--control-field-height-md);
 	min-height: var(--control-field-height-md);
 	min-width: var(--control-field-height-md);
 	padding: 0 0.875rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='lg'],
-[data-ui-kit='social'] [data-slot='date-time-picker'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='lg']{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-size='lg'],
+[data-ui-kit='social']
+	[data-slot='date-time-picker']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='lg'] {
 	height: var(--control-field-height-lg);
 	min-height: var(--control-field-height-lg);
 	min-width: var(--control-field-height-lg);
@@ -73,12 +87,13 @@
 }
 
 [data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled']):disabled,
-[data-ui-kit='social'] [data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-disabled]{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-input']:not([data-variant='unstyled'])[data-disabled] {
 	cursor: not-allowed;
 	opacity: 0.6;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-value']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-value']:not([data-variant='unstyled']) {
 	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -88,24 +103,25 @@
 	font-variant-numeric: tabular-nums;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-value']:not([data-variant='unstyled'])[data-empty]{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-value']:not([data-variant='unstyled'])[data-empty] {
 	color: var(--text-secondary);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-icon']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-icon']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	flex-shrink: 0;
 	color: var(--text-secondary);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-error']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-error']:not([data-variant='unstyled']) {
 	margin-top: 0.375rem;
 	font-size: 0.75rem;
 	line-height: 1rem;
 	color: var(--danger, #ef4444);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']) {
 	--date-time-picker-day-size: 2.25rem;
 
 	box-sizing: border-box;
@@ -123,7 +139,7 @@
 	overflow: hidden;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']) {
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) auto;
 	grid-template-rows: auto;
@@ -131,14 +147,16 @@
 	min-height: 0;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-calendar']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-calendar']:not([data-variant='unstyled']) {
 	grid-column: 1;
 	grid-row: 1;
 	min-width: 0;
 	max-width: 15.75rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'] [data-slot='date-picker-popover']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-picker-popover']:not([data-variant='unstyled']) {
 	--date-picker-day-size: var(--date-time-picker-day-size);
 
 	width: 100%;
@@ -152,12 +170,14 @@
 	overflow: visible;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'] [data-slot='date-picker-day']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-picker-day']:not([data-variant='unstyled']) {
 	width: var(--date-time-picker-day-size);
 	height: var(--date-time-picker-day-size);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']) {
 	display: flex;
 	grid-column: 2;
 	grid-row: 1;
@@ -170,7 +190,7 @@
 	border-left: 1px solid var(--glass-border);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']) {
 	display: flex;
 	flex: 1 1 0;
 	align-self: stretch;
@@ -188,11 +208,12 @@
 	scrollbar-width: thin;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child {
 	padding-left: 0.625rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-option']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-time-option']:not([data-variant='unstyled']) {
 	display: flex;
 	width: 100%;
 	align-items: center;
@@ -209,17 +230,20 @@
 	cursor: pointer;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-option']:not([data-variant='unstyled']):hover{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-time-option']:not([data-variant='unstyled']):hover {
 	background: color-mix(in srgb, var(--text-primary) 6%, transparent);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-time-option'][data-selected]:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='date-time-picker-time-option'].is-selected:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-time-option'][data-selected]:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='date-time-picker-time-option'].is-selected:not([data-variant='unstyled']) {
 	border-color: var(--foreground);
 	background: color-mix(in srgb, var(--foreground) 8%, transparent);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-footer']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-footer']:not([data-variant='unstyled']) {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -229,7 +253,7 @@
 }
 
 [data-ui-kit='social'] [data-slot='date-time-picker-clear']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='date-time-picker-today']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='date-time-picker-today']:not([data-variant='unstyled']) {
 	border: 0;
 	background: transparent;
 	color: var(--foreground);
@@ -238,14 +262,19 @@
 	cursor: pointer;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-today']:not([data-variant='unstyled']):disabled{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-today']:not([data-variant='unstyled']):disabled {
 	cursor: not-allowed;
 	opacity: 0.45;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile]:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	width: 100%;
 	min-width: 0;
@@ -259,37 +288,69 @@
 	overflow: hidden;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile]:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']:not([data-variant='unstyled']) {
 	--date-time-picker-day-size: min(2rem, calc((100vw - 8.5rem) / 7));
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-panel-body']:not([data-variant='unstyled']) {
 	width: 100%;
 	min-width: 0;
 	max-width: 100%;
 	overflow: hidden;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-calendar']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-calendar']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-calendar']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-calendar']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-calendar']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-calendar']:not([data-variant='unstyled']) {
 	max-width: none;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-picker-day']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-picker-day']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-picker-day']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-picker-day']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-picker-day']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-picker-day']:not([data-variant='unstyled']) {
 	width: var(--date-time-picker-day-size);
 	height: var(--date-time-picker-day-size);
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-shell']:not([data-variant='unstyled']) {
 	width: 6.25rem;
 	max-width: 6.25rem;
 	border-top: 0;
@@ -297,9 +358,16 @@
 	padding: 0;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']) {
 	flex: 1 1 0;
 	width: auto;
 	min-width: 0;
@@ -308,27 +376,49 @@
 	padding: 0.125rem 0.25rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child,
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child,
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child,
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child,
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):first-child {
 	padding-left: 0.375rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child,
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child,
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child{
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child,
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child,
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-time-column']:not([data-variant='unstyled']):last-child {
 	padding-right: 0.125rem;
 }
 
-[data-ui-kit='social'] [data-slot='date-time-picker-panel'][data-mobile] [data-slot='date-time-picker-footer']:not([data-variant='unstyled']),
-[data-ui-kit='social'] [data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-footer']:not([data-variant='unstyled']),
-[data-ui-kit='social'][data-slot='bottom-sheet-content'] [data-slot='date-time-picker-panel'] [data-slot='date-time-picker-footer']:not([data-variant='unstyled']){
+[data-ui-kit='social']
+	[data-slot='date-time-picker-panel'][data-mobile]
+	[data-slot='date-time-picker-footer']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-footer']:not([data-variant='unstyled']),
+[data-ui-kit='social'][data-slot='bottom-sheet-content']
+	[data-slot='date-time-picker-panel']
+	[data-slot='date-time-picker-footer']:not([data-variant='unstyled']) {
 	margin-top: 0.625rem;
 	padding-top: 0.75rem;
 }
 
 @media (max-width: 40rem) {
-	[data-ui-kit='social'] [data-slot='date-time-picker-panel']:not([data-variant='unstyled']):not([data-mobile]){
+	[data-ui-kit='social']
+		[data-slot='date-time-picker-panel']:not([data-variant='unstyled']):not([data-mobile]) {
 		width: min(100%, calc(100vw - 24px));
 	}
 }

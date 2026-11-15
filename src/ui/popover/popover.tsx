@@ -1,14 +1,6 @@
 'use client'
 
 import { Popover as PopoverPrimitive } from '@base-ui/react/popover'
-import { findHoverFloatingRoot } from '@/core/hover-floating-root'
-import {
-	lockOverlayParentDismissUntilPointerUp,
-	registerOverlayFloatingOpen,
-	shouldLockOverlayParentAfterFloatingClose,
-} from '@/core/overlay-floating-dismiss-lock'
-import { getOverlayPortalContainer } from '@/core/overlay-layer'
-import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	useCallback,
 	useEffect,
@@ -18,6 +10,16 @@ import {
 	useState,
 	type ReactNode,
 } from 'react'
+
+import { findHoverFloatingRoot } from '@/core/hover-floating-root'
+import {
+	lockOverlayParentDismissUntilPointerUp,
+	registerOverlayFloatingOpen,
+	shouldLockOverlayParentAfterFloatingClose,
+} from '@/core/overlay-floating-dismiss-lock'
+import { getOverlayPortalContainer } from '@/core/overlay-layer'
+import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
+
 import { PopoverAnchor } from './components/popover-anchor/popover-anchor'
 import { PopoverContent } from './components/popover-content/popover-content'
 import { PopoverTrigger } from './components/popover-trigger/popover-trigger'
@@ -35,12 +37,8 @@ const PopoverRoot = ({
 	offset = 8,
 	modal = true,
 }: IPopoverProps): ReactNode => {
-	const [anchorElement, setAnchorElementState] = useState<HTMLElement | null>(
-		null,
-	)
-	const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(
-		null,
-	)
+	const [anchorElement, setAnchorElementState] = useState<HTMLElement | null>(null)
+	const [portalContainer, setPortalContainer] = useState<HTMLElement | null>(null)
 	const isControlled = typeof open === 'boolean'
 	const { side, align } = mapPopoverPlacement(placement)
 	const { hostRef, uiKit } = useInheritedUiKit()
@@ -53,9 +51,7 @@ const PopoverRoot = ({
 	const handleOpenChange = useCallback(
 		(
 			isNextOpen: boolean,
-			eventDetails?: Parameters<
-				NonNullable<PopoverPrimitive.Root.Props['onOpenChange']>
-			>[1],
+			eventDetails?: Parameters<NonNullable<PopoverPrimitive.Root.Props['onOpenChange']>>[1],
 		) => {
 			if (isNextOpen) {
 				unregisterFloatingOpenRef.current?.()
@@ -64,9 +60,7 @@ const PopoverRoot = ({
 				unregisterFloatingOpenRef.current?.()
 				unregisterFloatingOpenRef.current = null
 
-				if (
-					shouldLockOverlayParentAfterFloatingClose(eventDetails?.reason)
-				) {
+				if (shouldLockOverlayParentAfterFloatingClose(eventDetails?.reason)) {
 					lockOverlayParentDismissUntilPointerUp()
 				}
 			}
@@ -99,9 +93,7 @@ const PopoverRoot = ({
 	)
 
 	useLayoutEffect(() => {
-		setPortalContainer(
-			findHoverFloatingRoot(hostRef.current) ?? getOverlayPortalContainer(),
-		)
+		setPortalContainer(findHoverFloatingRoot(hostRef.current) ?? getOverlayPortalContainer())
 	}, [hostRef, open])
 
 	const value = useMemo<IPopoverContextValue>(
@@ -114,15 +106,7 @@ const PopoverRoot = ({
 			uiKit,
 			portalContainer,
 		}),
-		[
-			align,
-			anchorElement,
-			offset,
-			portalContainer,
-			setAnchorElement,
-			side,
-			uiKit,
-		],
+		[align, anchorElement, offset, portalContainer, setAnchorElement, side, uiKit],
 	)
 
 	return (

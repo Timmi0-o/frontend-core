@@ -1,6 +1,16 @@
 'use client'
 
 import { Dialog } from '@base-ui/react/dialog'
+import {
+	useCallback,
+	useLayoutEffect,
+	useState,
+	type ComponentProps,
+	type PointerEvent as ReactPointerEvent,
+	type ReactElement,
+	type ReactNode,
+} from 'react'
+
 import { cn } from '@/core/cn'
 import { isNativeButtonTrigger } from '@/core/is-native-button-trigger'
 import { isOverlayParentDismissLocked } from '@/core/overlay-floating-dismiss-lock'
@@ -12,15 +22,7 @@ import {
 } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import {
-	useCallback,
-	useLayoutEffect,
-	useState,
-	type ComponentProps,
-	type PointerEvent as ReactPointerEvent,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
+
 import { ModalBody } from './components/modal-body/modal-body'
 import { ModalFooter } from './components/modal-footer/modal-footer'
 import { ModalHeader } from './components/modal-header/modal-header'
@@ -57,9 +59,7 @@ const ModalRoot = ({
 	const handleOpenChange = useCallback(
 		(
 			isNextOpen: boolean,
-			eventDetails?: Parameters<
-				NonNullable<Dialog.Root.Props['onOpenChange']>
-			>[1],
+			eventDetails?: Parameters<NonNullable<Dialog.Root.Props['onOpenChange']>>[1],
 		) => {
 			if (!isNextOpen && isOverlayParentDismissLocked()) {
 				eventDetails?.cancel()
@@ -93,15 +93,13 @@ const ModalRoot = ({
 	return (
 		<Dialog.Root open={open} onOpenChange={handleOpenChange}>
 			<span ref={hostRef} hidden />
-			<ModalContext.Provider
-				value={{ isOpen: open, onOpenChange, setHasVisibleTitle }}
-			>
+			<ModalContext.Provider value={{ isOpen: open, onOpenChange, setHasVisibleTitle }}>
 				{portalContainer ? (
 					<Dialog.Portal container={portalContainer}>
 						<div data-ui-kit={uiKit} style={overlayLayerStyle(overlayZ)}>
 							<Dialog.Backdrop
 								forceRender
-								data-slot='modal-overlay'
+								data-slot="modal-overlay"
 								style={{
 									zIndex: overlayZ,
 									pointerEvents: 'auto',
@@ -109,7 +107,7 @@ const ModalRoot = ({
 								onPointerDown={dismissFromBackdrop}
 							/>
 							<Dialog.Popup
-								data-slot='modal-content'
+								data-slot="modal-content"
 								data-variant={variant}
 								data-animation={animation}
 								className={cn(className)}
@@ -117,7 +115,7 @@ const ModalRoot = ({
 							>
 								<OverlayLayerProvider overlayZ={overlayZ}>
 									{hasVisibleTitle ? null : (
-										<Dialog.Title data-slot='modal-title-hidden'>
+										<Dialog.Title data-slot="modal-title-hidden">
 											{title ?? DEFAULT_DIALOG_TITLE}
 										</Dialog.Title>
 									)}
@@ -153,11 +151,7 @@ const ModalTitle = ({
 	}, [setHasVisibleTitle])
 
 	return (
-		<Dialog.Title
-			data-slot='modal-title'
-			data-variant={variant}
-			className={className}
-		>
+		<Dialog.Title data-slot="modal-title" data-variant={variant} className={className}>
 			{children}
 		</Dialog.Title>
 	)
@@ -180,11 +174,7 @@ const ModalDescription = ({
 	variant = 'default',
 }: IModalDescriptionProps): ReactElement => {
 	return (
-		<p
-			data-slot='modal-description'
-			data-variant={variant}
-			className={className}
-		>
+		<p data-slot="modal-description" data-variant={variant} className={className}>
 			{children}
 		</p>
 	)
@@ -204,11 +194,7 @@ const ModalClose = ({
 	variant = 'default',
 }: IModalCloseProps): ReactElement => {
 	return (
-		<Dialog.Close
-			data-slot='modal-close'
-			data-variant={variant}
-			className={className}
-		>
+		<Dialog.Close data-slot="modal-close" data-variant={variant} className={className}>
 			{children}
 		</Dialog.Close>
 	)
@@ -234,9 +220,9 @@ const ModalCloseButton = ({
 	if (children) {
 		return (
 			<Dialog.Close
-				data-slot='modal-close-button'
+				data-slot="modal-close-button"
 				data-variant={variant}
-				data-custom-control=''
+				data-custom-control=""
 				className={className}
 				aria-label={ariaLabel}
 				nativeButton={isNativeButtonTrigger(children)}
@@ -248,13 +234,13 @@ const ModalCloseButton = ({
 
 	return (
 		<Dialog.Close
-			data-slot='modal-close-button'
+			data-slot="modal-close-button"
 			data-variant={variant}
 			className={className}
 			aria-label={ariaLabel}
 			{...props}
 		>
-			<OverlayCloseIcon data-slot='overlay-close-icon' />
+			<OverlayCloseIcon data-slot="overlay-close-icon" />
 		</Dialog.Close>
 	)
 }

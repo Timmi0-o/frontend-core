@@ -57,7 +57,8 @@
 	color: var(--destructive);
 }
 
-[data-ui-kit='social'] [data-slot='chip']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
+[data-ui-kit='social']
+	[data-slot='chip']:not([data-variant='unstyled'])[data-variant='soft-danger'] {
 	background: var(--danger-soft);
 	color: var(--danger-soft-foreground);
 }

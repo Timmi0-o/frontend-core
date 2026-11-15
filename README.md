@@ -36,11 +36,11 @@ zod ^4
 
 Опциональные — только если используете соответствующий компонент:
 
-| Пакет           | Нужен для        |
-| --------------- | ---------------- |
-| `swiper` ^14    | `SwiperCarousel`  |
-| `vaul` ^1       | `BottomSheet`    |
-| `framer-motion` | `PhotoGallery`   |
+| Пакет           | Нужен для               |
+| --------------- | ----------------------- |
+| `swiper` ^14    | `SwiperCarousel`        |
+| `vaul` ^1       | `BottomSheet`           |
+| `framer-motion` | `PhotoGallery`          |
 | `next`          | `useManageSearchParams` |
 
 ---
@@ -50,7 +50,7 @@ zod ^4
 ```tsx
 import { uiKit, Button, Card } from '@timmi0-o/frontend-core/ui-kit'
 
-<body data-ui-kit={uiKit}>{children}</body>
+;<body data-ui-kit={uiKit}>{children}</body>
 ```
 
 ```css
@@ -79,23 +79,23 @@ export const Example = () => {
 
 Компоненты всегда из `ui-kit`. CSS подключается отдельно — путь выбирает визуальный кит:
 
-| CSS | `data-ui-kit` |
-| --- | ------------- |
-| `ui-kit/social/styles.css` | `social` |
-| `ui-kit/admin/styles.css` | `admin` |
+| CSS                        | `data-ui-kit` |
+| -------------------------- | ------------- |
+| `ui-kit/social/styles.css` | `social`      |
+| `ui-kit/admin/styles.css`  | `admin`       |
 
 ---
 
 ## Точки входа
 
-| Импорт | Что внутри |
-| ------ | ---------- |
-| `@timmi0-o/frontend-core/ui-kit` | Компоненты, типы, `uiKit` |
-| `@timmi0-o/frontend-core/ui-kit/social/styles.css` | CSS кита `social` |
-| `@timmi0-o/frontend-core/ui-kit/admin/styles.css` | CSS кита `admin` |
-| `@timmi0-o/frontend-core/hooks` | `useDebounceValue`, `useLocalStorage`, `useMediaQuery`, `useManageSearchParams`, `useLockBodyScroll`, … |
-| `@timmi0-o/frontend-core/actions` | `abstractGetAction`, `abstractMutateAction`, типы workers/fetcher/mapper |
-| `@timmi0-o/frontend-core/utils` | `base64Manager`, `multiTypeFieldParser` |
+| Импорт                                             | Что внутри                                                                                              |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `@timmi0-o/frontend-core/ui-kit`                   | Компоненты, типы, `uiKit`                                                                               |
+| `@timmi0-o/frontend-core/ui-kit/social/styles.css` | CSS кита `social`                                                                                       |
+| `@timmi0-o/frontend-core/ui-kit/admin/styles.css`  | CSS кита `admin`                                                                                        |
+| `@timmi0-o/frontend-core/hooks`                    | `useDebounceValue`, `useLocalStorage`, `useMediaQuery`, `useManageSearchParams`, `useLockBodyScroll`, … |
+| `@timmi0-o/frontend-core/actions`                  | `abstractGetAction`, `abstractMutateAction`, типы workers/fetcher/mapper                                |
+| `@timmi0-o/frontend-core/utils`                    | `base64Manager`, `multiTypeFieldParser`                                                                 |
 
 `fetcher` и `responseMapper` в либу не входят: приложение передаёт их в `requestWorkers`.
 

@@ -1,8 +1,8 @@
-[data-ui-kit='admin'][data-slot='dropdown-menu-positioner']:not([data-variant='unstyled']){
+[data-ui-kit='admin'][data-slot='dropdown-menu-positioner']:not([data-variant='unstyled']) {
 	z-index: 1205;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
@@ -23,17 +23,19 @@
 	line-height: 1.25rem;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open]{
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
 		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style]{
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-content']:not([data-variant='unstyled'])[data-ending-style] {
 	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
 		var(--motion-easing-overlay-surface-exit) both;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-section']:not([data-variant='unstyled']) {
 	display: flex;
 	width: 100%;
 	flex-direction: column;
@@ -42,13 +44,13 @@
 
 [data-ui-kit='admin']
 	[data-slot='dropdown-menu-section']
-	+ [data-slot='dropdown-menu-section']:not([data-variant='unstyled']){
+	+ [data-slot='dropdown-menu-section']:not([data-variant='unstyled']) {
 	margin-top: 0.375rem;
 	padding-top: 0.375rem;
 	border-top: 1px solid var(--separator);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-label']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-label']:not([data-variant='unstyled']) {
 	padding: 0.25rem 0.625rem 0.375rem;
 	font-size: 0.75rem;
 	font-weight: 500;
@@ -56,7 +58,8 @@
 	color: var(--muted);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']),
+[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	position: relative;
 	display: flex;
@@ -83,39 +86,56 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']) svg,[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) svg{
+[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']) svg,
+[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']) svg {
 	width: 1rem;
 	height: 1rem;
 	flex-shrink: 0;
 	color: var(--muted);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):hover,[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted]{
+[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):hover,
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted] {
 	background: var(--default);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):active,[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):active{
+[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):active,
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):active {
 	transform: scale(0.98);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):focus-visible,[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):focus-visible{
+[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):focus-visible,
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):focus-visible {
 	box-shadow: var(--focus-ring);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive']{
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive'] {
 	color: var(--danger);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item'][data-variant='destructive']:not([data-variant='unstyled']) svg{
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-item'][data-variant='destructive']:not([data-variant='unstyled'])
+	svg {
 	color: var(--danger);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled]{
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled] {
 	pointer-events: none;
 	opacity: var(--disabled-opacity);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-separator']:not([data-variant='unstyled']) {
 	margin-inline-start: 3%;
 	margin-block: 0.125rem;
 	height: 1px;
@@ -124,11 +144,13 @@
 	background: var(--separator);
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item-label']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item-label']:not([data-variant='unstyled']) {
 	min-width: 0;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-item-indicator']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='dropdown-menu-checkbox-item-indicator']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	height: 1rem;
 	width: 1rem;
@@ -149,7 +171,7 @@
 	overflow-y: auto;
 }
 
-[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='dropdown-menu-checkbox-check']:not([data-variant='unstyled']) {
 	display: block;
 	width: 0.375rem;
 	height: 0.625rem;
@@ -157,4 +179,3 @@
 	border-bottom: 2px solid currentColor;
 	transform: rotate(45deg) translateY(-1px);
 }
-

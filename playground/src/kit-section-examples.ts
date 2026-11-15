@@ -1090,10 +1090,7 @@ export const Example = () => {
  * Возвращает пример секции каталога с импортом текущего кита.
  * Если для заголовка нет примера, кнопку кода показывать не нужно.
  */
-export const getKitSectionExample = (
-	slug: string,
-	kitId: string,
-): string | null => {
+export const getKitSectionExample = (slug: string, kitId: string): string | null => {
 	const template = KIT_SECTION_EXAMPLES[slug]
 
 	if (template == null) {

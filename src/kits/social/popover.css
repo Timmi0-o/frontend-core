@@ -12,8 +12,12 @@
 	background: transparent;
 }
 
-[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='select-dropdown']),
-[data-ui-kit='social'] [data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='autocomplete-dropdown']) {
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has([data-slot='select-dropdown']),
+[data-ui-kit='social']
+	[data-slot='popover-content']:not([data-variant='unstyled']):has(
+		[data-slot='autocomplete-dropdown']
+	) {
 	overflow: hidden;
 	border-radius: var(--overlay-radius);
 	background: transparent;
@@ -87,4 +91,3 @@
 	font-size: 0.875rem;
 	overflow: hidden;
 }
-

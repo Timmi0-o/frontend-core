@@ -1,7 +1,9 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import { useMemo, type ReactElement } from 'react'
+
+import { cn } from '@/core/cn'
+
 import { Popover } from '../popover/popover'
 import { SelectClear } from './components/select-clear/select-clear'
 import { SelectDropdown } from './components/select-dropdown/select-dropdown'
@@ -10,10 +12,7 @@ import { SelectLabel } from './components/select-label/select-label'
 import { SelectOption } from './components/select-option/select-option'
 import { SelectTrigger } from './components/select-trigger/select-trigger'
 import { SelectValue } from './components/select-value/select-value'
-import {
-	SELECT_DISPLAY_NAMES,
-	SELECT_DROPDOWN_OFFSET_PX,
-} from './constants/select.constants'
+import { SELECT_DISPLAY_NAMES, SELECT_DROPDOWN_OFFSET_PX } from './constants/select.constants'
 import {
 	SelectChromeContext,
 	SelectInteractionContext,
@@ -59,9 +58,7 @@ export type SelectVariant = TSelectVariant
 export type SelectTone = TSelectTone
 export type SelectSelectionMode = TSelectSelectionMode
 
-const SelectRoot = <T extends string | number = string>(
-	props: ISelectProps<T>,
-): ReactElement => {
+const SelectRoot = <T extends string | number = string>(props: ISelectProps<T>): ReactElement => {
 	const {
 		options,
 		children,
@@ -142,15 +139,14 @@ const SelectRoot = <T extends string | number = string>(
 		[selectedItems, triggerLabel, isOptionSelected, handleSelect],
 	)
 
-	const { labelSlots, rest: popoverChildren } =
-		splitSelectLabelFromChildren(children)
+	const { labelSlots, rest: popoverChildren } = splitSelectLabelFromChildren(children)
 
 	return (
 		<SelectChromeContext.Provider value={chromeContextValue}>
 			<SelectInteractionContext.Provider value={interactionContextValue}>
 				<SelectSelectionContext.Provider value={selectionContextValue}>
 					<div
-						data-slot='select'
+						data-slot="select"
 						data-variant={variant}
 						data-disabled={isDisabled ? '' : undefined}
 						data-invalid={error ? '' : undefined}
@@ -168,7 +164,7 @@ const SelectRoot = <T extends string | number = string>(
 
 								setIsOpen(isNextOpen)
 							}}
-							placement='bottom-start'
+							placement="bottom-start"
 							offset={SELECT_DROPDOWN_OFFSET_PX}
 						>
 							{popoverChildren ?? (
@@ -184,7 +180,7 @@ const SelectRoot = <T extends string | number = string>(
 						</Popover>
 
 						{error ? (
-							<p data-slot='select-error' role='alert'>
+							<p data-slot="select-error" role="alert">
 								{error}
 							</p>
 						) : null}

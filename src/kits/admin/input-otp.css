@@ -23,9 +23,12 @@
 	outline-offset: 0;
 }
 
-[data-ui-kit='admin'] [data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-invalid][data-active] {
+[data-ui-kit='admin']
+	[data-slot='input-otp-slot']:not([data-variant='unstyled'])[data-invalid][data-active] {
 	outline: none;
-	box-shadow: var(--field-shadow), 0 0 0 2px var(--danger);
+	box-shadow:
+		var(--field-shadow),
+		0 0 0 2px var(--danger);
 }
 
 [data-ui-kit='admin'] [data-slot='input-otp-separator']:not([data-variant='unstyled']) {

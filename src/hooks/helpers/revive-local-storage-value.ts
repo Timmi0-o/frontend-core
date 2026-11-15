@@ -2,10 +2,7 @@
  * `JSON.parse` reviver: поднимает Set/Map/Date из мета-объектов,
  * которые записал `replaceLocalStorageValue`.
  */
-export const reviveLocalStorageValue = (
-	_key: string,
-	value: unknown,
-): unknown => {
+export const reviveLocalStorageValue = (_key: string, value: unknown): unknown => {
 	if (value === null || typeof value !== 'object') {
 		return value
 	}

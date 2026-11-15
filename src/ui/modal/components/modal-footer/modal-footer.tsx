@@ -1,8 +1,10 @@
 'use client'
 
+import type { ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { ReactElement, ReactNode } from 'react'
+
 import { MODAL_DISPLAY_NAMES } from '../../constants/modal.constants'
 
 /**
@@ -26,11 +28,7 @@ export const ModalFooter = ({
 	variant?: TSlotVariant
 }): ReactElement => {
 	return (
-		<div
-			data-slot='modal-footer'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="modal-footer" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)

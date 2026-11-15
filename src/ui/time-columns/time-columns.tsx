@@ -1,12 +1,13 @@
 'use client'
 
+import { useLayoutEffect, useRef, type ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { scrollElementToContainerCenter } from '@/ui/date-picker/utils/date-picker-date.util'
 import {
 	buildTimeColumnValues,
 	padTimeUnit,
 } from '@/ui/date-time-picker/utils/date-time-picker.util'
-import { useLayoutEffect, useRef, type ReactElement } from 'react'
 
 export interface ITimeColumnsProps {
 	hour: number
@@ -19,17 +20,12 @@ export interface ITimeColumnsProps {
 	className?: string
 }
 
-const scrollColumnToValue = (
-	container: HTMLDivElement | null,
-	value: number,
-): void => {
+const scrollColumnToValue = (container: HTMLDivElement | null, value: number): void => {
 	if (!container) {
 		return
 	}
 
-	const selected = container.querySelector(
-		`[data-value="${value}"]`,
-	) as HTMLElement | null
+	const selected = container.querySelector(`[data-value="${value}"]`) as HTMLElement | null
 
 	if (selected) {
 		scrollElementToContainerCenter(container, selected)
@@ -95,20 +91,16 @@ export const TimeColumns = ({
 	}, [hour, isMobile, isOpen, minute])
 
 	return (
-		<div
-			data-slot='date-time-picker-time-shell'
-			className={cn(className)}
-			aria-label='Time'
-		>
-			<div ref={hoursRef} data-slot='date-time-picker-time-column'>
+		<div data-slot="date-time-picker-time-shell" className={cn(className)} aria-label="Time">
+			<div ref={hoursRef} data-slot="date-time-picker-time-column">
 				{hours.map((value) => {
 					const isSelected = value === hour
 
 					return (
 						<button
 							key={value}
-							type='button'
-							data-slot='date-time-picker-time-option'
+							type="button"
+							data-slot="date-time-picker-time-option"
 							data-value={value}
 							data-selected={isSelected ? '' : undefined}
 							className={cn(isSelected && 'is-selected')}
@@ -119,15 +111,15 @@ export const TimeColumns = ({
 					)
 				})}
 			</div>
-			<div ref={minutesRef} data-slot='date-time-picker-time-column'>
+			<div ref={minutesRef} data-slot="date-time-picker-time-column">
 				{minutes.map((value) => {
 					const isSelected = value === minute
 
 					return (
 						<button
 							key={value}
-							type='button'
-							data-slot='date-time-picker-time-option'
+							type="button"
+							data-slot="date-time-picker-time-option"
 							data-value={value}
 							data-selected={isSelected ? '' : undefined}
 							className={cn(isSelected && 'is-selected')}

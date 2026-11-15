@@ -1,10 +1,8 @@
 'use client'
 
 import { useCallback, useMemo, useState } from 'react'
-import type {
-	IDatePickerProps,
-	TDatePickerViewMode,
-} from '../types/i-date-picker-props'
+
+import type { IDatePickerProps, TDatePickerViewMode } from '../types/i-date-picker-props'
 import {
 	formatDatePickerValue,
 	getCalendarDays,
@@ -21,73 +19,50 @@ import {
 import { resolveVisibleMonthCount } from '../utils/resolve-visible-month-count'
 
 export const useDatePicker = (props: IDatePickerProps) => {
-	const {
-		value,
-		onChange,
-		minDate,
-		maxDate,
-		locale = 'ru',
-		extendMonthCount,
-	} = props
+	const { value, onChange, minDate, maxDate, locale = 'ru', extendMonthCount } = props
 	const isDisabled = props.isDisabled === true
 	const closeOnSelect = props.closeOnSelect !== false
 	const visibleMonthCount = resolveVisibleMonthCount(extendMonthCount)
 
 	const [isOpen, setIsOpen] = useState(false)
 	const [viewMode, setViewMode] = useState<TDatePickerViewMode>('days')
-	const [visibleMonth, setVisibleMonth] = useState(() =>
-		startOfDay(value ?? new Date()),
-	)
+	const [visibleMonth, setVisibleMonth] = useState(() => startOfDay(value ?? new Date()))
 
-	const displayValue = useMemo(
-		() => formatDatePickerValue(value, locale),
-		[locale, value],
-	)
+	const displayValue = useMemo(() => formatDatePickerValue(value, locale), [locale, value])
 
-	const monthLabels = useMemo(
-		() => getDatePickerMonthLabels(locale),
-		[locale],
-	)
+	const monthLabels = useMemo(() => getDatePickerMonthLabels(locale), [locale])
 
-	const yearRange = useMemo(
-		() => getDatePickerYearRange(minDate, maxDate),
-		[maxDate, minDate],
-	)
+	const yearRange = useMemo(() => getDatePickerYearRange(minDate, maxDate), [maxDate, minDate])
 
-	const handleOpenChange = useCallback((isPopoverOpen: boolean): void => {
-		setIsOpen(isPopoverOpen)
+	const handleOpenChange = useCallback(
+		(isPopoverOpen: boolean): void => {
+			setIsOpen(isPopoverOpen)
 
-		if (!isPopoverOpen) {
+			if (!isPopoverOpen) {
+				setViewMode('days')
+				return
+			}
+
+			setVisibleMonth(startOfDay(value ?? new Date()))
 			setViewMode('days')
-			return
-		}
-
-		setVisibleMonth(startOfDay(value ?? new Date()))
-		setViewMode('days')
-	}, [value])
+		},
+		[value],
+	)
 
 	const handlePreviousMonth = useCallback((): void => {
-		setVisibleMonth(
-			(current) => new Date(current.getFullYear(), current.getMonth() - 1, 1),
-		)
+		setVisibleMonth((current) => new Date(current.getFullYear(), current.getMonth() - 1, 1))
 	}, [])
 
 	const handleNextMonth = useCallback((): void => {
-		setVisibleMonth(
-			(current) => new Date(current.getFullYear(), current.getMonth() + 1, 1),
-		)
+		setVisibleMonth((current) => new Date(current.getFullYear(), current.getMonth() + 1, 1))
 	}, [])
 
 	const handleToggleMonthPicker = useCallback((): void => {
-		setViewMode((currentViewMode) =>
-			currentViewMode === 'months' ? 'days' : 'months',
-		)
+		setViewMode((currentViewMode) => (currentViewMode === 'months' ? 'days' : 'months'))
 	}, [])
 
 	const handleToggleYearPicker = useCallback((): void => {
-		setViewMode((currentViewMode) =>
-			currentViewMode === 'years' ? 'days' : 'years',
-		)
+		setViewMode((currentViewMode) => (currentViewMode === 'years' ? 'days' : 'years'))
 	}, [])
 
 	const handleSelectMonth = useCallback((monthIndex: number): void => {
@@ -100,23 +75,26 @@ export const useDatePicker = (props: IDatePickerProps) => {
 		setViewMode('days')
 	}, [])
 
-	const handleShiftVisibleYear = useCallback((delta: number): void => {
-		setVisibleMonth((current) => {
-			const nextYear = current.getFullYear() + delta
-			const firstYear = yearRange[0]
-			const lastYear = yearRange[yearRange.length - 1]
+	const handleShiftVisibleYear = useCallback(
+		(delta: number): void => {
+			setVisibleMonth((current) => {
+				const nextYear = current.getFullYear() + delta
+				const firstYear = yearRange[0]
+				const lastYear = yearRange[yearRange.length - 1]
 
-			if (firstYear != null && nextYear < firstYear) {
-				return current
-			}
+				if (firstYear != null && nextYear < firstYear) {
+					return current
+				}
 
-			if (lastYear != null && nextYear > lastYear) {
-				return current
-			}
+				if (lastYear != null && nextYear > lastYear) {
+					return current
+				}
 
-			return new Date(nextYear, current.getMonth(), 1)
-		})
-	}, [yearRange])
+				return new Date(nextYear, current.getMonth(), 1)
+			})
+		},
+		[yearRange],
+	)
 
 	const isMonthDisabledByRange = useCallback(
 		(monthIndex: number): boolean =>
@@ -154,9 +132,7 @@ export const useDatePicker = (props: IDatePickerProps) => {
 
 			onChange?.(nextDay)
 			setVisibleMonth((current) =>
-				isDateInVisibleMonths(nextDay, current, visibleMonthCount)
-					? current
-					: nextDay,
+				isDateInVisibleMonths(nextDay, current, visibleMonthCount) ? current : nextDay,
 			)
 
 			if (closeOnSelect) {
@@ -192,10 +168,7 @@ export const useDatePicker = (props: IDatePickerProps) => {
 		return isSameDay(date, new Date())
 	}, [])
 
-	const getVisibleCalendarDays = useCallback(
-		(month: Date) => getCalendarDays(month),
-		[],
-	)
+	const getVisibleCalendarDays = useCallback((month: Date) => getCalendarDays(month), [])
 
 	return {
 		isOpen,

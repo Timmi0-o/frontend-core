@@ -28,14 +28,10 @@ export const abstractMutateAction = async <TBody, TData = unknown>(
 		isPublic,
 	})
 
-	const errorResult = await ErrorObjectSetup(
-		res,
-		requestWorkers.responseMapper,
-		{
-			resolveActionError: requestWorkers.resolveActionError,
-			onError: requestWorkers.onError,
-		},
-	)
+	const errorResult = await ErrorObjectSetup(res, requestWorkers.responseMapper, {
+		resolveActionError: requestWorkers.resolveActionError,
+		onError: requestWorkers.onError,
+	})
 
 	if (isForbiddenLogout) {
 		await requestWorkers.onForbiddenLogout?.()
@@ -50,8 +46,7 @@ export const abstractMutateAction = async <TBody, TData = unknown>(
 		? await requestWorkers.streamResponseParser(res)
 		: await res.json()
 
-	const formattedResponseData: IAppActionResponse<TData> =
-		requestWorkers.responseMapper(data)
+	const formattedResponseData: IAppActionResponse<TData> = requestWorkers.responseMapper(data)
 
 	return formattedResponseData
 }

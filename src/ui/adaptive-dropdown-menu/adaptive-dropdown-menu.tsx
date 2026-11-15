@@ -33,9 +33,7 @@ import type {
 
 const DEFAULT_SHEET_TITLE = 'Меню'
 
-type TMenuOpenChangeDetails = Parameters<
-	NonNullable<IDropdownMenuRootProps['onOpenChange']>
->[1]
+type TMenuOpenChangeDetails = Parameters<NonNullable<IDropdownMenuRootProps['onOpenChange']>>[1]
 
 type TCheckboxChangeDetails = Parameters<
 	NonNullable<IDropdownMenuCheckboxItemProps['onCheckedChange']>
@@ -54,10 +52,9 @@ const AdaptiveDropdownMenuSheetContext =
 /**
  * Контекст шторки. `null` на десктопе: части меню тогда делегируют в `DropdownMenu`.
  */
-const useAdaptiveDropdownMenuSheet =
-	(): IAdaptiveDropdownMenuSheetContextValue | null => {
-		return useContext(AdaptiveDropdownMenuSheetContext)
-	}
+const useAdaptiveDropdownMenuSheet = (): IAdaptiveDropdownMenuSheetContextValue | null => {
+	return useContext(AdaptiveDropdownMenuSheetContext)
+}
 
 const createNoneChangeDetails = (): TMenuOpenChangeDetails => {
 	return {
@@ -72,9 +69,7 @@ const createNoneChangeDetails = (): TMenuOpenChangeDetails => {
 	}
 }
 
-const createItemPressDetails = (
-	event: globalThis.MouseEvent,
-): TCheckboxChangeDetails => {
+const createItemPressDetails = (event: globalThis.MouseEvent): TCheckboxChangeDetails => {
 	return {
 		reason: 'item-press',
 		event,
@@ -106,13 +101,10 @@ const AdaptiveDropdownMenuSheetTrigger = ({
 	const sheet = useAdaptiveDropdownMenuSheet()
 	const isDisabled = disabled || sheet?.isDisabled === true
 	const triggerState = { open: sheet?.isOpen ?? false, disabled: isDisabled }
-	const resolvedClassName =
-		typeof className === 'function' ? className(triggerState) : className
+	const resolvedClassName = typeof className === 'function' ? className(triggerState) : className
 	const resolvedStyle = typeof style === 'function' ? style(triggerState) : style
 
-	const handleClick: NonNullable<IDropdownMenuTriggerProps['onClick']> = (
-		event,
-	) => {
+	const handleClick: NonNullable<IDropdownMenuTriggerProps['onClick']> = (event) => {
 		onClick?.(event)
 
 		if (event.defaultPrevented || isDisabled) {
@@ -145,9 +137,9 @@ const AdaptiveDropdownMenuSheetTrigger = ({
 			id={id}
 			className={resolvedClassName}
 			style={resolvedStyle}
-			type='button'
+			type="button"
 			disabled={isDisabled}
-			data-slot='dropdown-menu-trigger'
+			data-slot="dropdown-menu-trigger"
 			data-variant={variant}
 			onClick={handleButtonClick}
 		>
@@ -156,9 +148,7 @@ const AdaptiveDropdownMenuSheetTrigger = ({
 	)
 }
 
-const AdaptiveDropdownMenuTrigger = (
-	props: IDropdownMenuTriggerProps,
-): ReactElement => {
+const AdaptiveDropdownMenuTrigger = (props: IDropdownMenuTriggerProps): ReactElement => {
 	const sheet = useAdaptiveDropdownMenuSheet()
 
 	if (!sheet) {
@@ -188,16 +178,16 @@ const AdaptiveDropdownMenuSheetContent = ({
 			}}
 			title={typeof title === 'string' ? title : DEFAULT_SHEET_TITLE}
 			isMobileCondition={true}
-			height='auto'
+			height="auto"
 		>
 			<AdaptiveDialog.Content>
 				<AdaptiveDialog.Header>
 					<AdaptiveDialog.Title>{title}</AdaptiveDialog.Title>
 				</AdaptiveDialog.Header>
 				<div
-					data-slot='adaptive-dropdown-menu-sheet'
-					data-vaul-no-drag=''
-					role='menu'
+					data-slot="adaptive-dropdown-menu-sheet"
+					data-vaul-no-drag=""
+					role="menu"
 					className={cn(className)}
 				>
 					{children}
@@ -207,9 +197,7 @@ const AdaptiveDropdownMenuSheetContent = ({
 	)
 }
 
-const AdaptiveDropdownMenuContent = (
-	props: IDropdownMenuContentProps,
-): ReactElement => {
+const AdaptiveDropdownMenuContent = (props: IDropdownMenuContentProps): ReactElement => {
 	const sheet = useAdaptiveDropdownMenuSheet()
 
 	if (!sheet) {
@@ -262,9 +250,7 @@ const AdaptiveDropdownMenuSheetItem = ({
 	return <div {...controlProps}>{children}</div>
 }
 
-const AdaptiveDropdownMenuItem = (
-	props: IDropdownMenuItemProps,
-): ReactElement => {
+const AdaptiveDropdownMenuItem = (props: IDropdownMenuItemProps): ReactElement => {
 	const sheet = useAdaptiveDropdownMenuSheet()
 
 	if (!sheet) {
@@ -293,9 +279,7 @@ const AdaptiveDropdownMenuSheetCheckboxItem = ({
 	const resolvedClassName = typeof className === 'string' ? className : undefined
 	const resolvedStyle = style != null && typeof style !== 'function' ? style : undefined
 
-	const handleClick: NonNullable<IDropdownMenuCheckboxItemProps['onClick']> = (
-		event,
-	) => {
+	const handleClick: NonNullable<IDropdownMenuCheckboxItemProps['onClick']> = (event) => {
 		onClick?.(event)
 
 		if (event.defaultPrevented || disabled) {
@@ -317,9 +301,9 @@ const AdaptiveDropdownMenuSheetCheckboxItem = ({
 
 	const checkboxChildren = (
 		<>
-			<span data-slot='dropdown-menu-checkbox-item-label'>{children}</span>
-			<span data-slot='dropdown-menu-checkbox-item-indicator'>
-				{isChecked ? <span data-slot='dropdown-menu-checkbox-check' /> : null}
+			<span data-slot="dropdown-menu-checkbox-item-label">{children}</span>
+			<span data-slot="dropdown-menu-checkbox-item-indicator">
+				{isChecked ? <span data-slot="dropdown-menu-checkbox-check" /> : null}
 			</span>
 		</>
 	)
@@ -328,10 +312,10 @@ const AdaptiveDropdownMenuSheetCheckboxItem = ({
 		<div
 			id={id}
 			style={resolvedStyle}
-			role='menuitemcheckbox'
+			role="menuitemcheckbox"
 			tabIndex={disabled ? -1 : 0}
 			aria-checked={isChecked}
-			data-slot='dropdown-menu-checkbox-item'
+			data-slot="dropdown-menu-checkbox-item"
 			data-variant={variant}
 			data-disabled={disabled ? '' : undefined}
 			data-checked={isChecked ? '' : undefined}
@@ -345,9 +329,7 @@ const AdaptiveDropdownMenuSheetCheckboxItem = ({
 	)
 }
 
-const AdaptiveDropdownMenuCheckboxItem = (
-	props: IDropdownMenuCheckboxItemProps,
-): ReactElement => {
+const AdaptiveDropdownMenuCheckboxItem = (props: IDropdownMenuCheckboxItemProps): ReactElement => {
 	const sheet = useAdaptiveDropdownMenuSheet()
 
 	if (!sheet) {
@@ -370,9 +352,9 @@ const AdaptiveDropdownMenuSeparator = ({
 
 	return (
 		<div
-			data-slot='dropdown-menu-separator'
+			data-slot="dropdown-menu-separator"
 			data-variant={variant}
-			role='separator'
+			role="separator"
 			className={cn(className)}
 		/>
 	)
@@ -390,11 +372,7 @@ const AdaptiveDropdownMenuLabel = ({
 	}
 
 	return (
-		<div
-			data-slot='dropdown-menu-label'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="dropdown-menu-label" data-variant={variant} className={cn(className)}>
 			{props.children}
 		</div>
 	)
@@ -425,7 +403,7 @@ const AdaptiveDropdownMenuSection = ({
 	if (!sheet) {
 		return (
 			<MenuPrimitive.Group
-				data-slot='dropdown-menu-section'
+				data-slot="dropdown-menu-section"
 				data-variant={variant}
 				className={cn(className)}
 				{...props}
@@ -439,11 +417,7 @@ const AdaptiveDropdownMenuSection = ({
 	}
 
 	return (
-		<div
-			data-slot='dropdown-menu-section'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="dropdown-menu-section" data-variant={variant} className={cn(className)}>
 			{heading != null && heading !== '' ? (
 				<AdaptiveDropdownMenuLabel>{heading}</AdaptiveDropdownMenuLabel>
 			) : null}
@@ -492,7 +466,7 @@ const AdaptiveDropdownMenuMobile = ({
 			}}
 		>
 			<div
-				data-slot='dropdown-menu'
+				data-slot="dropdown-menu"
 				data-variant={variant}
 				data-disabled={disabled ? '' : undefined}
 			>

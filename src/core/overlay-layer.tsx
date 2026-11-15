@@ -32,8 +32,7 @@ const OverlayLayerContext = createContext<IOverlayLayer>({
 	floatingZ: OVERLAY_Z_BASE + OVERLAY_FLOATING_OFFSET,
 })
 
-export const useOverlayLayer = (): IOverlayLayer =>
-	useContext(OverlayLayerContext)
+export const useOverlayLayer = (): IOverlayLayer => useContext(OverlayLayerContext)
 
 const OpenOverlayZContext = createContext<number | null>(null)
 
@@ -80,8 +79,7 @@ const releaseOverlayStackId = (id: string): void => {
 	overlayStackIds.splice(index, 1)
 }
 
-const overlayZFromStackIndex = (index: number): number =>
-	OVERLAY_Z_BASE + index * OVERLAY_Z_STEP
+const overlayZFromStackIndex = (index: number): number => OVERLAY_Z_BASE + index * OVERLAY_Z_STEP
 
 const getTopOverlayZ = (): number => {
 	if (overlayStackIds.length === 0) {
@@ -144,11 +142,7 @@ export const OpenOverlayZProvider = ({
 }): ReactElement => {
 	const overlayZ = useOpenOverlayZ(isOpen)
 
-	return (
-		<OpenOverlayZContext.Provider value={overlayZ}>
-			{children}
-		</OpenOverlayZContext.Provider>
-	)
+	return <OpenOverlayZContext.Provider value={overlayZ}>{children}</OpenOverlayZContext.Provider>
 }
 
 /** z текущего оверлея: из OpenOverlayZProvider или из inherited-слоя. */
@@ -165,11 +159,7 @@ export const useActiveOverlayZ = (): number => {
  */
 export const useHasOverlayAbove = (): boolean => {
 	const overlayZ = useActiveOverlayZ()
-	const topOverlayZ = useSyncExternalStore(
-		subscribeOverlayStack,
-		getTopOverlayZ,
-		() => 0,
-	)
+	const topOverlayZ = useSyncExternalStore(subscribeOverlayStack, getTopOverlayZ, () => 0)
 
 	return topOverlayZ > overlayZ
 }
@@ -217,9 +207,7 @@ export const useGuardedOverlayOpenChange = (
 		(isNextOpen: boolean) => {
 			if (
 				!isNextOpen &&
-				(hasOverlayAbove ||
-					isDismissLockedRef.current ||
-					isOverlayParentDismissLocked())
+				(hasOverlayAbove || isDismissLockedRef.current || isOverlayParentDismissLocked())
 			) {
 				return
 			}
@@ -340,9 +328,5 @@ export const OverlayLayerProvider = ({
 		[overlayZ],
 	)
 
-	return (
-		<OverlayLayerContext.Provider value={value}>
-			{children}
-		</OverlayLayerContext.Provider>
-	)
+	return <OverlayLayerContext.Provider value={value}>{children}</OverlayLayerContext.Provider>
 }

@@ -1,21 +1,20 @@
 'use client'
 
+import type { ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { AdaptiveDialog } from '@/ui/adaptive-dialog/adaptive-dialog'
 import { CalendarView } from '@/ui/calendar/components/calendar-view/calendar-view'
-import { Popover } from '@/ui/popover/popover'
 import { startOfDay } from '@/ui/date-picker/utils/date-picker-date.util'
-import type { ReactNode } from 'react'
+import { Popover } from '@/ui/popover/popover'
 
 import { DATE_TIME_PICKER_DISPLAY_NAMES } from '../constants/date-time-picker.constants'
 import { useDateTimePickerContext } from '../context/date-time-picker-context'
 import type { IDateTimePickerPopoverProps } from '../types/i-date-time-picker-props'
 import { DateTimePickerTimeColumns } from './date-time-picker-time-columns'
 
-export const DateTimePickerPopover = ({
-	className,
-}: IDateTimePickerPopoverProps): ReactNode => {
+export const DateTimePickerPopover = ({ className }: IDateTimePickerPopoverProps): ReactNode => {
 	const {
 		placeholder,
 		isOpen,
@@ -53,13 +52,13 @@ export const DateTimePickerPopover = ({
 
 	const panel = (
 		<div
-			data-slot='date-time-picker-panel'
+			data-slot="date-time-picker-panel"
 			data-mobile={isMobile ? '' : undefined}
 			data-variant={variant}
 			className={cn(className)}
 		>
-			<div data-slot='date-time-picker-panel-body'>
-				<div data-slot='date-time-picker-calendar'>
+			<div data-slot="date-time-picker-panel-body">
+				<div data-slot="date-time-picker-calendar">
 					<CalendarView
 						variant={variant}
 						visibleMonth={visibleMonth}
@@ -91,13 +90,13 @@ export const DateTimePickerPopover = ({
 				</div>
 				<DateTimePickerTimeColumns />
 			</div>
-			<div data-slot='date-time-picker-footer'>
-				<button type='button' data-slot='date-time-picker-clear' onClick={handleClear}>
+			<div data-slot="date-time-picker-footer">
+				<button type="button" data-slot="date-time-picker-clear" onClick={handleClear}>
 					{clearLabel}
 				</button>
 				<button
-					type='button'
-					data-slot='date-time-picker-today'
+					type="button"
+					data-slot="date-time-picker-today"
 					disabled={isDateDisabled(startOfDay(new Date()))}
 					onClick={handleSelectToday}
 				>

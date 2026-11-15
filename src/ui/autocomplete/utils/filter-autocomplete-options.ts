@@ -14,7 +14,5 @@ export const filterAutocompleteOptions = <T extends string | number>(
 		return options
 	}
 
-	return options.filter((option) =>
-		option.label.toLowerCase().includes(normalizedQuery),
-	)
+	return options.filter((option) => option.label.toLowerCase().includes(normalizedQuery))
 }

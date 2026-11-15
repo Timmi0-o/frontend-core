@@ -1,10 +1,6 @@
 import type { MouseEvent, ReactElement } from 'react'
-import {
-	getKitImportPath,
-	KIT_OPTIONS,
-	serializeKitIds,
-	type TKitId,
-} from './kit-options'
+
+import { getKitImportPath, KIT_OPTIONS, serializeKitIds, type TKitId } from './kit-options'
 import { usePlaygroundLocation } from './location-context'
 
 const KIT_COMPONENT_NAMES = [
@@ -71,15 +67,15 @@ export const HomePage = (): ReactElement => {
 		}
 
 	return (
-		<main className='pg-main pg-main--home'>
-			<section className='pg-hero'>
-				<p className='pg-kicker'>Playground</p>
-				<h1 className='pg-hero__title'>UI-киты</h1>
-				<p className='pg-hero__lead'>
-					Общие примитивы из @timmi0-o/frontend-core на одном TSX. Внешний вид
-					задаёт CSS кита: Social или Admin.
+		<main className="pg-main pg-main--home">
+			<section className="pg-hero">
+				<p className="pg-kicker">Playground</p>
+				<h1 className="pg-hero__title">UI-киты</h1>
+				<p className="pg-hero__lead">
+					Общие примитивы из @timmi0-o/frontend-core на одном TSX. Внешний вид задаёт CSS кита:
+					Social или Admin.
 				</p>
-				<p className='pg-hero__meta'>
+				<p className="pg-hero__meta">
 					<a href={catalogHref} onClick={openHref(catalogHref)}>
 						Открыть каталог
 					</a>
@@ -89,28 +85,27 @@ export const HomePage = (): ReactElement => {
 				</p>
 			</section>
 
-			<section className='pg-section' aria-labelledby='kits-title' id='kits'>
-				<div className='pg-section__head'>
-					<h2 id='kits-title'>Киты</h2>
-					<p className='pg-section__lead'>
-						Один набор компонентов, разный CSS. В каталоге остаются только
-						выбранные киты.
+			<section className="pg-section" aria-labelledby="kits-title" id="kits">
+				<div className="pg-section__head">
+					<h2 id="kits-title">Киты</h2>
+					<p className="pg-section__lead">
+						Один набор компонентов, разный CSS. В каталоге остаются только выбранные киты.
 					</p>
 				</div>
 
-				<ul className='pg-kit-list'>
+				<ul className="pg-kit-list">
 					{KIT_OPTIONS.map((kit) => {
 						const href = buildKitsHref([kit.id])
 
 						return (
 							<li key={kit.id}>
 								<a href={href} onClick={openHref(href)}>
-									<div className='pg-kit-list__copy'>
+									<div className="pg-kit-list__copy">
 										<h3>{kit.title}</h3>
 										<code>{getKitImportPath(kit.id)}</code>
 										<p>{kit.hint}</p>
 									</div>
-									<span className='pg-kit-list__action'>Открыть</span>
+									<span className="pg-kit-list__action">Открыть</span>
 								</a>
 							</li>
 						)
@@ -118,12 +113,12 @@ export const HomePage = (): ReactElement => {
 				</ul>
 			</section>
 
-			<section className='pg-section' aria-labelledby='parts-title'>
-				<div className='pg-section__head pg-section__head--split'>
-					<h2 id='parts-title'>Компоненты</h2>
-					<p className='pg-section__count'>{KIT_COMPONENT_NAMES.length}</p>
+			<section className="pg-section" aria-labelledby="parts-title">
+				<div className="pg-section__head pg-section__head--split">
+					<h2 id="parts-title">Компоненты</h2>
+					<p className="pg-section__count">{KIT_COMPONENT_NAMES.length}</p>
 				</div>
-				<ul className='pg-tags'>
+				<ul className="pg-tags">
 					{KIT_COMPONENT_NAMES.map((name) => (
 						<li key={name}>{name}</li>
 					))}

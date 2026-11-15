@@ -1,5 +1,23 @@
 'use client'
 
+import 'swiper/css'
+import 'swiper/css/zoom'
+
+import { AnimatePresence, m, useMotionValue, useReducedMotion, useTransform } from 'framer-motion'
+import {
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+	type DragEvent as ReactDragEvent,
+	type MouseEvent as ReactMouseEvent,
+	type ReactElement,
+} from 'react'
+import { createPortal } from 'react-dom'
+import { A11y, Keyboard, Mousewheel, Zoom } from 'swiper/modules'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import type { Swiper as SwiperInstance } from 'swiper/types'
+
 import { cn } from '@/core/cn'
 import { overlayLayerStyle, useOpenOverlayZ } from '@/core/overlay-layer'
 import type { TSlotVariant } from '@/core/slot-variant'
@@ -7,8 +25,8 @@ import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import { useLockBodyScroll } from '@/hooks/use-lock-body-scroll'
 import { REDUCED_MOTION_TRANSITION } from '@/motion'
 import { useDismissLayerTransform } from '@/ui/photo-gallery/hooks/use-dismiss-layer-transform'
-import { usePhotoGalleryEdgeTap } from '@/ui/photo-gallery/hooks/use-photo-gallery-edge-tap'
 import { usePhotoGalleryDismissGesture } from '@/ui/photo-gallery/hooks/use-photo-gallery-dismiss-gesture'
+import { usePhotoGalleryEdgeTap } from '@/ui/photo-gallery/hooks/use-photo-gallery-edge-tap'
 import {
 	GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS,
 	GALLERY_OVERLAY_CHROME_TOP_VARIANTS,
@@ -24,28 +42,6 @@ import {
 	getMediaOverlayDismissChromeOpacity,
 	MEDIA_OVERLAY_DISMISS_ACTIVATE_PX,
 } from '@/ui/photo-gallery/utils/media-overlay-dismiss'
-import {
-	AnimatePresence,
-	m,
-	useMotionValue,
-	useReducedMotion,
-	useTransform,
-} from 'framer-motion'
-import {
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	type DragEvent as ReactDragEvent,
-	type MouseEvent as ReactMouseEvent,
-	type ReactElement,
-} from 'react'
-import { createPortal } from 'react-dom'
-import type { Swiper as SwiperInstance } from 'swiper/types'
-import { A11y, Keyboard, Mousewheel, Zoom } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/zoom'
 
 export type { IPhotoGalleryImage }
 
@@ -113,29 +109,20 @@ const resolvePhotoGalleryLabels = (
 		close: labels?.close ?? 'Закрыть',
 		prev: labels?.prev ?? 'Предыдущее фото',
 		next: labels?.next ?? 'Следующее фото',
-		imageAlt:
-			labels?.imageAlt ??
-			((current, total) => `Фото ${current} из ${total}`),
-		counter:
-			labels?.counter ?? ((current, total) => `${current} / ${total}`),
+		imageAlt: labels?.imageAlt ?? ((current, total) => `Фото ${current} из ${total}`),
+		counter: labels?.counter ?? ((current, total) => `${current} / ${total}`),
 	}
 }
 
 const DownloadIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='20'
-			height='20'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
 			<path
-				d='M12 3v12m0 0l-4-4m4 4l4-4M5 21h14'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -143,19 +130,13 @@ const DownloadIcon = (): ReactElement => {
 
 const CloseIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='20'
-			height='20'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
 			<path
-				d='M6 6l12 12M18 6L6 18'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M6 6l12 12M18 6L6 18"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -163,19 +144,13 @@ const CloseIcon = (): ReactElement => {
 
 const ChevronLeftIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='20'
-			height='20'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
 			<path
-				d='m15 18-6-6 6-6'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="m15 18-6-6 6-6"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -183,19 +158,13 @@ const ChevronLeftIcon = (): ReactElement => {
 
 const ChevronRightIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='20'
-			height='20'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true">
 			<path
-				d='m9 18 6-6-6-6'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="m9 18 6-6-6-6"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -208,24 +177,16 @@ const PhotoGalleryGrid = ({
 	variant = 'default',
 }: IPhotoGalleryGridProps): ReactElement => {
 	return (
-		<div
-			data-slot='photo-gallery-grid'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="photo-gallery-grid" data-variant={variant} className={cn(className)}>
 			{images.map((image, index) => (
 				<button
 					key={`${image.src}-${String(index)}`}
-					type='button'
-					data-slot='photo-gallery-thumb'
+					type="button"
+					data-slot="photo-gallery-thumb"
 					onClick={() => onSelect(index)}
 					aria-label={image.alt ?? `Открыть фото ${index + 1}`}
 				>
-					<img
-						data-slot='photo-gallery-thumb-image'
-						src={image.src}
-						alt=''
-					/>
+					<img data-slot="photo-gallery-thumb-image" src={image.src} alt="" />
 				</button>
 			))}
 		</div>
@@ -249,17 +210,14 @@ const PhotoGalleryOverlay = ({
 	const resolvedLabels = resolvePhotoGalleryLabels(labels)
 	const prefersReducedMotion = useReducedMotion()
 	const overlayMotion = galleryOverlayMotionProps(prefersReducedMotion)
-	const overlayEnterMotion =
-		galleryOverlayEnterMotionProps(prefersReducedMotion)
+	const overlayEnterMotion = galleryOverlayEnterMotionProps(prefersReducedMotion)
 
 	const overlayRef = useRef<HTMLDivElement | null>(null)
 	const swiperRef = useRef<SwiperInstance | null>(null)
 	const dragY = useMotionValue(0)
 	const backdropOpacity = useMotionValue(1)
 
-	const chromeOpacity = useTransform(dragY, (value) =>
-		getMediaOverlayDismissChromeOpacity(value),
-	)
+	const chromeOpacity = useTransform(dragY, (value) => getMediaOverlayDismissChromeOpacity(value))
 
 	const [isMounted, setIsMounted] = useState(false)
 	const stageRef = useDismissLayerTransform(dragY, open && isMounted)
@@ -268,17 +226,12 @@ const PhotoGalleryOverlay = ({
 	const [exitMode, setExitMode] = useState<'default' | 'gesture'>('default')
 
 	const total = images.length
-	const safeInitialIndex = Math.min(
-		Math.max(0, initialIndex),
-		Math.max(0, total - 1),
-	)
+	const safeInitialIndex = Math.min(Math.max(0, initialIndex), Math.max(0, total - 1))
 	const currentImage = images[activeIndex] ?? images[safeInitialIndex] ?? null
 	const isLeftSlideControlEnabled = slideControls?.left?.isEnabled ?? true
 	const isRightSlideControlEnabled = slideControls?.right?.isEnabled ?? true
-	const isLeftSlideControlVisible =
-		isLeftSlideControlEnabled && activeIndex > 0
-	const isRightSlideControlVisible =
-		isRightSlideControlEnabled && activeIndex < total - 1
+	const isLeftSlideControlVisible = isLeftSlideControlEnabled && activeIndex > 0
+	const isRightSlideControlVisible = isRightSlideControlEnabled && activeIndex < total - 1
 
 	useLockBodyScroll(open)
 
@@ -398,9 +351,9 @@ const PhotoGalleryOverlay = ({
 					<AnimatePresence onExitComplete={handleExitComplete}>
 						{open ? (
 							<m.div
-								key='photo-gallery-overlay'
+								key="photo-gallery-overlay"
 								data-ui-kit={uiKit}
-								data-slot='photo-gallery-host'
+								data-slot="photo-gallery-host"
 								style={{
 									...overlayLayerStyle(overlayZ),
 									zIndex: overlayZ,
@@ -409,8 +362,8 @@ const PhotoGalleryOverlay = ({
 								}}
 								onContextMenu={blockContextMenu}
 								variants={GALLERY_OVERLAY_ROOT_VARIANTS}
-								initial='initial'
-								animate='animate'
+								initial="initial"
+								animate="animate"
 								exit={
 									exitMode === 'gesture'
 										? {
@@ -421,151 +374,138 @@ const PhotoGalleryOverlay = ({
 										: 'exit'
 								}
 								transition={
-									prefersReducedMotion
-										? REDUCED_MOTION_TRANSITION
-										: overlayMotion.transition
+									prefersReducedMotion ? REDUCED_MOTION_TRANSITION : overlayMotion.transition
 								}
 							>
 								<div
 									ref={overlayRef}
-									data-slot='photo-gallery-root'
+									data-slot="photo-gallery-root"
 									data-variant={variant}
 									className={cn(className)}
-									role='dialog'
+									role="dialog"
 									aria-modal
 									aria-label={resolvedLabels.title}
 								>
-								<m.div
-									data-slot='photo-gallery-backdrop'
-									style={{ opacity: backdropOpacity }}
-									aria-hidden
-								/>
+									<m.div
+										data-slot="photo-gallery-backdrop"
+										style={{ opacity: backdropOpacity }}
+										aria-hidden
+									/>
 
-								<h2 data-slot='photo-gallery-title'>
-									{resolvedLabels.title}
-								</h2>
+									<h2 data-slot="photo-gallery-title">{resolvedLabels.title}</h2>
 
-								<m.div
-									data-slot='photo-gallery-header'
-									variants={GALLERY_OVERLAY_CHROME_TOP_VARIANTS}
-									{...overlayEnterMotion}
-									style={{ opacity: chromeOpacity }}
-								>
-									<span data-slot='photo-gallery-header-spacer' aria-hidden />
-									<div data-slot='photo-gallery-header-side'>
-										<button
-											type='button'
-											data-slot='photo-gallery-icon-button'
-											onClick={() => void handleDownload()}
-											disabled={!currentImage || isDownloading}
-											aria-label={resolvedLabels.download}
-										>
-											<DownloadIcon />
-										</button>
-										<button
-											type='button'
-											data-slot='photo-gallery-icon-button'
-											onClick={close}
-											aria-label={resolvedLabels.close}
-										>
-											<CloseIcon />
-										</button>
-									</div>
-								</m.div>
-
-								<div
-									ref={stageRef}
-									data-slot='photo-gallery-stage'
-								>
-									<Swiper
-										key={`gallery-${String(safeInitialIndex)}-${String(total)}`}
-										data-slot='photo-gallery-swiper'
-										modules={[A11y, Keyboard, Mousewheel, Zoom]}
-										initialSlide={safeInitialIndex}
-										slidesPerView={1}
-										spaceBetween={0}
-										threshold={MEDIA_OVERLAY_DISMISS_ACTIVATE_PX}
-										touchStartPreventDefault={false}
-										touchAngle={90}
-										zoom={{
-											maxRatio: 3,
-											minRatio: 1,
-											toggle: true,
-										}}
-										keyboard={{ enabled: true }}
-										mousewheel={{
-											forceToAxis: true,
-										}}
-										a11y={{
-											prevSlideMessage: resolvedLabels.prev,
-											nextSlideMessage: resolvedLabels.next,
-										}}
-										onSwiper={(swiper: SwiperInstance) => {
-											swiperRef.current = swiper
-										}}
-										onSlideChange={(swiper: SwiperInstance) => {
-											setActiveIndex(swiper.activeIndex)
-											swiper.zoom.out()
-											dragY.set(0)
-											backdropOpacity.set(1)
-										}}
+									<m.div
+										data-slot="photo-gallery-header"
+										variants={GALLERY_OVERLAY_CHROME_TOP_VARIANTS}
+										{...overlayEnterMotion}
+										style={{ opacity: chromeOpacity }}
 									>
-										{images.map((image, index) => (
-											<SwiperSlide key={`${image.src}-${String(index)}`}>
-												<div
-													className='swiper-zoom-container'
-													data-slot='photo-gallery-zoom'
-												>
-													<img
-														src={image.src}
-														alt={
-															image.alt ??
-															resolvedLabels.imageAlt(index + 1, total)
-														}
-														data-slot='photo-gallery-image'
-														draggable={false}
-														onDragStart={blockNativeDrag}
-													/>
-												</div>
-											</SwiperSlide>
-										))}
-									</Swiper>
+										<span data-slot="photo-gallery-header-spacer" aria-hidden />
+										<div data-slot="photo-gallery-header-side">
+											<button
+												type="button"
+												data-slot="photo-gallery-icon-button"
+												onClick={() => void handleDownload()}
+												disabled={!currentImage || isDownloading}
+												aria-label={resolvedLabels.download}
+											>
+												<DownloadIcon />
+											</button>
+											<button
+												type="button"
+												data-slot="photo-gallery-icon-button"
+												onClick={close}
+												aria-label={resolvedLabels.close}
+											>
+												<CloseIcon />
+											</button>
+										</div>
+									</m.div>
 
-									{isLeftSlideControlVisible ? (
-										<button
-											type='button'
-											data-slot='photo-gallery-slide-zone'
-											data-side='left'
-											onClick={goToPreviousSlide}
-											aria-label={resolvedLabels.prev}
+									<div ref={stageRef} data-slot="photo-gallery-stage">
+										<Swiper
+											key={`gallery-${String(safeInitialIndex)}-${String(total)}`}
+											data-slot="photo-gallery-swiper"
+											modules={[A11y, Keyboard, Mousewheel, Zoom]}
+											initialSlide={safeInitialIndex}
+											slidesPerView={1}
+											spaceBetween={0}
+											threshold={MEDIA_OVERLAY_DISMISS_ACTIVATE_PX}
+											touchStartPreventDefault={false}
+											touchAngle={90}
+											zoom={{
+												maxRatio: 3,
+												minRatio: 1,
+												toggle: true,
+											}}
+											keyboard={{ enabled: true }}
+											mousewheel={{
+												forceToAxis: true,
+											}}
+											a11y={{
+												prevSlideMessage: resolvedLabels.prev,
+												nextSlideMessage: resolvedLabels.next,
+											}}
+											onSwiper={(swiper: SwiperInstance) => {
+												swiperRef.current = swiper
+											}}
+											onSlideChange={(swiper: SwiperInstance) => {
+												setActiveIndex(swiper.activeIndex)
+												swiper.zoom.out()
+												dragY.set(0)
+												backdropOpacity.set(1)
+											}}
 										>
-											<ChevronLeftIcon />
-										</button>
-									) : null}
+											{images.map((image, index) => (
+												<SwiperSlide key={`${image.src}-${String(index)}`}>
+													<div className="swiper-zoom-container" data-slot="photo-gallery-zoom">
+														<img
+															src={image.src}
+															alt={image.alt ?? resolvedLabels.imageAlt(index + 1, total)}
+															data-slot="photo-gallery-image"
+															draggable={false}
+															onDragStart={blockNativeDrag}
+														/>
+													</div>
+												</SwiperSlide>
+											))}
+										</Swiper>
 
-									{isRightSlideControlVisible ? (
-										<button
-											type='button'
-											data-slot='photo-gallery-slide-zone'
-											data-side='right'
-											onClick={goToNextSlide}
-											aria-label={resolvedLabels.next}
-										>
-											<ChevronRightIcon />
-										</button>
-									) : null}
-								</div>
+										{isLeftSlideControlVisible ? (
+											<button
+												type="button"
+												data-slot="photo-gallery-slide-zone"
+												data-side="left"
+												onClick={goToPreviousSlide}
+												aria-label={resolvedLabels.prev}
+											>
+												<ChevronLeftIcon />
+											</button>
+										) : null}
 
-								<m.div
-									data-slot='photo-gallery-footer'
-									variants={GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS}
-									{...overlayEnterMotion}
-									style={{ opacity: chromeOpacity }}
-								>
-									<span data-slot='photo-gallery-counter'>
-										{resolvedLabels.counter(activeIndex + 1, total)}
-									</span>
-								</m.div>
+										{isRightSlideControlVisible ? (
+											<button
+												type="button"
+												data-slot="photo-gallery-slide-zone"
+												data-side="right"
+												onClick={goToNextSlide}
+												aria-label={resolvedLabels.next}
+											>
+												<ChevronRightIcon />
+											</button>
+										) : null}
+									</div>
+
+									<m.div
+										data-slot="photo-gallery-footer"
+										variants={GALLERY_OVERLAY_CHROME_BOTTOM_VARIANTS}
+										{...overlayEnterMotion}
+										style={{ opacity: chromeOpacity }}
+									>
+										<span data-slot="photo-gallery-counter">
+											{resolvedLabels.counter(activeIndex + 1, total)}
+										</span>
+									</m.div>
 								</div>
 							</m.div>
 						) : null}

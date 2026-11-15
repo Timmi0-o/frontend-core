@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useEffect, useRef, type RefObject } from 'react'
+
 import type {
 	TScrollShadowOrientation,
 	TScrollShadowVisibility,
@@ -133,12 +134,7 @@ export const useScrollShadow = ({
 	useEffect(() => {
 		const element = containerRef.current
 
-		if (
-			!element ||
-			!isEnabled ||
-			visibility !== 'auto' ||
-			supportsScrollTimeline()
-		) {
+		if (!element || !isEnabled || visibility !== 'auto' || supportsScrollTimeline()) {
 			return
 		}
 

@@ -9,9 +9,7 @@ export const useLocation = (): {
 	search: string
 	navigate: (to: string, options?: { replace?: boolean }) => void
 } => {
-	const [href, setHref] = useState(
-		() => `${window.location.pathname}${window.location.search}`,
-	)
+	const [href, setHref] = useState(() => `${window.location.pathname}${window.location.search}`)
 
 	useEffect(() => {
 		const sync = (): void => {

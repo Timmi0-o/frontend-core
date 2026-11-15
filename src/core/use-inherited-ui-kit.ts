@@ -15,9 +15,7 @@ export const useInheritedUiKit = (): {
 	const [uiKit, setUiKit] = useState<string>()
 
 	useLayoutEffect(() => {
-		const kit = hostRef.current
-			?.closest('[data-ui-kit]')
-			?.getAttribute('data-ui-kit')
+		const kit = hostRef.current?.closest('[data-ui-kit]')?.getAttribute('data-ui-kit')
 
 		if (kit) {
 			setUiKit(kit)

@@ -1,6 +1,5 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import {
 	forwardRef,
 	useCallback,
@@ -9,6 +8,9 @@ import {
 	type CSSProperties,
 	type ReactElement,
 } from 'react'
+
+import { cn } from '@/core/cn'
+
 import { useScrollShadow } from './hooks/use-scroll-shadow'
 import type { IScrollShadowProps } from './types/i-scroll-shadow-props'
 
@@ -62,9 +64,7 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 			delete element.dataset.leftRightScroll
 
 			if (visibility === 'both') {
-				element.dataset[
-					orientation === 'vertical' ? 'topBottomScroll' : 'leftRightScroll'
-				] = 'true'
+				element.dataset[orientation === 'vertical' ? 'topBottomScroll' : 'leftRightScroll'] = 'true'
 			} else if (visibility !== 'none') {
 				element.dataset[`${visibility}Scroll`] = 'true'
 			}
@@ -96,7 +96,7 @@ const ScrollShadowRoot = forwardRef<HTMLDivElement, IScrollShadowProps>(
 		return (
 			<div
 				ref={handleRef}
-				data-slot='scroll-shadow'
+				data-slot="scroll-shadow"
 				data-variant={variant}
 				data-orientation={orientation}
 				data-scroll-shadow-mode={isEnabled && visibility === 'auto' ? 'auto' : 'manual'}

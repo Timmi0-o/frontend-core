@@ -15,10 +15,8 @@ import {
 
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import {
-	useMobileCondition,
-	type TMobileCondition,
-} from '@/hooks/use-mobile-condition'
+import { useMobileCondition, type TMobileCondition } from '@/hooks/use-mobile-condition'
+
 import { BottomSheet, type TBottomSheetVariant } from '../modal/bottom-sheet/bottom-sheet'
 import { ModalBody } from '../modal/components/modal-body/modal-body'
 import { ModalFooter } from '../modal/components/modal-footer/modal-footer'
@@ -43,9 +41,7 @@ interface IAdaptiveDialogContextValue {
 	hasMounted: boolean
 }
 
-const AdaptiveDialogContext = createContext<IAdaptiveDialogContextValue | null>(
-	null,
-)
+const AdaptiveDialogContext = createContext<IAdaptiveDialogContextValue | null>(null)
 
 /**
  * Читает режим AdaptiveDialog (модал vs шторка).
@@ -55,9 +51,7 @@ export const useAdaptiveDialog = (): IAdaptiveDialogContextValue => {
 	const context = useContext(AdaptiveDialogContext)
 
 	if (!context) {
-		throw new Error(
-			'AdaptiveDialog compound components must be used within AdaptiveDialog',
-		)
+		throw new Error('AdaptiveDialog compound components must be used within AdaptiveDialog')
 	}
 
 	return context
@@ -118,16 +112,7 @@ const AdaptiveDialogRoot = ({
 			height,
 			hasMounted,
 		}),
-		[
-			handleOpenChange,
-			hasMounted,
-			height,
-			isMobile,
-			isOpen,
-			shell,
-			title,
-			variant,
-		],
+		[handleOpenChange, hasMounted, height, isMobile, isOpen, shell, title, variant],
 	)
 
 	useEffect(() => {
@@ -135,9 +120,7 @@ const AdaptiveDialogRoot = ({
 	}, [])
 
 	return (
-		<AdaptiveDialogContext.Provider value={contextValue}>
-			{children}
-		</AdaptiveDialogContext.Provider>
+		<AdaptiveDialogContext.Provider value={contextValue}>{children}</AdaptiveDialogContext.Provider>
 	)
 }
 
@@ -236,9 +219,7 @@ const AdaptiveDialogHeader = ({
 	const { shell } = useAdaptiveDialog()
 
 	if (shell === 'sheet') {
-		return (
-			<BottomSheet.Header className={className}>{children}</BottomSheet.Header>
-		)
+		return <BottomSheet.Header className={className}>{children}</BottomSheet.Header>
 	}
 
 	if (shell === 'drawer') {
@@ -294,9 +275,7 @@ const AdaptiveDialogFooter = ({
 	const { shell } = useAdaptiveDialog()
 
 	if (shell === 'sheet') {
-		return (
-			<BottomSheet.Footer className={className}>{children}</BottomSheet.Footer>
-		)
+		return <BottomSheet.Footer className={className}>{children}</BottomSheet.Footer>
 	}
 
 	if (shell === 'drawer') {
@@ -325,7 +304,7 @@ const AdaptiveDialogTitle = ({
 
 	if (shell === 'sheet') {
 		return (
-			<h2 data-slot='modal-title' data-variant={variant} className={className}>
+			<h2 data-slot="modal-title" data-variant={variant} className={className}>
 				{children}
 			</h2>
 		)
@@ -360,11 +339,7 @@ const AdaptiveDialogDescription = ({
 	const { shell } = useAdaptiveDialog()
 
 	if (shell === 'sheet') {
-		return (
-			<BottomSheet.Description className={className}>
-				{children}
-			</BottomSheet.Description>
-		)
+		return <BottomSheet.Description className={className}>{children}</BottomSheet.Description>
 	}
 
 	if (shell === 'drawer') {
@@ -412,9 +387,7 @@ const AdaptiveDialogClose = ({
 	const { shell } = useAdaptiveDialog()
 
 	if (shell === 'sheet') {
-		return (
-			<BottomSheet.Close className={className}>{children}</BottomSheet.Close>
-		)
+		return <BottomSheet.Close className={className}>{children}</BottomSheet.Close>
 	}
 
 	if (shell === 'drawer') {
@@ -444,22 +417,14 @@ const AdaptiveDialogCloseButton = ({
 
 	if (shell === 'drawer') {
 		return (
-			<Drawer.CloseButton
-				className={className}
-				variant={variant}
-				aria-label={ariaLabel}
-			>
+			<Drawer.CloseButton className={className} variant={variant} aria-label={ariaLabel}>
 				{children}
 			</Drawer.CloseButton>
 		)
 	}
 
 	return (
-		<Modal.CloseButton
-			className={className}
-			variant={variant}
-			aria-label={ariaLabel}
-		>
+		<Modal.CloseButton className={className} variant={variant} aria-label={ariaLabel}>
 			{children}
 		</Modal.CloseButton>
 	)
@@ -498,17 +463,14 @@ type TAdaptiveDialogComponent = typeof AdaptiveDialogRoot & {
  * </AdaptiveDialog>
  * ```
  */
-export const AdaptiveDialog: TAdaptiveDialogComponent = Object.assign(
-	AdaptiveDialogRoot,
-	{
-		Trigger: AdaptiveDialogTrigger,
-		Close: AdaptiveDialogClose,
-		CloseButton: AdaptiveDialogCloseButton,
-		Content: AdaptiveDialogContent,
-		Header: AdaptiveDialogHeader,
-		Body: AdaptiveDialogBody,
-		Footer: AdaptiveDialogFooter,
-		Title: AdaptiveDialogTitle,
-		Description: AdaptiveDialogDescription,
-	},
-)
+export const AdaptiveDialog: TAdaptiveDialogComponent = Object.assign(AdaptiveDialogRoot, {
+	Trigger: AdaptiveDialogTrigger,
+	Close: AdaptiveDialogClose,
+	CloseButton: AdaptiveDialogCloseButton,
+	Content: AdaptiveDialogContent,
+	Header: AdaptiveDialogHeader,
+	Body: AdaptiveDialogBody,
+	Footer: AdaptiveDialogFooter,
+	Title: AdaptiveDialogTitle,
+	Description: AdaptiveDialogDescription,
+})

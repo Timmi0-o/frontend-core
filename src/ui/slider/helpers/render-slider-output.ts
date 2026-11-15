@@ -8,9 +8,7 @@ export function renderSliderOutput(
 	values: readonly number[],
 ): string {
 	if (formatValue) {
-		return values
-			.map((item, index) => formatValue(item, index))
-			.join(' – ')
+		return values.map((item, index) => formatValue(item, index)).join(' – ')
 	}
 
 	return formattedValues.join(' – ')

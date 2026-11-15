@@ -30,16 +30,9 @@ const DropdownMenuRoot = ({
 	const { hostRef, uiKit } = useInheritedUiKit()
 
 	return (
-		<MenuPrimitive.Root
-			data-slot='dropdown-menu'
-			data-variant={variant}
-			modal={modal}
-			{...props}
-		>
+		<MenuPrimitive.Root data-slot="dropdown-menu" data-variant={variant} modal={modal} {...props}>
 			<span ref={hostRef} hidden />
-			<Context.Provider value={{ uiKit }}>
-				{children as ReactNode}
-			</Context.Provider>
+			<Context.Provider value={{ uiKit }}>{children as ReactNode}</Context.Provider>
 		</MenuPrimitive.Root>
 	)
 }
@@ -53,20 +46,14 @@ const DropdownMenuTrigger = ({
 	...props
 }: IDropdownMenuTriggerProps): ReactNode => {
 	return (
-		<MenuPrimitive.Trigger
-			data-slot='dropdown-menu-trigger'
-			data-variant={variant}
-			{...props}
-		/>
+		<MenuPrimitive.Trigger data-slot="dropdown-menu-trigger" data-variant={variant} {...props} />
 	)
 }
 
 export interface IDropdownMenuContentProps
-	extends MenuPrimitive.Popup.Props,
-		Pick<
-			MenuPrimitive.Positioner.Props,
-			'align' | 'alignOffset' | 'side' | 'sideOffset'
-		> {
+	extends
+		MenuPrimitive.Popup.Props,
+		Pick<MenuPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -81,14 +68,13 @@ const DropdownMenuContent = ({
 	...props
 }: IDropdownMenuContentProps): ReactNode => {
 	const { uiKit } = useCompoundContext()
-	const { ref: positionerRef, style: positionerStyle } =
-		useFloatingPositionerProps()
+	const { ref: positionerRef, style: positionerStyle } = useFloatingPositionerProps()
 
 	return (
 		<MenuPrimitive.Portal>
 			<MenuPrimitive.Positioner
 				ref={positionerRef}
-				data-slot='dropdown-menu-positioner'
+				data-slot="dropdown-menu-positioner"
 				data-ui-kit={uiKit}
 				style={positionerStyle}
 				align={align}
@@ -97,7 +83,7 @@ const DropdownMenuContent = ({
 				sideOffset={sideOffset}
 			>
 				<MenuPrimitive.Popup
-					data-slot='dropdown-menu-content'
+					data-slot="dropdown-menu-content"
 					data-variant={variant}
 					className={cn(className)}
 					{...props}
@@ -122,7 +108,7 @@ const DropdownMenuItem = ({
 	return (
 		<MenuPrimitive.Item
 			{...props}
-			data-slot='dropdown-menu-item'
+			data-slot="dropdown-menu-item"
 			data-inset={inset ? '' : undefined}
 			data-variant={variant}
 			className={cn(className)}
@@ -130,8 +116,7 @@ const DropdownMenuItem = ({
 	)
 }
 
-export interface IDropdownMenuSeparatorProps
-	extends MenuPrimitive.Separator.Props {
+export interface IDropdownMenuSeparatorProps extends MenuPrimitive.Separator.Props {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -143,7 +128,7 @@ const DropdownMenuSeparator = ({
 }: IDropdownMenuSeparatorProps): ReactNode => {
 	return (
 		<MenuPrimitive.Separator
-			data-slot='dropdown-menu-separator'
+			data-slot="dropdown-menu-separator"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -167,7 +152,7 @@ const DropdownMenuLabel = ({
 }: IDropdownMenuLabelProps): ReactNode => {
 	return (
 		<MenuPrimitive.GroupLabel
-			data-slot='dropdown-menu-label'
+			data-slot="dropdown-menu-label"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -175,8 +160,7 @@ const DropdownMenuLabel = ({
 	)
 }
 
-export interface IDropdownMenuCheckboxItemProps
-	extends MenuPrimitive.CheckboxItem.Props {
+export interface IDropdownMenuCheckboxItemProps extends MenuPrimitive.CheckboxItem.Props {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -189,14 +173,14 @@ const DropdownMenuCheckboxItem = ({
 }: IDropdownMenuCheckboxItemProps): ReactNode => {
 	return (
 		<MenuPrimitive.CheckboxItem
-			data-slot='dropdown-menu-checkbox-item'
+			data-slot="dropdown-menu-checkbox-item"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
 		>
-			<span data-slot='dropdown-menu-checkbox-item-label'>{children}</span>
-			<MenuPrimitive.CheckboxItemIndicator data-slot='dropdown-menu-checkbox-item-indicator'>
-				<span data-slot='dropdown-menu-checkbox-check' />
+			<span data-slot="dropdown-menu-checkbox-item-label">{children}</span>
+			<MenuPrimitive.CheckboxItemIndicator data-slot="dropdown-menu-checkbox-item-indicator">
+				<span data-slot="dropdown-menu-checkbox-check" />
 			</MenuPrimitive.CheckboxItemIndicator>
 		</MenuPrimitive.CheckboxItem>
 	)
@@ -211,8 +195,10 @@ export type TDropdownMenuSectionChild =
 	| null
 	| undefined
 
-export interface IDropdownMenuSectionProps
-	extends Omit<MenuPrimitive.Group.Props, 'title' | 'children'> {
+export interface IDropdownMenuSectionProps extends Omit<
+	MenuPrimitive.Group.Props,
+	'title' | 'children'
+> {
 	title?: ReactNode
 	/** @deprecated Используй `title` */
 	label?: ReactNode
@@ -235,12 +221,7 @@ const DropdownMenuSection = ({
 }: IDropdownMenuSectionProps): ReactNode => {
 	assertMenuSectionChildren(
 		children,
-		[
-			DropdownMenuItem,
-			DropdownMenuSeparator,
-			DropdownMenuCheckboxItem,
-			DropdownMenuLabel,
-		],
+		[DropdownMenuItem, DropdownMenuSeparator, DropdownMenuCheckboxItem, DropdownMenuLabel],
 		'DropdownMenu.Section',
 	)
 
@@ -248,14 +229,12 @@ const DropdownMenuSection = ({
 
 	return (
 		<MenuPrimitive.Group
-			data-slot='dropdown-menu-section'
+			data-slot="dropdown-menu-section"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
 		>
-			{heading != null && heading !== '' ? (
-				<DropdownMenuLabel>{heading}</DropdownMenuLabel>
-			) : null}
+			{heading != null && heading !== '' ? <DropdownMenuLabel>{heading}</DropdownMenuLabel> : null}
 			{children}
 		</MenuPrimitive.Group>
 	)

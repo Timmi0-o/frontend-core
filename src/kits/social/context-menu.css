@@ -1,9 +1,11 @@
-[data-ui-kit='social'] [data-slot='context-menu-content']:not([data-variant='unstyled'])[data-open] {
+[data-ui-kit='social']
+	[data-slot='context-menu-content']:not([data-variant='unstyled'])[data-open] {
 	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
 		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='social'] [data-slot='context-menu-content']:not([data-variant='unstyled'])[data-ending-style] {
+[data-ui-kit='social']
+	[data-slot='context-menu-content']:not([data-variant='unstyled'])[data-ending-style] {
 	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
 		var(--motion-easing-overlay-surface-exit) both;
 }

@@ -28,7 +28,8 @@
 		var(--motion-easing-overlay-surface-enter) both;
 }
 
-[data-ui-kit='social'] [data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style] {
+[data-ui-kit='social']
+	[data-slot='tooltip-content']:not([data-variant='unstyled'])[data-ending-style] {
 	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
 		var(--motion-easing-overlay-surface-exit) both;
 }
@@ -42,4 +43,3 @@
 	border-right: 1px solid var(--glass-border);
 	border-bottom: 1px solid var(--glass-border);
 }
-

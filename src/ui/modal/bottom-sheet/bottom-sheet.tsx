@@ -1,5 +1,17 @@
 'use client'
 
+import {
+	createContext,
+	forwardRef,
+	useCallback,
+	useContext,
+	type ComponentProps,
+	type CSSProperties,
+	type ReactElement,
+	type ReactNode,
+} from 'react'
+import { Drawer as DrawerPrimitive } from 'vaul'
+
 import { cn } from '@/core/cn'
 import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
 import {
@@ -13,22 +25,10 @@ import {
 } from '@/core/overlay-layer'
 import type { WithUnstyledVariant } from '@/core/slot-variant'
 import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
-import {
-	createContext,
-	forwardRef,
-	useCallback,
-	useContext,
-	type ComponentProps,
-	type CSSProperties,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
-import { Drawer as DrawerPrimitive } from 'vaul'
 
 const BottomSheetKitContext = createContext<string | undefined>(undefined)
 
-const useBottomSheetUiKit = (): string | undefined =>
-	useContext(BottomSheetKitContext)
+const useBottomSheetUiKit = (): string | undefined => useContext(BottomSheetKitContext)
 
 export type TBottomSheetVariant = WithUnstyledVariant<'default' | 'secondary'>
 
@@ -90,7 +90,7 @@ function BottomSheetGuardedRoot({
 	return (
 		<BottomSheetKitContext.Provider value={uiKit}>
 			<DrawerPrimitive.Root
-				data-slot='bottom-sheet'
+				data-slot="bottom-sheet"
 				dismissible={dismissible && !hasOverlayAbove}
 				onOpenChange={handleOpenChange}
 				{...props}
@@ -105,7 +105,7 @@ function BottomSheetGuardedRoot({
 function BottomSheetTrigger({
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Trigger>): ReactElement {
-	return <DrawerPrimitive.Trigger data-slot='bottom-sheet-trigger' {...props} />
+	return <DrawerPrimitive.Trigger data-slot="bottom-sheet-trigger" {...props} />
 }
 
 function BottomSheetPortal({
@@ -121,7 +121,7 @@ function BottomSheetPortal({
 
 	return (
 		<DrawerPrimitive.Portal
-			data-slot='bottom-sheet-portal'
+			data-slot="bottom-sheet-portal"
 			{...props}
 			container={resolvedContainer}
 		/>
@@ -131,7 +131,7 @@ function BottomSheetPortal({
 function BottomSheetClose({
 	...props
 }: ComponentProps<typeof DrawerPrimitive.Close>): ReactElement {
-	return <DrawerPrimitive.Close data-slot='bottom-sheet-close' {...props} />
+	return <DrawerPrimitive.Close data-slot="bottom-sheet-close" {...props} />
 }
 
 const BottomSheetOverlay = forwardRef<
@@ -148,7 +148,7 @@ const BottomSheetOverlay = forwardRef<
 		<DrawerPrimitive.Overlay
 			ref={ref}
 			data-ui-kit={uiKit}
-			data-slot='bottom-sheet-overlay'
+			data-slot="bottom-sheet-overlay"
 			data-variant={variant}
 			className={cn(className)}
 			style={style}
@@ -216,7 +216,7 @@ const BottomSheetContent = forwardRef<
 		<DrawerPrimitive.Content
 			ref={ref}
 			data-ui-kit={uiKit}
-			data-slot='bottom-sheet-content'
+			data-slot="bottom-sheet-content"
 			data-variant={variant}
 			className={cn(className)}
 			style={style}
@@ -225,29 +225,19 @@ const BottomSheetContent = forwardRef<
 			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
-			<div data-slot='bottom-sheet-surface' data-variant={variant}>
+			<div data-slot="bottom-sheet-surface" data-variant={variant}>
 				{children}
 			</div>
 		</DrawerPrimitive.Content>
 	)
 })
 
-function BottomSheetHeader({
-	className,
-	...props
-}: ComponentProps<'div'>): ReactElement {
-	return (
-		<div data-slot='bottom-sheet-header' className={cn(className)} {...props} />
-	)
+function BottomSheetHeader({ className, ...props }: ComponentProps<'div'>): ReactElement {
+	return <div data-slot="bottom-sheet-header" className={cn(className)} {...props} />
 }
 
-function BottomSheetFooter({
-	className,
-	...props
-}: ComponentProps<'div'>): ReactElement {
-	return (
-		<div data-slot='bottom-sheet-footer' className={cn(className)} {...props} />
-	)
+function BottomSheetFooter({ className, ...props }: ComponentProps<'div'>): ReactElement {
+	return <div data-slot="bottom-sheet-footer" className={cn(className)} {...props} />
 }
 
 function BottomSheetTitle({
@@ -260,7 +250,7 @@ function BottomSheetTitle({
 }): ReactElement {
 	return (
 		<DrawerPrimitive.Title
-			data-slot='bottom-sheet-title'
+			data-slot="bottom-sheet-title"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -276,7 +266,7 @@ function BottomSheetDescription({
 }: ComponentProps<typeof DrawerPrimitive.Description>): ReactElement {
 	return (
 		<DrawerPrimitive.Description
-			data-slot='bottom-sheet-description'
+			data-slot="bottom-sheet-description"
 			className={cn(className)}
 			{...props}
 		/>
@@ -292,10 +282,10 @@ function BottomSheetHandle({
 }): ReactElement {
 	return (
 		<DrawerPrimitive.Handle
-			data-slot='bottom-sheet-handle'
+			data-slot="bottom-sheet-handle"
 			data-variant={variant}
 			className={cn(className)}
-			aria-hidden='true'
+			aria-hidden="true"
 			{...props}
 		/>
 	)
@@ -316,8 +306,7 @@ const BottomSheetConvenience = ({
 	contentClassName,
 	variant = 'default',
 }: IBottomSheetRootProps): ReactElement => {
-	const resolvedHeight =
-		height ?? (variant === 'secondary' ? 'auto' : DEFAULT_SHEET_HEIGHT)
+	const resolvedHeight = height ?? (variant === 'secondary' ? 'auto' : DEFAULT_SHEET_HEIGHT)
 
 	return (
 		<BottomSheetPrimitiveRoot
@@ -365,19 +354,14 @@ function BottomSheetConvenienceBody({
 	}
 	const contentStyle: CSSProperties = {
 		...layerStyle,
-		pointerEvents:
-			hasOverlayAbove || variant === 'secondary' ? 'none' : 'auto',
+		pointerEvents: hasOverlayAbove || variant === 'secondary' ? 'none' : 'auto',
 		zIndex: overlayZ + 1,
 		height,
 	}
 
 	return (
 		<BottomSheetPortal>
-			<BottomSheetOverlay
-				uiKit={uiKit}
-				style={overlayStyle}
-				variant={variant}
-			/>
+			<BottomSheetOverlay uiKit={uiKit} style={overlayStyle} variant={variant} />
 			<BottomSheetContent
 				uiKit={uiKit}
 				className={className}
@@ -388,7 +372,7 @@ function BottomSheetConvenienceBody({
 					<BottomSheetTitle variant={variant}>{title}</BottomSheetTitle>
 					<BottomSheetHandle variant={variant} />
 					<div
-						data-slot='bottom-sheet-body'
+						data-slot="bottom-sheet-body"
 						data-variant={variant}
 						className={cn(contentClassName)}
 					>
@@ -426,19 +410,16 @@ type TBottomSheetComponent = typeof BottomSheetConvenience & {
  * </BottomSheet>
  * ```
  */
-export const BottomSheet: TBottomSheetComponent = Object.assign(
-	BottomSheetConvenience,
-	{
-		Root: BottomSheetPrimitiveRoot,
-		Trigger: BottomSheetTrigger,
-		Portal: BottomSheetPortal,
-		Close: BottomSheetClose,
-		Overlay: BottomSheetOverlay,
-		Content: BottomSheetContent,
-		Header: BottomSheetHeader,
-		Footer: BottomSheetFooter,
-		Title: BottomSheetTitle,
-		Description: BottomSheetDescription,
-		Handle: BottomSheetHandle,
-	},
-)
+export const BottomSheet: TBottomSheetComponent = Object.assign(BottomSheetConvenience, {
+	Root: BottomSheetPrimitiveRoot,
+	Trigger: BottomSheetTrigger,
+	Portal: BottomSheetPortal,
+	Close: BottomSheetClose,
+	Overlay: BottomSheetOverlay,
+	Content: BottomSheetContent,
+	Header: BottomSheetHeader,
+	Footer: BottomSheetFooter,
+	Title: BottomSheetTitle,
+	Description: BottomSheetDescription,
+	Handle: BottomSheetHandle,
+})

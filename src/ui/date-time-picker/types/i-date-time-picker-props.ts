@@ -1,5 +1,6 @@
-import type { TMobileCondition } from '@/hooks/use-mobile-condition'
 import type { ButtonHTMLAttributes, ReactElement, ReactNode } from 'react'
+
+import type { TMobileCondition } from '@/hooks/use-mobile-condition'
 
 import type {
 	TDatePickerSize,
@@ -41,9 +42,7 @@ export interface IDateTimePickerPopoverProps {
 	className?: string
 }
 
-export type TDateTimePickerRootComponent = (
-	props: IDateTimePickerProps,
-) => ReactElement
+export type TDateTimePickerRootComponent = (props: IDateTimePickerProps) => ReactElement
 
 export type TDateTimePickerComponent = TDateTimePickerRootComponent & {
 	Root: TDateTimePickerRootComponent

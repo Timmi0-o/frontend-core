@@ -1,8 +1,10 @@
 'use client'
 
+import type { ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
-import type { ReactElement } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import {
 	useSelectChrome,
@@ -22,15 +24,11 @@ export const SelectValue = ({
 	const { selectedItems, triggerLabel } = useSelectSelection()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 	const isPlaceholder = !isLoading && selectedItems.length === 0
-	const defaultChildren = isLoading
-		? loadingLabel
-		: isPlaceholder
-			? placeholder
-			: triggerLabel
+	const defaultChildren = isLoading ? loadingLabel : isPlaceholder ? placeholder : triggerLabel
 
 	return (
 		<span
-			data-slot='select-value'
+			data-slot="select-value"
 			data-variant={variant}
 			data-placeholder={isPlaceholder ? '' : undefined}
 			data-rich={children != null ? '' : undefined}

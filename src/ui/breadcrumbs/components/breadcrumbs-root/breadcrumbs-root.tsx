@@ -1,7 +1,9 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import { Children, isValidElement, type ReactElement, type ReactNode } from 'react'
+
+import { cn } from '@/core/cn'
+
 import {
 	BREADCRUMBS_DISPLAY_NAMES,
 	type TBreadcrumbsVariant,
@@ -39,17 +41,14 @@ export const BreadcrumbsRoot = ({
 
 	return (
 		<nav
-			data-slot='breadcrumbs'
+			data-slot="breadcrumbs"
 			data-variant={variant}
 			className={cn(className)}
 			aria-label={ariaLabel}
 		>
 			<ol>
 				{items.map((child, index) => (
-					<BreadcrumbsItemContext.Provider
-						key={child.key ?? index}
-						value={{ index }}
-					>
+					<BreadcrumbsItemContext.Provider key={child.key ?? index} value={{ index }}>
 						{child}
 					</BreadcrumbsItemContext.Provider>
 				))}

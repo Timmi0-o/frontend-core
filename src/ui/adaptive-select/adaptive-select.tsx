@@ -1,21 +1,22 @@
 'use client'
 
+import { Children, isValidElement, useMemo, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { useMobileCondition, type TMobileCondition } from '@/hooks/use-mobile-condition'
 import { AdaptiveDialog } from '@/ui/adaptive-dialog/adaptive-dialog'
-import { Children, isValidElement, useMemo, type ReactElement, type ReactNode } from 'react'
 
 import { SelectClear } from '../select/components/select-clear/select-clear'
 import { SelectIndicator } from '../select/components/select-indicator/select-indicator'
 import { SelectLabel } from '../select/components/select-label/select-label'
 import { SelectOption } from '../select/components/select-option/select-option'
 import { SelectValue } from '../select/components/select-value/select-value'
+import { SELECT_DISPLAY_NAMES } from '../select/constants/select.constants'
 import {
 	SelectChromeContext,
 	SelectInteractionContext,
 	SelectSelectionContext,
 } from '../select/context/select-context'
-import { SELECT_DISPLAY_NAMES } from '../select/constants/select.constants'
 import { useSelect } from '../select/hooks/use-select'
 import { Select } from '../select/select'
 import type {
@@ -25,10 +26,9 @@ import type {
 } from '../select/types/i-select-context-value'
 import type { ISelectProps } from '../select/types/i-select-props'
 
-export type IAdaptiveSelectProps<T extends string | number = string> =
-	ISelectProps<T> & {
-		isMobileCondition?: TMobileCondition
-	}
+export type IAdaptiveSelectProps<T extends string | number = string> = ISelectProps<T> & {
+	isMobileCondition?: TMobileCondition
+}
 
 const isReactNode = (value: unknown): value is ReactNode => {
 	if (
@@ -167,7 +167,7 @@ const AdaptiveSelectSheet = <T extends string | number = string>(
 			<SelectInteractionContext.Provider value={interactionContextValue}>
 				<SelectSelectionContext.Provider value={selectionContextValue}>
 					<div
-						data-slot='select'
+						data-slot="select"
 						data-variant={variant}
 						data-disabled={isDisabled ? '' : undefined}
 						data-invalid={error ? '' : undefined}
@@ -177,9 +177,9 @@ const AdaptiveSelectSheet = <T extends string | number = string>(
 						<SelectLabel />
 
 						<button
-							type='button'
+							type="button"
 							disabled={isDisabled}
-							data-slot='select-trigger'
+							data-slot="select-trigger"
 							data-size={size}
 							data-variant={visualVariant}
 							data-tone={tone}
@@ -187,7 +187,7 @@ const AdaptiveSelectSheet = <T extends string | number = string>(
 							data-loading={isLoading ? '' : undefined}
 							data-open={isOpen ? '' : undefined}
 							data-empty={selectedItems.length === 0 ? '' : undefined}
-							aria-haspopup='dialog'
+							aria-haspopup="dialog"
 							aria-expanded={isOpen}
 							aria-label={isLoading ? loadingLabel : triggerLabel || placeholder}
 							onClick={() => {
@@ -208,24 +208,17 @@ const AdaptiveSelectSheet = <T extends string | number = string>(
 							onOpenChange={setIsOpen}
 							title={sheetTitle}
 							isMobileCondition={true}
-							height='auto'
+							height="auto"
 						>
 							<AdaptiveDialog.Content>
 								<AdaptiveDialog.Header>
 									<AdaptiveDialog.Title>{sheetTitle}</AdaptiveDialog.Title>
 								</AdaptiveDialog.Header>
-								<div data-slot='adaptive-select-sheet'>
-									<div
-										data-slot='select-dropdown-list'
-										role='listbox'
-										data-vaul-no-drag=''
-									>
+								<div data-slot="adaptive-select-sheet">
+									<div data-slot="select-dropdown-list" role="listbox" data-vaul-no-drag="">
 										{optionSlots ??
 											options.map((option) => (
-												<SelectOption
-													key={String(option.value)}
-													option={option}
-												/>
+												<SelectOption key={String(option.value)} option={option} />
 											))}
 									</div>
 								</div>
@@ -233,7 +226,7 @@ const AdaptiveSelectSheet = <T extends string | number = string>(
 						</AdaptiveDialog>
 
 						{error ? (
-							<p data-slot='select-error' role='alert'>
+							<p data-slot="select-error" role="alert">
 								{error}
 							</p>
 						) : null}

@@ -1,7 +1,9 @@
 'use client'
 
-import { cn } from '@/core/cn'
 import { useMemo, type ReactElement } from 'react'
+
+import { cn } from '@/core/cn'
+
 import { Popover } from '../popover/popover'
 import { AutocompleteDropdown } from './components/autocomplete-dropdown/autocomplete-dropdown'
 import { AutocompleteInput } from './components/autocomplete-input/autocomplete-input'
@@ -12,10 +14,7 @@ import {
 import { AutocompleteContext } from './context/autocomplete-context'
 import { useAutocomplete } from './hooks/use-autocomplete'
 import type { IAutocompleteContextValue } from './types/i-autocomplete-context-value'
-import type {
-	IAutocompleteProps,
-	TAutocompleteComponent,
-} from './types/i-autocomplete-props'
+import type { IAutocompleteProps, TAutocompleteComponent } from './types/i-autocomplete-props'
 
 export type {
 	IAutocompleteDropdownProps,
@@ -110,21 +109,19 @@ const AutoCompleteRoot = <T extends string | number = string>(
 	return (
 		<AutocompleteContext.Provider value={contextValue}>
 			<div
-				data-slot='autocomplete'
+				data-slot="autocomplete"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-invalid={error ? '' : undefined}
 				data-open={isOpen ? '' : undefined}
 				className={cn(className)}
 			>
-				{label ? (
-					<label data-slot='autocomplete-label'>{label}</label>
-				) : null}
+				{label ? <label data-slot="autocomplete-label">{label}</label> : null}
 
 				<Popover
 					open={isOpen}
 					onOpenChange={handleOpenChange}
-					placement='bottom-start'
+					placement="bottom-start"
 					offset={AUTOCOMPLETE_DROPDOWN_OFFSET_PX}
 					modal={false}
 				>
@@ -137,7 +134,7 @@ const AutoCompleteRoot = <T extends string | number = string>(
 				</Popover>
 
 				{error ? (
-					<p data-slot='autocomplete-error' role='alert'>
+					<p data-slot="autocomplete-error" role="alert">
 						{error}
 					</p>
 				) : null}
@@ -162,11 +159,8 @@ AutoCompleteRoot.displayName = AUTOCOMPLETE_DISPLAY_NAMES.ROOT
  * />
  * ```
  */
-export const AutoComplete: TAutocompleteComponent = Object.assign(
-	AutoCompleteRoot,
-	{
-		Input: AutocompleteInput,
-		Dropdown: AutocompleteDropdown,
-		Root: AutoCompleteRoot,
-	},
-)
+export const AutoComplete: TAutocompleteComponent = Object.assign(AutoCompleteRoot, {
+	Input: AutocompleteInput,
+	Dropdown: AutocompleteDropdown,
+	Root: AutoCompleteRoot,
+})

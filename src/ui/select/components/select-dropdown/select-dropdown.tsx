@@ -1,9 +1,11 @@
 'use client'
 
+import type { ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { Popover } from '@/ui/popover/popover'
-import type { ReactNode } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import { useSelectChrome } from '../../context/select-context'
 import type { ISelectDropdownProps } from '../../types/i-select-props'
@@ -14,8 +16,7 @@ export const SelectDropdown = ({
 	variant: variantProp,
 	children,
 }: ISelectDropdownProps): ReactNode => {
-	const { options, isMultiselect, minDropdownWidth, variant: contextVariant } =
-		useSelectChrome()
+	const { options, isMultiselect, minDropdownWidth, variant: contextVariant } = useSelectChrome()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
 
 	return (
@@ -25,14 +26,14 @@ export const SelectDropdown = ({
 			style={minDropdownWidth > 0 ? { minWidth: minDropdownWidth } : undefined}
 		>
 			<div
-				data-slot='select-dropdown'
+				data-slot="select-dropdown"
 				data-variant={variant}
 				data-multiselect={isMultiselect ? '' : undefined}
-				data-vaul-no-drag=''
+				data-vaul-no-drag=""
 			>
 				<div
-					data-slot='select-dropdown-list'
-					role='listbox'
+					data-slot="select-dropdown-list"
+					role="listbox"
 					onTouchMove={(event) => {
 						event.stopPropagation()
 					}}
@@ -41,9 +42,7 @@ export const SelectDropdown = ({
 					}}
 				>
 					{children ??
-						options.map((option) => (
-							<SelectOption key={String(option.value)} option={option} />
-						))}
+						options.map((option) => <SelectOption key={String(option.value)} option={option} />)}
 				</div>
 			</div>
 		</Popover.Content>

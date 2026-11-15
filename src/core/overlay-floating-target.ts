@@ -19,24 +19,15 @@ const OVERLAY_FLOATING_TARGET_SELECTOR = [
 type TOutsideDismissEvent = CustomEvent<{ originalEvent: Event }>
 
 /** Клик по порталу Popover/Select/меню внутри Modal/BottomSheet. */
-export const isOverlayFloatingTarget = (
-	target: EventTarget | null,
-): boolean => {
-	return (
-		target instanceof Element &&
-		target.closest(OVERLAY_FLOATING_TARGET_SELECTOR) !== null
-	)
+export const isOverlayFloatingTarget = (target: EventTarget | null): boolean => {
+	return target instanceof Element && target.closest(OVERLAY_FLOATING_TARGET_SELECTOR) !== null
 }
 
-export const getOutsideDismissEventTarget = (
-	event: TOutsideDismissEvent,
-): EventTarget | null => {
+export const getOutsideDismissEventTarget = (event: TOutsideDismissEvent): EventTarget | null => {
 	return event.detail?.originalEvent?.target ?? null
 }
 
-export const shouldPreventOverlayDismiss = (
-	event: TOutsideDismissEvent,
-): boolean => {
+export const shouldPreventOverlayDismiss = (event: TOutsideDismissEvent): boolean => {
 	if (isOverlayParentDismissLocked()) {
 		return true
 	}

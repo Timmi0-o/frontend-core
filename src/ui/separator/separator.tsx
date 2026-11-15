@@ -1,9 +1,10 @@
 'use client'
 
 import { Separator as SeparatorPrimitive } from '@base-ui/react/separator'
+import type { ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { ReactElement } from 'react'
 
 export type TSeparatorMode = 'solid' | 'dashed'
 
@@ -25,7 +26,7 @@ const SeparatorRoot = ({
 		<SeparatorPrimitive
 			{...props}
 			orientation={orientation}
-			data-slot='separator'
+			data-slot="separator"
 			data-variant={variant}
 			data-mode={mode}
 			className={cn(className)}

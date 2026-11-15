@@ -1,4 +1,4 @@
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
@@ -13,22 +13,22 @@
 	color: var(--text-primary);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='success']{
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='success'] {
 	background: color-mix(in srgb, var(--success) 12%, var(--background));
 	color: color-mix(in srgb, var(--success) 66%, black);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='error']{
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='error'] {
 	background: var(--danger);
 	color: #fff;
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='outline']{
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-variant='outline'] {
 	border-color: var(--border-primary-color);
 	background: transparent;
 }
 
-[data-ui-kit='social'] [data-slot='badge-anchor']:not([data-variant='unstyled']){
+[data-ui-kit='social'] [data-slot='badge-anchor']:not([data-variant='unstyled']) {
 	position: relative;
 	display: inline-flex;
 	width: max-content;
@@ -36,7 +36,7 @@
 	vertical-align: middle;
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement]{
+[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement] {
 	position: absolute;
 	z-index: 1;
 	min-width: 1.125rem;
@@ -49,47 +49,55 @@
 	color: var(--text-contrast);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='success']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='success'] {
 	background: var(--success);
 	color: var(--text-contrast);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='error']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='error'] {
 	background: var(--danger);
 	color: #fff;
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='outline']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-variant='outline'] {
 	background: var(--background);
 	border-color: var(--border-primary-color);
 	color: var(--text-primary);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-empty]{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement][data-empty] {
 	min-width: 0.5rem;
 	min-height: 0.5rem;
 	padding: 0;
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-right']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-right'] {
 	top: 0;
 	right: 0;
 	transform: translate(40%, -40%);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-left']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement='top-left'] {
 	top: 0;
 	left: 0;
 	transform: translate(-40%, -40%);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-right']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-right'] {
 	bottom: 0;
 	right: 0;
 	transform: translate(40%, 40%);
 }
 
-[data-ui-kit='social'] [data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-left']{
+[data-ui-kit='social']
+	[data-slot='badge']:not([data-variant='unstyled'])[data-placement='bottom-left'] {
 	bottom: 0;
 	left: 0;
 	transform: translate(-40%, 40%);

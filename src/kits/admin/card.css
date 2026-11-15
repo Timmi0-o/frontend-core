@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled']) {
 	position: relative;
 	display: flex;
 	width: 100%;
@@ -21,7 +21,8 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
+[data-ui-kit='admin']
+	[data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
 	box-shadow: var(--surface-shadow), var(--focus-ring);
 }
 
@@ -29,12 +30,12 @@
 	transform: scale(0.992);
 }
 
-[data-ui-kit='admin'] [data-slot='card-header']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card-header']:not([data-variant='unstyled']) {
 	display: flex;
 	flex-direction: column;
 }
 
-[data-ui-kit='admin'] [data-slot='card-title']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card-title']:not([data-variant='unstyled']) {
 	margin: 0;
 	font-size: 0.875rem;
 	font-weight: 500;
@@ -42,21 +43,21 @@
 	color: var(--foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='card-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card-description']:not([data-variant='unstyled']) {
 	margin: 0;
 	font-size: 0.875rem;
 	line-height: 1.25rem;
 	color: var(--muted);
 }
 
-[data-ui-kit='admin'] [data-slot='card-content']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card-content']:not([data-variant='unstyled']) {
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	gap: 0.25rem;
 }
 
-[data-ui-kit='admin'] [data-slot='card-footer']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='card-footer']:not([data-variant='unstyled']) {
 	display: flex;
 	flex-direction: row;
 	align-items: center;

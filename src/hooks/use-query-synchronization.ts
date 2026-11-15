@@ -2,8 +2,9 @@
 
 import { usePathname } from 'next/navigation'
 import { useEffect, useMemo, useRef } from 'react'
-import { useManageSearchParams } from './use-manage-search-params'
+
 import type { TQueryFieldValue } from './types/t-query-field-value'
+import { useManageSearchParams } from './use-manage-search-params'
 
 export interface IQuerySynchronizationItem {
 	key: string
@@ -21,10 +22,7 @@ export const useQuerySynchronization = (
 	const pathname = usePathname()
 	const { searchParams, handlePushKeyInSearchParams } = useManageSearchParams()
 
-	const normalizedItems = useMemo(
-		() => (Array.isArray(items) ? items : [items]),
-		[items],
-	)
+	const normalizedItems = useMemo(() => (Array.isArray(items) ? items : [items]), [items])
 
 	const itemsRef = useRef(normalizedItems)
 	const prevQueryRef = useRef<string | null>(null)
@@ -41,17 +39,14 @@ export const useQuerySynchronization = (
 	useEffect(() => {
 		const paramsFromUrl = new URLSearchParams(querySignature)
 		const prevParams =
-			prevQueryRef.current !== null
-				? new URLSearchParams(prevQueryRef.current)
-				: null
+			prevQueryRef.current !== null ? new URLSearchParams(prevQueryRef.current) : null
 		const isInitialSync = prevParams === null
 
 		prevQueryRef.current = querySignature
 
 		itemsRef.current.forEach((item) => {
 			const hasParamChanged =
-				isInitialSync ||
-				paramsFromUrl.get(item.key) !== prevParams?.get(item.key)
+				isInitialSync || paramsFromUrl.get(item.key) !== prevParams?.get(item.key)
 
 			if (!hasParamChanged) {
 				return

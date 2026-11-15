@@ -1,8 +1,9 @@
 'use client'
 
+import type { HTMLAttributes, ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { HTMLAttributes, ReactElement } from 'react'
 
 export interface ISkeletonRootProps extends HTMLAttributes<HTMLDivElement> {
 	className?: string
@@ -16,10 +17,10 @@ const SkeletonRoot = ({
 }: ISkeletonRootProps): ReactElement => {
 	return (
 		<div
-			data-slot='skeleton'
+			data-slot="skeleton"
 			data-variant={variant}
 			className={cn(className)}
-			aria-hidden='true'
+			aria-hidden="true"
 			{...rest}
 		/>
 	)

@@ -1,16 +1,11 @@
-import type { TSlotVariant } from '@/core/slot-variant'
 import type { ReactElement, ReactNode } from 'react'
+
+import type { TSlotVariant } from '@/core/slot-variant'
 
 export type TSelectSize = 'sm' | 'md' | 'lg' | 'xl'
 export type TSelectVariant = 'default' | 'light' | 'secondary' | 'unstyled'
 export type TSelectVisualVariant = Exclude<TSelectVariant, 'unstyled'>
-export type TSelectTone =
-	| 'default'
-	| 'light'
-	| 'danger'
-	| 'soft-danger'
-	| 'success'
-	| 'solid'
+export type TSelectTone = 'default' | 'light' | 'danger' | 'soft-danger' | 'success' | 'solid'
 export type TSelectSelectionMode = 'single' | 'multiselect'
 
 export interface ISelectOption<T extends string | number = string> {
@@ -29,9 +24,7 @@ export interface ISelectValueRenderParams {
 	state: ISelectValueState
 }
 
-export type TSelectValueChildren =
-	| ReactNode
-	| ((params: ISelectValueRenderParams) => ReactNode)
+export type TSelectValueChildren = ReactNode | ((params: ISelectValueRenderParams) => ReactNode)
 
 export interface ISelectValueProps {
 	className?: string
@@ -45,9 +38,7 @@ export interface ISelectOptionRenderParams {
 	defaultChildren: ReactNode
 }
 
-export type TSelectOptionChildren =
-	| ReactNode
-	| ((params: ISelectOptionRenderParams) => ReactNode)
+export type TSelectOptionChildren = ReactNode | ((params: ISelectOptionRenderParams) => ReactNode)
 
 export interface ISelectBaseProps<T extends string | number = string> {
 	options: Array<ISelectOption<T>>

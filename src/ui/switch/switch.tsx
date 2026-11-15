@@ -1,19 +1,11 @@
 'use client'
 
 import { Switch as SwitchPrimitive } from '@base-ui/react/switch'
+import { createContext, useContext, useId, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
-import {
-	createCompoundContext,
-	type ICompoundChildProps,
-} from '@/core/create-compound-context'
+import { createCompoundContext, type ICompoundChildProps } from '@/core/create-compound-context'
 import type { TSlotVariant } from '@/core/slot-variant'
-import {
-	createContext,
-	useContext,
-	useId,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
 
 export type TSwitchLabelPosition = 'start' | 'end'
 
@@ -26,12 +18,9 @@ interface ISwitchFieldContextValue {
 	isDisabled: boolean
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<ISwitchContextValue>('Switch')
+const { Context, useCompoundContext } = createCompoundContext<ISwitchContextValue>('Switch')
 
-const SwitchFieldContext = createContext<ISwitchFieldContextValue | null>(
-	null,
-)
+const SwitchFieldContext = createContext<ISwitchFieldContextValue | null>(null)
 
 export interface ISwitchFieldProps extends ICompoundChildProps {
 	isDisabled?: boolean
@@ -56,7 +45,7 @@ const SwitchField = ({
 	return (
 		<SwitchFieldContext.Provider value={{ switchId, isDisabled }}>
 			<div
-				data-slot='switch-field'
+				data-slot="switch-field"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-label-position={labelPosition}
@@ -99,7 +88,7 @@ const SwitchRoot = ({
 				onCheckedChange={onCheckedChange}
 				disabled={resolvedDisabled}
 				aria-label={ariaLabel}
-				data-slot='switch'
+				data-slot="switch"
 				data-variant={variant}
 				className={cn(className)}
 			>
@@ -116,15 +105,12 @@ export interface ISwitchThumbProps {
 	variant?: TSlotVariant
 }
 
-const SwitchThumb = ({
-	className,
-	variant = 'default',
-}: ISwitchThumbProps): ReactElement => {
+const SwitchThumb = ({ className, variant = 'default' }: ISwitchThumbProps): ReactElement => {
 	useCompoundContext()
 
 	return (
 		<SwitchPrimitive.Thumb
-			data-slot='switch-thumb'
+			data-slot="switch-thumb"
 			data-variant={variant}
 			className={cn(className)}
 		/>
@@ -156,7 +142,7 @@ const SwitchLabel = ({
 	return (
 		<label
 			htmlFor={field.switchId}
-			data-slot='switch-label'
+			data-slot="switch-label"
 			data-variant={variant}
 			className={cn(className)}
 		>
@@ -181,11 +167,7 @@ const SwitchDescription = ({
 	variant = 'default',
 }: ISwitchDescriptionProps): ReactElement => {
 	return (
-		<span
-			data-slot='switch-description'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<span data-slot="switch-description" data-variant={variant} className={cn(className)}>
 			{children}
 		</span>
 	)
@@ -216,11 +198,7 @@ const SwitchCombined = ({
 	...rest
 }: ISwitchProps): ReactElement => {
 	const control = (
-		<SwitchRoot
-			{...rest}
-			isDisabled={isDisabled}
-			ariaLabel={label ? undefined : ariaLabel}
-		>
+		<SwitchRoot {...rest} isDisabled={isDisabled} ariaLabel={label ? undefined : ariaLabel}>
 			{children}
 		</SwitchRoot>
 	)

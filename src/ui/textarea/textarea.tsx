@@ -1,13 +1,13 @@
 'use client'
 
+import type { ReactElement, TextareaHTMLAttributes } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { ReactElement, TextareaHTMLAttributes } from 'react'
 
 export type TTextareaSize = 'sm' | 'md' | 'lg'
 
-export interface ITextareaProps
-	extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+export interface ITextareaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	size?: TTextareaSize
 	className?: string
 	variant?: TSlotVariant | 'secondary'
@@ -36,7 +36,7 @@ export const Textarea = ({
 	return (
 		<textarea
 			{...props}
-			data-slot='textarea'
+			data-slot="textarea"
 			data-variant={variant}
 			data-size={size}
 			className={cn(className)}

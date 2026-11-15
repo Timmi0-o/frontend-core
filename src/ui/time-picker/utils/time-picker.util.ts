@@ -2,10 +2,7 @@ import { padTimeUnit } from '@/ui/date-time-picker/utils/date-time-picker.util'
 
 export const DEFAULT_TIME_PICKER_PLACEHOLDER = '--:--'
 
-export const snapMinuteToStep = (
-	minute: number,
-	stepMinutes: number,
-): number => {
+export const snapMinuteToStep = (minute: number, stepMinutes: number): number => {
 	const safeStep = Math.min(60, Math.max(1, stepMinutes))
 	const snapped = Math.round(minute / safeStep) * safeStep
 

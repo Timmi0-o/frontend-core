@@ -6,9 +6,7 @@ export const measureKitsTocIndicator = (
 	list: HTMLElement,
 	sectionId: string,
 ): { top: number; height: number } | null => {
-	const button = list.querySelector(
-		`[data-section-id="${CSS.escape(sectionId)}"]`,
-	)
+	const button = list.querySelector(`[data-section-id="${CSS.escape(sectionId)}"]`)
 
 	if (!(button instanceof HTMLElement)) {
 		return null

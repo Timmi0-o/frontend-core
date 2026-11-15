@@ -1,9 +1,4 @@
-import {
-	Children,
-	isValidElement,
-	type ElementType,
-	type ReactNode,
-} from 'react'
+import { Children, isValidElement, type ElementType, type ReactNode } from 'react'
 
 const getTypeLabel = (type: ElementType): string => {
 	if (typeof type === 'string') {
@@ -43,9 +38,7 @@ export const assertMenuSectionChildren = (
 				? getTypeLabel(child.type as ElementType)
 				: typeof child
 
-			throw new Error(
-				`${sectionName} accepts only ${allowedLabels}. Received: ${received}.`,
-			)
+			throw new Error(`${sectionName} accepts only ${allowedLabels}. Received: ${received}.`)
 		}
 	})
 }

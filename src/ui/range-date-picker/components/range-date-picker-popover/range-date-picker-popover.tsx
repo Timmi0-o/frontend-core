@@ -8,6 +8,7 @@ import { AdaptiveDialog } from '@/ui/adaptive-dialog/adaptive-dialog'
 import { CalendarView } from '@/ui/calendar/components/calendar-view/calendar-view'
 import { startOfDay } from '@/ui/date-picker/utils/date-picker-date.util'
 import { Popover } from '@/ui/popover/popover'
+
 import { RANGE_DATE_PICKER_DISPLAY_NAMES } from '../../constants/range-date-picker.constants'
 import { useRangeDatePickerContext } from '../../context/range-date-picker-context'
 import type { IRangeDatePickerPopoverProps } from '../../types/i-range-date-picker-props'
@@ -51,8 +52,7 @@ export const RangeDatePickerPopover = ({
 		variant: contextVariant,
 	} = useRangeDatePickerContext()
 	const variant = resolveChildSlotVariant(variantProp, contextVariant, 'default')
-	const rangePickStartDate =
-		value.start != null && value.end == null ? value.start : null
+	const rangePickStartDate = value.start != null && value.end == null ? value.start : null
 
 	const calendarView = (
 		<CalendarView
@@ -97,9 +97,7 @@ export const RangeDatePickerPopover = ({
 				title={placeholder}
 				isMobileCondition={true}
 			>
-				<AdaptiveDialog.Content className={cn(className)}>
-					{calendarView}
-				</AdaptiveDialog.Content>
+				<AdaptiveDialog.Content className={cn(className)}>{calendarView}</AdaptiveDialog.Content>
 			</AdaptiveDialog>
 		)
 	}

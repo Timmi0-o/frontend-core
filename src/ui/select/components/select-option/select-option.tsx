@@ -1,9 +1,11 @@
 'use client'
 
+import { memo, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { Checkbox } from '@/ui/checkbox/checkbox'
-import { memo, type ReactElement, type ReactNode } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../../constants/select.constants'
 import { useSelectChrome, useSelectSelection } from '../../context/select-context'
 import { renderSelectSlot } from '../../helpers/render-select-slot'
@@ -21,14 +23,7 @@ const DefaultOptionContent = ({
 	isDisabled?: boolean
 }): ReactElement => {
 	if (isMultiselect) {
-		return (
-			<Checkbox
-				label={label}
-				checked={isSelected}
-				readOnly
-				isDisabled={isDisabled}
-			/>
-		)
+		return <Checkbox label={label} checked={isSelected} readOnly isDisabled={isDisabled} />
 	}
 
 	return <span>{label}</span>
@@ -80,10 +75,10 @@ const SelectOptionComponent = ({
 
 	return (
 		<div
-			role='option'
+			role="option"
 			aria-selected={isSelected}
 			aria-disabled={option.disabled}
-			data-slot='select-option'
+			data-slot="select-option"
 			data-variant={variant}
 			data-selected={isSelected ? '' : undefined}
 			data-disabled={option.disabled ? '' : undefined}
@@ -104,6 +99,4 @@ const SelectOptionComponent = ({
 
 SelectOptionComponent.displayName = SELECT_DISPLAY_NAMES.OPTION
 
-export const SelectOption = memo(
-	SelectOptionComponent,
-) as typeof SelectOptionComponent
+export const SelectOption = memo(SelectOptionComponent) as typeof SelectOptionComponent

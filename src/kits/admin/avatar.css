@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled']) {
 	position: relative;
 	display: inline-flex;
 	height: 2.5rem;
@@ -12,19 +12,19 @@
 	background: var(--default);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='sm']{
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='sm'] {
 	height: 2rem;
 	width: 2rem;
 	border-radius: var(--radius-2xl);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='lg']{
+[data-ui-kit='admin'] [data-slot='avatar']:not([data-variant='unstyled'])[data-size='lg'] {
 	height: 3rem;
 	width: 3rem;
 	border-radius: var(--button-radius);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-image']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar-image']:not([data-variant='unstyled']) {
 	position: absolute;
 	inset: 0;
 	height: 100%;
@@ -35,7 +35,7 @@
 	border-radius: inherit;
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-fallback']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar-fallback']:not([data-variant='unstyled']) {
 	display: flex;
 	height: 100%;
 	width: 100%;
@@ -49,7 +49,7 @@
 	color: var(--default-foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-badge']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar-badge']:not([data-variant='unstyled']) {
 	position: absolute;
 	z-index: 1;
 	right: 0;
@@ -62,24 +62,30 @@
 	transform: translate(15%, 15%);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar'][data-size='lg'] [data-slot='avatar-fallback']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='avatar'][data-size='lg']
+	[data-slot='avatar-fallback']:not([data-variant='unstyled']) {
 	font-size: 1rem;
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-group']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar-group']:not([data-variant='unstyled']) {
 	display: flex;
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='avatar-group']
+	> [data-slot='avatar']:not([data-variant='unstyled']) {
 	margin-left: -0.5rem;
 	box-shadow: 0 0 0 2px var(--background);
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-group'] > [data-slot='avatar']:not([data-variant='unstyled']):first-child{
+[data-ui-kit='admin']
+	[data-slot='avatar-group']
+	> [data-slot='avatar']:not([data-variant='unstyled']):first-child {
 	margin-left: 0;
 }
 
-[data-ui-kit='admin'] [data-slot='avatar-group-count']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='avatar-group-count']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;

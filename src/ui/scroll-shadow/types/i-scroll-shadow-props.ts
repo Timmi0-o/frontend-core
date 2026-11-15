@@ -1,16 +1,10 @@
-import type { TSlotVariant } from '@/core/slot-variant'
 import type { HTMLAttributes, ReactNode } from 'react'
+
+import type { TSlotVariant } from '@/core/slot-variant'
 
 export type TScrollShadowOrientation = 'horizontal' | 'vertical'
 
-export type TScrollShadowVisibility =
-	| 'auto'
-	| 'both'
-	| 'top'
-	| 'bottom'
-	| 'left'
-	| 'right'
-	| 'none'
+export type TScrollShadowVisibility = 'auto' | 'both' | 'top' | 'bottom' | 'left' | 'right' | 'none'
 
 export interface IScrollShadowProps extends HTMLAttributes<HTMLDivElement> {
 	children?: ReactNode

@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+
 import { defineConfig, type Plugin } from 'vite'
 import dts from 'vite-plugin-dts'
 
@@ -60,18 +61,14 @@ const emitKitStyles = (): Plugin => {
 				}
 			}
 
-			const socialCss = flattenCss(
-				resolve(root, 'src/kits/social/styles.css'),
-			)
+			const socialCss = flattenCss(resolve(root, 'src/kits/social/styles.css'))
 
 			for (const kit of kits) {
 				this.emitFile({
 					type: 'asset',
 					fileName: `kits/${kit}/styles.css`,
 					source:
-						kit === 'social'
-							? socialCss
-							: flattenCss(resolve(root, `src/kits/${kit}/styles.css`)),
+						kit === 'social' ? socialCss : flattenCss(resolve(root, `src/kits/${kit}/styles.css`)),
 				})
 			}
 		},
@@ -115,17 +112,13 @@ export default defineConfig({
 						moduleIds.some((id) => id.includes('/src/actions/')) &&
 						!moduleIds.some(
 							(id) =>
-								id.includes('/src/ui/') ||
-								id.includes('/src/hooks/') ||
-								id.includes('/src/kits/'),
+								id.includes('/src/ui/') || id.includes('/src/hooks/') || id.includes('/src/kits/'),
 						)
 
 					return isServerChunk ? 'shared-server.js' : 'shared.js'
 				},
 				banner: (chunk) =>
-					chunk.fileName.endsWith('.js') && !isServerEntry(chunk.fileName)
-						? `'use client';\n`
-						: '',
+					chunk.fileName.endsWith('.js') && !isServerEntry(chunk.fileName) ? `'use client';\n` : '',
 			},
 		},
 	},

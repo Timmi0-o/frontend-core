@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='label']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='label']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	align-items: center;
 	gap: 0.5rem;

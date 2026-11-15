@@ -1,9 +1,10 @@
 'use client'
 
+import type { ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { ICompoundChildProps } from '@/core/types/i-create-compound-component.types'
-import type { ReactElement, ReactNode } from 'react'
 
 export type IAlertBannerVariant =
 	| 'default'
@@ -25,19 +26,8 @@ const iconProps = {
 const InfoIcon = (): ReactElement => {
 	return (
 		<svg {...iconProps}>
-			<circle
-				cx='12'
-				cy='12'
-				r='10'
-				stroke='currentColor'
-				strokeWidth='2'
-			/>
-			<path
-				d='M12 16v-4M12 8h.01'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-			/>
+			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+			<path d="M12 16v-4M12 8h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
 		</svg>
 	)
 }
@@ -46,17 +36,12 @@ const WarningIcon = (): ReactElement => {
 	return (
 		<svg {...iconProps}>
 			<path
-				d='M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinejoin='round'
+				d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinejoin="round"
 			/>
-			<path
-				d='M12 9v4M12 17h.01'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-			/>
+			<path d="M12 9v4M12 17h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
 		</svg>
 	)
 }
@@ -64,19 +49,13 @@ const WarningIcon = (): ReactElement => {
 const SuccessIcon = (): ReactElement => {
 	return (
 		<svg {...iconProps}>
-			<circle
-				cx='12'
-				cy='12'
-				r='10'
-				stroke='currentColor'
-				strokeWidth='2'
-			/>
+			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
 			<path
-				d='m9 12 2 2 4-4'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="m9 12 2 2 4-4"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -85,27 +64,13 @@ const SuccessIcon = (): ReactElement => {
 const DangerIcon = (): ReactElement => {
 	return (
 		<svg {...iconProps}>
-			<circle
-				cx='12'
-				cy='12'
-				r='10'
-				stroke='currentColor'
-				strokeWidth='2'
-			/>
-			<path
-				d='M12 8v4M12 16h.01'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-			/>
+			<circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+			<path d="M12 8v4M12 16h.01" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
 		</svg>
 	)
 }
 
-const VARIANT_ICON: Record<
-	Exclude<IAlertBannerVariant, 'unstyled'>,
-	() => ReactElement
-> = {
+const VARIANT_ICON: Record<Exclude<IAlertBannerVariant, 'unstyled'>, () => ReactElement> = {
 	default: InfoIcon,
 	warning: WarningIcon,
 	success: SuccessIcon,
@@ -132,18 +97,13 @@ const AlertBannerRoot = ({
 	const Icon = variant === 'unstyled' ? null : VARIANT_ICON[variant]
 
 	return (
-		<div
-			data-slot='alert'
-			data-variant={variant}
-			className={cn(className)}
-			role='alert'
-		>
+		<div data-slot="alert" data-variant={variant} className={cn(className)} role="alert">
 			{Icon ? (
-				<span data-slot='alert-icon' aria-hidden='true'>
+				<span data-slot="alert-icon" aria-hidden="true">
 					<Icon />
 				</span>
 			) : null}
-			<div data-slot='alert-body'>{children}</div>
+			<div data-slot="alert-body">{children}</div>
 		</div>
 	)
 }
@@ -161,11 +121,7 @@ const AlertBannerTitle = ({
 	variant = 'default',
 }: IAlertBannerTitleProps): ReactElement => {
 	return (
-		<div
-			data-slot='alert-title'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="alert-title" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)
@@ -184,11 +140,7 @@ const AlertBannerDescription = ({
 	variant = 'default',
 }: IAlertBannerDescriptionProps): ReactElement => {
 	return (
-		<div
-			data-slot='alert-description'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="alert-description" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)

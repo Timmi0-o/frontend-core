@@ -12,7 +12,9 @@
 	color: var(--foreground);
 }
 
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled']),
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled']),
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled']) {
 	box-sizing: border-box;
 	display: flex;
@@ -37,65 +39,86 @@
 		border-color var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled']):hover:not(:disabled):not([data-disabled]),
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled']):hover:not(:disabled) {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled']):hover:not(:disabled):not(
+		[data-disabled]
+	),
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled']):hover:not(:disabled) {
 	border-color: color-mix(in srgb, var(--ring) 40%, transparent);
 }
 
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-open],
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[aria-expanded='true'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[aria-expanded='true'] {
 	border-color: var(--ring);
 	box-shadow: var(--focus-ring);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light'] {
 	border-color: var(--glass-border);
 	background: var(--glass-bg);
 	color: var(--muted-foreground);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light']:hover:not(:disabled),
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light'][data-open] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light']:hover:not(
+		:disabled
+	),
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-variant='light'][data-open] {
 	border-color: var(--ring);
 	background: var(--glass-bg);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='success'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='success'] {
 	background-color: color-mix(in srgb, var(--success) 8%, var(--glass-bg));
 	border-color: color-mix(in srgb, var(--success) 25%, transparent);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='danger'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='danger'] {
 	background-color: color-mix(in srgb, var(--danger) 8%, var(--glass-bg));
 	border-color: color-mix(in srgb, var(--danger) 25%, transparent);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='soft-danger'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='soft-danger'] {
 	background-color: var(--danger-soft);
 	border-color: transparent;
 	color: var(--danger-soft-foreground);
 }
 
-[data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='solid'] {
+[data-ui-kit='social']
+	[data-slot='select-trigger']:not([data-variant='unstyled'])[data-tone='solid'] {
 	background-color: var(--secondary);
 	border-color: var(--glass-border);
 }
 
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='sm'],
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='sm'],
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-size='sm'] {
 	min-width: var(--control-field-height-sm);
 	min-height: var(--control-field-height-sm);
 	padding: 0 0.75rem;
 }
 
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='md'],
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='md'],
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-size='md'] {
 	min-width: var(--control-field-height-md);
 	min-height: var(--control-field-height-md);
 	padding: 0 0.875rem;
 }
 
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='lg'],
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='lg'],
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-size='lg'] {
 	min-width: var(--control-field-height-lg);
 	min-height: var(--control-field-height-lg);
@@ -103,7 +126,9 @@
 	font-size: 1rem;
 }
 
-[data-ui-kit='social'] [data-slot='select'] [data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='xl'],
+[data-ui-kit='social']
+	[data-slot='select']
+	[data-slot='popover-trigger']:not([data-variant='unstyled'])[data-size='xl'],
 [data-ui-kit='social'] [data-slot='select-trigger']:not([data-variant='unstyled'])[data-size='xl'] {
 	min-width: var(--control-field-height-xl);
 	min-height: var(--control-field-height-xl);
@@ -127,7 +152,9 @@
 	color: var(--muted-foreground);
 }
 
-[data-ui-kit='social'] [data-slot='select-value']:not([data-variant='unstyled']) [data-slot='chip'] {
+[data-ui-kit='social']
+	[data-slot='select-value']:not([data-variant='unstyled'])
+	[data-slot='chip'] {
 	flex-shrink: 0;
 }
 
@@ -203,7 +230,8 @@
 	touch-action: pan-y;
 }
 
-[data-ui-kit='social'] [data-slot='select-dropdown']:not([data-variant='unstyled'])[data-multiselect] {
+[data-ui-kit='social']
+	[data-slot='select-dropdown']:not([data-variant='unstyled'])[data-multiselect] {
 	padding-block: 0.25rem;
 }
 
@@ -234,7 +262,9 @@
 	-webkit-user-select: none;
 }
 
-[data-ui-kit='social'] [data-slot='select-option'] + [data-slot='select-option']:not([data-variant='unstyled']) {
+[data-ui-kit='social']
+	[data-slot='select-option']
+	+ [data-slot='select-option']:not([data-variant='unstyled']) {
 	margin-top: var(--overlay-item-gap);
 }
 
@@ -248,7 +278,8 @@
 	opacity: 0.45;
 }
 
-[data-ui-kit='social'] [data-slot='select-option']:not([data-variant='unstyled'])[data-disabled]:hover {
+[data-ui-kit='social']
+	[data-slot='select-option']:not([data-variant='unstyled'])[data-disabled]:hover {
 	background: transparent;
 }
 

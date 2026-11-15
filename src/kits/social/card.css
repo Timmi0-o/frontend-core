@@ -19,7 +19,8 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='social'] [data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
+[data-ui-kit='social']
+	[data-slot='card']:not([data-variant='unstyled'])[data-clickable]:focus-visible {
 	box-shadow: var(--glass-shadow), var(--focus-ring);
 }
 

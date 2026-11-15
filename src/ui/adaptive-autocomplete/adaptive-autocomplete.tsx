@@ -1,13 +1,14 @@
 'use client'
 
+import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { useMobileCondition, type TMobileCondition } from '@/hooks/use-mobile-condition'
 import { AdaptiveDialog } from '@/ui/adaptive-dialog/adaptive-dialog'
 import { Spinner } from '@/ui/spinner/spinner'
-import { useEffect, useMemo, useRef, useState, type ReactElement } from 'react'
 
-import { AutocompleteOption } from '../autocomplete/components/autocomplete-option/autocomplete-option'
 import { AutoComplete } from '../autocomplete/autocomplete'
+import { AutocompleteOption } from '../autocomplete/components/autocomplete-option/autocomplete-option'
 import { AutocompleteContext } from '../autocomplete/context/autocomplete-context'
 import { useAutocomplete } from '../autocomplete/hooks/use-autocomplete'
 import type { IAutocompleteContextValue } from '../autocomplete/types/i-autocomplete-context-value'
@@ -127,27 +128,25 @@ const AdaptiveAutocompleteSheet = <T extends string | number = string>(
 	return (
 		<AutocompleteContext.Provider value={contextValue}>
 			<div
-				data-slot='autocomplete'
+				data-slot="autocomplete"
 				data-variant={variant}
 				data-disabled={isDisabled ? '' : undefined}
 				data-invalid={error ? '' : undefined}
 				data-open={isSheetOpen ? '' : undefined}
 				className={cn(className)}
 			>
-				{label ? (
-					<label data-slot='autocomplete-label'>{label}</label>
-				) : null}
+				{label ? <label data-slot="autocomplete-label">{label}</label> : null}
 
 				<button
-					type='button'
+					type="button"
 					disabled={isDisabled}
-					data-slot='autocomplete-input'
-					data-adaptive-trigger=''
+					data-slot="autocomplete-input"
+					data-adaptive-trigger=""
 					data-size={size}
 					data-variant={visualVariant}
 					data-disabled={isDisabled ? '' : undefined}
 					data-empty={triggerLabel ? undefined : ''}
-					aria-haspopup='dialog'
+					aria-haspopup="dialog"
 					aria-expanded={isSheetOpen}
 					aria-label={placeholder}
 					onClick={() => {
@@ -166,59 +165,59 @@ const AdaptiveAutocompleteSheet = <T extends string | number = string>(
 					onOpenChange={setIsSheetOpen}
 					title={sheetTitle}
 					isMobileCondition={true}
-					height='auto'
+					height="auto"
 				>
 					<AdaptiveDialog.Content>
 						<AdaptiveDialog.Header>
 							<AdaptiveDialog.Title>{sheetTitle}</AdaptiveDialog.Title>
 						</AdaptiveDialog.Header>
-						<div data-slot='adaptive-autocomplete-sheet'>
+						<div data-slot="adaptive-autocomplete-sheet">
 							<input
 								ref={searchRef}
-								type='text'
+								type="text"
 								value={inputValue}
 								placeholder={placeholder}
-								autoComplete='off'
-								data-slot='autocomplete-input'
+								autoComplete="off"
+								data-slot="autocomplete-input"
 								data-size={size}
 								data-variant={visualVariant}
 								aria-controls={listboxId}
-								aria-autocomplete='list'
+								aria-autocomplete="list"
 								onChange={handleInputChange}
 								onFocus={handleInputFocus}
 							/>
 							<div
 								id={listboxId}
-								role='listbox'
-								data-slot='autocomplete-dropdown-list'
-								data-vaul-no-drag=''
+								role="listbox"
+								data-slot="autocomplete-dropdown-list"
+								data-vaul-no-drag=""
 							>
-									{isLoading ? (
-										<div data-slot='autocomplete-loading'>
-											<Spinner size='sm' />
-											<span>{loadingLabel}</span>
-										</div>
-									) : null}
-									{!isLoading && filteredOptions.length === 0 ? (
-										<div data-slot='autocomplete-empty'>{noResultsLabel}</div>
-									) : null}
-									{!isLoading
-										? filteredOptions.map((option) => (
-												<AutocompleteOption
-													key={String(option.value)}
-													option={option}
-													isSelected={isOptionSelected(option)}
-													onSelect={handleSheetSelect}
-												/>
-											))
-										: null}
-								</div>
+								{isLoading ? (
+									<div data-slot="autocomplete-loading">
+										<Spinner size="sm" />
+										<span>{loadingLabel}</span>
+									</div>
+								) : null}
+								{!isLoading && filteredOptions.length === 0 ? (
+									<div data-slot="autocomplete-empty">{noResultsLabel}</div>
+								) : null}
+								{!isLoading
+									? filteredOptions.map((option) => (
+											<AutocompleteOption
+												key={String(option.value)}
+												option={option}
+												isSelected={isOptionSelected(option)}
+												onSelect={handleSheetSelect}
+											/>
+										))
+									: null}
 							</div>
-						</AdaptiveDialog.Content>
-					</AdaptiveDialog>
+						</div>
+					</AdaptiveDialog.Content>
+				</AdaptiveDialog>
 
 				{error ? (
-					<p data-slot='autocomplete-error' role='alert'>
+					<p data-slot="autocomplete-error" role="alert">
 						{error}
 					</p>
 				) : null}

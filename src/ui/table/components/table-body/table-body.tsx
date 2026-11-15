@@ -1,8 +1,10 @@
 'use client'
 
+import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { HTMLAttributes, ReactElement, ReactNode } from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableBodyProps extends HTMLAttributes<HTMLTableSectionElement> {
@@ -23,7 +25,7 @@ export const TableBody = ({
 }: ITableBodyProps): ReactElement => {
 	return (
 		<tbody
-			data-slot='table-body'
+			data-slot="table-body"
 			data-variant={variant}
 			data-fade-in={withFadeIn ? '' : undefined}
 			className={cn(className)}

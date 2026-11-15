@@ -1,6 +1,7 @@
 'use client'
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+
 import { QUERY_ARRAY_SEPARATOR } from './constants/query-array-separator'
 
 export enum ENavigationMode {
@@ -29,10 +30,7 @@ export interface IUseManageSearchParamsReturn {
 		options?: IHandlePushKeyInSearchParamsOptions,
 	) => void
 	buildQueryValue: (props: THandlePushKeyInSearchParamsProps) => string
-	buildUrlByPathnameAndQueryString: (
-		pathname: string,
-		queryString: string,
-	) => string
+	buildUrlByPathnameAndQueryString: (pathname: string, queryString: string) => string
 }
 
 /**
@@ -52,9 +50,7 @@ export const useManageSearchParams = (): IUseManageSearchParamsReturn => {
 		items.forEach((paramsItem) => {
 			const { key, value } = paramsItem
 
-			const formattedValue = Array.isArray(value)
-				? value.join(QUERY_ARRAY_SEPARATOR)
-				: value
+			const formattedValue = Array.isArray(value) ? value.join(QUERY_ARRAY_SEPARATOR) : value
 
 			if (!formattedValue) {
 				nextSearchParams.delete(key)
@@ -66,10 +62,7 @@ export const useManageSearchParams = (): IUseManageSearchParamsReturn => {
 		return nextSearchParams.toString()
 	}
 
-	const buildUrlByPathnameAndQueryString = (
-		nextPathname: string,
-		queryString: string,
-	) => {
+	const buildUrlByPathnameAndQueryString = (nextPathname: string, queryString: string) => {
 		return queryString ? `${nextPathname}?${queryString}` : nextPathname
 	}
 
@@ -79,18 +72,13 @@ export const useManageSearchParams = (): IUseManageSearchParamsReturn => {
 	) => {
 		const queryString = buildQueryValue(props)
 		const nextUrl = buildUrlByPathnameAndQueryString(pathname, queryString)
-		const currentUrl = buildUrlByPathnameAndQueryString(
-			pathname,
-			searchParams.toString(),
-		)
+		const currentUrl = buildUrlByPathnameAndQueryString(pathname, searchParams.toString())
 
 		if (nextUrl === currentUrl) {
 			return
 		}
 
-		if (
-			navigationOptions.navigationMode === ENavigationMode.BY_NO_REFRESH_SERVER
-		) {
+		if (navigationOptions.navigationMode === ENavigationMode.BY_NO_REFRESH_SERVER) {
 			window.history.replaceState(null, '', nextUrl)
 			return
 		}

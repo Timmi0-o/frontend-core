@@ -1,4 +1,5 @@
 import { Children, isValidElement, type ReactNode } from 'react'
+
 import { SELECT_DISPLAY_NAMES } from '../constants/select.constants'
 
 /**
@@ -11,9 +12,6 @@ export function hasSelectValueChild(children: ReactNode): boolean {
 			return false
 		}
 
-		return (
-			'displayName' in child.type &&
-			child.type.displayName === SELECT_DISPLAY_NAMES.VALUE
-		)
+		return 'displayName' in child.type && child.type.displayName === SELECT_DISPLAY_NAMES.VALUE
 	})
 }

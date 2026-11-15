@@ -1,9 +1,6 @@
-export const padTimeUnit = (value: number): string =>
-	String(value).padStart(2, '0')
+export const padTimeUnit = (value: number): string => String(value).padStart(2, '0')
 
-export const splitLocalDateTime = (
-	value: string,
-): { date: Date | null; time: string } => {
+export const splitLocalDateTime = (value: string): { date: Date | null; time: string } => {
 	if (!value) {
 		return { date: null, time: '09:00' }
 	}
@@ -30,10 +27,7 @@ export const composeLocalDateTime = (date: Date, time: string): string => {
 	return `${yyyy}-${mm}-${dd}T${padTimeUnit(Number(hours))}:${padTimeUnit(Number(minutes))}`
 }
 
-export const formatDateTimePickerValue = (
-	value: string,
-	locale: string,
-): string => {
+export const formatDateTimePickerValue = (value: string, locale: string): string => {
 	if (!value) {
 		return ''
 	}

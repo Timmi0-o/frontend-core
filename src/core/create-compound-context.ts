@@ -24,9 +24,7 @@ export const createCompoundContext = <T>(
 		const value = useContext(Context)
 
 		if (value === null) {
-			throw new Error(
-				`${displayName} subcomponents must be used within ${displayName}.Root`,
-			)
+			throw new Error(`${displayName} subcomponents must be used within ${displayName}.Root`)
 		}
 
 		return value

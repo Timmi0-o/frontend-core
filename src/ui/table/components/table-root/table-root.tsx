@@ -1,12 +1,9 @@
 'use client'
 
+import { forwardRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
-import {
-	forwardRef,
-	type HTMLAttributes,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 import { TableContext } from '../../context/table-context'
 import type { ITableContextValue } from '../../types/i-table-context-value'
@@ -19,10 +16,7 @@ export interface ITableRootProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const TableRootInner = forwardRef<HTMLDivElement, ITableRootProps>(
-	(
-		{ children, className, minWidth, variant = 'default', ...rest },
-		ref,
-	): ReactElement => {
+	({ children, className, minWidth, variant = 'default', ...rest }, ref): ReactElement => {
 		const visualVariant = variant === 'unstyled' ? 'default' : variant
 		const contextValue: ITableContextValue = {
 			minWidth,
@@ -33,7 +27,7 @@ const TableRootInner = forwardRef<HTMLDivElement, ITableRootProps>(
 			<TableContext.Provider value={contextValue}>
 				<div
 					ref={ref}
-					data-slot='table-root'
+					data-slot="table-root"
 					data-variant={variant}
 					className={cn(className)}
 					{...rest}

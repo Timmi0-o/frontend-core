@@ -1,13 +1,13 @@
-[data-ui-kit='admin'][data-slot='popover-positioner']:not([data-variant='unstyled']){
+[data-ui-kit='admin'][data-slot='popover-positioner']:not([data-variant='unstyled']) {
 	z-index: 1205;
 	pointer-events: auto;
 }
 
-[data-ui-kit='admin'] [data-slot='popover-anchor']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='popover-anchor']:not([data-variant='unstyled']) {
 	width: 100%;
 }
 
-[data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='popover-content']:not([data-variant='unstyled']) {
 	outline: none;
 	background: transparent;
 }
@@ -15,7 +15,7 @@
 [data-ui-kit='admin']
 	[data-slot='popover-content']:not([data-variant='unstyled']):not(
 		:has([data-slot='select-dropdown'])
-	)[data-open]{
+	)[data-open] {
 	animation: tg-overlay-surface-in var(--overlay-surface-duration-in)
 		var(--motion-easing-overlay-surface-enter) both;
 }
@@ -23,7 +23,7 @@
 [data-ui-kit='admin']
 	[data-slot='popover-content']:not([data-variant='unstyled']):not(
 		:has([data-slot='select-dropdown'])
-	)[data-ending-style]{
+	)[data-ending-style] {
 	animation: tg-overlay-surface-out var(--overlay-surface-duration-out)
 		var(--motion-easing-overlay-surface-exit) both;
 }
@@ -31,14 +31,14 @@
 [data-ui-kit='admin']
 	[data-slot='popover-content']:not([data-variant='unstyled']):has(
 		[data-slot='select-dropdown']
-	)[data-open]{
+	)[data-open] {
 	animation: tg-admin-popover-select-in var(--motion-duration-fast) var(--motion-easing-enter);
 }
 
 [data-ui-kit='admin']
 	[data-slot='popover-content']:not([data-variant='unstyled']):has(
 		[data-slot='select-dropdown']
-	)[data-ending-style]{
+	)[data-ending-style] {
 	animation: tg-admin-popover-select-out var(--motion-duration-micro) var(--motion-easing-exit);
 }
 
@@ -66,7 +66,7 @@
 	}
 }
 
-[data-ui-kit='admin'] [data-slot='popover-panel']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='popover-panel']:not([data-variant='unstyled']) {
 	border-radius: min(32px, var(--radius-3xl));
 	padding: 1rem;
 	z-index: 50;
@@ -74,4 +74,3 @@
 	background: var(--overlay-bg);
 	box-shadow: var(--overlay-shadow);
 }
-

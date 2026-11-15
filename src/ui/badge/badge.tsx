@@ -28,15 +28,7 @@ export type {
  */
 export const Badge = forwardRef<HTMLSpanElement, IBadgeProps>(
 	(
-		{
-			variant = 'default',
-			placement,
-			position = 'static',
-			content,
-			className,
-			children,
-			...props
-		},
+		{ variant = 'default', placement, position = 'static', content, className, children, ...props },
 		ref,
 	): ReactElement => {
 		const resolvedPlacement = resolveBadgePlacement(placement ?? position)
@@ -48,7 +40,7 @@ export const Badge = forwardRef<HTMLSpanElement, IBadgeProps>(
 				<span
 					{...props}
 					ref={ref}
-					data-slot='badge'
+					data-slot="badge"
 					data-variant={variant}
 					className={cn(className)}
 				>
@@ -58,10 +50,10 @@ export const Badge = forwardRef<HTMLSpanElement, IBadgeProps>(
 		}
 
 		return (
-			<span ref={ref} data-slot='badge-anchor' {...props}>
+			<span ref={ref} data-slot="badge-anchor" {...props}>
 				{children}
 				<span
-					data-slot='badge'
+					data-slot="badge"
 					data-variant={variant}
 					data-placement={resolvedPlacement}
 					data-empty={!hasContent ? '' : undefined}

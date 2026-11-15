@@ -1,4 +1,5 @@
 import { useMemo, useState, type ReactElement } from 'react'
+
 import {
 	AlertBanner,
 	AutoComplete,
@@ -121,15 +122,10 @@ export const KitScenario = (): ReactElement => {
 	const [freeCancel, setFreeCancel] = useState(true)
 	const [lateCheckout, setLateCheckout] = useState(true)
 
-	const cityLabel =
-		CITY_OPTIONS.find((option) => option.value === city)?.label ?? 'Казань'
-	const hotelLabel =
-		HOTEL_OPTIONS.find((option) => option.value === hotel)?.label ??
-		'River Palace'
-	const nightsLabel =
-		NIGHTS_OPTIONS.find((option) => option.value === nights)?.label ?? '2 ночи'
-	const selectedTour =
-		TOURS.find((tour) => tour.id === selectedTourId) ?? TOURS[0]
+	const cityLabel = CITY_OPTIONS.find((option) => option.value === city)?.label ?? 'Казань'
+	const hotelLabel = HOTEL_OPTIONS.find((option) => option.value === hotel)?.label ?? 'River Palace'
+	const nightsLabel = NIGHTS_OPTIONS.find((option) => option.value === nights)?.label ?? '2 ночи'
+	const selectedTour = TOURS.find((tour) => tour.id === selectedTourId) ?? TOURS[0]
 
 	const stayLabel = useMemo(
 		() => `${formatStayDate(date)}, ${checkInTime} · ${nightsLabel}`,
@@ -147,36 +143,34 @@ export const KitScenario = (): ReactElement => {
 	}
 
 	return (
-		<div className='scenario'>
+		<div className="scenario">
 			<Breadcrumbs>
-				<Breadcrumbs.Home href='#home' />
-				<Breadcrumbs.Item href='#tours'>Туры</Breadcrumbs.Item>
+				<Breadcrumbs.Home href="#home" />
+				<Breadcrumbs.Item href="#tours">Туры</Breadcrumbs.Item>
 				<Breadcrumbs.Item>{cityLabel}</Breadcrumbs.Item>
 			</Breadcrumbs>
 
-			<AlertBanner variant='success'>
+			<AlertBanner variant="success">
 				<AlertBanner.Title>Есть свободные номера</AlertBanner.Title>
 				<AlertBanner.Description>
 					На эти даты ещё есть свободные номера — бронь держится 15 минут.
 				</AlertBanner.Description>
 			</AlertBanner>
 
-			<div className='scenario__hero'>
+			<div className="scenario__hero">
 				<div>
-					<p className='scenario__kicker'>Выбранный вариант</p>
-					<p className='scenario__hero-title'>{selectedTour.hotel}</p>
-					<p className='scenario__hero-meta'>
+					<p className="scenario__kicker">Выбранный вариант</p>
+					<p className="scenario__hero-title">{selectedTour.hotel}</p>
+					<p className="scenario__hero-meta">
 						{cityLabel} · {stayLabel} · {guest}
 					</p>
-					<div className='kit-row'>
-						<Chip variant='accent'>
-							{breakfast ? 'Завтрак' : 'Без завтрака'}
-						</Chip>
+					<div className="kit-row">
+						<Chip variant="accent">{breakfast ? 'Завтрак' : 'Без завтрака'}</Chip>
 						<Chip>2 взрослых</Chip>
-						<Chip variant='outline'>Отмена 24 ч</Chip>
+						<Chip variant="outline">Отмена 24 ч</Chip>
 					</div>
 				</div>
-				<div className='scenario__hero-price'>
+				<div className="scenario__hero-price">
 					<strong>{selectedTour.price}</strong>
 					<span>за номер</span>
 				</div>
@@ -196,33 +190,33 @@ export const KitScenario = (): ReactElement => {
 						))}
 					</SwiperCarousel>
 
-					<div className='scenario__chips'>
-						<Chip variant='accent'>Выходные</Chip>
+					<div className="scenario__chips">
+						<Chip variant="accent">Выходные</Chip>
 						<Chip>{nightsLabel}</Chip>
-						<Chip variant='outline'>Гибкие даты</Chip>
+						<Chip variant="outline">Гибкие даты</Chip>
 					</div>
 
-					<div className='scenario__form'>
-						<TextField name='guest'>
+					<div className="scenario__form">
+						<TextField name="guest">
 							<TextField.Label>Гость</TextField.Label>
 							<TextField.Input
-								size='sm'
+								size="sm"
 								value={guest}
 								onChange={(event) => setGuest(event.target.value)}
 							/>
 						</TextField>
 
 						<Select
-							label='Город'
-							size='sm'
+							label="Город"
+							size="sm"
 							options={CITY_OPTIONS}
 							value={city}
 							onChange={setCity}
 						/>
 
 						<AutoComplete
-							label='Отель'
-							size='sm'
+							label="Отель"
+							size="sm"
 							options={HOTEL_OPTIONS}
 							value={hotel}
 							onChange={(value) => {
@@ -234,73 +228,66 @@ export const KitScenario = (): ReactElement => {
 						/>
 
 						<Select
-							label='Длительность'
-							size='sm'
+							label="Длительность"
+							size="sm"
 							options={NIGHTS_OPTIONS}
 							value={nights}
 							onChange={setNights}
 						/>
 
 						<DatePicker
-							label='Заезд'
+							label="Заезд"
 							value={date}
 							onChange={setDate}
 							minDate={new Date(2020, 0, 1)}
 						/>
 
 						<TimePicker
-							label='Время заезда'
-							size='sm'
+							label="Время заезда"
+							size="sm"
 							value={checkInTime}
 							onChange={setCheckInTime}
 						/>
 
 						<Input
-							size='sm'
-							placeholder='Комментарий к брони: поздний заезд, люлька, трансфер'
-							aria-label='Комментарий'
+							size="sm"
+							placeholder="Комментарий к брони: поздний заезд, люлька, трансфер"
+							aria-label="Комментарий"
 						/>
 					</div>
 
-					<div className='scenario__toggles'>
-						<Switch
-							label='Завтрак включён'
-							isChecked={breakfast}
-							onCheckedChange={setBreakfast}
-						/>
+					<div className="scenario__toggles">
+						<Switch label="Завтрак включён" isChecked={breakfast} onCheckedChange={setBreakfast} />
 						<Checkbox
-							label='Согласен с правилами отмены'
+							label="Согласен с правилами отмены"
 							checked={agree}
 							onCheckedChange={setAgree}
 						/>
 					</div>
 				</Card.Content>
 				<Card.Footer>
-					<div className='scenario__actions'>
+					<div className="scenario__actions">
 						<Button isPending={isSearching} onClick={handleSearch}>
 							Найти варианты
 						</Button>
 						<Popover>
 							<Popover.Trigger>
-								<Button variant='ghost'>Что входит</Button>
+								<Button variant="ghost">Что входит</Button>
 							</Popover.Trigger>
-							<Popover.Content panelClassName='kit-popover-preview'>
-								<p className='kit-popover-preview__title'>{hotelLabel}</p>
-								<p className='kit-popover-preview__lead'>
-									{cityLabel} · {nightsLabel} ·{' '}
-									{breakfast ? 'завтрак' : 'без завтрака'}
+							<Popover.Content panelClassName="kit-popover-preview">
+								<p className="kit-popover-preview__title">{hotelLabel}</p>
+								<p className="kit-popover-preview__lead">
+									{cityLabel} · {nightsLabel} · {breakfast ? 'завтрак' : 'без завтрака'}
 								</p>
-								<ul className='kit-popover-preview__list'>
+								<ul className="kit-popover-preview__list">
 									<li>Завтрак «шведский стол»</li>
 									<li>Трансфер из аэропорта</li>
 									<li>Бесплатная отмена за 24 часа</li>
 								</ul>
-								<p className='kit-popover-preview__price'>
-									{selectedTour.price}
-								</p>
+								<p className="kit-popover-preview__price">{selectedTour.price}</p>
 							</Popover.Content>
 						</Popover>
-						<Button variant='outline' onClick={() => setIsSheetOpen(true)}>
+						<Button variant="outline" onClick={() => setIsSheetOpen(true)}>
 							Фильтры
 						</Button>
 					</div>
@@ -308,8 +295,8 @@ export const KitScenario = (): ReactElement => {
 			</Card>
 
 			{isSearching ? (
-				<div className='scenario__loading'>
-					<Spinner size='md' />
+				<div className="scenario__loading">
+					<Spinner size="md" />
 					<Skeleton style={{ height: 14, width: '40%' }} />
 					<Skeleton style={{ height: 72, width: '100%' }} />
 					<Skeleton style={{ height: 72, width: '100%' }} />
@@ -323,14 +310,14 @@ export const KitScenario = (): ReactElement => {
 						{ value: 'reviews', label: 'Отзывы' },
 					]}
 				>
-					<Tabs.Panel value='tours'>
+					<Tabs.Panel value="tours">
 						<Table>
 							<Table.ScrollContainer>
 								<Table.Element>
 									<Table.Head>
 										<Table.HeaderRow>
 											<Table.HeaderCell>
-												<Table.HeaderCellContent sortable sortDirection='asc'>
+												<Table.HeaderCellContent sortable sortDirection="asc">
 													Отель
 												</Table.HeaderCellContent>
 											</Table.HeaderCell>
@@ -344,9 +331,7 @@ export const KitScenario = (): ReactElement => {
 										{TOURS.map((tour) => (
 											<Table.Row
 												key={tour.id}
-												data-selected={
-													tour.id === selectedTourId ? '' : undefined
-												}
+												data-selected={tour.id === selectedTourId ? '' : undefined}
 											>
 												<Table.Cell>{tour.hotel}</Table.Cell>
 												<Table.Cell>{tour.room}</Table.Cell>
@@ -354,17 +339,11 @@ export const KitScenario = (): ReactElement => {
 												<Table.Cell>{tour.price}</Table.Cell>
 												<Table.Cell width={118}>
 													<Button
-														size='sm'
-														variant={
-															tour.id === selectedTourId
-																? 'primary'
-																: 'outline'
-														}
+														size="sm"
+														variant={tour.id === selectedTourId ? 'primary' : 'outline'}
 														onClick={() => handlePickTour(tour.id)}
 													>
-														{tour.id === selectedTourId
-															? 'Выбран'
-															: 'Выбрать'}
+														{tour.id === selectedTourId ? 'Выбран' : 'Выбрать'}
 													</Button>
 												</Table.Cell>
 											</Table.Row>
@@ -374,17 +353,17 @@ export const KitScenario = (): ReactElement => {
 							</Table.ScrollContainer>
 						</Table>
 					</Tabs.Panel>
-					<Tabs.Panel value='reviews'>
-						<div className='scenario__reviews'>
+					<Tabs.Panel value="reviews">
+						<div className="scenario__reviews">
 							{REVIEWS.map((review) => (
-								<article key={review.name} className='scenario__review'>
-									<Avatar size='sm'>
+								<article key={review.name} className="scenario__review">
+									<Avatar size="sm">
 										<Avatar.Fallback>{review.initials}</Avatar.Fallback>
 									</Avatar>
 									<div>
-										<div className='scenario__review-head'>
+										<div className="scenario__review-head">
 											<strong>{review.name}</strong>
-											<Chip variant='outline'>{review.stay}</Chip>
+											<Chip variant="outline">{review.stay}</Chip>
 										</div>
 										<p>{review.text}</p>
 									</div>
@@ -395,37 +374,28 @@ export const KitScenario = (): ReactElement => {
 				</Tabs>
 			)}
 
-			<div className='scenario__actions scenario__actions--end'>
-				<Button
-					isDisabled={!agree}
-					onClick={() => setIsModalOpen(true)}
-				>
+			<div className="scenario__actions scenario__actions--end">
+				<Button isDisabled={!agree} onClick={() => setIsModalOpen(true)}>
 					Забронировать {selectedTour.hotel}
 				</Button>
 			</div>
 
-			<Modal
-				open={isModalOpen}
-				onOpenChange={setIsModalOpen}
-				className='kit-modal-preview'
-			>
+			<Modal open={isModalOpen} onOpenChange={setIsModalOpen} className="kit-modal-preview">
 				<Modal.Header>
 					<Modal.Title>Подтвердить бронь</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<div className='kit-modal-preview__content'>
-						<p className='kit-modal-preview__hotel'>{selectedTour.hotel}</p>
-						<p className='kit-modal-preview__meta'>
+					<div className="kit-modal-preview__content">
+						<p className="kit-modal-preview__hotel">{selectedTour.hotel}</p>
+						<p className="kit-modal-preview__meta">
 							{cityLabel} · {stayLabel} · {guest}
 						</p>
-						<div className='kit-row'>
-							<Chip variant='accent'>
-								{breakfast ? 'Завтрак' : 'Без завтрака'}
-							</Chip>
+						<div className="kit-row">
+							<Chip variant="accent">{breakfast ? 'Завтрак' : 'Без завтрака'}</Chip>
 							<Chip>2 гостя</Chip>
-							<Chip variant='outline'>Бесплатная отмена</Chip>
+							<Chip variant="outline">Бесплатная отмена</Chip>
 						</div>
-						<dl className='kit-modal-preview__details'>
+						<dl className="kit-modal-preview__details">
 							<div>
 								<dt>Номер</dt>
 								<dd>{selectedTour.room}</dd>
@@ -443,13 +413,11 @@ export const KitScenario = (): ReactElement => {
 								<dd>{selectedTour.prepay}</dd>
 							</div>
 						</dl>
-						<p className='kit-modal-preview__sum'>
-							К оплате {selectedTour.price}
-						</p>
+						<p className="kit-modal-preview__sum">К оплате {selectedTour.price}</p>
 					</div>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant='outline' onClick={() => setIsModalOpen(false)}>
+					<Button variant="outline" onClick={() => setIsModalOpen(false)}>
 						Позже
 					</Button>
 					<Button onClick={() => setIsModalOpen(false)}>Подтвердить</Button>
@@ -459,51 +427,46 @@ export const KitScenario = (): ReactElement => {
 			<BottomSheet
 				open={isSheetOpen}
 				onOpenChange={setIsSheetOpen}
-				title='Фильтры поиска'
-				height='min(72vh, 560px)'
+				title="Фильтры поиска"
+				height="min(72vh, 560px)"
 			>
-				<div className='kit-sheet-preview'>
-					<p className='kit-sheet-preview__lead'>
+				<div className="kit-sheet-preview">
+					<p className="kit-sheet-preview__lead">
 						{cityLabel} · {stayLabel} · 2 взрослых
 					</p>
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Условия</p>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Условия</p>
 						<Checkbox
-							label='Бесплатная отмена за 24 часа'
+							label="Бесплатная отмена за 24 часа"
 							checked={freeCancel}
 							onCheckedChange={setFreeCancel}
 						/>
 						<Checkbox
-							label='Поздний выезд до 16:00'
+							label="Поздний выезд до 16:00"
 							checked={lateCheckout}
 							onCheckedChange={setLateCheckout}
 						/>
-						<Checkbox
-							label='Только отели 4 звезды и выше'
-							defaultChecked
-						/>
+						<Checkbox label="Только отели 4 звезды и выше" defaultChecked />
 					</div>
-					<div className='kit-sheet-preview__group'>
-						<p className='kit-sheet-preview__label'>Дополнительно</p>
-						<div className='kit-row'>
-							<Chip variant='accent' clickable>
+					<div className="kit-sheet-preview__group">
+						<p className="kit-sheet-preview__label">Дополнительно</p>
+						<div className="kit-row">
+							<Chip variant="accent" clickable>
 								Центр
 							</Chip>
-							<Chip clickable variant='outline'>
+							<Chip clickable variant="outline">
 								Бассейн
 							</Chip>
-							<Chip clickable variant='outline'>
+							<Chip clickable variant="outline">
 								Парковка
 							</Chip>
 						</div>
 					</div>
-					<div className='kit-sheet-preview__actions'>
-						<Button variant='ghost' onClick={() => setIsSheetOpen(false)}>
+					<div className="kit-sheet-preview__actions">
+						<Button variant="ghost" onClick={() => setIsSheetOpen(false)}>
 							Сбросить
 						</Button>
-						<Button onClick={() => setIsSheetOpen(false)}>
-							Показать варианты
-						</Button>
+						<Button onClick={() => setIsSheetOpen(false)}>Показать варианты</Button>
 					</div>
 				</div>
 			</BottomSheet>

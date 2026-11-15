@@ -1,9 +1,11 @@
 'use client'
 
+import type { ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import { Spinner } from '@/ui/spinner/spinner'
-import type { ReactElement } from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableLoadingProps {
@@ -19,13 +21,13 @@ export const TableLoading = ({
 }: ITableLoadingProps): ReactElement => {
 	return (
 		<div
-			data-slot='table-loading'
+			data-slot="table-loading"
 			data-variant={variant}
 			className={cn(className)}
-			role='status'
-			aria-live='polite'
+			role="status"
+			aria-live="polite"
 		>
-			<Spinner size='md' />
+			<Spinner size="md" />
 			<p>{label}</p>
 		</div>
 	)

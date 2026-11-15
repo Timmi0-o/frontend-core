@@ -1,7 +1,8 @@
 'use client'
 
-import { TimeColumns } from '@/ui/time-columns/time-columns'
 import type { ReactElement } from 'react'
+
+import { TimeColumns } from '@/ui/time-columns/time-columns'
 
 import { useDateTimePickerContext } from '../context/date-time-picker-context'
 

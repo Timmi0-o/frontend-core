@@ -1,6 +1,7 @@
 'use client'
 
 import { useCallback, useMemo, useState } from 'react'
+
 import { SELECT_DROPDOWN_MIN_WIDTH_PX } from '../constants/select.constants'
 import type { TSelectValue } from '../types/i-select-context-value'
 import type {
@@ -12,11 +13,7 @@ import type {
 import { getSelectTriggerLabel } from '../utils/get-select-trigger-label'
 
 export const useSelect = <T extends string | number>(props: ISelectProps<T>) => {
-	const {
-		options,
-		isLoading = false,
-		minDropdownWidth = SELECT_DROPDOWN_MIN_WIDTH_PX,
-	} = props
+	const { options, isLoading = false, minDropdownWidth = SELECT_DROPDOWN_MIN_WIDTH_PX } = props
 
 	const selectionMode = props.selectionMode ?? 'single'
 	const isMultiselect = selectionMode === 'multiselect'
@@ -24,9 +21,7 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 
 	const [isOpen, setIsOpen] = useState(false)
 
-	const valueSingle = !isMultiselect
-		? ((props as ISelectSingleProps<T>).value ?? null)
-		: undefined
+	const valueSingle = !isMultiselect ? ((props as ISelectSingleProps<T>).value ?? null) : undefined
 	const valueMulti: T[] | undefined = isMultiselect
 		? ((props as ISelectMultiselectProps<T>).value ?? [])
 		: undefined
@@ -41,19 +36,12 @@ export const useSelect = <T extends string | number>(props: ISelectProps<T>) => 
 
 	const selectedOptionsMulti = useMemo(
 		() =>
-			valueMulti !== undefined
-				? options.filter((option) => valueMulti.includes(option.value))
-				: [],
+			valueMulti !== undefined ? options.filter((option) => valueMulti.includes(option.value)) : [],
 		[options, valueMulti],
 	)
 
 	const selectedItems = useMemo(
-		() =>
-			isMultiselect
-				? selectedOptionsMulti
-				: selectedSingle
-					? [selectedSingle]
-					: [],
+		() => (isMultiselect ? selectedOptionsMulti : selectedSingle ? [selectedSingle] : []),
 		[isMultiselect, selectedOptionsMulti, selectedSingle],
 	)
 

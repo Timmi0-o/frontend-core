@@ -1,4 +1,5 @@
 import type { ZodSchema } from 'zod'
+
 import type { IApiResponseMapper } from '../contracts/api-response/types/i-api-response-mapper'
 import type { TAppFetcher } from './i-app-fetcher'
 
@@ -36,10 +37,7 @@ export type TResolvedActionError = {
  * }
  * ```
  */
-export type TResolveActionError = (
-	message: string,
-	code?: string,
-) => Promise<TResolvedActionError>
+export type TResolveActionError = (message: string, code?: string) => Promise<TResolvedActionError>
 
 /**
  * Зависимости `abstractGetAction` / `abstractMutateAction`: транспорт, маппер ответа и обработка ошибок.

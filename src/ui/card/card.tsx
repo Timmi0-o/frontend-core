@@ -1,12 +1,12 @@
 'use client'
 
+import type { HTMLAttributes, KeyboardEvent, ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
 import type { ICompoundChildProps } from '@/core/types/i-create-compound-component.types'
-import type { HTMLAttributes, KeyboardEvent, ReactElement } from 'react'
 
-export interface ICardRootProps
-	extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
+export interface ICardRootProps extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
 	className?: string
 	variant?: TSlotVariant
 	isClickable?: boolean
@@ -36,7 +36,7 @@ const CardRoot = ({
 
 	return (
 		<div
-			data-slot='card'
+			data-slot="card"
 			data-variant={variant}
 			data-clickable={isClickable ? '' : undefined}
 			className={cn(className)}
@@ -52,8 +52,7 @@ const CardRoot = ({
 
 CardRoot.displayName = 'Card'
 
-export interface ICardHeaderProps
-	extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
+export interface ICardHeaderProps extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -65,12 +64,7 @@ const CardHeader = ({
 	...rest
 }: ICardHeaderProps): ReactElement => {
 	return (
-		<div
-			data-slot='card-header'
-			data-variant={variant}
-			className={cn(className)}
-			{...rest}
-		>
+		<div data-slot="card-header" data-variant={variant} className={cn(className)} {...rest}>
 			{children}
 		</div>
 	)
@@ -78,8 +72,7 @@ const CardHeader = ({
 
 CardHeader.displayName = 'Card.Header'
 
-export interface ICardTitleProps
-	extends ICompoundChildProps, HTMLAttributes<HTMLHeadingElement> {
+export interface ICardTitleProps extends ICompoundChildProps, HTMLAttributes<HTMLHeadingElement> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -91,12 +84,7 @@ const CardTitle = ({
 	...rest
 }: ICardTitleProps): ReactElement => {
 	return (
-		<h3
-			data-slot='card-title'
-			data-variant={variant}
-			className={cn(className)}
-			{...rest}
-		>
+		<h3 data-slot="card-title" data-variant={variant} className={cn(className)} {...rest}>
 			{children}
 		</h3>
 	)
@@ -117,12 +105,7 @@ const CardDescription = ({
 	...rest
 }: ICardDescriptionProps): ReactElement => {
 	return (
-		<p
-			data-slot='card-description'
-			data-variant={variant}
-			className={cn(className)}
-			{...rest}
-		>
+		<p data-slot="card-description" data-variant={variant} className={cn(className)} {...rest}>
 			{children}
 		</p>
 	)
@@ -130,8 +113,7 @@ const CardDescription = ({
 
 CardDescription.displayName = 'Card.Description'
 
-export interface ICardContentProps
-	extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
+export interface ICardContentProps extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -143,12 +125,7 @@ const CardContent = ({
 	...rest
 }: ICardContentProps): ReactElement => {
 	return (
-		<div
-			data-slot='card-content'
-			data-variant={variant}
-			className={cn(className)}
-			{...rest}
-		>
+		<div data-slot="card-content" data-variant={variant} className={cn(className)} {...rest}>
 			{children}
 		</div>
 	)
@@ -156,8 +133,7 @@ const CardContent = ({
 
 CardContent.displayName = 'Card.Content'
 
-export interface ICardFooterProps
-	extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
+export interface ICardFooterProps extends ICompoundChildProps, HTMLAttributes<HTMLDivElement> {
 	className?: string
 	variant?: TSlotVariant
 }
@@ -169,12 +145,7 @@ const CardFooter = ({
 	...rest
 }: ICardFooterProps): ReactElement => {
 	return (
-		<div
-			data-slot='card-footer'
-			data-variant={variant}
-			className={cn(className)}
-			{...rest}
-		>
+		<div data-slot="card-footer" data-variant={variant} className={cn(className)} {...rest}>
 			{children}
 		</div>
 	)

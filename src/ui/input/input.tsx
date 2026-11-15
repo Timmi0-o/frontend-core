@@ -1,11 +1,5 @@
 'use client'
 
-import { cn } from '@/core/cn'
-import {
-	createCompoundContext,
-	type ICompoundChildProps,
-} from '@/core/create-compound-context'
-import type { TSlotVariant } from '@/core/slot-variant'
 import {
 	forwardRef,
 	useCallback,
@@ -18,6 +12,10 @@ import {
 	type ReactElement,
 	type ReactNode,
 } from 'react'
+
+import { cn } from '@/core/cn'
+import { createCompoundContext, type ICompoundChildProps } from '@/core/create-compound-context'
+import type { TSlotVariant } from '@/core/slot-variant'
 
 export type IInputSize = 'xs' | 'sm' | 'md' | 'lg'
 export type TInputVariant = TSlotVariant | 'light' | 'secondary'
@@ -32,33 +30,18 @@ interface IInputContextValue {
 	clear: () => void
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<IInputContextValue>('Input')
+const { Context, useCompoundContext } = createCompoundContext<IInputContextValue>('Input')
 
 const ClearIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 16 16'
-			width='16'
-			height='16'
-			fill='none'
-			aria-hidden='true'
-		>
-			<path
-				d='M4 4l8 8M12 4l-8 8'
-				stroke='currentColor'
-				strokeWidth='1.5'
-				strokeLinecap='round'
-			/>
+		<svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+			<path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
 		</svg>
 	)
 }
 
 const clearNativeInputValue = (input: HTMLInputElement): void => {
-	const valueSetter = Object.getOwnPropertyDescriptor(
-		HTMLInputElement.prototype,
-		'value',
-	)?.set
+	const valueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')?.set
 
 	valueSetter?.call(input, '')
 	input.dispatchEvent(new Event('input', { bubbles: true }))
@@ -84,9 +67,9 @@ const InputClearButton = (): ReactElement | null => {
 
 	return (
 		<button
-			type='button'
-			data-slot='input-clear'
-			aria-label='Очистить'
+			type="button"
+			data-slot="input-clear"
+			aria-label="Очистить"
 			onMouseDown={(event) => {
 				event.preventDefault()
 			}}
@@ -118,9 +101,7 @@ const InputRoot = ({
 			return
 		}
 
-		const field = rootRef.current?.querySelector<HTMLInputElement>(
-			'[data-slot="input-field"]',
-		)
+		const field = rootRef.current?.querySelector<HTMLInputElement>('[data-slot="input-field"]')
 
 		if (!field) {
 			return
@@ -146,7 +127,7 @@ const InputRoot = ({
 		>
 			<div
 				ref={rootRef}
-				data-slot='input'
+				data-slot="input"
 				data-size={size}
 				data-invalid={invalid ? '' : undefined}
 				data-disabled={isDisabled ? '' : undefined}
@@ -212,7 +193,7 @@ const InputField = forwardRef<HTMLInputElement, IInputFieldProps>(
 			<input
 				{...rest}
 				ref={ref}
-				data-slot='input-field'
+				data-slot="input-field"
 				data-variant={variant}
 				disabled={isFieldDisabled}
 				aria-invalid={isInvalid || undefined}

@@ -1,13 +1,10 @@
 'use client'
 
+import { forwardRef, type HTMLAttributes, type ReactElement, type ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import {
-	forwardRef,
-	type HTMLAttributes,
-	type ReactElement,
-	type ReactNode,
-} from 'react'
+
 import { TABLE_DISPLAY_NAMES } from '../../constants/table.constants'
 
 export interface ITableRowProps extends HTMLAttributes<HTMLTableRowElement> {
@@ -17,14 +14,11 @@ export interface ITableRowProps extends HTMLAttributes<HTMLTableRowElement> {
 }
 
 const TableRowInner = forwardRef<HTMLTableRowElement, ITableRowProps>(
-	(
-		{ children, className, minWidth, variant = 'default', style, ...rest },
-		ref,
-	): ReactElement => {
+	({ children, className, minWidth, variant = 'default', style, ...rest }, ref): ReactElement => {
 		return (
 			<tr
 				ref={ref}
-				data-slot='table-row'
+				data-slot="table-row"
 				data-variant={variant}
 				className={cn(className)}
 				style={{

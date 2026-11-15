@@ -60,22 +60,31 @@
 }
 
 [data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled']):hover,
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],
-[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,
-[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted],
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-highlighted],
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled']):hover,
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-highlighted],
 [data-ui-kit='social'] [data-slot='context-menu-item']:not([data-variant='unstyled']):hover,
-[data-ui-kit='social'] [data-slot='context-menu-item']:not([data-variant='unstyled'])[data-highlighted] {
+[data-ui-kit='social']
+	[data-slot='context-menu-item']:not([data-variant='unstyled'])[data-highlighted] {
 	background: var(--menu-item-hover);
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive'],
-[data-ui-kit='social'] [data-slot='context-menu-item']:not([data-variant='unstyled'])[data-variant='destructive'] {
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-variant='destructive'],
+[data-ui-kit='social']
+	[data-slot='context-menu-item']:not([data-variant='unstyled'])[data-variant='destructive'] {
 	color: var(--danger);
 }
 
-[data-ui-kit='social'] [data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],
-[data-ui-kit='social'] [data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled],
-[data-ui-kit='social'] [data-slot='context-menu-item']:not([data-variant='unstyled'])[data-disabled] {
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-item']:not([data-variant='unstyled'])[data-disabled],
+[data-ui-kit='social']
+	[data-slot='dropdown-menu-checkbox-item']:not([data-variant='unstyled'])[data-disabled],
+[data-ui-kit='social']
+	[data-slot='context-menu-item']:not([data-variant='unstyled'])[data-disabled] {
 	pointer-events: none;
 	opacity: 0.35;
 }

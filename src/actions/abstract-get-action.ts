@@ -11,10 +11,7 @@ import type { IHttpParams, TAppFetcher } from './types/i-app-fetcher'
  * Общий GET server action: фильтры → query, fetch через переданный fetcher, ответ через mapper.
  * Вызывать из доменных getMany/getOne, передавая `fetcher` и `responseMapper`.
  */
-export const abstractGetAction = async <
-	TData,
-	TFilters = Record<string, unknown>,
->(
+export const abstractGetAction = async <TData, TFilters = Record<string, unknown>>(
 	options: IGetActionOptions<TFilters> & { url: string },
 	requestWorkers: IGetActionRequestWorkers<TFilters>,
 ): Promise<IAppActionResponse<TData>> => {
@@ -45,14 +42,10 @@ export const abstractGetAction = async <
 		isPublic,
 	})
 
-	const errorResult = await ErrorObjectSetup(
-		res,
-		requestWorkers.responseMapper,
-		{
-			resolveActionError: requestWorkers.resolveActionError,
-			onError: requestWorkers.onError,
-		},
-	)
+	const errorResult = await ErrorObjectSetup(res, requestWorkers.responseMapper, {
+		resolveActionError: requestWorkers.resolveActionError,
+		onError: requestWorkers.onError,
+	})
 
 	if (errorResult?.error) {
 		if (errorResult.error.statusCode === 404 && isArray) {
@@ -65,8 +58,7 @@ export const abstractGetAction = async <
 		? await requestWorkers.streamResponseParser(res)
 		: await res.json()
 
-	const formattedResponseData: IAppActionResponse<TData> =
-		requestWorkers.responseMapper(data)
+	const formattedResponseData: IAppActionResponse<TData> = requestWorkers.responseMapper(data)
 
 	if (!isArray && !formattedResponseData.result?.data) {
 		return {

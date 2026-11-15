@@ -1,4 +1,5 @@
 import { createCompoundContext } from '@/core/create-compound-context'
+
 import { TABLE_DISPLAY_NAMES } from '../constants/table.constants'
 import type { ITableContextValue } from '../types/i-table-context-value'
 

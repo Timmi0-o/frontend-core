@@ -1,9 +1,10 @@
-import type { ICalendarGridDay } from '@/ui/date-picker/utils/date-picker-date.util'
 import type {
 	TDatePickerSize,
 	TDatePickerVisualVariant,
 	TDatePickerViewMode,
 } from '@/ui/date-picker/types/i-date-picker-props'
+import type { ICalendarGridDay } from '@/ui/date-picker/utils/date-picker-date.util'
+
 import type { IDateRangeValue } from './i-range-date-picker-props'
 
 export interface IRangeDatePickerContextValue {

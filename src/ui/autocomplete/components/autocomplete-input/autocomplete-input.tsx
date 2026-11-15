@@ -1,9 +1,11 @@
 'use client'
 
+import type { ReactElement } from 'react'
+
 import { cn } from '@/core/cn'
 import { resolveChildSlotVariant } from '@/core/slot-variant'
 import { Popover } from '@/ui/popover/popover'
-import type { ReactElement } from 'react'
+
 import { AUTOCOMPLETE_DISPLAY_NAMES } from '../../constants/autocomplete.constants'
 import { useAutocompleteContext } from '../../context/autocomplete-context'
 import type { IAutocompleteInputProps } from '../../types/i-autocomplete-props'
@@ -33,26 +35,26 @@ export const AutocompleteInput = ({
 			<div>
 				<input
 					{...rest}
-					type='text'
+					type="text"
 					value={inputValue}
 					disabled={isDisabled}
-					autoComplete='off'
+					autoComplete="off"
 					placeholder={placeholder}
 					onChange={handleInputChange}
 					onFocus={handleInputFocus}
 					onBlur={handleInputBlur}
-					data-slot='autocomplete-input'
+					data-slot="autocomplete-input"
 					data-size={size}
 					data-variant={variant}
 					data-disabled={isDisabled ? '' : undefined}
 					data-loading={isLoading ? '' : undefined}
 					data-open={isOpen ? '' : undefined}
 					className={cn(className)}
-					role='combobox'
+					role="combobox"
 					aria-busy={isLoading}
 					aria-expanded={isOpen}
 					aria-controls={isOpen ? listboxId : undefined}
-					aria-autocomplete='list'
+					aria-autocomplete="list"
 					aria-label={placeholder}
 				/>
 			</div>

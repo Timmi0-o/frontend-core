@@ -1,6 +1,4 @@
-export type {
-	IApiResponseMapper,
-} from './i-api-response-mapper'
+export type { IApiResponseMapper } from './i-api-response-mapper'
 export type {
 	IAppActionResponse,
 	IAppActionResponseError,

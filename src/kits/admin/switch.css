@@ -1,4 +1,4 @@
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']) {
 	position: relative;
 	display: inline-flex;
 	height: 1.25rem;
@@ -18,28 +18,32 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']):hover:not([data-disabled]):not([data-checked]){
+[data-ui-kit='admin']
+	[data-slot='switch']:not([data-variant='unstyled']):hover:not([data-disabled]):not(
+		[data-checked]
+	) {
 	background: color-mix(in oklab, var(--default), transparent 20%);
 }
 
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']):hover:not([data-disabled])[data-checked]{
+[data-ui-kit='admin']
+	[data-slot='switch']:not([data-variant='unstyled']):hover:not([data-disabled])[data-checked] {
 	background: var(--accent-hover);
 }
 
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']):focus-visible{
+[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled']):focus-visible {
 	box-shadow: var(--focus-ring);
 }
 
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled'])[data-checked]{
+[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled'])[data-checked] {
 	background: var(--accent);
 }
 
-[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled'])[data-disabled]{
+[data-ui-kit='admin'] [data-slot='switch']:not([data-variant='unstyled'])[data-disabled] {
 	cursor: not-allowed;
 	opacity: var(--disabled-opacity);
 }
 
-[data-ui-kit='admin'] [data-slot='switch-thumb']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='switch-thumb']:not([data-variant='unstyled']) {
 	pointer-events: none;
 	position: absolute;
 	top: 50%;
@@ -59,7 +63,10 @@
 		box-shadow var(--motion-duration-fast) var(--motion-easing-control);
 }
 
-[data-ui-kit='admin'] [data-slot='switch'][data-checked] [data-slot='switch-thumb']:not([data-variant='unstyled']),[data-ui-kit='admin'] [data-slot='switch-thumb']:not([data-variant='unstyled'])[data-checked]{
+[data-ui-kit='admin']
+	[data-slot='switch'][data-checked]
+	[data-slot='switch-thumb']:not([data-variant='unstyled']),
+[data-ui-kit='admin'] [data-slot='switch-thumb']:not([data-variant='unstyled'])[data-checked] {
 	left: calc(100% - 1.5rem);
 	background: var(--accent-foreground);
 	box-shadow:
@@ -68,7 +75,7 @@
 		0 0 1px 0 rgb(0 0 0 / 0.3);
 }
 
-[data-ui-kit='admin'] [data-slot='switch-field']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='switch-field']:not([data-variant='unstyled']) {
 	display: inline-flex;
 	max-width: 100%;
 	align-items: center;
@@ -77,17 +84,18 @@
 	user-select: none;
 }
 
-[data-ui-kit='admin'] [data-slot='switch-field']:not([data-variant='unstyled'])[data-label-position='start']{
+[data-ui-kit='admin']
+	[data-slot='switch-field']:not([data-variant='unstyled'])[data-label-position='start'] {
 	width: 100%;
 	flex-direction: row-reverse;
 	justify-content: space-between;
 }
 
-[data-ui-kit='admin'] [data-slot='switch-field']:not([data-variant='unstyled'])[data-disabled]{
+[data-ui-kit='admin'] [data-slot='switch-field']:not([data-variant='unstyled'])[data-disabled] {
 	cursor: not-allowed;
 }
 
-[data-ui-kit='admin'] [data-slot='switch-label']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='switch-label']:not([data-variant='unstyled']) {
 	display: flex;
 	min-width: 0;
 	flex-direction: column;
@@ -99,18 +107,22 @@
 	color: var(--foreground);
 }
 
-[data-ui-kit='admin'] [data-slot='switch-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin'] [data-slot='switch-description']:not([data-variant='unstyled']) {
 	font-size: 0.75rem;
 	line-height: 1rem;
 	font-weight: 400;
 	color: var(--muted);
 }
 
-[data-ui-kit='admin'] [data-slot='switch-field'][data-disabled] [data-slot='switch-label']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='switch-field'][data-disabled]
+	[data-slot='switch-label']:not([data-variant='unstyled']) {
 	color: var(--muted);
 	opacity: var(--disabled-opacity);
 }
 
-[data-ui-kit='admin'] [data-slot='switch-field'][data-disabled] [data-slot='switch-description']:not([data-variant='unstyled']){
+[data-ui-kit='admin']
+	[data-slot='switch-field'][data-disabled]
+	[data-slot='switch-description']:not([data-variant='unstyled']) {
 	color: var(--muted);
 }

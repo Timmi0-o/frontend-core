@@ -66,11 +66,7 @@
 	--success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
 	--warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
 	--danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
-	--field-hover: color-mix(
-		in oklab,
-		var(--field-background) 90%,
-		var(--field-foreground) 2%
-	);
+	--field-hover: color-mix(in oklab, var(--field-background) 90%, var(--field-foreground) 2%);
 	--field-focus: var(--field-background);
 	--field-border-hover: color-mix(in oklab, var(--border) 88%, var(--field-foreground) 10%);
 	--field-border-focus: color-mix(in oklab, var(--border) 74%, var(--field-foreground) 22%);
@@ -92,13 +88,9 @@
 	--success-soft-hover: color-mix(in oklab, var(--success) 20%, transparent);
 
 	--surface-shadow:
-		0 2px 4px 0 rgb(0 0 0 / 0.04),
-		0 1px 2px 0 rgb(0 0 0 / 0.06),
-		0 0 1px 0 rgb(0 0 0 / 0.06);
+		0 2px 4px 0 rgb(0 0 0 / 0.04), 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 0 1px 0 rgb(0 0 0 / 0.06);
 	--overlay-shadow:
-		0 2px 8px 0 rgb(0 0 0 / 0.06),
-		0 -6px 12px 0 rgb(0 0 0 / 0.03),
-		0 14px 28px 0 rgb(0 0 0 / 0.08);
+		0 2px 8px 0 rgb(0 0 0 / 0.06), 0 -6px 12px 0 rgb(0 0 0 / 0.03), 0 14px 28px 0 rgb(0 0 0 / 0.08);
 	--field-shadow: var(--surface-shadow);
 	--focus-ring: 0 0 0 2px var(--background), 0 0 0 4px var(--accent);
 	--focus-field-ring: 0 0 0 2px var(--accent);
@@ -213,11 +205,7 @@ html.dark [data-ui-kit='admin'],
 	--success-hover: color-mix(in oklab, var(--success) 90%, var(--success-foreground) 10%);
 	--warning-hover: color-mix(in oklab, var(--warning) 90%, var(--warning-foreground) 10%);
 	--danger-hover: color-mix(in oklab, var(--danger) 90%, var(--danger-foreground) 10%);
-	--field-hover: color-mix(
-		in oklab,
-		var(--field-background) 90%,
-		var(--field-foreground) 2%
-	);
+	--field-hover: color-mix(in oklab, var(--field-background) 90%, var(--field-foreground) 2%);
 	--field-focus: var(--field-background);
 	--accent-soft: color-mix(in oklab, var(--accent) 12%, transparent);
 	--accent-soft-foreground: color-mix(in oklab, var(--accent) 80%, var(--foreground) 30%);

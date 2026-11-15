@@ -21,96 +21,101 @@
 }
 
 /* Жест скролла не уходит на страницу из оверлеев, списков и календаря. */
-[data-ui-kit] :where(
-	[data-slot='calendar'],
-	[data-slot='date-picker-popover'],
-	[data-slot='date-picker-years'],
-	[data-slot='modal-body'],
-	[data-slot='bottom-sheet-content'],
-	[data-slot='bottom-sheet-body'],
-	[data-slot='drawer-content'],
-	[data-slot='drawer-surface'],
-	[data-slot='drawer-body'],
-	[data-slot='select-dropdown'],
-	[data-slot='select-dropdown-list'],
-	[data-slot='autocomplete-dropdown'],
-	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='dropdown-menu-content'],
-	[data-slot='context-menu-content'],
-	[data-slot='popover-panel'],
-	[data-slot='photo-gallery-root']
-) {
+[data-ui-kit]
+	:where(
+		[data-slot='calendar'],
+		[data-slot='date-picker-popover'],
+		[data-slot='date-picker-years'],
+		[data-slot='modal-body'],
+		[data-slot='bottom-sheet-content'],
+		[data-slot='bottom-sheet-body'],
+		[data-slot='drawer-content'],
+		[data-slot='drawer-surface'],
+		[data-slot='drawer-body'],
+		[data-slot='select-dropdown'],
+		[data-slot='select-dropdown-list'],
+		[data-slot='autocomplete-dropdown'],
+		[data-slot='autocomplete-dropdown-list'],
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content'],
+		[data-slot='popover-panel'],
+		[data-slot='photo-gallery-root']
+	) {
 	overscroll-behavior: contain;
 }
 
 /* Тонкий скроллбар в акценте кита — только у реальных скролл-контейнеров. */
-[data-ui-kit] :where(
-	[data-slot='date-picker-years'],
-	[data-slot='modal-body'],
-	[data-slot='bottom-sheet-body'],
-	[data-slot='drawer-body'],
-	[data-slot='select-dropdown'],
-	[data-slot='select-dropdown-list'],
-	[data-slot='autocomplete-dropdown'],
-	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='table-scroll'],
-	[data-slot='textarea'],
-	[data-slot='dropdown-menu-content'],
-	[data-slot='context-menu-content']
-) {
+[data-ui-kit]
+	:where(
+		[data-slot='date-picker-years'],
+		[data-slot='modal-body'],
+		[data-slot='bottom-sheet-body'],
+		[data-slot='drawer-body'],
+		[data-slot='select-dropdown'],
+		[data-slot='select-dropdown-list'],
+		[data-slot='autocomplete-dropdown'],
+		[data-slot='autocomplete-dropdown-list'],
+		[data-slot='table-scroll'],
+		[data-slot='textarea'],
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content']
+	) {
 	scrollbar-width: thin;
 	scrollbar-color: color-mix(in srgb, var(--main-blue) 55%, transparent) transparent;
 }
 
-[data-ui-kit] :where(
-	[data-slot='date-picker-years'],
-	[data-slot='modal-body'],
-	[data-slot='bottom-sheet-body'],
-	[data-slot='drawer-body'],
-	[data-slot='select-dropdown'],
-	[data-slot='select-dropdown-list'],
-	[data-slot='autocomplete-dropdown'],
-	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='table-scroll'],
-	[data-slot='textarea'],
-	[data-slot='dropdown-menu-content'],
-	[data-slot='context-menu-content']
-)::-webkit-scrollbar {
+[data-ui-kit]
+	:where(
+		[data-slot='date-picker-years'],
+		[data-slot='modal-body'],
+		[data-slot='bottom-sheet-body'],
+		[data-slot='drawer-body'],
+		[data-slot='select-dropdown'],
+		[data-slot='select-dropdown-list'],
+		[data-slot='autocomplete-dropdown'],
+		[data-slot='autocomplete-dropdown-list'],
+		[data-slot='table-scroll'],
+		[data-slot='textarea'],
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content']
+	)::-webkit-scrollbar {
 	width: 4px;
 	height: 4px;
 }
 
-[data-ui-kit] :where(
-	[data-slot='date-picker-years'],
-	[data-slot='modal-body'],
-	[data-slot='bottom-sheet-body'],
-	[data-slot='drawer-body'],
-	[data-slot='select-dropdown'],
-	[data-slot='select-dropdown-list'],
-	[data-slot='autocomplete-dropdown'],
-	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='table-scroll'],
-	[data-slot='textarea'],
-	[data-slot='dropdown-menu-content'],
-	[data-slot='context-menu-content']
-)::-webkit-scrollbar-track {
+[data-ui-kit]
+	:where(
+		[data-slot='date-picker-years'],
+		[data-slot='modal-body'],
+		[data-slot='bottom-sheet-body'],
+		[data-slot='drawer-body'],
+		[data-slot='select-dropdown'],
+		[data-slot='select-dropdown-list'],
+		[data-slot='autocomplete-dropdown'],
+		[data-slot='autocomplete-dropdown-list'],
+		[data-slot='table-scroll'],
+		[data-slot='textarea'],
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content']
+	)::-webkit-scrollbar-track {
 	background: transparent;
 }
 
-[data-ui-kit] :where(
-	[data-slot='date-picker-years'],
-	[data-slot='modal-body'],
-	[data-slot='bottom-sheet-body'],
-	[data-slot='drawer-body'],
-	[data-slot='select-dropdown'],
-	[data-slot='select-dropdown-list'],
-	[data-slot='autocomplete-dropdown'],
-	[data-slot='autocomplete-dropdown-list'],
-	[data-slot='table-scroll'],
-	[data-slot='textarea'],
-	[data-slot='dropdown-menu-content'],
-	[data-slot='context-menu-content']
-)::-webkit-scrollbar-thumb {
+[data-ui-kit]
+	:where(
+		[data-slot='date-picker-years'],
+		[data-slot='modal-body'],
+		[data-slot='bottom-sheet-body'],
+		[data-slot='drawer-body'],
+		[data-slot='select-dropdown'],
+		[data-slot='select-dropdown-list'],
+		[data-slot='autocomplete-dropdown'],
+		[data-slot='autocomplete-dropdown-list'],
+		[data-slot='table-scroll'],
+		[data-slot='textarea'],
+		[data-slot='dropdown-menu-content'],
+		[data-slot='context-menu-content']
+	)::-webkit-scrollbar-thumb {
 	background-color: color-mix(in srgb, var(--main-blue) 55%, transparent);
 	border-radius: 999px;
 }

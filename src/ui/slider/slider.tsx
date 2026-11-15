@@ -1,13 +1,12 @@
 'use client'
 
 import { Slider as SliderPrimitive } from '@base-ui/react/slider'
-import { cn } from '@/core/cn'
-import {
-	createCompoundContext,
-	type ICompoundChildProps,
-} from '@/core/create-compound-context'
-import type { WithUnstyledVariant } from '@/core/slot-variant'
 import { type ReactElement, type ReactNode } from 'react'
+
+import { cn } from '@/core/cn'
+import { createCompoundContext, type ICompoundChildProps } from '@/core/create-compound-context'
+import type { WithUnstyledVariant } from '@/core/slot-variant'
+
 import { getSliderThumbCount } from './helpers/get-slider-thumb-count'
 import { renderSliderOutput } from './helpers/render-slider-output'
 import {
@@ -33,8 +32,7 @@ interface ISliderContextValue {
 	tone: TSliderTone
 }
 
-const { Context, useCompoundContext } =
-	createCompoundContext<ISliderContextValue>('Slider')
+const { Context, useCompoundContext } = createCompoundContext<ISliderContextValue>('Slider')
 
 export interface ISliderRootProps {
 	value?: TSliderValue
@@ -115,8 +113,8 @@ const SliderRoot = ({
 				form={form}
 				format={format}
 				locale={locale}
-				thumbAlignment='edge'
-				data-slot='slider'
+				thumbAlignment="edge"
+				data-slot="slider"
 				data-variant={variant}
 				data-tone={tone}
 				data-size={size}
@@ -144,11 +142,7 @@ const SliderHeader = ({
 	const variant = variantProp ?? contextVariant
 
 	return (
-		<div
-			data-slot='slider-header'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="slider-header" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)
@@ -171,7 +165,7 @@ const SliderLabel = ({
 
 	return (
 		<SliderPrimitive.Label
-			data-slot='slider-label'
+			data-slot="slider-label"
 			data-variant={variant}
 			className={cn(className)}
 		>
@@ -187,22 +181,17 @@ export interface ISliderValueProps {
 	variant?: TSliderVariant
 }
 
-const SliderValue = ({
-	className,
-	variant: variantProp,
-}: ISliderValueProps): ReactElement => {
+const SliderValue = ({ className, variant: variantProp }: ISliderValueProps): ReactElement => {
 	const { formatValue, variant: contextVariant } = useCompoundContext()
 	const variant = variantProp ?? contextVariant
 
 	return (
 		<SliderPrimitive.Value
-			data-slot='slider-value'
+			data-slot="slider-value"
 			data-variant={variant}
 			className={cn(className)}
 		>
-			{(formattedValues, values) =>
-				renderSliderOutput(formatValue, formattedValues, values)
-			}
+			{(formattedValues, values) => renderSliderOutput(formatValue, formattedValues, values)}
 		</SliderPrimitive.Value>
 	)
 }
@@ -224,7 +213,7 @@ const SliderControl = ({
 
 	return (
 		<SliderPrimitive.Control
-			data-slot='slider-control'
+			data-slot="slider-control"
 			data-variant={variant}
 			className={cn(className)}
 		>
@@ -250,7 +239,7 @@ const SliderTrack = ({
 
 	return (
 		<SliderPrimitive.Track
-			data-slot='slider-track'
+			data-slot="slider-track"
 			data-variant={variant}
 			className={cn(className)}
 		>
@@ -275,7 +264,7 @@ const SliderIndicator = ({
 
 	return (
 		<SliderPrimitive.Indicator
-			data-slot='slider-indicator'
+			data-slot="slider-indicator"
 			data-variant={variant}
 			className={cn(className)}
 		/>
@@ -289,11 +278,7 @@ export interface ISliderThumbProps {
 	className?: string
 	variant?: TSliderVariant
 	getAriaLabel?: (index: number) => string
-	getAriaValueText?: (
-		formattedValue: string,
-		value: number,
-		index: number,
-	) => string
+	getAriaValueText?: (formattedValue: string, value: number, index: number) => string
 }
 
 const SliderThumb = ({
@@ -311,7 +296,7 @@ const SliderThumb = ({
 			index={index}
 			getAriaLabel={getAriaLabel}
 			getAriaValueText={getAriaValueText}
-			data-slot='slider-thumb'
+			data-slot="slider-thumb"
 			data-variant={variant}
 			className={cn(className)}
 		/>
@@ -334,11 +319,7 @@ const SliderHints = ({
 	const variant = variantProp ?? contextVariant
 
 	return (
-		<div
-			data-slot='slider-hints'
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<div data-slot="slider-hints" data-variant={variant} className={cn(className)}>
 			{children}
 		</div>
 	)
@@ -362,12 +343,7 @@ const SliderHint = ({
 	const variant = variantProp ?? contextVariant
 
 	return (
-		<span
-			data-slot='slider-hint'
-			data-side={side}
-			data-variant={variant}
-			className={cn(className)}
-		>
+		<span data-slot="slider-hint" data-side={side} data-variant={variant} className={cn(className)}>
 			{children}
 		</span>
 	)
@@ -436,14 +412,11 @@ const SliderCombined = ({
 					{shouldShowValue ? <SliderValue /> : null}
 				</SliderHeader>
 			) : null}
-			<SliderControlTree
-				thumbCount={thumbCount}
-				ariaLabel={label ? undefined : ariaLabel}
-			/>
+			<SliderControlTree thumbCount={thumbCount} ariaLabel={label ? undefined : ariaLabel} />
 			{hasHints ? (
 				<SliderHints>
-					<SliderHint side='min'>{minLabel}</SliderHint>
-					<SliderHint side='max'>{maxLabel}</SliderHint>
+					<SliderHint side="min">{minLabel}</SliderHint>
+					<SliderHint side="max">{maxLabel}</SliderHint>
 				</SliderHints>
 			) : null}
 		</SliderRoot>

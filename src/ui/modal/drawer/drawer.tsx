@@ -1,18 +1,5 @@
 'use client'
 
-import { cn } from '@/core/cn'
-import {
-	OpenOverlayZProvider,
-	OverlayLayerProvider,
-	overlayLayerStyle,
-	useActiveOverlayZ,
-	useGuardedOverlayOpenChange,
-	useHasOverlayAbove,
-	useOverlayPortalContainer,
-} from '@/core/overlay-layer'
-import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
-import type { TSlotVariant } from '@/core/slot-variant'
-import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
 import {
 	createContext,
 	forwardRef,
@@ -24,6 +11,21 @@ import {
 	type ReactNode,
 } from 'react'
 import { Drawer as DrawerPrimitive } from 'vaul'
+
+import { cn } from '@/core/cn'
+import { shouldPreventOverlayDismiss } from '@/core/overlay-floating-target'
+import {
+	OpenOverlayZProvider,
+	OverlayLayerProvider,
+	overlayLayerStyle,
+	useActiveOverlayZ,
+	useGuardedOverlayOpenChange,
+	useHasOverlayAbove,
+	useOverlayPortalContainer,
+} from '@/core/overlay-layer'
+import type { TSlotVariant } from '@/core/slot-variant'
+import { useInheritedUiKit } from '@/core/use-inherited-ui-kit'
+
 import { OverlayCloseIcon } from '../components/overlay-close-icon/overlay-close-icon'
 
 const DEFAULT_DRAWER_TITLE = 'Панель'
@@ -85,7 +87,7 @@ function DrawerGuardedRoot({
 	return (
 		<DrawerKitContext.Provider value={uiKit}>
 			<DrawerPrimitive.Root
-				data-slot='drawer'
+				data-slot="drawer"
 				dismissible={dismissible && !hasOverlayAbove}
 				onOpenChange={handleOpenChange}
 				{...props}
@@ -97,10 +99,8 @@ function DrawerGuardedRoot({
 	)
 }
 
-function DrawerTrigger({
-	...props
-}: ComponentProps<typeof DrawerPrimitive.Trigger>): ReactElement {
-	return <DrawerPrimitive.Trigger data-slot='drawer-trigger' {...props} />
+function DrawerTrigger({ ...props }: ComponentProps<typeof DrawerPrimitive.Trigger>): ReactElement {
+	return <DrawerPrimitive.Trigger data-slot="drawer-trigger" {...props} />
 }
 
 function DrawerPortal({
@@ -115,18 +115,12 @@ function DrawerPortal({
 	}
 
 	return (
-		<DrawerPrimitive.Portal
-			data-slot='drawer-portal'
-			{...props}
-			container={resolvedContainer}
-		/>
+		<DrawerPrimitive.Portal data-slot="drawer-portal" {...props} container={resolvedContainer} />
 	)
 }
 
-function DrawerClose({
-	...props
-}: ComponentProps<typeof DrawerPrimitive.Close>): ReactElement {
-	return <DrawerPrimitive.Close data-slot='drawer-close' {...props} />
+function DrawerClose({ ...props }: ComponentProps<typeof DrawerPrimitive.Close>): ReactElement {
+	return <DrawerPrimitive.Close data-slot="drawer-close" {...props} />
 }
 
 export type IDrawerCloseButtonProps = Omit<
@@ -148,9 +142,9 @@ function DrawerCloseButton({
 		return (
 			<DrawerPrimitive.Close
 				asChild
-				data-slot='drawer-close-button'
+				data-slot="drawer-close-button"
 				data-variant={variant}
-				data-custom-control=''
+				data-custom-control=""
 				className={className}
 				aria-label={ariaLabel}
 				{...props}
@@ -162,13 +156,13 @@ function DrawerCloseButton({
 
 	return (
 		<DrawerPrimitive.Close
-			data-slot='drawer-close-button'
+			data-slot="drawer-close-button"
 			data-variant={variant}
 			className={className}
 			aria-label={ariaLabel}
 			{...props}
 		>
-			<OverlayCloseIcon data-slot='overlay-close-icon' />
+			<OverlayCloseIcon data-slot="overlay-close-icon" />
 		</DrawerPrimitive.Close>
 	)
 }
@@ -180,10 +174,7 @@ const DrawerOverlay = forwardRef<
 	ComponentProps<typeof DrawerPrimitive.Overlay> & {
 		variant?: TSlotVariant
 	}
->(function DrawerOverlay(
-	{ variant = 'default', className, style, ...props },
-	ref,
-): ReactElement {
+>(function DrawerOverlay({ variant = 'default', className, style, ...props }, ref): ReactElement {
 	const uiKit = useDrawerUiKit()
 	const overlayZ = useActiveOverlayZ()
 	const hasOverlayAbove = useHasOverlayAbove()
@@ -192,7 +183,7 @@ const DrawerOverlay = forwardRef<
 		<DrawerPrimitive.Overlay
 			ref={ref}
 			data-ui-kit={uiKit}
-			data-slot='drawer-overlay'
+			data-slot="drawer-overlay"
 			data-variant={variant}
 			className={cn(className)}
 			style={{
@@ -264,7 +255,7 @@ const DrawerContent = forwardRef<
 		<DrawerPrimitive.Content
 			ref={ref}
 			data-ui-kit={uiKit}
-			data-slot='drawer-content'
+			data-slot="drawer-content"
 			data-variant={variant}
 			className={cn(className)}
 			style={{
@@ -277,10 +268,8 @@ const DrawerContent = forwardRef<
 			onFocusOutside={handleFocusOutside}
 			{...props}
 		>
-			<div data-slot='drawer-surface' data-variant={variant}>
-				<OverlayLayerProvider overlayZ={overlayZ}>
-					{children}
-				</OverlayLayerProvider>
+			<div data-slot="drawer-surface" data-variant={variant}>
+				<OverlayLayerProvider overlayZ={overlayZ}>{children}</OverlayLayerProvider>
 			</div>
 		</DrawerPrimitive.Content>
 	)
@@ -292,12 +281,7 @@ function DrawerHeader({
 	...props
 }: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
 	return (
-		<div
-			data-slot='drawer-header'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<div data-slot="drawer-header" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -306,14 +290,7 @@ function DrawerBody({
 	variant = 'default',
 	...props
 }: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
-	return (
-		<div
-			data-slot='drawer-body'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
-	)
+	return <div data-slot="drawer-body" data-variant={variant} className={cn(className)} {...props} />
 }
 
 function DrawerFooter({
@@ -322,12 +299,7 @@ function DrawerFooter({
 	...props
 }: ComponentProps<'div'> & { variant?: TSlotVariant }): ReactElement {
 	return (
-		<div
-			data-slot='drawer-footer'
-			data-variant={variant}
-			className={cn(className)}
-			{...props}
-		/>
+		<div data-slot="drawer-footer" data-variant={variant} className={cn(className)} {...props} />
 	)
 }
 
@@ -339,10 +311,7 @@ function DrawerTitleHidden({
 	variant?: TSlotVariant
 }): ReactElement {
 	return (
-		<DrawerPrimitive.Title
-			data-slot='drawer-title-hidden'
-			data-variant={variant}
-		>
+		<DrawerPrimitive.Title data-slot="drawer-title-hidden" data-variant={variant}>
 			{children}
 		</DrawerPrimitive.Title>
 	)
@@ -358,7 +327,7 @@ function DrawerTitle({
 }): ReactElement {
 	return (
 		<DrawerPrimitive.Title
-			data-slot='drawer-title'
+			data-slot="drawer-title"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -374,7 +343,7 @@ function DrawerDescription({
 }: ComponentProps<typeof DrawerPrimitive.Description>): ReactElement {
 	return (
 		<DrawerPrimitive.Description
-			data-slot='drawer-description'
+			data-slot="drawer-description"
 			className={cn(className)}
 			{...props}
 		/>
@@ -405,11 +374,7 @@ const DrawerRoot = ({
 		>
 			<DrawerPortal>
 				<DrawerOverlay variant={variant} />
-				<DrawerContent
-					className={className}
-					style={{ width }}
-					variant={variant}
-				>
+				<DrawerContent className={className} style={{ width }} variant={variant}>
 					<DrawerTitleHidden variant={variant}>{title}</DrawerTitleHidden>
 					{children}
 				</DrawerContent>

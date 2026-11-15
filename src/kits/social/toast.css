@@ -119,12 +119,16 @@
 	text-align: center;
 }
 
-[data-ui-kit='social'] [data-sonner-toast]:not(:has([data-description])):not(:has([data-button])) [data-content] {
+[data-ui-kit='social']
+	[data-sonner-toast]:not(:has([data-description])):not(:has([data-button]))
+	[data-content] {
 	flex: 0 1 auto;
 	align-items: center;
 }
 
-[data-ui-kit='social'] [data-sonner-toast]:not(:has([data-description])):not(:has([data-button])) [data-title] {
+[data-ui-kit='social']
+	[data-sonner-toast]:not(:has([data-description])):not(:has([data-button]))
+	[data-title] {
 	text-align: center;
 	overflow-wrap: break-word;
 }

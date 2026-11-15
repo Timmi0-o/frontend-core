@@ -1,25 +1,20 @@
 'use client'
 
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
+import type { ReactElement, ReactNode } from 'react'
+
 import { cn } from '@/core/cn'
 import type { TSlotVariant } from '@/core/slot-variant'
-import type { ReactElement, ReactNode } from 'react'
 
 const ChevronDownIcon = (): ReactElement => {
 	return (
-		<svg
-			viewBox='0 0 24 24'
-			width='18'
-			height='18'
-			fill='none'
-			aria-hidden='true'
-		>
+		<svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true">
 			<path
-				d='M6 9l6 6 6-6'
-				stroke='currentColor'
-				strokeWidth='2'
-				strokeLinecap='round'
-				strokeLinejoin='round'
+				d="M6 9l6 6 6-6"
+				stroke="currentColor"
+				strokeWidth="2"
+				strokeLinecap="round"
+				strokeLinejoin="round"
 			/>
 		</svg>
 	)
@@ -36,7 +31,7 @@ const AccordionRoot = ({
 }: IAccordionRootProps): ReactNode => {
 	return (
 		<AccordionPrimitive.Root
-			data-slot='accordion'
+			data-slot="accordion"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -55,7 +50,7 @@ const AccordionItem = ({
 }: IAccordionItemProps): ReactNode => {
 	return (
 		<AccordionPrimitive.Item
-			data-slot='accordion-item'
+			data-slot="accordion-item"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -74,7 +69,7 @@ const AccordionHeader = ({
 }: IAccordionHeaderProps): ReactNode => {
 	return (
 		<AccordionPrimitive.Header
-			data-slot='accordion-header'
+			data-slot="accordion-header"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
@@ -94,13 +89,13 @@ const AccordionTrigger = ({
 }: IAccordionTriggerProps): ReactNode => {
 	return (
 		<AccordionPrimitive.Trigger
-			data-slot='accordion-trigger'
+			data-slot="accordion-trigger"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
 		>
 			{children}
-			<span data-slot='accordion-trigger-icon' aria-hidden='true'>
+			<span data-slot="accordion-trigger-icon" aria-hidden="true">
 				<ChevronDownIcon />
 			</span>
 		</AccordionPrimitive.Trigger>
@@ -119,12 +114,12 @@ const AccordionPanel = ({
 }: IAccordionPanelProps): ReactNode => {
 	return (
 		<AccordionPrimitive.Panel
-			data-slot='accordion-panel'
+			data-slot="accordion-panel"
 			data-variant={variant}
 			className={cn(className)}
 			{...props}
 		>
-			<div data-slot='accordion-content'>{children}</div>
+			<div data-slot="accordion-content">{children}</div>
 		</AccordionPrimitive.Panel>
 	)
 }
