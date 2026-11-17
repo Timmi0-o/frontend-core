@@ -1,0 +1,12 @@
+---
+description: Web platform практики для ui-kit и shared UI — modern-web-guidance перед разметкой/CSS/a11y.
+alwaysApply: true
+---
+
+# Modern Web Guidance
+
+Перед изменением **компонентов ui-kit, shared UI, CSS, a11y, focus, forms primitives** в `frontend-core`:
+
+1. **Прочитай** `external-skills/modern-web-guidance-my-master/SKILL.md`.
+2. Найди гайды (`search` / `retrieve` или Read `external-skills/modern-web-guidance/skills/modern-web-guidance/guides/`).
+3. Публичный API и breaking changes — `public-api.mdc`; платформенные паттерны — из гайдов (компоненты должны оставаться доступными и предсказуемыми для next-app и admin).
