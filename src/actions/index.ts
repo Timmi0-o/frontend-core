@@ -1,6 +1,5 @@
 export { abstractGetAction } from './abstract-get-action'
 export { abstractMutateAction } from './abstract-mutate-action'
-export { getAppActionData } from './app-action-response'
 export { EMPTY_DEFAULT_API_RESPONSE, emptyDefaultApiResponse } from './constants/empty-default-api-response'
 export type {
 	IApiResponseMapper,
