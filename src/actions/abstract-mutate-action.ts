@@ -37,8 +37,8 @@ export const abstractMutateAction = async <TBody, TData = unknown>(
 		await requestWorkers.onForbiddenLogout?.()
 	}
 
-	if (errorResult?.error) {
-		return errorResult as IAppActionResponse<TData>
+	if (errorResult) {
+		return errorResult
 	}
 	onOk?.()
 

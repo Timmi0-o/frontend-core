@@ -1,4 +1,4 @@
-import { EMPTY_DEFAULT_API_RESPONSE } from './constants/empty-default-api-response'
+import { emptyDefaultApiResponse } from './constants/empty-default-api-response'
 import type { IAppActionResponse } from './contracts/api-response/types/i-app-action-response.type'
 import { createError } from './create-error'
 import { ErrorObjectSetup } from './error-object-setup'
@@ -47,11 +47,11 @@ export const abstractGetAction = async <TData, TFilters = Record<string, unknown
 		onError: requestWorkers.onError,
 	})
 
-	if (errorResult?.error) {
+	if (errorResult) {
 		if (errorResult.error.statusCode === 404 && isArray) {
-			return EMPTY_DEFAULT_API_RESPONSE as IAppActionResponse<TData>
+			return emptyDefaultApiResponse<TData>()
 		}
-		return errorResult as IAppActionResponse<TData>
+		return errorResult
 	}
 
 	const data: unknown = requestWorkers.streamResponseParser
@@ -60,11 +60,9 @@ export const abstractGetAction = async <TData, TFilters = Record<string, unknown
 
 	const formattedResponseData: IAppActionResponse<TData> = requestWorkers.responseMapper(data)
 
-	if (!isArray && !formattedResponseData.result?.data) {
+	if (!isArray && formattedResponseData.error === null && !formattedResponseData.result.data) {
 		return {
-			result: {
-				data: null,
-			},
+			result: null,
 			error: createError(404, 'Data not found', finalUrl, 'GET'),
 		}
 	}

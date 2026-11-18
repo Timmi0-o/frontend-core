@@ -1,5 +1,8 @@
 import type { IApiResponseMapper } from './contracts/api-response/types/i-api-response-mapper'
-import type { IAppActionResponseError } from './contracts/api-response/types/i-app-action-response.type'
+import type {
+	IAppActionResponseError,
+	IAppActionResponseFailure,
+} from './contracts/api-response/types/i-app-action-response.type'
 import type { TActionErrorLogger, TResolveActionError } from './types/i-action-request-workers'
 
 /**
@@ -55,5 +58,10 @@ export const ErrorObjectSetup = async (
 		}
 	}
 
-	return { result: null, error: errorData, isArray: false }
+	return {
+		result: null,
+		error: errorData,
+	}
 }
+
+export type TAppActionHttpError = IAppActionResponseFailure

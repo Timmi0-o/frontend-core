@@ -21,7 +21,14 @@ export interface IAppActionResponseError {
 	cta?: string
 }
 
-export interface IAppActionResponse<T> {
-	result: IAppActionResponseResult<T> | null
-	error: IAppActionResponseError | null
+export interface IAppActionResponseSuccess<T> {
+	result: IAppActionResponseResult<T>
+	error: null
 }
+
+export interface IAppActionResponseFailure {
+	result: null
+	error: IAppActionResponseError
+}
+
+export type IAppActionResponse<T> = IAppActionResponseSuccess<T> | IAppActionResponseFailure
