@@ -107,7 +107,7 @@ await abstractAction().GET(
 	{
 		fetcher: appFetcher,
 		responseMapper: appEndpointResponseMapper,
-		queryFilterSchema: EntityGetManyFiltersSchema,
+		requestQueryValidationSchema: EntityGetManyFiltersSchema,
 	},
 )
 ```

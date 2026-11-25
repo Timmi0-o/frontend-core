@@ -36,7 +36,7 @@ interface IExecuteActionInput<TFilters> {
 
 const readResponseData = async (
 	response: Response,
-	requestWorkers: IActionRequestWorkers<any>,
+	requestWorkers: IActionRequestWorkers,
 	useStreamParser: boolean,
 ): Promise<unknown> => {
 	if (useStreamParser) {
@@ -50,16 +50,26 @@ const readResponseData = async (
 	return response.json()
 }
 
-const executeAction = async <TData, TFilters>(
+const executeAction = async <TData, TFilters, TBody = unknown>(
 	input: IExecuteActionInput<TFilters>,
-	requestWorkers: IActionRequestWorkers<TFilters>,
+	requestWorkers: IActionRequestWorkers<TFilters, TBody>,
 ): Promise<IAppActionResponse<TData>> => {
+	const parsedBody = requestWorkers.requestBodyValidationSchema?.safeParse(input.body)
+	if (parsedBody && !parsedBody.success) {
+		const message = parsedBody.error.issues[0]?.message ?? 'Invalid request body'
+
+		return {
+			result: null,
+			error: createError(400, message, input.url, input.method),
+		}
+	}
+
 	const requestFetcher: TAppFetcher = requestWorkers.fetcher
 	const finalUrl = input.applyQueryFilters
 		? await setQueryFilters<TFilters>(
 				input.url,
 				input.filters,
-				requestWorkers.queryFilterSchema,
+				requestWorkers.requestQueryValidationSchema,
 				input.customFormatter,
 			)
 		: input.url
@@ -68,7 +78,7 @@ const executeAction = async <TData, TFilters>(
 		url: finalUrl,
 		params: {
 			method: input.method,
-			body: input.body as BodyInit | null | undefined,
+			body: (parsedBody ? parsedBody.data : input.body) as BodyInit | null | undefined,
 			cache: input.cache,
 			headers: input.headers,
 			next: input.next,
@@ -136,9 +146,9 @@ const mutateAction =
 	(method: Exclude<THttpMethod, 'GET'>) =>
 	async <TBody, TData = unknown>(
 		options: IPostActionOptions<TBody>,
-		requestWorkers: IActionRequestWorkers,
+		requestWorkers: IActionRequestWorkers<Record<string, unknown>, TBody>,
 	): Promise<IAppActionResponse<TData>> =>
-		executeAction<TData, Record<string, unknown>>(
+		executeAction<TData, Record<string, unknown>, TBody>(
 			{
 				method,
 				url: options.url,
@@ -200,19 +210,19 @@ export const abstractAction = (): {
 	) => Promise<IAppActionResponse<TData>>
 	POST: <TBody, TData = unknown>(
 		options: IPostActionOptions<TBody>,
-		requestWorkers: IActionRequestWorkers,
+		requestWorkers: IActionRequestWorkers<Record<string, unknown>, TBody>,
 	) => Promise<IAppActionResponse<TData>>
 	PUT: <TBody, TData = unknown>(
 		options: IPutActionOptions<TBody>,
-		requestWorkers: IActionRequestWorkers,
+		requestWorkers: IActionRequestWorkers<Record<string, unknown>, TBody>,
 	) => Promise<IAppActionResponse<TData>>
 	PATCH: <TBody, TData = unknown>(
 		options: IPatchActionOptions<TBody>,
-		requestWorkers: IActionRequestWorkers,
+		requestWorkers: IActionRequestWorkers<Record<string, unknown>, TBody>,
 	) => Promise<IAppActionResponse<TData>>
 	DELETE: <TBody, TData = unknown>(
 		options: IDeleteActionOptions<TBody>,
-		requestWorkers: IActionRequestWorkers,
+		requestWorkers: IActionRequestWorkers<Record<string, unknown>, TBody>,
 	) => Promise<IAppActionResponse<TData>>
 	SSE: <TData, TFilters = Record<string, unknown>>(
 		options: ISseActionOptions<TFilters>,

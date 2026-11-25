@@ -26,11 +26,11 @@ const appendRequiredIds = (searchParams: URLSearchParams, requiredIds: unknown):
 export const setQueryFilters = async <TFilters>(
 	url: string,
 	filters: IActionFilters<TFilters> | undefined,
-	queryFilterSchema?: ZodSchema<TFilters>,
+	requestQueryValidationSchema?: ZodSchema<TFilters>,
 	customFormatter?: (filters: IActionFilters<TFilters>) => Record<string, string> | undefined,
 ): Promise<string> => {
-	if (queryFilterSchema && filters) {
-		const sanitizedFilters = sanitizeQueryFiltersBySchema(queryFilterSchema, filters)
+	if (requestQueryValidationSchema && filters) {
+		const sanitizedFilters = sanitizeQueryFiltersBySchema(requestQueryValidationSchema, filters)
 
 		if (Object.keys(sanitizedFilters).length) {
 			const formattedParams = customFormatter

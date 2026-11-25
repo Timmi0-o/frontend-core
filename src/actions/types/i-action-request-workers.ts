@@ -65,7 +65,7 @@ export type TResolveActionError = (message: string, code?: string) => Promise<TR
  * await abstractAction().POST({ url: '/v1/appointments', body }, workers)
  * ```
  */
-export interface IActionRequestWorkers<TFilters = Record<string, unknown>> {
+export interface IActionRequestWorkers<TFilters = Record<string, unknown>, TBody = unknown> {
 	/**
 	 * HTTP-транспорт. Должен вернуть нативный `Response`.
 	 *
@@ -142,12 +142,26 @@ export interface IActionRequestWorkers<TFilters = Record<string, unknown>> {
 	 *
 	 * @example
 	 * ```ts
-	 * queryFilterSchema: z.object({
+	 * requestQueryValidationSchema: z.object({
 	 *   page: z.number().optional(),
 	 *   limit: z.number().optional(),
 	 *   preset: z.enum(['MINIMAL', 'SHORT', 'BASE']).optional(),
 	 * })
 	 * ```
 	 */
-	queryFilterSchema?: ZodSchema<TFilters>
+	requestQueryValidationSchema?: ZodSchema<TFilters>
+
+	/**
+	 * Zod-схема JSON-body для POST, PUT, PATCH и DELETE.
+	 * Без неё body уходит как передан. При ошибке action возвращает 400 и запрос не отправляется.
+	 *
+	 * @example
+	 * ```ts
+	 * requestBodyValidationSchema: z.object({
+	 *   name: z.string(),
+	 *   price: z.number(),
+	 * })
+	 * ```
+	 */
+	requestBodyValidationSchema?: ZodSchema<TBody>
 }
