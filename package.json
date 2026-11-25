@@ -1,6 +1,6 @@
 {
 	"name": "@timmi0-o/frontend-core",
-	"version": "0.0.203",
+	"version": "0.0.204",
 	"description": "Shared frontend primitives: UI kits, hooks, abstract actions, utils",
 	"repository": {
 		"type": "git",

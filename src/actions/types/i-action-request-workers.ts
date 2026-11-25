@@ -40,7 +40,7 @@ export type TResolvedActionError = {
 export type TResolveActionError = (message: string, code?: string) => Promise<TResolvedActionError>
 
 /**
- * Зависимости `abstractGetAction` / `abstractMutateAction`: транспорт, маппер ответа и обработка ошибок.
+ * Зависимости `abstractAction`: транспорт, маппер ответа и обработка ошибок.
  *
  * Обязательны `fetcher` и `responseMapper`. Остальное — хуки конкретного приложения.
  *
@@ -62,10 +62,10 @@ export type TResolveActionError = (message: string, code?: string) => Promise<TR
  *   resolveActionError,
  * }
  *
- * await abstractMutateAction({ url: '/v1/appointments', params: { method: 'POST', body } }, workers)
+ * await abstractAction().POST({ url: '/v1/appointments', body }, workers)
  * ```
  */
-export interface IActionRequestWorkers {
+export interface IActionRequestWorkers<TFilters = Record<string, unknown>> {
 	/**
 	 * HTTP-транспорт. Должен вернуть нативный `Response`.
 	 *
@@ -137,41 +137,8 @@ export interface IActionRequestWorkers {
 	onError?: TActionErrorLogger
 
 	/**
-	 * Вызывается из `abstractMutateAction`, если в опциях `isForbiddenLogout: true`.
-	 *
-	 * @example
-	 * ```ts
-	 * onForbiddenLogout: () => signOut()
-	 * ```
-	 */
-	onForbiddenLogout?: () => void | Promise<void>
-}
-
-/**
- * Workers для GET: всё из {@link IActionRequestWorkers} плюс Zod-схема query-фильтров.
- *
- * `queryFilterSchema` отсекает неизвестные поля и валидирует `filters` перед сборкой query string.
- *
- * @example
- * ```ts
- * await abstractGetAction(
- *   {
- *     url: '/v1/appointments',
- *     isArray: true,
- *     filters: { page: 1, limit: 20 },
- *   },
- *   {
- *     ...workers,
- *     queryFilterSchema: AppointmentsGetManyFiltersSchema,
- *   },
- * )
- * ```
- */
-export interface IGetActionRequestWorkers<
-	TFilters = Record<string, unknown>,
-> extends IActionRequestWorkers {
-	/**
-	 * Zod-схема фильтров list/getOne. Без неё в query уходят только сырые `filters`.
+	 * Zod-схема query-фильтров для GET и SSE.
+	 * Отсекает неизвестные поля перед сборкой query string. Без неё в query уходят сырые `filters`.
 	 *
 	 * @example
 	 * ```ts

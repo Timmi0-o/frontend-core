@@ -94,15 +94,15 @@ export const Example = () => {
 | `@timmi0-o/frontend-core/ui-kit/social/styles.css` | CSS кита `social`                                                                                       |
 | `@timmi0-o/frontend-core/ui-kit/admin/styles.css`  | CSS кита `admin`                                                                                        |
 | `@timmi0-o/frontend-core/hooks`                    | `useDebounceValue`, `useLocalStorage`, `useMediaQuery`, `useManageSearchParams`, `useLockBodyScroll`, … |
-| `@timmi0-o/frontend-core/actions`                  | `abstractGetAction`, `abstractMutateAction`, типы workers/fetcher/mapper                                |
+| `@timmi0-o/frontend-core/actions`                  | `abstractAction().GET/POST/PUT/PATCH/DELETE/SSE`, типы workers/fetcher/mapper                            |
 | `@timmi0-o/frontend-core/utils`                    | `base64Manager`, `multiTypeFieldParser`                                                                 |
 
 `fetcher` и `responseMapper` в либу не входят: приложение передаёт их в `requestWorkers`.
 
 ```ts
-import { abstractGetAction } from '@timmi0-o/frontend-core/actions'
+import { abstractAction } from '@timmi0-o/frontend-core/actions'
 
-await abstractGetAction(
+await abstractAction().GET(
 	{ url, filters, isPublic },
 	{
 		fetcher: appFetcher,

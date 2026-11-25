@@ -21,7 +21,7 @@ const appendRequiredIds = (searchParams: URLSearchParams, requiredIds: unknown):
 
 /**
  * Дописывает к URL query string из zod-проверенных фильтров.
- * Нужен abstractGetAction перед fetch.
+ * Нужен abstractAction().GET и abstractAction().SSE перед fetch.
  */
 export const setQueryFilters = async <TFilters>(
 	url: string,

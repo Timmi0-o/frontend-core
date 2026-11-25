@@ -1,6 +1,8 @@
-export { abstractGetAction } from './abstract-get-action'
-export { abstractMutateAction } from './abstract-mutate-action'
-export { EMPTY_DEFAULT_API_RESPONSE, emptyDefaultApiResponse } from './constants/empty-default-api-response'
+export { abstractAction } from './abstract-action'
+export {
+	EMPTY_DEFAULT_API_RESPONSE,
+	emptyDefaultApiResponse,
+} from './constants/empty-default-api-response'
 export type {
 	IApiResponseMapper,
 	IAppActionResponse,
@@ -17,7 +19,6 @@ export { sanitizeQueryFiltersBySchema } from './sanitize-query-filters-by-schema
 export { setQueryFilters } from './set-query-filters'
 export type {
 	IActionRequestWorkers,
-	IGetActionRequestWorkers,
 	TActionErrorLogger,
 	TResolveActionError,
 	TResolvedActionError,
@@ -25,8 +26,12 @@ export type {
 export type {
 	IActionFilters,
 	IActionQueryFieldValue,
+	IDeleteActionOptions,
 	IGetActionOptions,
-	IMutateActionOptions,
+	IPatchActionOptions,
+	IPostActionOptions,
+	IPutActionOptions,
+	ISseActionOptions,
 } from './types/i-action.types'
 export type {
 	IAppFetcher,
